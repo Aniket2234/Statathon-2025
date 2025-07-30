@@ -1,0 +1,117 @@
+# SafeData Pipeline - Government of India
+
+## Overview
+
+SafeData Pipeline is a comprehensive web-based data privacy protection and anonymization system developed for the Government of India's Ministry of Electronics and Information Technology. The application provides advanced privacy enhancement techniques while preserving data utility for analytical purposes, ensuring compliance with Digital Personal Data Protection Act requirements and government data protection frameworks.
+
+## User Preferences
+
+Preferred communication style: Simple, everyday language.
+
+## System Architecture
+
+### Frontend Architecture
+- **Framework**: Streamlit web application framework
+- **Interface Design**: Modern, government-compliant UI with wide layout and sidebar navigation
+- **State Management**: Session-based state management using Streamlit's session state
+- **File Upload**: Multi-format file upload support (CSV, Excel, JSON, XML, Parquet)
+
+### Backend Architecture
+- **Language**: Python 3.8+
+- **Core Modules**: Modular architecture with separate components for:
+  - Data handling and validation
+  - Risk assessment and privacy evaluation
+  - Privacy enhancement techniques
+  - Utility measurement and quality assessment
+  - Report generation and visualization
+- **Processing**: In-memory data processing with chunked loading for large files
+- **Caching**: Streamlit resource caching for performance optimization
+
+## Key Components
+
+### 1. Data Handler (`core/data_handler.py`)
+- **Purpose**: Centralized data loading, validation, and format conversion
+- **Supported Formats**: CSV, Excel, JSON, XML, Parquet, TSV
+- **Features**: Automatic encoding detection, chunked processing, error handling
+- **Rationale**: Provides robust data ingestion with support for government data formats
+
+### 2. Risk Assessment Module (`core/risk_assessment.py`)
+- **Purpose**: Evaluate re-identification risks using attack simulation scenarios
+- **Techniques**: Equivalence class analysis, prosecutor attack simulation, k-anonymity assessment
+- **Output**: Comprehensive risk metrics with visualizations
+- **Rationale**: Essential for government compliance and privacy risk evaluation
+
+### 3. Privacy Enhancement Module (`core/privacy_enhancement.py`)
+- **Purpose**: Apply various anonymization techniques to protect sensitive data
+- **Techniques**: 
+  - K-anonymity with global/local recoding
+  - L-diversity for attribute diversity
+  - T-closeness for distribution preservation
+  - Differential privacy with noise addition
+- **Rationale**: Multiple privacy techniques ensure flexibility for different government use cases
+
+### 4. Utility Measurement Module (`core/utility_measurement.py`)
+- **Purpose**: Assess data quality preservation after anonymization
+- **Metrics**: Statistical similarity, correlation preservation, distribution analysis
+- **Features**: Machine learning utility assessment, visualization of trade-offs
+- **Rationale**: Critical for ensuring anonymized data remains useful for analysis
+
+### 5. Report Generator (`core/report_generator.py`)
+- **Purpose**: Create comprehensive privacy-utility analysis reports
+- **Output Formats**: HTML, PDF (with FPDF2), interactive visualizations
+- **Templates**: Executive, technical, and comprehensive report templates
+- **Rationale**: Government requires detailed documentation and compliance reports
+
+## Data Flow
+
+1. **Data Ingestion**: Files uploaded through Streamlit interface → DataHandler processes and validates
+2. **Risk Assessment**: Original data → RiskAssessment module → Risk metrics and visualizations
+3. **Privacy Enhancement**: Original data + configuration → PrivacyEnhancement module → Anonymized data
+4. **Utility Measurement**: Original + anonymized data → UtilityMeasurement module → Quality metrics
+5. **Report Generation**: All results → ReportGenerator → Comprehensive reports and visualizations
+
+## External Dependencies
+
+### Core Libraries
+- **streamlit**: Web application framework
+- **pandas**: Data manipulation and analysis
+- **numpy**: Numerical computing
+- **plotly**: Interactive visualizations
+- **scikit-learn**: Machine learning utilities for clustering and utility assessment
+
+### Security Libraries
+- **cryptography**: Data encryption and key management
+- **fpdf2**: PDF report generation (optional)
+
+### File Processing
+- **openpyxl**: Excel file handling
+- **chardet**: Character encoding detection
+- **xml.etree.ElementTree**: XML processing
+
+### Configuration Management
+- **jinja2**: HTML template rendering
+- **json**: Configuration file handling
+
+## Deployment Strategy
+
+### Local Deployment
+- **Requirements**: Python 3.8+, 8GB RAM, 2GB storage
+- **Installation**: Standard pip-based dependency installation
+- **Configuration**: JSON-based privacy profiles and settings
+
+### Government Environment Considerations
+- **Security**: Data encryption at rest and in transit
+- **Compliance**: ISO/IEC 27001 practices, NIST Privacy Framework alignment
+- **Scalability**: Modular design allows for distributed processing if needed
+- **Data Isolation**: Session-based processing ensures data separation between users
+
+### Key Architectural Decisions
+
+1. **Streamlit Choice**: Selected for rapid development and government-friendly interface, avoiding complex web frameworks
+2. **Modular Design**: Separate core modules enable independent testing and maintenance of privacy techniques
+3. **In-Memory Processing**: Chosen for security (no persistent data storage) and simplicity, with chunking for large files
+4. **JSON Configuration**: Human-readable configuration files for transparency and government audit requirements
+5. **Multiple Privacy Techniques**: Comprehensive suite ensures compliance with various government privacy requirements
+6. **Utility Preservation Focus**: Balanced approach ensures anonymized data remains analytically useful
+
+The architecture prioritizes government compliance, security, and ease of use while maintaining flexibility for different anonymization requirements across various government departments.

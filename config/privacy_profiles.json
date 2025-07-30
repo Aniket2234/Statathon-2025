@@ -1,0 +1,238 @@
+{
+  "Low_Privacy_High_Utility": {
+    "name": "Low Privacy - High Utility",
+    "description": "Minimal privacy protection with maximum data utility preservation",
+    "k_threshold": 2,
+    "l_diversity": 2,
+    "t_closeness": 0.8,
+    "epsilon": 5.0,
+    "risk_level": "Low",
+    "privacy_technique": "K-Anonymity",
+    "utility_threshold": 0.9,
+    "suppression_limit": 0.05,
+    "generalization_level": "minimal",
+    "use_case": "Internal analytics, research with low sensitivity",
+    "recommended_for": [
+      "Non-sensitive demographic data",
+      "Aggregated business metrics",
+      "Research datasets with minimal PII"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Level-1"
+  },
+  
+  "Medium_Privacy_Balanced": {
+    "name": "Medium Privacy - Balanced Approach",
+    "description": "Balanced privacy protection with good utility preservation",
+    "k_threshold": 5,
+    "l_diversity": 3,
+    "t_closeness": 0.5,
+    "epsilon": 2.0,
+    "risk_level": "Medium",
+    "privacy_technique": "L-Diversity",
+    "utility_threshold": 0.7,
+    "suppression_limit": 0.1,
+    "generalization_level": "moderate",
+    "use_case": "Standard government data sharing, public datasets",
+    "recommended_for": [
+      "Census data for public use",
+      "Healthcare statistics",
+      "Educational demographics"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Level-2"
+  },
+  
+  "High_Privacy_Secure": {
+    "name": "High Privacy - Maximum Security",
+    "description": "Maximum privacy protection for highly sensitive data",
+    "k_threshold": 10,
+    "l_diversity": 5,
+    "t_closeness": 0.2,
+    "epsilon": 0.5,
+    "risk_level": "High",
+    "privacy_technique": "Differential Privacy",
+    "utility_threshold": 0.5,
+    "suppression_limit": 0.2,
+    "generalization_level": "aggressive",
+    "use_case": "Highly sensitive personal data, national security datasets",
+    "recommended_for": [
+      "Medical records with sensitive conditions",
+      "Financial transaction data",
+      "Individual tax records",
+      "Biometric databases"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Level-3"
+  },
+  
+  "Healthcare_Specialized": {
+    "name": "Healthcare Data Protection",
+    "description": "Specialized profile for healthcare and medical data",
+    "k_threshold": 8,
+    "l_diversity": 4,
+    "t_closeness": 0.3,
+    "epsilon": 1.0,
+    "risk_level": "High",
+    "privacy_technique": "T-Closeness",
+    "utility_threshold": 0.6,
+    "suppression_limit": 0.15,
+    "generalization_level": "targeted",
+    "use_case": "Medical research, patient data analysis",
+    "recommended_for": [
+      "Patient treatment records",
+      "Disease surveillance data",
+      "Clinical trial datasets",
+      "Pharmaceutical research data"
+    ],
+    "special_considerations": [
+      "HIPAA compliance equivalent",
+      "Medical ethics board approval required",
+      "Informed consent documentation"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Healthcare-Specialized"
+  },
+  
+  "Financial_Regulatory": {
+    "name": "Financial Regulatory Compliance",
+    "description": "Profile designed for financial sector regulatory requirements",
+    "k_threshold": 7,
+    "l_diversity": 4,
+    "t_closeness": 0.25,
+    "epsilon": 1.2,
+    "risk_level": "High",
+    "privacy_technique": "L-Diversity",
+    "utility_threshold": 0.65,
+    "suppression_limit": 0.12,
+    "generalization_level": "conservative",
+    "use_case": "Banking data, financial transaction analysis",
+    "recommended_for": [
+      "Credit scoring datasets",
+      "Transaction pattern analysis", 
+      "Anti-money laundering investigations",
+      "Insurance claim data"
+    ],
+    "regulatory_compliance": [
+      "RBI guidelines",
+      "SEBI data protection norms",
+      "Banking secrecy requirements"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Financial-Regulatory"
+  },
+  
+  "Education_Research": {
+    "name": "Educational Research Data",
+    "description": "Optimized for educational datasets and academic research",
+    "k_threshold": 4,
+    "l_diversity": 3,
+    "t_closeness": 0.4,
+    "epsilon": 2.5,
+    "risk_level": "Medium",
+    "privacy_technique": "K-Anonymity",
+    "utility_threshold": 0.8,
+    "suppression_limit": 0.08,
+    "generalization_level": "minimal_targeted",
+    "use_case": "Student data analysis, educational outcome research",
+    "recommended_for": [
+      "Student performance data",
+      "Educational demographics",
+      "Teacher evaluation data",
+      "School district analytics"
+    ],
+    "special_considerations": [
+      "FERPA compliance equivalent",
+      "Parental consent for minors",
+      "Academic freedom preservation"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Education-Research"
+  },
+  
+  "Public_Statistics": {
+    "name": "Public Statistics Release",
+    "description": "For data intended for public release and open statistics",
+    "k_threshold": 6,
+    "l_diversity": 3,
+    "t_closeness": 0.35,
+    "epsilon": 1.8,
+    "risk_level": "Medium",
+    "privacy_technique": "K-Anonymity",
+    "utility_threshold": 0.75,
+    "suppression_limit": 0.1,
+    "generalization_level": "standard",
+    "use_case": "Census data, demographic studies, public policy research",
+    "recommended_for": [
+      "Population census data",
+      "Economic surveys",
+      "Social welfare statistics",
+      "Public health indicators"
+    ],
+    "transparency_requirements": [
+      "Methodology documentation",
+      "Public consultation process",
+      "Open data standards compliance"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Public-Release"
+  },
+  
+  "Law_Enforcement": {
+    "name": "Law Enforcement Analytics",
+    "description": "Specialized for law enforcement and security analytics",
+    "k_threshold": 12,
+    "l_diversity": 6,
+    "t_closeness": 0.15,
+    "epsilon": 0.3,
+    "risk_level": "High",
+    "privacy_technique": "Differential Privacy",
+    "utility_threshold": 0.45,
+    "suppression_limit": 0.25,
+    "generalization_level": "maximum",
+    "use_case": "Criminal justice data, security threat analysis",
+    "recommended_for": [
+      "Crime pattern analysis",
+      "Recidivism studies",
+      "Security clearance data",
+      "Intelligence analytics"
+    ],
+    "security_requirements": [
+      "Top secret clearance required",
+      "Air-gapped processing environment",
+      "Multi-level security protocols",
+      "Audit trail mandatory"
+    ],
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Security-Classified"
+  },
+  
+  "Synthetic_Data_Generation": {
+    "name": "Synthetic Data Generation",
+    "description": "Profile optimized for generating synthetic datasets",
+    "k_threshold": 3,
+    "l_diversity": 2,
+    "t_closeness": 0.6,
+    "epsilon": 10.0,
+    "risk_level": "Low",
+    "privacy_technique": "Synthetic Data Generation",
+    "utility_threshold": 0.85,
+    "suppression_limit": 0.02,
+    "generalization_level": "synthetic_preservation",
+    "use_case": "Data sharing, model training, testing environments",
+    "recommended_for": [
+      "ML model training datasets",
+      "Software testing data",
+      "Third-party data sharing",
+      "Research collaboration"
+    ],
+    "generation_parameters": {
+      "correlation_preservation": true,
+      "distribution_matching": true,
+      "statistical_equivalence": 0.95,
+      "generation_method": "GAN-based"
+    },
+    "created_date": "2024-01-01T00:00:00Z",
+    "government_clearance": "Data-Sharing"
+  }
+}

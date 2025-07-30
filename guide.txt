@@ -1,0 +1,871 @@
+================================================================================
+                        SAFEDATA PIPELINE - USER GUIDE
+                 Government of India - Ministry of Electronics and IT
+                Data Privacy Protection and Anonymization System
+================================================================================
+
+VERSION: 1.0.0
+LAST UPDATED: January 2024
+CLASSIFICATION: Government Use - Internal Distribution
+
+================================================================================
+TABLE OF CONTENTS
+================================================================================
+
+1. INTRODUCTION
+2. INSTALLATION INSTRUCTIONS
+3. QUICK START GUIDE
+4. DETAILED FEATURE DOCUMENTATION
+5. PRIVACY ENHANCEMENT TECHNIQUES
+6. CONFIGURATION MANAGEMENT
+7. TROUBLESHOOTING
+8. SECURITY BEST PRACTICES
+9. API REFERENCE
+10. COMPLIANCE AND STANDARDS
+11. APPENDICES
+
+================================================================================
+1. INTRODUCTION
+================================================================================
+
+SafeData Pipeline is a comprehensive web-based application designed to meet the
+Government of India's data privacy protection and anonymization requirements.
+The system provides advanced privacy enhancement techniques while preserving
+data utility for analytical purposes.
+
+Key Features:
+- Risk Assessment: Evaluate re-identification risks using multiple attack scenarios
+- Privacy Enhancement: Apply k-anonymity, l-diversity, t-closeness, and differential privacy
+- Utility Measurement: Assess data quality preservation after anonymization
+- Report Generation: Create comprehensive privacy-utility analysis reports
+- Multi-format Support: Handle CSV, Excel, JSON, XML, and Parquet files
+- Configuration Management: Save and manage privacy parameter profiles
+
+Target Users:
+- Data Protection Officers
+- Government Data Analysts
+- Privacy Researchers
+- IT Security Personnel
+- Policy Makers
+
+================================================================================
+2. INSTALLATION INSTRUCTIONS
+================================================================================
+
+2.1 SYSTEM REQUIREMENTS
+------------------------
+- Operating System: Windows 10+, macOS 10.14+, Ubuntu 18.04+
+- Python: 3.8 or higher
+- RAM: 8GB minimum, 16GB recommended
+- Storage: 2GB free space minimum
+- Network: Internet connection for initial setup
+
+2.2 PYTHON DEPENDENCIES
+-----------------------
+The application requires the following Python packages:
+- streamlit>=1.28.0
+- pandas>=1.5.0
+- numpy>=1.21.0
+- matplotlib>=3.5.0
+- seaborn>=0.11.0
+- plotly>=5.0.0
+- openpyxl>=3.0.0
+- scikit-learn>=1.0.0
+- scipy>=1.7.0
+- cryptography>=3.4.0
+- fpdf2>=2.5.0
+- jinja2>=3.0.0
+
+2.3 INSTALLATION STEPS
+----------------------
+1. Download the SafeData Pipeline application files
+2. Extract to a directory (e.g., C:\SafeData or /opt/safedata)
+3. Open command prompt/terminal in the application directory
+4. Install dependencies: pip install -r requirements.txt
+5. Run the application: streamlit run app.py
+6. Access via web browser: http://localhost:5000
+
+2.4 CONFIGURATION
+-----------------
+The application automatically creates necessary directories:
+- config/: Configuration files and privacy profiles
+- exports/: Processed data and reports
+- logs/: Application logs
+- temp/: Temporary files
+
+Initial configuration is handled through the web interface.
+
+================================================================================
+3. QUICK START GUIDE
+================================================================================
+
+3.1 BASIC WORKFLOW
+------------------
+Follow these steps for a typical privacy enhancement workflow:
+
+STEP 1: Data Upload
+- Navigate to "Data Upload" in the sidebar
+- Select your data file (CSV, Excel, JSON, XML, or Parquet)
+- Review data preview and quality assessment
+- Apply automatic fixes if recommended
+
+STEP 2: Risk Assessment  
+- Go to "Risk Assessment" page
+- Select quasi-identifiers (attributes that could identify individuals)
+- Choose sensitive attributes (if applicable)
+- Configure risk parameters (k-threshold, attack scenarios)
+- Run the assessment to identify vulnerabilities
+
+STEP 3: Privacy Enhancement
+- Navigate to "Privacy Enhancement"
+- Choose technique: K-Anonymity, L-Diversity, T-Closeness, or Differential Privacy
+- Configure parameters based on your privacy requirements
+- Apply the technique and review before/after comparison
+
+STEP 4: Utility Measurement
+- Go to "Utility Measurement" page
+- Select relevant utility metrics
+- Run analysis to evaluate data quality preservation
+- Review utility scores and recommendations
+
+STEP 5: Report Generation
+- Visit "Reports" section
+- Configure report type (Executive, Technical, or Comprehensive)
+- Choose output format (PDF, HTML, or both)
+- Generate and download your privacy-utility report
+
+3.2 FIRST-TIME USER CHECKLIST
+------------------------------
+□ Application installed and running
+□ Sample data file prepared for testing
+□ Basic understanding of quasi-identifiers in your dataset
+□ Privacy requirements defined (k-value, privacy level)
+□ Utility threshold requirements established
+□ Report recipient list prepared
+
+================================================================================
+4. DETAILED FEATURE DOCUMENTATION
+================================================================================
+
+4.1 DATA UPLOAD MODULE
+----------------------
+The Data Upload module handles multi-format data ingestion with comprehensive
+validation and automatic repair capabilities.
+
+Supported Formats:
+- CSV: Comma-separated values with automatic encoding detection
+- Excel: .xlsx and .xls files, handles multiple sheets
+- JSON: JavaScript Object Notation with structure auto-detection
+- XML: Extensible Markup Language with element parsing
+- Parquet: Columnar storage format for large datasets
+- TSV: Tab-separated values
+
+Data Quality Assessment:
+- Completeness: Missing value analysis
+- Consistency: Data type and format validation
+- Validity: Range and constraint checking
+- Recommendations: Automated improvement suggestions
+
+Automatic Data Repair:
+- Missing value imputation using statistical methods
+- Data type conversion for misclassified columns
+- Encoding correction for character issues
+- Duplicate record removal
+- Outlier detection and handling
+
+4.2 RISK ASSESSMENT MODULE
+--------------------------
+The Risk Assessment module evaluates re-identification risks using advanced
+statistical methods and multiple attack scenarios.
+
+Core Functionality:
+- Equivalence class analysis for k-anonymity evaluation
+- Population uniqueness estimation
+- Attack scenario simulation (Prosecutor, Journalist, Marketer)
+- Sensitive attribute disclosure risk assessment
+- Comprehensive risk metric calculation
+
+Risk Metrics:
+- Overall Risk Score: Composite measure of re-identification risk
+- K-Anonymity Violations: Count of groups smaller than k
+- Unique Records: Individual records with highest risk
+- Population Uniqueness: Estimated uniqueness in larger population
+
+Configuration Options:
+- K-threshold: Minimum group size for anonymity
+- Sample size: Percentage of data to analyze
+- Attack scenarios: Types of adversarial attacks to simulate
+- Quasi-identifier selection: Attributes for re-identification analysis
+
+Visualization:
+- Risk distribution histograms
+- Equivalence class size charts
+- Attack scenario comparison plots
+- Risk level classification displays
+
+4.3 PRIVACY ENHANCEMENT MODULE
+-----------------------------
+The Privacy Enhancement module implements state-of-the-art anonymization
+techniques to protect individual privacy while preserving data utility.
+
+Available Techniques:
+
+K-ANONYMITY:
+- Ensures each individual is indistinguishable from at least k-1 others
+- Methods: Global recoding, local recoding, clustering-based
+- Parameters: k-value, generalization level, suppression limit
+- Best for: Basic privacy protection with good utility
+
+L-DIVERSITY:
+- Ensures diversity in sensitive attributes within equivalence classes
+- Methods: Distinct, entropy, and recursive l-diversity
+- Parameters: l-value, sensitive attribute selection
+- Best for: Protecting against homogeneity attacks
+
+T-CLOSENESS:
+- Ensures sensitive attribute distribution matches global distribution
+- Methods: Earth mover's distance, hierarchical distance
+- Parameters: t-value, distance measure selection
+- Best for: Protecting against skewness attacks
+
+DIFFERENTIAL PRIVACY:
+- Adds calibrated noise to prevent inference attacks
+- Methods: Laplace and Gaussian mechanisms
+- Parameters: epsilon (privacy budget), sensitivity, noise type
+- Best for: Strong mathematical privacy guarantees
+
+SYNTHETIC DATA GENERATION:
+- Creates artificial datasets maintaining statistical properties
+- Methods: Statistical sampling, copula-based, GAN-based
+- Parameters: Sample size, correlation preservation, distribution matching
+- Best for: Data sharing without exposing original records
+
+4.4 UTILITY MEASUREMENT MODULE
+------------------------------
+The Utility Measurement module quantifies how well anonymized data preserves
+the analytical value of the original dataset.
+
+Utility Metrics:
+
+STATISTICAL SIMILARITY:
+- Mean, variance, and range preservation
+- Distribution shape maintenance
+- Summary statistics comparison
+
+CORRELATION PRESERVATION:
+- Pearson and Spearman correlation analysis
+- Relationship pattern maintenance
+- Variable dependency preservation
+
+DISTRIBUTION SIMILARITY:
+- Kolmogorov-Smirnov tests for numerical data
+- Chi-square tests for categorical data
+- Wasserstein distance calculations
+
+INFORMATION LOSS:
+- Entropy-based information measurement
+- Mutual information preservation
+- Data compression ratio analysis
+
+CLASSIFICATION UTILITY:
+- Machine learning model performance comparison
+- Prediction accuracy preservation
+- Feature importance maintenance
+
+QUERY ACCURACY:
+- Aggregate query result comparison
+- Count, sum, and average preservation
+- Range query accuracy assessment
+
+4.5 REPORT GENERATION MODULE
+---------------------------
+The Report Generation module creates comprehensive privacy-utility analysis
+documents for stakeholders and compliance purposes.
+
+Report Types:
+- Executive Summary: High-level overview for decision makers
+- Technical Report: Detailed analysis for data scientists
+- Comprehensive Report: Complete documentation for compliance
+
+Output Formats:
+- PDF: Professional documents for distribution
+- HTML: Interactive reports for web viewing
+- Both: PDF and HTML versions generated simultaneously
+
+Report Components:
+- Executive summary with key findings
+- Detailed risk assessment results
+- Utility preservation analysis
+- Technical implementation details
+- Recommendations and action items
+- Compliance and standards information
+
+Customization Options:
+- Report title and organization details
+- Inclusion of visualizations and charts
+- Recommendation generation settings
+- Template customization capabilities
+
+================================================================================
+5. PRIVACY ENHANCEMENT TECHNIQUES
+================================================================================
+
+5.1 K-ANONYMITY
+---------------
+K-anonymity ensures that each individual in a dataset is indistinguishable
+from at least k-1 other individuals with respect to quasi-identifiers.
+
+Theory:
+K-anonymity protects against identity disclosure by ensuring that any
+combination of quasi-identifier values appears for at least k individuals.
+This makes it impossible to uniquely identify any individual based solely
+on quasi-identifiers.
+
+Implementation:
+- Generalization: Replace specific values with more general ones
+- Suppression: Remove records or values that violate k-anonymity
+- Clustering: Group similar records and generalize within clusters
+
+Parameters:
+- k-value: Higher values provide more privacy but may reduce utility
+- Generalization hierarchy: Defines how values are generalized
+- Suppression limit: Maximum percentage of data that can be suppressed
+
+Best Practices:
+- Choose k-value based on dataset size and sensitivity
+- Minimize suppression to preserve data utility
+- Use domain knowledge for generalization hierarchies
+- Consider computational complexity for large datasets
+
+5.2 L-DIVERSITY
+---------------
+L-diversity extends k-anonymity by ensuring that sensitive attributes within
+each equivalence class have at least l diverse values.
+
+Theory:
+K-anonymity alone may not prevent attribute disclosure if sensitive attributes
+lack diversity within equivalence classes. L-diversity addresses this by
+requiring each equivalence class to have diverse sensitive attribute values.
+
+Types:
+- Distinct l-diversity: At least l distinct sensitive values
+- Entropy l-diversity: Entropy of sensitive values ≥ log(l)
+- Recursive (c,l)-diversity: Most frequent value appears ≤ c times
+
+Implementation:
+- Apply k-anonymity first to create equivalence classes
+- Check l-diversity constraint for each class
+- Further generalize or suppress violating classes
+- Balance privacy and utility through parameter tuning
+
+Parameters:
+- l-value: Number of diverse values required
+- Sensitive attribute: Attribute requiring diversity protection
+- Diversity measure: Type of l-diversity to apply
+
+Considerations:
+- May require significant data modification
+- Effectiveness depends on sensitive attribute distribution
+- Computational complexity increases with dataset size
+
+5.3 T-CLOSENESS
+---------------
+T-closeness requires that the distribution of sensitive attributes in each
+equivalence class is close to the distribution in the overall dataset.
+
+Theory:
+Even with l-diversity, an equivalence class may have a skewed distribution
+of sensitive attributes that differs from the global distribution. T-closeness
+addresses this by ensuring distributions are similar within threshold t.
+
+Distance Measures:
+- Earth Mover's Distance (EMD): Optimal transport cost between distributions
+- Hierarchical distance: Based on taxonomy of sensitive values
+- Variational distance: Maximum difference between probability masses
+
+Implementation:
+- Calculate global distribution of sensitive attributes
+- For each equivalence class, calculate local distribution
+- Measure distance between local and global distributions
+- Generalize classes that exceed t-closeness threshold
+
+Parameters:
+- t-value: Maximum allowed distance (0 < t ≤ 1)
+- Distance measure: Method for comparing distributions
+- Sensitive attribute: Attribute requiring distribution protection
+
+Trade-offs:
+- Stronger privacy protection than l-diversity
+- May significantly impact data utility
+- Computational complexity for distance calculations
+
+5.4 DIFFERENTIAL PRIVACY
+------------------------
+Differential privacy provides mathematical guarantees that the output of a
+data analysis algorithm is insensitive to the presence or absence of any
+single individual.
+
+Theory:
+A randomized algorithm M satisfies ε-differential privacy if for all datasets
+D1 and D2 differing by at most one element, and for all possible outputs S:
+P[M(D1) ∈ S] ≤ exp(ε) × P[M(D2) ∈ S]
+
+Mechanisms:
+- Laplace mechanism: Adds Laplace noise to numerical outputs
+- Gaussian mechanism: Adds Gaussian noise with composition guarantees
+- Exponential mechanism: For non-numerical outputs
+
+Implementation:
+- Determine global sensitivity of the query function
+- Calculate required noise magnitude based on ε and sensitivity
+- Add calibrated noise to query results
+- Ensure privacy budget is properly managed
+
+Parameters:
+- ε (epsilon): Privacy parameter (smaller = more private)
+- δ (delta): Failure probability (for approximate DP)
+- Sensitivity: Maximum change in output from single record
+
+Privacy Budget:
+- Each query consumes privacy budget
+- Sequential composition: εtotal = Σεi
+- Parallel composition: εtotal = max(εi)
+- Advanced composition: Tighter bounds for many queries
+
+5.5 SYNTHETIC DATA GENERATION
+-----------------------------
+Synthetic data generation creates artificial datasets that maintain statistical
+properties of the original data without exposing individual records.
+
+Approaches:
+
+STATISTICAL METHODS:
+- Marginal distribution sampling
+- Correlation structure preservation
+- Copula-based generation
+
+MACHINE LEARNING METHODS:
+- Generative Adversarial Networks (GANs)
+- Variational Autoencoders (VAEs)
+- Autoregressive models
+
+HYBRID APPROACHES:
+- Statistical preprocessing with ML refinement
+- Ensemble methods combining multiple approaches
+- Domain-specific customizations
+
+Implementation Considerations:
+- Evaluation metrics for synthetic data quality
+- Privacy guarantees and utility preservation
+- Computational requirements and scalability
+- Domain-specific constraints and requirements
+
+Quality Metrics:
+- Statistical similarity to original data
+- Correlation preservation accuracy
+- Distribution matching fidelity
+- Machine learning utility preservation
+
+================================================================================
+6. CONFIGURATION MANAGEMENT
+================================================================================
+
+6.1 PRIVACY PROFILES
+--------------------
+Privacy profiles provide pre-configured parameter sets for common use cases,
+ensuring consistent application of privacy techniques across organizations.
+
+Built-in Profiles:
+
+LOW PRIVACY - HIGH UTILITY:
+- k-anonymity with k=2
+- Minimal generalization
+- Suitable for internal analytics with low sensitivity data
+
+MEDIUM PRIVACY - BALANCED:
+- k-anonymity with k=5 or l-diversity with l=3
+- Moderate generalization levels
+- Suitable for public datasets and research
+
+HIGH PRIVACY - MAXIMUM SECURITY:
+- Differential privacy with low epsilon
+- Aggressive generalization and suppression
+- Suitable for highly sensitive personal data
+
+SPECIALIZED PROFILES:
+- Healthcare: HIPAA-equivalent protection
+- Financial: Regulatory compliance focused
+- Education: FERPA-equivalent protection
+- Public Statistics: Open data release optimization
+
+Custom Profile Creation:
+- Define parameter sets for specific use cases
+- Save and share profiles across teams
+- Version control and audit trails
+- Validation and testing procedures
+
+6.2 SYSTEM CONFIGURATION
+------------------------
+System-wide settings control application behavior and performance optimization.
+
+Performance Settings:
+- Maximum file size for processing
+- Chunk size for large dataset handling
+- Memory usage optimization
+- Parallel processing configuration
+
+Security Settings:
+- Data encryption at rest
+- Secure memory handling
+- Audit logging levels
+- Access control configuration
+
+Export Settings:
+- Default output formats
+- Compression options
+- File naming conventions
+- Storage location preferences
+
+6.3 CONFIGURATION FILES
+-----------------------
+Configuration data is stored in JSON format for easy editing and sharing.
+
+privacy_profiles.json:
+Contains all privacy profile definitions with parameters, descriptions,
+and use case recommendations.
+
+system_config.json:
+System-wide settings including performance, security, and export options.
+
+user_preferences.json:
+Individual user settings and interface customizations.
+
+audit_config.json:
+Logging and audit trail configuration settings.
+
+================================================================================
+7. TROUBLESHOOTING
+================================================================================
+
+7.1 COMMON ISSUES
+-----------------
+
+INSTALLATION PROBLEMS:
+
+Issue: "ModuleNotFoundError" when running the application
+Solution: 
+- Ensure all dependencies are installed: pip install -r requirements.txt
+- Check Python version compatibility (3.8+)
+- Verify virtual environment activation if used
+
+Issue: Application starts but won't load in browser
+Solution:
+- Check firewall settings allow localhost:5000
+- Try different browser or incognito mode
+- Verify no other applications using port 5000
+
+Issue: Permission errors when creating directories
+Solution:
+- Run with administrator/sudo privileges for initial setup
+- Check file system permissions on installation directory
+- Ensure adequate disk space available
+
+DATA LOADING PROBLEMS:
+
+Issue: "File format not supported" error
+Solution:
+- Verify file extension matches content (.csv for CSV files)
+- Check file is not corrupted or truncated
+- Try opening file in appropriate application first
+
+Issue: Encoding errors when loading CSV files
+Solution:
+- Save CSV file with UTF-8 encoding
+- Try different CSV delimiter settings
+- Check for special characters in data
+
+Issue: Memory errors with large datasets
+Solution:
+- Increase system RAM or use smaller sample
+- Enable chunked processing in system configuration
+- Close other applications to free memory
+
+PRIVACY ENHANCEMENT PROBLEMS:
+
+Issue: "No quasi-identifiers selected" error
+Solution:
+- Select at least one column as quasi-identifier
+- Verify selected columns exist in dataset
+- Review quasi-identifier selection guidelines
+
+Issue: Privacy technique produces empty result
+Solution:
+- Reduce privacy parameters (lower k, higher epsilon)
+- Check for sufficient data diversity
+- Review suppression limit settings
+
+Issue: Processing takes very long time
+Solution:
+- Use data sampling for initial testing
+- Optimize privacy parameters
+- Consider chunked processing for large datasets
+
+UTILITY MEASUREMENT PROBLEMS:
+
+Issue: Utility metrics show zero or negative values
+Solution:
+- Verify processed data contains actual data
+- Check that original and processed datasets align
+- Review metric calculation prerequisites
+
+Issue: Correlation analysis fails
+Solution:
+- Ensure sufficient numerical columns present
+- Check for constant-value columns
+- Verify data quality and completeness
+
+REPORT GENERATION PROBLEMS:
+
+Issue: PDF generation fails
+Solution:
+- Install fpdf2: pip install fpdf2
+- Check write permissions for export directory
+- Verify report data completeness
+
+Issue: HTML report displays incorrectly
+Solution:
+- Check browser compatibility
+- Verify template file integrity
+- Review data formatting in report template
+
+7.2 ERROR MESSAGES
+------------------
+
+"Dataset is empty":
+- File contains no data rows
+- Check file format and content
+
+"Insufficient numerical columns for correlation analysis":
+- Dataset needs at least 2 numerical columns
+- Review data types and convert if necessary
+
+"K-anonymity violations exceed threshold":
+- Reduce k-value or increase generalization
+- Check data diversity and distribution
+
+"Privacy budget exhausted":
+- Reduce epsilon value or number of queries
+- Implement proper budget management
+
+"Validation process failed":
+- Check data integrity and format
+- Review error logs for specific issues
+
+7.3 PERFORMANCE OPTIMIZATION
+----------------------------
+
+For Large Datasets:
+- Enable chunked processing
+- Use data sampling for parameter tuning
+- Optimize memory usage settings
+- Consider distributed processing
+
+For Slow Processing:
+- Reduce privacy parameter complexity
+- Use simpler anonymization techniques
+- Optimize quasi-identifier selection
+- Enable parallel processing where available
+
+For Memory Issues:
+- Close unnecessary applications
+- Use 64-bit Python installation
+- Increase virtual memory/swap space
+- Process data in smaller batches
+
+7.4 GETTING HELP
+----------------
+
+Internal Support:
+- Check application logs in logs/ directory
+- Review this user guide thoroughly
+- Consult with IT department for technical issues
+
+Documentation:
+- API reference for programmatic usage
+- Configuration file examples
+- Best practices guidelines
+
+Community Resources:
+- Government data privacy working groups
+- Academic research on privacy-preserving techniques
+- International standards organizations
+
+Escalation Procedures:
+- Document specific error messages and steps to reproduce
+- Provide sample data files (anonymized) if possible
+- Include system specifications and configuration details
+
+================================================================================
+8. SECURITY BEST PRACTICES
+================================================================================
+
+8.1 DATA HANDLING SECURITY
+--------------------------
+
+Data Classification:
+- Classify datasets according to sensitivity levels
+- Apply appropriate privacy profiles based on classification
+- Document data lineage and processing history
+- Implement access controls based on classification
+
+Secure Storage:
+- Use encrypted storage for sensitive datasets
+- Implement secure backup procedures
+- Control access to data directories
+- Regular security audits of stored data
+
+Data Transmission:
+- Use secure protocols for data transfer
+- Encrypt data in transit
+- Verify data integrity after transmission
+- Log all data movement activities
+
+Data Disposal:
+- Securely delete temporary files
+- Overwrite sensitive data in memory
+- Follow data retention policies
+- Document disposal procedures
+
+8.2 ACCESS CONTROL
+------------------
+
+User Authentication:
+- Implement strong password policies
+- Use multi-factor authentication where possible
+- Regular password updates and security reviews
+- Account lockout policies for failed attempts
+
+Authorization:
+- Role-based access control (RBAC)
+- Principle of least privilege
+- Regular access reviews and updates
+- Separation of duties for sensitive operations
+
+Audit Logging:
+- Log all user activities and data access
+- Secure audit log storage
+- Regular audit log reviews
+- Incident response procedures
+
+8.3 SYSTEM SECURITY
+-------------------
+
+Operating System:
+- Keep OS and software updated
+- Install security patches promptly
+- Use antivirus and anti-malware protection
+- Regular security scans and assessments
+
+Network Security:
+- Use firewalls and network segmentation
+- Monitor network traffic for anomalies
+- Secure configuration of network services
+- Regular penetration testing
+
+Application Security:
+- Input validation and sanitization
+- Secure coding practices
+- Regular security code reviews
+- Vulnerability assessments
+
+8.4 PRIVACY PROTECTION
+----------------------
+
+Data Minimization:
+- Collect only necessary data
+- Process minimal data required for analysis
+- Delete data when no longer needed
+- Regular data inventory and cleanup
+
+Purpose Limitation:
+- Use data only for specified purposes
+- Document intended use cases
+- Obtain consent for new uses
+- Regular purpose alignment reviews
+
+Anonymization Quality:
+- Regular re-identification risk assessments
+- Independent privacy audits
+- Continuous monitoring of privacy guarantees
+- Updates to anonymization techniques as needed
+
+8.5 INCIDENT RESPONSE
+---------------------
+
+Preparation:
+- Develop incident response plan
+- Train staff on procedures
+- Establish communication protocols
+- Prepare necessary tools and resources
+
+Detection:
+- Monitor for security events
+- Automated alerting systems
+- Regular security assessments
+- User reporting mechanisms
+
+Response:
+- Immediate containment procedures
+- Damage assessment protocols
+- Recovery and restoration plans
+- Lessons learned documentation
+
+Recovery:
+- System restoration procedures
+- Data recovery protocols
+- Service continuity planning
+- Post-incident monitoring
+
+================================================================================
+9. API REFERENCE
+================================================================================
+
+9.1 PROGRAMMATIC ACCESS
+-----------------------
+
+The SafeData Pipeline provides programmatic access through Python modules
+for integration with existing workflows and automation systems.
+
+Core Modules:
+- core.data_handler: Data loading and validation
+- core.risk_assessment: Privacy risk evaluation
+- core.privacy_enhancement: Anonymization techniques
+- core.utility_measurement: Data quality assessment
+- core.report_generator: Automated reporting
+
+Basic Usage Example:
+
+```python
+from core.data_handler import DataHandler
+from core.risk_assessment import RiskAssessment
+from core.privacy_enhancement import PrivacyEnhancement
+
+# Load data
+handler = DataHandler()
+data = handler.load_data('dataset.csv')
+
+# Assess risk
+risk_assessor = RiskAssessment()
+risk_results = risk_assessor.assess_risk(
+    data, 
+    quasi_identifiers=['age', 'zipcode'],
+    k_threshold=5
+)
+
+# Apply privacy enhancement
+privacy_enhancer = PrivacyEnhancement()
+anonymized_data = privacy_enhancer.apply_k_anonymity(
+    data,
+    k=5,
+    quasi_identifiers=['age', 'zipcode']
+)

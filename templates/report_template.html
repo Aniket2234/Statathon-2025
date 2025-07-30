@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 3rem 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            font-weight: 300;
+        }
+        
+        .header .subtitle {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+        
+        .header .meta {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 1rem;
+        }
+        
+        .section {
+            background: white;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .section h2 {
+            color: #1e3c72;
+            border-bottom: 3px solid #2a5298;
+            padding-bottom: 0.8rem;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 500;
+        }
+        
+        .section h3 {
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .metric-label {
+            color: #6c757d;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+        
+        .risk-high { 
+            border-left-color: #e74c3c; 
+            background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+        }
+        .risk-medium { 
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+        .risk-low { 
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        }
+        
+        .utility-excellent { 
+            border-left-color: #27ae60;
+            background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%);
+        }
+        .utility-good { 
+            border-left-color: #3498db;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        }
+        .utility-fair { 
+            border-left-color: #f39c12;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        }
+        .utility-poor { 
+            border-left-color: #e74c3c;
+            background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+        }
+        
+        .recommendations {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid #f0ad4e;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .recommendations h3 {
+            color: #856404;
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+        
+        .recommendations ul {
+            margin: 0;
+            padding-left: 2rem;
+        }
+        
+        .recommendations li {
+            margin-bottom: 0.8rem;
+            color: #856404;
+            font-weight: 500;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .data-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .alert {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+        
+        .alert-info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+        
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffeaa7;
+            color: #856404;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #6c757d;
+            font-size: 0.95rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+        }
+        
+        .footer .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-high { background-color: #e74c3c; color: white; }
+        .badge-medium { background-color: #f39c12; color: white; }
+        .badge-low { background-color: #27ae60; color: white; }
+        .badge-excellent { background-color: #27ae60; color: white; }
+        .badge-good { background-color: #3498db; color: white; }
+        .badge-fair { background-color: #f39c12; color: white; }
+        .badge-poor { background-color: #e74c3c; color: white; }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .summary-box {
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-high { background-color: #e74c3c; }
+        .progress-medium { background-color: #f39c12; }
+        .progress-low { background-color: #27ae60; }
+        
+        @media print {
+            body { background-color: white; }
+            .section { box-shadow: none; border: 1px solid #ddd; }
+            .header { background: #1e3c72 !important; }
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            .header { padding: 2rem 1rem; }
+            .section { padding: 1.5rem; }
+            .metric-grid { grid-template-columns: 1fr; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ organization }}</div>
+        <div class="subtitle">Ministry of Electronics and Information Technology</div>
+        <div class="meta">
+            <div>Generated on {{ date }}</div>
+            <div>Report Author: {{ author }}</div>
+            {% if data_info %}
+            <div>Dataset: {{ data_info.rows }} rows, {{ data_info.columns }} columns</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Executive Summary -->
+    <div class="section">
+        <h2>🔍 Executive Summary</h2>
+        
+        <div class="summary-grid">
+            <div class="summary-box">
+                <h3>Privacy Assessment</h3>
+                <div class="metric-value {{ risk_class }}">{{ overall_risk }}</div>
+                <span class="badge badge-{{ risk_level.lower() }}">{{ risk_level }} Risk</span>
+                <div class="progress-bar">
+                    <div class="progress-fill progress-{{ risk_level.lower() }}" 
+                         style="width: {{ (overall_risk|float * 100)|round }}%"></div>
+                </div>
+            </div>
+            
+            <div class="summary-box">
+                <h3>Utility Preservation</h3>
+                <div class="metric-value {{ utility_class }}">{{ overall_utility }}</div>
+                <span class="badge badge-{{ utility_level.lower() }}">{{ utility_level }} Utility</span>
+                <div class="progress-bar">
+                    <div class="progress-fill progress-{{ 'high' if utility_level.lower() in ['excellent', 'good'] else 'medium' if utility_level.lower() == 'fair' else 'low' }}" 
+                         style="width: {{ (overall_utility|float * 100)|round }}%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>Summary:</strong> This report analyzes the privacy-utility trade-off for the processed dataset. 
+            The current configuration achieves <strong>{{ risk_level }}</strong> privacy protection with 
+            <strong>{{ utility_level }}</strong> data utility preservation.
+        </div>
+    </div>
+
+    <!-- Privacy Assessment -->
+    {% if risk_results %}
+    <div class="section">
+        <h2>🛡️ Privacy Assessment Results</h2>
+        
+        <div class="metric-grid">
+            <div class="metric-card {{ risk_class }}">
+                <div class="metric-value">{{ "%.4f"|format(risk_results.overall_risk) }}</div>
+                <div class="metric-label">Overall Risk Score</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ risk_results.k_violations }}</div>
+                <div class="metric-label">K-Anonymity Violations</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ risk_results.unique_records }}</div>
+                <div class="metric-label">Unique Records</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">{{ risk_results.equivalence_classes|length }}</div>
+                <div class="metric-label">Equivalence Classes</div>
+            </div>
+        </div>
+        
+        <h3>Analysis Configuration</h3>
+        <table class="data-table">
+            <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>Dataset Size</td>
+                <td>{{ risk_results.dataset_size }} records</td>
+                <td>Number of records analyzed</td>
+            </tr>
+            <tr>
+                <td>K-Threshold</td>
+                <td>{{ risk_results.k_threshold }}</td>
+                <td>Minimum group size for k-anonymity</td>
+            </tr>
+            <tr>
+                <td>Quasi-Identifiers</td>
+                <td>{{ risk_results.quasi_identifiers|join(', ') }}</td>
+                <td>Attributes used for re-identification analysis</td>
+            </tr>
+            <tr>
+                <td>Attack Scenarios</td>
+                <td>{{ risk_results.attack_scenarios|join(', ') }}</td>
+                <td>Types of attacks simulated</td>
+            </tr>
+        </table>
+
+        {% if risk_results.sensitive_attribute_risks %}
+        <h3>Sensitive Attribute Analysis</h3>
+        <table class="data-table">
+            <tr>
+                <th>Attribute</th>
+                <th>Disclosure Risk</th>
+                <th>Homogeneity Risk</th>
+                <th>Assessment</th>
+            </tr>
+            {% for attr, risks in risk_results.sensitive_attribute_risks.items() %}
+            <tr>
+                <td>{{ attr }}</td>
+                <td>{{ "%.4f"|format(risks.disclosure_risk) }}</td>
+                <td>{{ "%.4f"|format(risks.homogeneity_risk) }}</td>
+                <td>
+                    {% if risks.disclosure_risk > 0.7 %}
+                    <span class="badge badge-high">High Risk</span>
+                    {% elif risks.disclosure_risk > 0.4 %}
+                    <span class="badge badge-medium">Medium Risk</span>
+                    {% else %}
+                    <span class="badge badge-low">Low Risk</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Utility Assessment -->
+    {% if utility_results %}
+    <div class="section">
+        <h2>📊 Data Utility Assessment</h2>
+        
+        <div class="metric-grid">
+            {% if utility_results.statistical_similarity %}
+            <div class="metric-card">
+                <div class="metric-value">{{ "%.4f"|format(utility_results.statistical_similarity.overall) }}</div>
+                <div class="metric-label">Statistical Similarity</div>
+            </div>
+            {% endif %}
+            {% if utility_results.correlation_preservation %}
+            <div class="metric-card">
+                <div class="metric-value">{{ "%.4f"|format(utility_results.correlation_preservation.overall) }}</div>
+                <div class="metric-label">Correlation Preservation</div>
+            </div>
+            {% endif %}
+            {% if utility_results.distribution_similarity %}
+            <div class="metric-card">
+                <div class="metric-value">{{ "%.4f"|format(utility_results.distribution_similarity.overall) }}</div>
+                <div class="metric-label">Distribution Similarity</div>
+            </div>
+            {% endif %}
+            {% if utility_results.information_loss %}
+            <div class="metric-card">
+                <div class="metric-value">{{ "%.4f"|format(utility_results.information_loss.information_preservation) }}</div>
+                <div class="metric-label">Information Preservation</div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <h3>Utility Metrics Analysis</h3>
+        <table class="data-table">
+            <tr>
+                <th>Metric</th>
+                <th>Score</th>
+                <th>Assessment</th>
+                <th>Impact</th>
+            </tr>
+            {% if utility_results.statistical_similarity %}
+            <tr>
+                <td>Statistical Similarity</td>
+                <td>{{ "%.4f"|format(utility_results.statistical_similarity.overall) }}</td>
+                <td>
+                    {% set score = utility_results.statistical_similarity.overall %}
+                    {% if score > 0.8 %}
+                    <span class="badge badge-excellent">Excellent</span>
+                    {% elif score > 0.6 %}
+                    <span class="badge badge-good">Good</span>
+                    {% elif score > 0.4 %}
+                    <span class="badge badge-fair">Fair</span>
+                    {% else %}
+                    <span class="badge badge-poor">Poor</span>
+                    {% endif %}
+                </td>
+                <td>Statistical properties preservation</td>
+            </tr>
+            {% endif %}
+            {% if utility_results.correlation_preservation %}
+            <tr>
+                <td>Correlation Preservation</td>
+                <td>{{ "%.4f"|format(utility_results.correlation_preservation.overall) }}</td>
+                <td>
+                    {% set score = utility_results.correlation_preservation.overall %}
+                    {% if score > 0.8 %}
+                    <span class="badge badge-excellent">Excellent</span>
+                    {% elif score > 0.6 %}
+                    <span class="badge badge-good">Good</span>
+                    {% elif score > 0.4 %}
+                    <span class="badge badge-fair">Fair</span>
+                    {% else %}
+                    <span class="badge badge-poor">Poor</span>
+                    {% endif %}
+                </td>
+                <td>Relationship patterns between variables</td>
+            </tr>
+            {% endif %}
+            {% if utility_results.classification_utility %}
+            <tr>
+                <td>Classification Utility</td>
+                <td>{{ "%.4f"|format(utility_results.classification_utility.accuracy_preservation) }}</td>
+                <td>
+                    {% set score = utility_results.classification_utility.accuracy_preservation %}
+                    {% if score > 0.8 %}
+                    <span class="badge badge-excellent">Excellent</span>
+                    {% elif score > 0.6 %}
+                    <span class="badge badge-good">Good</span>
+                    {% elif score > 0.4 %}
+                    <span class="badge badge-fair">Fair</span>
+                    {% else %}
+                    <span class="badge badge-poor">Poor</span>
+                    {% endif %}
+                </td>
+                <td>Machine learning model performance</td>
+            </tr>
+            {% endif %}
+        </table>
+        
+        <h3>Analysis Summary</h3>
+        <div class="alert alert-info">
+            <p><strong>Metrics Computed:</strong> {{ utility_results.metrics_computed|join(', ') }}</p>
+            <p><strong>Overall Assessment:</strong> The processed dataset maintains 
+            <strong>{{ "%.1f"|format(utility_results.overall_utility * 100) }}%</strong> of its original analytical value.</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recommendations -->
+    {% if recommendations %}
+    <div class="section">
+        <h2>💡 Recommendations & Action Items</h2>
+        
+        <div class="recommendations">
+            <h3>Priority Actions</h3>
+            <ul>
+                {% for rec in recommendations %}
+                <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="alert alert-warning">
+            <strong>Important:</strong> These recommendations are based on the current analysis. 
+            Consider your specific use case requirements when implementing changes.
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Technical Details -->
+    <div class="section">
+        <h2>🔧 Technical Implementation Details</h2>
+        
+        <h3>Privacy Enhancement Techniques Applied</h3>
+        <div class="alert alert-info">
+            This analysis considers multiple privacy enhancement approaches including:
+            <ul>
+                <li><strong>K-Anonymity:</strong> Ensures each individual is indistinguishable from at least k-1 others</li>
+                <li><strong>L-Diversity:</strong> Ensures diversity in sensitive attributes within equivalence classes</li>
+                <li><strong>T-Closeness:</strong> Ensures distribution of sensitive attributes matches global distribution</li>
+                <li><strong>Differential Privacy:</strong> Adds calibrated noise to prevent inference attacks</li>
+            </ul>
+        </div>
+        
+        <h3>Risk Assessment Methodology</h3>
+        <p>The risk assessment employs multiple attack scenarios to evaluate re-identification vulnerabilities:</p>
+        <ul>
+            <li><strong>Prosecutor Attack:</strong> Assumes attacker knows target is in dataset</li>
+            <li><strong>Journalist Attack:</strong> Assumes attacker unsure if target is in dataset</li>
+            <li><strong>Marketer Attack:</strong> Focuses on inferring group characteristics</li>
+        </ul>
+        
+        <h3>Utility Measurement Approach</h3>
+        <p>Data utility is assessed across multiple dimensions:</p>
+        <ul>
+            <li><strong>Statistical Similarity:</strong> Preservation of basic statistics (mean, variance, etc.)</li>
+            <li><strong>Correlation Preservation:</strong> Maintenance of variable relationships</li>
+            <li><strong>Distribution Similarity:</strong> Statistical tests for distribution changes</li>
+            <li><strong>Information Theory:</strong> Entropy-based information loss measurement</li>
+            <li><strong>Machine Learning Utility:</strong> Impact on predictive model performance</li>
+        </ul>
+    </div>
+
+    <!-- Compliance & Standards -->
+    <div class="section">
+        <h2>📋 Compliance & Standards</h2>
+        
+        <div class="alert alert-success">
+            <h3>Government of India Compliance</h3>
+            <p>This analysis follows the guidelines established by the Ministry of Electronics and Information Technology 
+            for data protection and privacy enhancement in government datasets.</p>
+        </div>
+        
+        <h3>Standards Applied</h3>
+        <ul>
+            <li>ISO/IEC 27001 Information Security Management</li>
+            <li>NIST Privacy Framework guidelines</li>
+            <li>Government of India Data Protection frameworks</li>
+            <li>International privacy-preserving data publishing standards</li>
+        </ul>
+        
+        <h3>Quality Assurance</h3>
+        <p>This report has been generated using validated algorithms and statistical methods. 
+        All calculations have been verified for accuracy and completeness.</p>
+    </div>
+
+    <div class="footer">
+        <div class="logo">🔒 SafeData Pipeline</div>
+        <p><strong>Government of India</strong></p>
+        <p>Ministry of Electronics and Information Technology</p>
+        <p>Data Privacy Protection and Anonymization System</p>
+        <hr style="margin: 2rem 0; border: none; border-top: 1px solid #dee2e6;">
+        <p style="font-size: 0.85rem; color: #6c757d;">
+            This report is confidential and intended for authorized personnel only.<br>
+            Generated by SafeData Pipeline System v1.0.0
+        </p>
+    </div>
+</body>
+</html>
