@@ -95,15 +95,29 @@ class SafeDataGUI:
                        background='#ecf0f1', foreground='#2c3e50')
     
     def setup_gui(self):
-        """Setup the main GUI interface with scrollable content"""
-        # Configure main window
+        """Setup the main GUI interface with responsive design for all screen sizes"""
+        # Configure main window with adaptive sizing
         self.root.title("SafeData Pipeline - Government of India")
-        self.root.geometry("1200x800")
-        self.root.minsize(1000, 700)
+        
+        # Get screen dimensions for responsive sizing
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        
+        # Calculate adaptive window size (80% of screen for main window)
+        window_width = min(1400, int(screen_width * 0.85))
+        window_height = min(900, int(screen_height * 0.85))
+        
+        # Center window on screen
+        x = (screen_width - window_width) // 2
+        y = (screen_height - window_height) // 2
+        
+        self.root.geometry(f"{window_width}x{window_height}+{x}+{y}")
+        self.root.minsize(800, 600)  # Reduced minimum for smaller screens
         self.root.configure(bg='#f8f9fa')
         
-        # Make window resizable
+        # Make window resizable and maximizable
         self.root.resizable(True, True)
+        self.root.state('normal')  # Allow maximize button
         
         # Setup styles
         self.setup_styles()
@@ -346,8 +360,9 @@ Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(s
         tree_frame = ttk.Frame(preview_frame)
         tree_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Create treeview for data display
-        self.data_tree = ttk.Treeview(tree_frame, show='headings', height=15)
+        # Create treeview for data display with adaptive height
+        tree_height = max(10, min(20, int(self.root.winfo_screenheight() / 50)))
+        self.data_tree = ttk.Treeview(tree_frame, show='headings', height=tree_height)
         
         # ONLY vertical scrollbar for treeview
         v_scrollbar = ttk.Scrollbar(tree_frame, orient=tk.VERTICAL, command=self.data_tree.yview)
@@ -890,20 +905,42 @@ Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(s
                 self.data_tree.insert('', 'end', values=list(row))
     
     def update_quality_assessment(self, quality_results):
-        """Update quality assessment display"""
+        """Update quality assessment display with accurate data"""
         self.quality_text.delete(1.0, tk.END)
         
-        if quality_results:
+        if quality_results and self.current_data is not None:
+            # Calculate real-time statistics from current data
+            total_rows = len(self.current_data)
+            total_columns = len(self.current_data.columns)
+            missing_count = self.current_data.isnull().sum().sum()
+            total_cells = total_rows * total_columns
+            missing_percentage = (missing_count / total_cells * 100) if total_cells > 0 else 0
+            
+            # Calculate quality score based on completeness and validity
+            quality_score = max(0, 100 - missing_percentage - len(quality_results.get('issues', [])) * 2)
+            
             quality_report = f"""Data Quality Assessment Results:
 
-Quality Score: {quality_results.get('quality_score', 0):.1f}%
-Total Rows: {quality_results.get('total_rows', 0):,}
-Total Columns: {quality_results.get('total_columns', 0)}
-Missing Values: {quality_results.get('missing_percentage', 0):.1f}%
+Quality Score: {quality_score:.1f}%
+Total Rows: {total_rows:,}
+Total Columns: {total_columns}
+Missing Values: {missing_percentage:.1f}% ({missing_count:,} cells)
+Data Completeness: {100 - missing_percentage:.1f}%
 
-Issues Detected:
+Column Information:
 """
             
+            # Add column type information
+            for col in self.current_data.columns[:5]:  # Show first 5 columns
+                dtype = str(self.current_data[col].dtype)
+                non_null = self.current_data[col].count()
+                unique_vals = self.current_data[col].nunique()
+                quality_report += f"• {col}: {dtype}, {non_null}/{total_rows} non-null, {unique_vals} unique\n"
+            
+            if len(self.current_data.columns) > 5:
+                quality_report += f"... and {len(self.current_data.columns) - 5} more columns\n"
+            
+            quality_report += "\nIssues Detected:\n"
             issues = quality_results.get('issues', [])
             if issues:
                 for issue in issues[:10]:  # Show first 10 issues
@@ -911,9 +948,12 @@ Issues Detected:
                 if len(issues) > 10:
                     quality_report += f"... and {len(issues) - 10} more issues\n"
             else:
-                quality_report += "No significant issues detected.\n"
+                quality_report += "No significant data quality issues detected.\n"
             
             self.quality_text.insert(1.0, quality_report)
+        else:
+            # Fallback when no data is loaded
+            self.quality_text.insert(1.0, "No data loaded. Please select and load a data file first.")
     
     def update_column_lists(self, columns):
         """Update column lists for risk assessment with checkboxes"""
