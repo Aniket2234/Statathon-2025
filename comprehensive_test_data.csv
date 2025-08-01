@@ -1,0 +1,1011 @@
+employee_id,name,age,gender,department,state,salary,experience_years,education,marital_status,medical_coverage,performance_rating
+GOI001001,Employee_1,60,Male,Defense,Maharashtra,57127.0,37,PhD,Married,Premium,Excellent
+GOI001002,Employee_2,50,Male,Agriculture,Tamil Nadu,35141.0,2,Post Graduate,Divorced,Premium,Excellent
+GOI001003,Employee_3,36,Female,Administration,Kerala,58884.0,27,PhD,Divorced,Premium,Good
+GOI001004,Employee_4,64,Male,Revenue,Tamil Nadu,120421.0,25,Diploma,Married,Family,Excellent
+GOI001005,Employee_5,29,Female,Agriculture,Delhi,32708.0,29,Diploma,Single,Basic,Excellent
+GOI001006,Employee_6,42,Female,Administration,Punjab,48375.0,12,Diploma,Married,None,Good
+GOI001007,Employee_7,60,Male,Finance,Gujarat,45088.0,12,Graduate,Married,None,Average
+GOI001008,Employee_8,40,Male,Agriculture,Karnataka,87615.0,1,Post Graduate,Married,Premium,Good
+GOI001009,Employee_9,44,Male,Education,Kerala,140138.0,36,PhD,Married,Basic,Excellent
+GOI001010,Employee_10,32,Female,Finance,Tamil Nadu,75046.0,37,PhD,Single,Basic,Below Average
+GOI001011,Employee_11,32,Male,Administration,Uttar Pradesh,40014.0,1,Professional,Married,Basic,Below Average
+GOI001012,Employee_12,45,Female,Revenue,Delhi,94425.0,35,Diploma,Single,Individual,Good
+GOI001013,Employee_13,57,Female,Administration,Uttar Pradesh,33273.0,25,Diploma,Married,Individual,Below Average
+GOI001014,Employee_14,61,Female,Agriculture,Karnataka,77135.0,10,Diploma,Divorced,Premium,Excellent
+GOI001015,Employee_15,45,Male,Agriculture,Kerala,132842.0,7,PhD,Single,Basic,Excellent
+GOI001016,Employee_16,24,Male,Health,Delhi,60881.0,39,Professional,Divorced,Basic,Good
+GOI001017,Employee_17,43,Female,Revenue,Kerala,127022.0,21,Graduate,Married,None,Excellent
+GOI001018,Employee_18,23,Male,Finance,Gujarat,108077.0,19,,Married,None,Average
+GOI001019,Employee_19,45,Male,Defense,Rajasthan,38712.0,7,Graduate,Married,Premium,Excellent
+GOI001020,Employee_20,51,Male,Revenue,Delhi,104704.0,28,PhD,Single,Basic,Good
+GOI001021,Employee_21,59,Female,Defense,Uttar Pradesh,82874.0,39,Diploma,Divorced,Premium,Average
+GOI001022,Employee_22,23,Female,Revenue,Karnataka,99087.0,25,Post Graduate,Single,None,Average
+GOI001023,Employee_23,42,Male,Revenue,Punjab,42297.0,29,PhD,Single,None,Below Average
+GOI001024,Employee_24,54,Female,Administration,Gujarat,139269.0,16,PhD,Married,Individual,Excellent
+GOI001025,Employee_25,33,Male,Revenue,Rajasthan,57128.0,19,PhD,Divorced,Premium,Good
+GOI001026,Employee_26,43,Male,Health,Punjab,98368.0,15,Post Graduate,Married,Premium,Below Average
+GOI001027,Employee_27,46,Male,Agriculture,Maharashtra,124019.0,6,Post Graduate,Single,Basic,Below Average
+GOI001028,Employee_28,48,Male,Technology,Gujarat,117599.0,15,Professional,Married,Basic,Excellent
+GOI001029,Employee_29,63,Female,Defense,Karnataka,118499.0,26,Professional,Divorced,Individual,Excellent
+GOI001030,Employee_30,49,Female,Agriculture,Tamil Nadu,108958.0,22,Graduate,Married,Family,Good
+GOI001031,Employee_31,37,Female,Technology,Delhi,62920.0,23,Post Graduate,Divorced,Family,Below Average
+GOI001032,Employee_32,36,Male,Defense,Kerala,41156.0,8,Post Graduate,Divorced,Family,Good
+GOI001033,Employee_33,24,Male,Defense,Karnataka,41108.0,34,Post Graduate,Married,Premium,Below Average
+GOI001034,Employee_34,58,Male,Technology,Delhi,,19,Professional,Single,Premium,Below Average
+GOI001035,Employee_35,28,Female,Revenue,Punjab,,36,PhD,Married,None,Below Average
+GOI001036,Employee_36,42,Male,Finance,Kerala,133614.0,16,Diploma,Single,Premium,Excellent
+GOI001037,Employee_37,30,Female,Education,West Bengal,72712.0,30,Professional,Single,Premium,Below Average
+GOI001038,Employee_38,60,Female,Agriculture,Uttar Pradesh,32610.0,7,Post Graduate,Married,Premium,Below Average
+GOI001039,Employee_39,39,Female,Administration,Maharashtra,107603.0,14,Professional,Single,Individual,Below Average
+GOI001040,Employee_40,25,Female,Agriculture,Gujarat,63872.0,30,Graduate,Single,Premium,Average
+GOI001041,Employee_41,46,Female,Administration,Karnataka,40728.0,29,Post Graduate,Married,Basic,Excellent
+GOI001042,Employee_42,35,Female,Technology,Maharashtra,125102.0,19,Graduate,Married,Basic,Average
+GOI001043,Employee_43,30,Male,Administration,Tamil Nadu,125319.0,38,Post Graduate,Married,None,Excellent
+GOI001044,Employee_44,47,Male,Defense,Delhi,50583.0,11,Professional,Single,Individual,Good
+GOI001045,Employee_45,23,Female,Finance,Delhi,115774.0,16,,Divorced,Basic,Average
+GOI001046,Employee_46,41,Female,Finance,Karnataka,37263.0,29,Diploma,Single,Individual,Good
+GOI001047,Employee_47,49,Male,Defense,Rajasthan,97450.0,28,Graduate,Divorced,Individual,Below Average
+GOI001048,Employee_48,28,Female,Health,Rajasthan,119285.0,18,Professional,Married,None,Good
+GOI001049,Employee_49,29,Female,Technology,West Bengal,49456.0,10,PhD,Divorced,Individual,Good
+GOI001050,Employee_50,56,Male,Health,Uttar Pradesh,121118.0,33,Professional,Married,Premium,Good
+GOI001051,Employee_51,35,Female,Health,Kerala,95942.0,6,Graduate,Married,Individual,Good
+GOI001052,Employee_52,38,Female,Agriculture,Tamil Nadu,43689.0,33,Diploma,Divorced,None,Excellent
+GOI001053,Employee_53,57,Female,Agriculture,Maharashtra,62934.0,19,Professional,Married,None,Average
+GOI001054,Employee_54,61,Male,Education,Rajasthan,63276.0,37,Post Graduate,Divorced,None,Excellent
+GOI001055,Employee_55,25,Male,Administration,West Bengal,146349.0,23,PhD,Married,Basic,Excellent
+GOI001056,Employee_56,23,Male,Defense,West Bengal,131968.0,9,Professional,Single,Premium,Excellent
+GOI001057,Employee_57,27,Female,Agriculture,Karnataka,49873.0,31,PhD,Single,Basic,Good
+GOI001058,Employee_58,63,Female,Technology,Tamil Nadu,43050.0,14,Post Graduate,Married,Family,Excellent
+GOI001059,Employee_59,25,Male,Administration,Punjab,96216.0,36,Diploma,Married,Premium,Average
+GOI001060,Employee_60,50,Female,Education,Kerala,114444.0,19,Diploma,Divorced,Individual,Excellent
+GOI001061,Employee_61,39,Female,Education,Uttar Pradesh,114040.0,2,Post Graduate,Single,None,Below Average
+GOI001062,Employee_62,47,Female,Technology,Gujarat,51644.0,36,PhD,Divorced,Family,Good
+GOI001063,Employee_63,55,Female,Health,Karnataka,92021.0,39,Professional,Married,Premium,Below Average
+GOI001064,Employee_64,31,Female,Finance,Kerala,67125.0,7,Post Graduate,Married,Basic,Average
+GOI001065,Employee_65,57,Male,Technology,Gujarat,96899.0,39,Graduate,Divorced,None,Average
+GOI001066,Employee_66,35,Female,Transport,Gujarat,72291.0,22,PhD,Married,Basic,Average
+GOI001067,Employee_67,52,Male,Technology,Tamil Nadu,65060.0,39,Diploma,Single,Premium,Average
+GOI001068,Employee_68,36,Female,Education,Tamil Nadu,31538.0,10,Post Graduate,Divorced,Premium,Excellent
+GOI001069,Employee_69,29,Male,Defense,Maharashtra,66176.0,7,Diploma,Single,Family,Good
+GOI001070,Employee_70,35,Female,Agriculture,West Bengal,71520.0,28,PhD,Single,Individual,Average
+GOI001071,Employee_71,44,Male,Defense,Kerala,55675.0,29,Diploma,Single,Basic,Below Average
+GOI001072,Employee_72,61,Female,Education,Karnataka,48287.0,9,Post Graduate,Divorced,Family,Average
+GOI001073,Employee_73,42,Male,Agriculture,Delhi,30174.0,38,PhD,Married,None,Good
+GOI001074,Employee_74,37,Female,Transport,Karnataka,122268.0,27,Graduate,Single,Individual,Below Average
+GOI001075,Employee_75,39,Male,Finance,Maharashtra,64998.0,35,Post Graduate,Single,Family,Below Average
+GOI001076,Employee_76,45,Female,Administration,Uttar Pradesh,132591.0,12,Professional,Single,Basic,Below Average
+GOI001077,Employee_77,47,Male,Education,West Bengal,83312.0,31,Post Graduate,Married,Premium,Excellent
+GOI001078,Employee_78,46,Male,Education,Delhi,42112.0,35,PhD,Married,None,Average
+GOI001079,Employee_79,62,Female,Education,Rajasthan,135410.0,36,Post Graduate,Divorced,Basic,Excellent
+GOI001080,Employee_80,50,Female,Agriculture,Uttar Pradesh,105225.0,25,Graduate,Married,Individual,Below Average
+GOI001081,Employee_81,36,Male,Revenue,Tamil Nadu,74814.0,21,Graduate,Divorced,Individual,Excellent
+GOI001082,Employee_82,22,Female,Technology,Gujarat,115091.0,3,Professional,Divorced,Premium,Excellent
+GOI001083,Employee_83,46,Male,Revenue,Rajasthan,80719.0,30,Diploma,Divorced,Premium,Excellent
+GOI001084,Employee_84,28,Male,Transport,Karnataka,63919.0,17,PhD,Divorced,None,Average
+GOI001085,Employee_85,30,Male,Finance,Karnataka,103155.0,37,PhD,Divorced,None,Below Average
+GOI001086,Employee_86,45,Female,Health,Tamil Nadu,101569.0,23,Diploma,Single,Premium,Below Average
+GOI001087,Employee_87,22,Male,Transport,Maharashtra,71328.0,22,Graduate,Married,Premium,Average
+GOI001088,Employee_88,29,Male,Health,Kerala,100482.0,21,Graduate,Single,Individual,Excellent
+GOI001089,Employee_89,45,Female,Health,Rajasthan,54618.0,1,Post Graduate,Divorced,Premium,Excellent
+GOI001090,Employee_90,32,Female,Finance,Rajasthan,64675.0,30,Professional,Married,Family,Good
+GOI001091,Employee_91,38,Female,Defense,Punjab,131794.0,10,Professional,Single,Basic,Good
+GOI001092,Employee_92,29,Female,Revenue,Uttar Pradesh,48919.0,27,Professional,Single,Premium,Good
+GOI001093,Employee_93,56,Male,Education,West Bengal,34173.0,31,Post Graduate,Divorced,None,Average
+GOI001094,Employee_94,56,Male,Administration,Uttar Pradesh,139369.0,4,Professional,Single,Family,Below Average
+GOI001095,Employee_95,54,Male,Health,Kerala,56400.0,37,Diploma,Single,None,Good
+GOI001096,Employee_96,26,Male,Transport,Karnataka,80445.0,9,Post Graduate,Single,Family,Below Average
+GOI001097,Employee_97,63,Female,Defense,Karnataka,100305.0,39,Diploma,Single,Premium,Below Average
+GOI001098,Employee_98,60,Male,Health,Karnataka,67564.0,23,Post Graduate,Single,Basic,Below Average
+GOI001099,Employee_99,62,Male,Defense,Punjab,75814.0,34,Professional,Divorced,None,Average
+GOI001100,Employee_100,49,Female,Defense,Karnataka,109747.0,22,Diploma,Divorced,Family,Average
+GOI001101,Employee_101,28,Male,Health,Kerala,118791.0,16,Diploma,Single,Individual,Average
+GOI001102,Employee_102,30,Male,Agriculture,Tamil Nadu,,0,Diploma,Divorced,Premium,Average
+GOI001103,Employee_103,29,Male,Technology,West Bengal,114892.0,30,Post Graduate,Divorced,Basic,Good
+GOI001104,Employee_104,33,Male,Education,Kerala,115842.0,30,PhD,Married,Premium,Excellent
+GOI001105,Employee_105,55,Male,Education,West Bengal,100533.0,33,Professional,Single,Individual,Excellent
+GOI001106,Employee_106,54,Male,Agriculture,Kerala,86184.0,8,Diploma,Divorced,Basic,Excellent
+GOI001107,Employee_107,44,Female,Education,Karnataka,112912.0,21,PhD,Divorced,Individual,Good
+GOI001108,Employee_108,45,Female,Defense,Tamil Nadu,136416.0,12,Professional,Single,Premium,Excellent
+GOI001109,Employee_109,58,Male,Finance,Rajasthan,133591.0,24,Professional,Married,Family,Good
+GOI001110,Employee_110,56,Male,Transport,Uttar Pradesh,40578.0,17,Diploma,Single,Premium,Good
+GOI001111,Employee_111,61,Female,Revenue,Gujarat,48624.0,11,Diploma,Married,Premium,Good
+GOI001112,Employee_112,43,Male,Education,Tamil Nadu,146164.0,39,Post Graduate,Single,Premium,Excellent
+GOI001113,Employee_113,48,Male,Finance,Rajasthan,69194.0,16,PhD,Single,None,Below Average
+GOI001114,Employee_114,56,Male,Health,Maharashtra,139903.0,14,PhD,Single,Individual,Excellent
+GOI001115,Employee_115,22,Female,Technology,Kerala,30389.0,14,Diploma,Single,Individual,Excellent
+GOI001116,Employee_116,56,Male,Defense,Maharashtra,129303.0,14,Professional,Married,Individual,Average
+GOI001117,Employee_117,58,Female,Technology,Rajasthan,141116.0,38,Diploma,Married,None,Good
+GOI001118,Employee_118,35,Male,Transport,Tamil Nadu,143903.0,12,Professional,Divorced,Family,Below Average
+GOI001119,Employee_119,24,Female,Transport,Kerala,97391.0,16,,Single,Premium,Average
+GOI001120,Employee_120,22,Female,Agriculture,Gujarat,136429.0,31,Diploma,Married,Family,Below Average
+GOI001121,Employee_121,26,Male,Administration,Karnataka,43794.0,8,Graduate,Married,None,Below Average
+GOI001122,Employee_122,47,Female,Agriculture,Kerala,88002.0,39,PhD,Married,Individual,Good
+GOI001123,Employee_123,35,Male,Finance,Kerala,65531.0,19,Professional,Single,Premium,Excellent
+GOI001124,Employee_124,60,Female,Technology,Tamil Nadu,82815.0,25,Professional,Divorced,Basic,Good
+GOI001125,Employee_125,48,Male,Administration,Tamil Nadu,34986.0,26,Graduate,Married,Basic,Good
+GOI001126,Employee_126,30,Male,Health,Rajasthan,62298.0,20,Post Graduate,Single,Family,Average
+GOI001127,Employee_127,36,Female,Defense,Delhi,31481.0,17,Graduate,Married,Individual,Good
+GOI001128,Employee_128,36,Male,Technology,Kerala,86408.0,12,Graduate,Married,Basic,Excellent
+GOI001129,Employee_129,47,Male,Agriculture,Uttar Pradesh,99267.0,15,Professional,Divorced,Family,Below Average
+GOI001130,Employee_130,63,Female,Revenue,Kerala,,8,PhD,Married,None,Good
+GOI001131,Employee_131,34,Male,Administration,Rajasthan,57798.0,11,Graduate,Married,Family,Below Average
+GOI001132,Employee_132,53,Male,Administration,West Bengal,121649.0,37,Post Graduate,Single,Family,Good
+GOI001133,Employee_133,60,Female,Defense,Maharashtra,94887.0,18,Diploma,Single,Family,Below Average
+GOI001134,Employee_134,53,Female,Education,Karnataka,49477.0,6,Graduate,Divorced,Premium,Good
+GOI001135,Employee_135,25,Male,Transport,Delhi,47266.0,34,Graduate,Single,Family,Average
+GOI001136,Employee_136,51,Male,Transport,Gujarat,116328.0,17,Post Graduate,Single,Family,Below Average
+GOI001137,Employee_137,58,Female,Revenue,Gujarat,115988.0,15,PhD,Divorced,Premium,Good
+GOI001138,Employee_138,44,Female,Finance,Gujarat,73526.0,38,Graduate,Married,Premium,Good
+GOI001139,Employee_139,60,Male,Finance,Tamil Nadu,147965.0,3,Graduate,Divorced,None,Average
+GOI001140,Employee_140,36,Female,Health,Gujarat,144615.0,24,PhD,Single,Individual,Average
+GOI001141,Employee_141,64,Male,Technology,Karnataka,136870.0,31,Post Graduate,Divorced,Basic,Average
+GOI001142,Employee_142,50,Male,Education,Maharashtra,41889.0,39,Graduate,Married,Basic,Below Average
+GOI001143,Employee_143,57,Male,Agriculture,Gujarat,54335.0,12,PhD,Divorced,Family,Below Average
+GOI001144,Employee_144,34,Male,Administration,Kerala,41254.0,16,Graduate,Single,None,Average
+GOI001145,Employee_145,53,Male,Revenue,Kerala,116610.0,36,Diploma,Single,Family,Excellent
+GOI001146,Employee_146,28,Female,Transport,Tamil Nadu,41442.0,5,Professional,Divorced,Basic,Excellent
+GOI001147,Employee_147,43,Female,Health,Karnataka,76289.0,18,Diploma,Married,Premium,Good
+GOI001148,Employee_148,49,Female,Finance,Maharashtra,83747.0,12,Graduate,Divorced,Individual,Excellent
+GOI001149,Employee_149,23,Female,Revenue,Delhi,67327.0,25,Post Graduate,Married,None,Good
+GOI001150,Employee_150,63,Male,Administration,Rajasthan,46199.0,13,Professional,Married,Premium,Below Average
+GOI001151,Employee_151,27,Male,Agriculture,Maharashtra,102827.0,30,Diploma,Divorced,Individual,Below Average
+GOI001152,Employee_152,49,Male,Health,Rajasthan,136464.0,3,PhD,Married,None,Excellent
+GOI001153,Employee_153,49,Male,Administration,West Bengal,30112.0,38,Post Graduate,Single,None,Below Average
+GOI001154,Employee_154,41,Female,Transport,Rajasthan,117051.0,7,Diploma,Divorced,Basic,Average
+GOI001155,Employee_155,51,Male,Transport,Uttar Pradesh,49581.0,24,PhD,Married,Premium,Average
+GOI001156,Employee_156,32,Male,Transport,Kerala,144228.0,12,Graduate,Single,None,Excellent
+GOI001157,Employee_157,49,Female,Revenue,Karnataka,89722.0,31,PhD,Divorced,None,Excellent
+GOI001158,Employee_158,46,Female,Revenue,Punjab,122036.0,37,Diploma,Single,Individual,Good
+GOI001159,Employee_159,60,Female,Finance,Tamil Nadu,127562.0,37,Diploma,Single,Basic,Below Average
+GOI001160,Employee_160,54,Female,Finance,Uttar Pradesh,46523.0,27,Graduate,Single,Family,Good
+GOI001161,Employee_161,22,Male,Agriculture,Rajasthan,96960.0,29,PhD,Married,Basic,Good
+GOI001162,Employee_162,48,Male,Health,Gujarat,147637.0,2,PhD,Divorced,Family,Average
+GOI001163,Employee_163,34,Female,Defense,Karnataka,49552.0,27,Graduate,Divorced,Premium,Average
+GOI001164,Employee_164,62,Male,Defense,Uttar Pradesh,40808.0,2,PhD,Married,Premium,Average
+GOI001165,Employee_165,24,Male,Administration,Tamil Nadu,134347.0,33,Graduate,Divorced,None,Average
+GOI001166,Employee_166,60,Male,Transport,Kerala,102525.0,15,Post Graduate,Single,Premium,Good
+GOI001167,Employee_167,27,Female,Health,Karnataka,53620.0,21,Diploma,Divorced,None,Average
+GOI001168,Employee_168,29,Male,Revenue,Tamil Nadu,134565.0,31,Post Graduate,Married,Basic,Below Average
+GOI001169,Employee_169,48,Female,Technology,West Bengal,30887.0,37,Professional,Single,Premium,Average
+GOI001170,Employee_170,30,Male,Education,West Bengal,61802.0,7,Professional,Married,Basic,Average
+GOI001171,Employee_171,58,Male,Agriculture,Tamil Nadu,115024.0,7,Professional,Single,Basic,Average
+GOI001172,Employee_172,54,Male,Transport,Uttar Pradesh,125549.0,5,Graduate,Single,Premium,Excellent
+GOI001173,Employee_173,63,Female,Transport,Karnataka,144737.0,13,PhD,Divorced,Basic,Below Average
+GOI001174,Employee_174,45,Male,Transport,Uttar Pradesh,148639.0,31,Post Graduate,Single,Premium,Below Average
+GOI001175,Employee_175,36,Female,Revenue,Delhi,148248.0,34,Post Graduate,Married,Premium,Good
+GOI001176,Employee_176,53,Female,Revenue,Rajasthan,111938.0,9,Post Graduate,Divorced,Premium,Good
+GOI001177,Employee_177,53,Female,Education,Delhi,116741.0,2,Post Graduate,Married,Family,Average
+GOI001178,Employee_178,45,Male,Health,West Bengal,56049.0,11,Professional,Single,Basic,Excellent
+GOI001179,Employee_179,62,Male,Transport,Kerala,107789.0,30,Post Graduate,Married,Individual,Good
+GOI001180,Employee_180,33,Male,Defense,Maharashtra,114526.0,28,PhD,Married,Premium,Good
+GOI001181,Employee_181,60,Male,Finance,Rajasthan,37846.0,4,Professional,Single,Basic,Average
+GOI001182,Employee_182,23,Female,Defense,West Bengal,120563.0,24,Post Graduate,Divorced,None,Average
+GOI001183,Employee_183,24,Female,Administration,Uttar Pradesh,134736.0,30,Graduate,Married,Premium,Good
+GOI001184,Employee_184,58,Female,Defense,Uttar Pradesh,76220.0,20,Diploma,Single,Premium,Good
+GOI001185,Employee_185,38,Male,Administration,Uttar Pradesh,76163.0,19,Diploma,Divorced,Individual,Below Average
+GOI001186,Employee_186,23,Female,Technology,Kerala,33765.0,38,Diploma,Divorced,Family,Excellent
+GOI001187,Employee_187,23,Male,Finance,Delhi,147126.0,21,Professional,Divorced,Family,Below Average
+GOI001188,Employee_188,49,Female,Defense,Maharashtra,111486.0,3,Post Graduate,Married,Premium,Good
+GOI001189,Employee_189,44,Male,Technology,Uttar Pradesh,75270.0,12,Professional,Married,Basic,Below Average
+GOI001190,Employee_190,58,Male,Agriculture,Punjab,105277.0,19,PhD,Married,None,Below Average
+GOI001191,Employee_191,53,Female,Health,Rajasthan,118278.0,12,Graduate,Divorced,None,Good
+GOI001192,Employee_192,54,Female,Technology,Karnataka,120239.0,16,Graduate,Married,Basic,Average
+GOI001193,Employee_193,22,Female,Health,Punjab,134245.0,35,Diploma,Single,Premium,Good
+GOI001194,Employee_194,40,Female,Defense,Maharashtra,133159.0,32,Diploma,Married,None,Average
+GOI001195,Employee_195,23,Male,Technology,Kerala,52931.0,0,Diploma,Married,Family,Good
+GOI001196,Employee_196,47,Female,Finance,Maharashtra,119116.0,14,Post Graduate,Divorced,Basic,Good
+GOI001197,Employee_197,53,Female,Defense,Karnataka,85633.0,12,PhD,Married,Individual,Good
+GOI001198,Employee_198,27,Female,Transport,Rajasthan,110702.0,16,PhD,Single,Premium,Excellent
+GOI001199,Employee_199,53,Male,Revenue,Karnataka,81913.0,23,PhD,Divorced,Basic,Average
+GOI001200,Employee_200,25,Male,Technology,Tamil Nadu,149144.0,7,PhD,Single,None,Excellent
+GOI001201,Employee_201,32,Female,Finance,Rajasthan,124776.0,26,Diploma,Divorced,Premium,Good
+GOI001202,Employee_202,38,Male,Agriculture,Maharashtra,55991.0,22,Graduate,Divorced,Family,Below Average
+GOI001203,Employee_203,59,Female,Transport,Uttar Pradesh,84845.0,7,Diploma,Married,Premium,Excellent
+GOI001204,Employee_204,45,Male,Agriculture,Maharashtra,134092.0,7,PhD,Single,Premium,Average
+GOI001205,Employee_205,26,Male,Defense,Maharashtra,128505.0,25,Diploma,Divorced,Family,Good
+GOI001206,Employee_206,55,Male,Revenue,Rajasthan,85312.0,12,PhD,Married,Family,Excellent
+GOI001207,Employee_207,27,Male,Technology,Tamil Nadu,40561.0,38,Professional,Divorced,Premium,Below Average
+GOI001208,Employee_208,43,Female,Technology,Maharashtra,46901.0,36,Graduate,Divorced,Family,Excellent
+GOI001209,Employee_209,32,Female,Defense,Punjab,136041.0,27,,Divorced,Basic,Average
+GOI001210,Employee_210,37,Female,Defense,West Bengal,125556.0,24,Post Graduate,Divorced,Family,Excellent
+GOI001211,Employee_211,54,Male,Revenue,Gujarat,92875.0,15,Diploma,Divorced,Family,Below Average
+GOI001212,Employee_212,30,Female,Finance,Gujarat,,1,Post Graduate,Divorced,Premium,Below Average
+GOI001213,Employee_213,27,Female,Finance,Maharashtra,92120.0,17,Diploma,Married,Basic,Average
+GOI001214,Employee_214,37,Female,Revenue,Punjab,31988.0,16,Professional,Divorced,Individual,Below Average
+GOI001215,Employee_215,50,Male,Finance,Uttar Pradesh,143745.0,29,PhD,Single,Individual,Good
+GOI001216,Employee_216,24,Male,Administration,Kerala,140041.0,38,PhD,Married,None,Below Average
+GOI001217,Employee_217,41,Male,Health,Kerala,44256.0,12,Diploma,Single,Family,Good
+GOI001218,Employee_218,57,Female,Revenue,Rajasthan,148490.0,31,PhD,Divorced,Family,Excellent
+GOI001219,Employee_219,40,Female,Revenue,Gujarat,117728.0,28,Professional,Single,Basic,Good
+GOI001220,Employee_220,47,Female,Education,Maharashtra,58230.0,29,PhD,Divorced,Individual,Good
+GOI001221,Employee_221,24,Male,Transport,Kerala,135466.0,17,Professional,Divorced,None,Excellent
+GOI001222,Employee_222,40,Male,Transport,Maharashtra,89778.0,12,Post Graduate,Married,Basic,Below Average
+GOI001223,Employee_223,41,Female,Administration,Rajasthan,75833.0,20,Professional,Married,Family,Good
+GOI001224,Employee_224,53,Male,Defense,Gujarat,52625.0,29,Graduate,Divorced,Individual,Below Average
+GOI001225,Employee_225,28,Male,Defense,Karnataka,62088.0,20,Graduate,Married,None,Excellent
+GOI001226,Employee_226,62,Male,Agriculture,West Bengal,109650.0,16,Graduate,Single,Premium,Average
+GOI001227,Employee_227,54,Male,Administration,West Bengal,71167.0,39,Diploma,Married,Individual,Below Average
+GOI001228,Employee_228,61,Female,Revenue,Kerala,133937.0,18,Diploma,Married,None,Below Average
+GOI001229,Employee_229,60,Male,Administration,West Bengal,101291.0,14,Diploma,Single,Basic,Average
+GOI001230,Employee_230,39,Male,Administration,Karnataka,95303.0,8,Professional,Married,Premium,Average
+GOI001231,Employee_231,61,Male,Administration,Maharashtra,106361.0,9,Diploma,Divorced,None,Excellent
+GOI001232,Employee_232,22,Male,Transport,Rajasthan,118229.0,30,Post Graduate,Single,None,Below Average
+GOI001233,Employee_233,32,Female,Administration,Karnataka,34117.0,22,Graduate,Divorced,Family,Below Average
+GOI001234,Employee_234,49,Female,Health,Rajasthan,120265.0,29,Professional,Single,Individual,Excellent
+GOI001235,Employee_235,46,Male,Defense,Rajasthan,127718.0,32,Graduate,Divorced,Family,Below Average
+GOI001236,Employee_236,44,Male,Agriculture,Gujarat,90710.0,8,Diploma,Divorced,Premium,Good
+GOI001237,Employee_237,52,Male,Health,Maharashtra,124426.0,0,Professional,Married,None,Good
+GOI001238,Employee_238,51,Male,Agriculture,Punjab,124876.0,34,PhD,Divorced,Family,Good
+GOI001239,Employee_239,63,Male,Education,West Bengal,97054.0,10,Post Graduate,Married,Individual,Below Average
+GOI001240,Employee_240,56,Male,Agriculture,Punjab,60949.0,33,Diploma,Single,Premium,Good
+GOI001241,Employee_241,28,Female,Defense,Gujarat,52547.0,15,Diploma,Divorced,Basic,Good
+GOI001242,Employee_242,37,Male,Defense,Rajasthan,111882.0,8,Post Graduate,Divorced,Family,Excellent
+GOI001243,Employee_243,47,Female,Administration,Kerala,98136.0,31,Post Graduate,Single,Premium,Excellent
+GOI001244,Employee_244,23,Female,Technology,West Bengal,141541.0,14,PhD,Single,Basic,Average
+GOI001245,Employee_245,22,Male,Education,West Bengal,146883.0,11,Diploma,Divorced,Family,Average
+GOI001246,Employee_246,33,Female,Revenue,Maharashtra,94619.0,32,Diploma,Single,Premium,Average
+GOI001247,Employee_247,26,Female,Finance,Tamil Nadu,91842.0,13,Graduate,Married,Premium,Average
+GOI001248,Employee_248,58,Female,Agriculture,Delhi,124803.0,7,Professional,Single,Family,Excellent
+GOI001249,Employee_249,53,Female,Technology,Delhi,131858.0,7,Professional,Single,Premium,Excellent
+GOI001250,Employee_250,30,Female,Administration,Delhi,56990.0,26,Graduate,Divorced,None,Excellent
+GOI001251,Employee_251,62,Female,Transport,Tamil Nadu,46193.0,11,Professional,Married,Family,Good
+GOI001252,Employee_252,56,Male,Revenue,Maharashtra,60109.0,0,Post Graduate,Single,Premium,Good
+GOI001253,Employee_253,40,Female,Technology,Tamil Nadu,49233.0,39,Professional,Married,Basic,Average
+GOI001254,Employee_254,37,Female,Transport,Delhi,143557.0,10,,Married,Basic,Good
+GOI001255,Employee_255,24,Female,Education,Gujarat,111730.0,38,Graduate,Married,None,Below Average
+GOI001256,Employee_256,41,Male,Administration,Karnataka,64510.0,30,PhD,Divorced,Family,Excellent
+GOI001257,Employee_257,45,Female,Revenue,Rajasthan,31306.0,16,Professional,Single,Premium,Average
+GOI001258,Employee_258,54,Male,Revenue,Tamil Nadu,33849.0,32,Professional,Divorced,Premium,Average
+GOI001259,Employee_259,45,Female,Revenue,Maharashtra,42360.0,31,PhD,Single,Basic,Below Average
+GOI001260,Employee_260,32,Male,Education,Maharashtra,141072.0,28,Graduate,Single,None,Good
+GOI001261,Employee_261,29,Male,Agriculture,Punjab,124767.0,20,PhD,Divorced,Basic,Average
+GOI001262,Employee_262,57,Female,Education,Karnataka,75800.0,20,Graduate,Married,Basic,Good
+GOI001263,Employee_263,59,Female,Finance,Kerala,66963.0,39,Post Graduate,Married,None,Good
+GOI001264,Employee_264,61,Male,Defense,West Bengal,84330.0,22,Graduate,Single,Family,Below Average
+GOI001265,Employee_265,41,Female,Administration,Delhi,81707.0,5,Post Graduate,Divorced,Premium,Average
+GOI001266,Employee_266,56,Male,Education,Kerala,48689.0,21,Post Graduate,Married,Family,Good
+GOI001267,Employee_267,46,Male,Transport,Punjab,59084.0,37,Graduate,Married,Individual,Good
+GOI001268,Employee_268,56,Male,Finance,Delhi,70387.0,36,Diploma,Single,Individual,Below Average
+GOI001269,Employee_269,46,Male,Defense,Karnataka,104816.0,7,Graduate,Single,Individual,Below Average
+GOI001270,Employee_270,50,Male,Agriculture,Punjab,32642.0,34,Professional,Divorced,None,Good
+GOI001271,Employee_271,39,Female,Transport,Delhi,72137.0,10,Professional,Single,Basic,Below Average
+GOI001272,Employee_272,39,Male,Administration,Karnataka,109832.0,23,Diploma,Married,Family,Good
+GOI001273,Employee_273,23,Male,Transport,Uttar Pradesh,85561.0,20,Post Graduate,Married,Premium,Average
+GOI001274,Employee_274,56,Female,Defense,Kerala,92260.0,1,Diploma,Married,Individual,Excellent
+GOI001275,Employee_275,37,Male,Transport,Kerala,45438.0,39,Professional,Married,Family,Below Average
+GOI001276,Employee_276,62,Female,Health,West Bengal,78442.0,18,Diploma,Divorced,Individual,Excellent
+GOI001277,Employee_277,57,Female,Technology,Karnataka,133061.0,38,Graduate,Divorced,Individual,Good
+GOI001278,Employee_278,54,Female,Agriculture,Tamil Nadu,32994.0,27,Diploma,Single,Premium,Good
+GOI001279,Employee_279,25,Male,Defense,Uttar Pradesh,143530.0,16,Post Graduate,Single,None,Good
+GOI001280,Employee_280,54,Male,Transport,Gujarat,129575.0,5,Graduate,Single,Basic,Excellent
+GOI001281,Employee_281,35,Male,Technology,Delhi,31813.0,18,PhD,Divorced,None,Good
+GOI001282,Employee_282,42,Female,Technology,Uttar Pradesh,123027.0,37,Professional,Married,Family,Below Average
+GOI001283,Employee_283,41,Male,Transport,Karnataka,114381.0,27,Professional,Single,None,Average
+GOI001284,Employee_284,29,Female,Administration,Rajasthan,148808.0,1,Diploma,Married,Family,Average
+GOI001285,Employee_285,28,Male,Health,Delhi,85276.0,37,Graduate,Single,Family,Below Average
+GOI001286,Employee_286,24,Female,Education,Maharashtra,71243.0,36,PhD,Single,Basic,Average
+GOI001287,Employee_287,38,Male,Health,Kerala,92912.0,3,Graduate,Single,Premium,Excellent
+GOI001288,Employee_288,54,Male,Transport,Karnataka,90272.0,21,Professional,Single,Basic,Good
+GOI001289,Employee_289,33,Male,Agriculture,Maharashtra,132700.0,25,Graduate,Single,None,Good
+GOI001290,Employee_290,43,Female,Education,West Bengal,72051.0,35,PhD,Married,Family,Good
+GOI001291,Employee_291,43,Female,Defense,Punjab,108854.0,12,Diploma,Single,Individual,Excellent
+GOI001292,Employee_292,51,Male,Health,Gujarat,112736.0,31,Post Graduate,Married,Individual,Excellent
+GOI001293,Employee_293,59,Male,Transport,Gujarat,95618.0,16,Graduate,Divorced,Family,Excellent
+GOI001294,Employee_294,59,Female,Health,Maharashtra,31920.0,35,Post Graduate,Single,Basic,Below Average
+GOI001295,Employee_295,29,Female,Education,Kerala,136121.0,18,Professional,Married,Premium,Excellent
+GOI001296,Employee_296,48,Female,Finance,West Bengal,107219.0,34,Diploma,Divorced,Basic,Average
+GOI001297,Employee_297,48,Male,Health,Rajasthan,106872.0,39,Diploma,Divorced,Family,Below Average
+GOI001298,Employee_298,55,Female,Defense,Kerala,111132.0,27,Graduate,Divorced,Family,Below Average
+GOI001299,Employee_299,42,Male,Defense,Uttar Pradesh,32093.0,0,Diploma,Married,Premium,Below Average
+GOI001300,Employee_300,51,Female,Revenue,Gujarat,42905.0,17,Graduate,Single,None,Excellent
+GOI001301,Employee_301,54,Male,Health,Uttar Pradesh,54351.0,39,Graduate,Single,None,Below Average
+GOI001302,Employee_302,49,Female,Administration,Delhi,60981.0,32,Post Graduate,Married,Premium,Excellent
+GOI001303,Employee_303,54,Female,Technology,Tamil Nadu,103903.0,11,Diploma,Single,None,Excellent
+GOI001304,Employee_304,26,Female,Technology,Karnataka,100821.0,7,Graduate,Married,Individual,Below Average
+GOI001305,Employee_305,40,Female,Technology,West Bengal,139200.0,23,Post Graduate,Single,None,Good
+GOI001306,Employee_306,25,Female,Finance,Kerala,133241.0,15,PhD,Divorced,None,Good
+GOI001307,Employee_307,56,Male,Revenue,Gujarat,112289.0,3,Post Graduate,Single,None,Below Average
+GOI001308,Employee_308,38,Female,Finance,Uttar Pradesh,146506.0,37,Post Graduate,Married,Individual,Good
+GOI001309,Employee_309,49,Female,Health,Punjab,114021.0,26,Graduate,Married,None,Average
+GOI001310,Employee_310,51,Female,Health,Delhi,108513.0,8,Professional,Divorced,Individual,Average
+GOI001311,Employee_311,50,Male,Health,Karnataka,49874.0,15,Professional,Married,Premium,Excellent
+GOI001312,Employee_312,27,Female,Agriculture,Karnataka,80931.0,11,Professional,Single,Basic,Good
+GOI001313,Employee_313,56,Male,Technology,Kerala,37674.0,30,Post Graduate,Single,Premium,Average
+GOI001314,Employee_314,62,Female,Agriculture,West Bengal,80516.0,23,Graduate,Divorced,Basic,Below Average
+GOI001315,Employee_315,58,Female,Revenue,Rajasthan,124574.0,13,Diploma,Married,Premium,Good
+GOI001316,Employee_316,45,Male,Finance,Punjab,90686.0,24,Post Graduate,Divorced,Basic,Average
+GOI001317,Employee_317,50,Female,Technology,Kerala,124851.0,33,Post Graduate,Single,Basic,Average
+GOI001318,Employee_318,52,Male,Agriculture,Uttar Pradesh,99212.0,2,Graduate,Divorced,Family,Below Average
+GOI001319,Employee_319,56,Male,Agriculture,Tamil Nadu,32426.0,23,PhD,Married,Basic,Excellent
+GOI001320,Employee_320,54,Female,Transport,Maharashtra,120009.0,8,Post Graduate,Divorced,Basic,Below Average
+GOI001321,Employee_321,42,Male,Agriculture,Rajasthan,98498.0,25,PhD,Married,Family,Excellent
+GOI001322,Employee_322,53,Female,Administration,West Bengal,59943.0,19,PhD,Married,None,Average
+GOI001323,Employee_323,44,Female,Administration,Delhi,96395.0,39,Professional,Single,None,Excellent
+GOI001324,Employee_324,54,Male,Finance,Rajasthan,74816.0,9,Graduate,Single,Family,Average
+GOI001325,Employee_325,24,Male,Administration,Gujarat,34138.0,18,PhD,Single,Individual,Average
+GOI001326,Employee_326,39,Male,Finance,West Bengal,,2,Graduate,Married,Basic,Good
+GOI001327,Employee_327,46,Male,Finance,Tamil Nadu,121176.0,23,Professional,Divorced,Basic,Excellent
+GOI001328,Employee_328,63,Female,Revenue,Gujarat,105945.0,4,Graduate,Married,Family,Excellent
+GOI001329,Employee_329,52,Female,Transport,Rajasthan,34017.0,2,Post Graduate,Single,Family,Excellent
+GOI001330,Employee_330,24,Male,Health,Maharashtra,40451.0,26,PhD,Single,Individual,Below Average
+GOI001331,Employee_331,61,Female,Defense,Maharashtra,92956.0,15,Graduate,Divorced,None,Good
+GOI001332,Employee_332,45,Female,Finance,Tamil Nadu,123863.0,14,Diploma,Single,Premium,Good
+GOI001333,Employee_333,53,Female,Education,Karnataka,40278.0,34,Graduate,Single,None,Good
+GOI001334,Employee_334,43,Female,Health,Punjab,120480.0,11,PhD,Single,Basic,Below Average
+GOI001335,Employee_335,44,Male,Technology,Delhi,73764.0,25,Professional,Divorced,Family,Excellent
+GOI001336,Employee_336,23,Male,Administration,Karnataka,31134.0,33,Professional,Married,Individual,Excellent
+GOI001337,Employee_337,48,Female,Defense,Maharashtra,92943.0,22,PhD,Single,None,Excellent
+GOI001338,Employee_338,63,Male,Education,Maharashtra,125667.0,30,Post Graduate,Divorced,Individual,Good
+GOI001339,Employee_339,23,Male,Health,Uttar Pradesh,84318.0,19,Post Graduate,Single,None,Good
+GOI001340,Employee_340,47,Male,Revenue,Gujarat,,11,Professional,Divorced,Basic,Average
+GOI001341,Employee_341,38,Female,Technology,Rajasthan,133998.0,22,Professional,Single,Premium,Below Average
+GOI001342,Employee_342,61,Female,Defense,Delhi,90128.0,3,PhD,Divorced,Individual,Below Average
+GOI001343,Employee_343,54,Female,Transport,Tamil Nadu,118056.0,22,Post Graduate,Single,Individual,Good
+GOI001344,Employee_344,30,Male,Revenue,Rajasthan,51869.0,0,Professional,Married,Premium,Average
+GOI001345,Employee_345,64,Female,Education,Uttar Pradesh,132468.0,24,Post Graduate,Single,Individual,Excellent
+GOI001346,Employee_346,60,Female,Defense,Maharashtra,147034.0,1,Professional,Divorced,Individual,Good
+GOI001347,Employee_347,50,Male,Revenue,Tamil Nadu,35039.0,29,Graduate,Single,None,Below Average
+GOI001348,Employee_348,63,Female,Technology,Maharashtra,51281.0,2,Diploma,Married,None,Below Average
+GOI001349,Employee_349,47,Female,Transport,Delhi,142935.0,20,Graduate,Single,Premium,Below Average
+GOI001350,Employee_350,56,Male,Revenue,Gujarat,40442.0,24,Professional,Divorced,Basic,Excellent
+GOI001351,Employee_351,46,Male,Agriculture,Rajasthan,103788.0,19,Diploma,Divorced,Individual,Below Average
+GOI001352,Employee_352,45,Male,Transport,Rajasthan,149729.0,21,Diploma,Married,Basic,Excellent
+GOI001353,Employee_353,34,Female,Education,Karnataka,57586.0,20,Professional,Divorced,Premium,Excellent
+GOI001354,Employee_354,28,Female,Technology,Tamil Nadu,83053.0,32,,Single,Premium,Excellent
+GOI001355,Employee_355,57,Female,Administration,Punjab,80489.0,37,Post Graduate,Single,None,Good
+GOI001356,Employee_356,41,Male,Administration,Uttar Pradesh,113104.0,14,Professional,Single,Individual,Excellent
+GOI001357,Employee_357,22,Male,Administration,Punjab,116346.0,14,PhD,Divorced,Family,Average
+GOI001358,Employee_358,29,Female,Defense,Karnataka,97087.0,24,Professional,Single,Premium,Below Average
+GOI001359,Employee_359,37,Female,Education,Delhi,42625.0,20,PhD,Single,Individual,Good
+GOI001360,Employee_360,35,Male,Technology,Uttar Pradesh,64397.0,23,Professional,Single,Basic,Below Average
+GOI001361,Employee_361,33,Male,Transport,Gujarat,88671.0,4,Post Graduate,Married,None,Excellent
+GOI001362,Employee_362,44,Male,Defense,Punjab,146214.0,5,PhD,Divorced,Basic,Good
+GOI001363,Employee_363,36,Male,Education,Gujarat,121785.0,22,,Divorced,Premium,Average
+GOI001364,Employee_364,49,Female,Agriculture,Punjab,96897.0,3,PhD,Divorced,Premium,Excellent
+GOI001365,Employee_365,55,Male,Technology,Gujarat,56149.0,26,Post Graduate,Married,Basic,Below Average
+GOI001366,Employee_366,23,Female,Administration,Punjab,90030.0,17,PhD,Divorced,Premium,Average
+GOI001367,Employee_367,53,Female,Revenue,Gujarat,99906.0,20,Professional,Married,Individual,Excellent
+GOI001368,Employee_368,44,Female,Technology,Karnataka,35283.0,27,Professional,Married,Premium,Average
+GOI001369,Employee_369,43,Male,Finance,West Bengal,37610.0,34,Post Graduate,Divorced,None,Excellent
+GOI001370,Employee_370,46,Male,Education,Uttar Pradesh,73326.0,21,Diploma,Single,Individual,Good
+GOI001371,Employee_371,43,Male,Health,Tamil Nadu,44924.0,39,Professional,Single,Family,Excellent
+GOI001372,Employee_372,43,Male,Agriculture,Delhi,143143.0,22,Graduate,Divorced,Premium,Good
+GOI001373,Employee_373,63,Female,Technology,Kerala,140253.0,2,Post Graduate,Divorced,Premium,Excellent
+GOI001374,Employee_374,27,Male,Health,Maharashtra,106162.0,39,PhD,Married,None,Excellent
+GOI001375,Employee_375,36,Male,Finance,Tamil Nadu,130297.0,9,PhD,Divorced,None,Below Average
+GOI001376,Employee_376,64,Female,Transport,Maharashtra,30869.0,24,Graduate,Married,Basic,Average
+GOI001377,Employee_377,58,Male,Revenue,Uttar Pradesh,127088.0,7,Professional,Divorced,Basic,Average
+GOI001378,Employee_378,54,Female,Health,Tamil Nadu,31014.0,10,Post Graduate,Single,Basic,Average
+GOI001379,Employee_379,29,Female,Education,Gujarat,40103.0,4,Graduate,Single,None,Excellent
+GOI001380,Employee_380,26,Female,Administration,Gujarat,112522.0,36,Professional,Divorced,Basic,Excellent
+GOI001381,Employee_381,60,Female,Finance,Kerala,140317.0,37,Post Graduate,Married,Basic,Excellent
+GOI001382,Employee_382,25,Female,Revenue,Maharashtra,126007.0,28,PhD,Single,Family,Good
+GOI001383,Employee_383,27,Female,Agriculture,Delhi,63458.0,4,Post Graduate,Married,Basic,Good
+GOI001384,Employee_384,53,Female,Administration,Uttar Pradesh,120605.0,8,Diploma,Divorced,Premium,Below Average
+GOI001385,Employee_385,51,Female,Technology,Gujarat,112409.0,1,Post Graduate,Divorced,None,Excellent
+GOI001386,Employee_386,56,Male,Health,West Bengal,53248.0,0,Diploma,Single,Individual,Average
+GOI001387,Employee_387,61,Male,Revenue,Karnataka,119160.0,39,Post Graduate,Divorced,Family,Average
+GOI001388,Employee_388,37,Male,Defense,Karnataka,73516.0,29,Diploma,Single,None,Below Average
+GOI001389,Employee_389,34,Male,Transport,Punjab,59061.0,10,PhD,Married,None,Average
+GOI001390,Employee_390,63,Female,Transport,Delhi,54170.0,27,Professional,Single,Premium,Below Average
+GOI001391,Employee_391,51,Male,Finance,Karnataka,38024.0,11,Diploma,Single,Basic,Excellent
+GOI001392,Employee_392,40,Female,Agriculture,Punjab,112214.0,38,Diploma,Married,Premium,Average
+GOI001393,Employee_393,38,Male,Finance,Maharashtra,133792.0,25,PhD,Single,Basic,Excellent
+GOI001394,Employee_394,40,Male,Defense,Gujarat,115947.0,12,Diploma,Single,Basic,Good
+GOI001395,Employee_395,49,Male,Education,Gujarat,73803.0,7,Graduate,Divorced,None,Average
+GOI001396,Employee_396,47,Female,Agriculture,West Bengal,49296.0,27,PhD,Married,Basic,Good
+GOI001397,Employee_397,58,Male,Education,Tamil Nadu,121829.0,29,Graduate,Single,Family,Average
+GOI001398,Employee_398,47,Female,Agriculture,Karnataka,122708.0,8,PhD,Married,Family,Excellent
+GOI001399,Employee_399,44,Female,Agriculture,Maharashtra,116664.0,38,Diploma,Married,Family,Below Average
+GOI001400,Employee_400,30,Male,Defense,Rajasthan,48257.0,30,Graduate,Single,None,Excellent
+GOI001401,Employee_401,33,Male,Technology,Karnataka,42855.0,20,Diploma,Divorced,Premium,Excellent
+GOI001402,Employee_402,22,Male,Defense,Delhi,115178.0,33,PhD,Married,Individual,Excellent
+GOI001403,Employee_403,22,Female,Agriculture,Tamil Nadu,131121.0,30,Diploma,Single,Basic,Average
+GOI001404,Employee_404,55,Male,Revenue,Karnataka,50025.0,24,Graduate,Married,Individual,Below Average
+GOI001405,Employee_405,53,Female,Education,Maharashtra,34458.0,11,Graduate,Divorced,Premium,Good
+GOI001406,Employee_406,46,Female,Defense,Karnataka,93610.0,0,Diploma,Divorced,Premium,Excellent
+GOI001407,Employee_407,61,Male,Technology,Delhi,100843.0,21,Post Graduate,Divorced,None,Average
+GOI001408,Employee_408,22,Male,Health,Rajasthan,137237.0,39,PhD,Single,Family,Good
+GOI001409,Employee_409,37,Female,Finance,Uttar Pradesh,113961.0,36,PhD,Single,Family,Excellent
+GOI001410,Employee_410,60,Female,Agriculture,Kerala,79831.0,0,Diploma,Divorced,Premium,Good
+GOI001411,Employee_411,26,Female,Health,Rajasthan,73427.0,0,Post Graduate,Single,None,Excellent
+GOI001412,Employee_412,43,Male,Transport,Punjab,123809.0,20,Graduate,Divorced,None,Good
+GOI001413,Employee_413,50,Female,Administration,Karnataka,68506.0,14,Professional,Single,Basic,Good
+GOI001414,Employee_414,24,Male,Technology,Gujarat,35668.0,16,Professional,Divorced,Family,Below Average
+GOI001415,Employee_415,33,Female,Administration,West Bengal,121470.0,21,Diploma,Married,Premium,Below Average
+GOI001416,Employee_416,47,Female,Technology,Gujarat,77195.0,37,Post Graduate,Divorced,Individual,Excellent
+GOI001417,Employee_417,37,Male,Revenue,Rajasthan,103233.0,34,Post Graduate,Divorced,Family,Average
+GOI001418,Employee_418,58,Female,Finance,Gujarat,54417.0,15,PhD,Single,Basic,Below Average
+GOI001419,Employee_419,43,Male,Health,Maharashtra,111982.0,7,Graduate,Single,None,Good
+GOI001420,Employee_420,50,Male,Education,Gujarat,136133.0,16,Post Graduate,Single,Premium,Below Average
+GOI001421,Employee_421,35,Female,Technology,Tamil Nadu,40751.0,16,Professional,Single,Family,Below Average
+GOI001422,Employee_422,49,Male,Education,Uttar Pradesh,76218.0,25,Graduate,Single,Individual,Excellent
+GOI001423,Employee_423,26,Male,Finance,Karnataka,37352.0,12,Graduate,Single,Basic,Below Average
+GOI001424,Employee_424,51,Female,Agriculture,Gujarat,109052.0,16,,Married,Basic,Below Average
+GOI001425,Employee_425,26,Male,Transport,Delhi,118835.0,37,Post Graduate,Divorced,Family,Good
+GOI001426,Employee_426,33,Male,Health,Uttar Pradesh,127493.0,16,Diploma,Divorced,Individual,Below Average
+GOI001427,Employee_427,37,Male,Finance,Uttar Pradesh,58927.0,13,Post Graduate,Divorced,Basic,Good
+GOI001428,Employee_428,47,Female,Finance,Gujarat,71094.0,5,PhD,Married,Premium,Below Average
+GOI001429,Employee_429,47,Male,Revenue,Uttar Pradesh,131948.0,34,Diploma,Divorced,Basic,Below Average
+GOI001430,Employee_430,42,Female,Administration,West Bengal,,13,Diploma,Married,Individual,Average
+GOI001431,Employee_431,60,Female,Transport,Gujarat,59493.0,7,Professional,Married,None,Below Average
+GOI001432,Employee_432,57,Male,Health,Maharashtra,122247.0,14,Diploma,Married,None,Good
+GOI001433,Employee_433,54,Male,Agriculture,Rajasthan,103539.0,26,Post Graduate,Divorced,Family,Good
+GOI001434,Employee_434,51,Male,Agriculture,Tamil Nadu,61707.0,12,Professional,Married,Individual,Excellent
+GOI001435,Employee_435,58,Female,Defense,Kerala,98814.0,30,Diploma,Divorced,Basic,Excellent
+GOI001436,Employee_436,44,Male,Finance,Punjab,37296.0,34,Diploma,Divorced,Basic,Average
+GOI001437,Employee_437,31,Male,Technology,Uttar Pradesh,55398.0,5,PhD,Single,None,Good
+GOI001438,Employee_438,26,Male,Revenue,Maharashtra,65842.0,4,Diploma,Single,None,Good
+GOI001439,Employee_439,57,Male,Transport,Karnataka,43261.0,21,Graduate,Married,Premium,Good
+GOI001440,Employee_440,55,Male,Agriculture,Karnataka,106709.0,22,Professional,Married,None,Average
+GOI001441,Employee_441,52,Female,Health,Punjab,,24,Graduate,Divorced,Premium,Good
+GOI001442,Employee_442,31,Female,Defense,Tamil Nadu,136616.0,33,Professional,Married,Basic,Excellent
+GOI001443,Employee_443,40,Male,Health,Uttar Pradesh,86704.0,25,PhD,Married,Premium,Average
+GOI001444,Employee_444,53,Male,Revenue,West Bengal,97173.0,4,Diploma,Divorced,Premium,Excellent
+GOI001445,Employee_445,22,Male,Technology,Punjab,61781.0,25,Diploma,Married,Family,Excellent
+GOI001446,Employee_446,26,Male,Defense,Tamil Nadu,43652.0,19,Diploma,Married,None,Average
+GOI001447,Employee_447,25,Female,Defense,Uttar Pradesh,35103.0,5,Professional,Divorced,Premium,Below Average
+GOI001448,Employee_448,37,Male,Administration,Maharashtra,55500.0,5,Diploma,Divorced,Basic,Below Average
+GOI001449,Employee_449,45,Female,Transport,Rajasthan,145332.0,17,Graduate,Single,Individual,Excellent
+GOI001450,Employee_450,37,Female,Defense,West Bengal,130336.0,3,Diploma,Divorced,Premium,Below Average
+GOI001451,Employee_451,23,Male,Administration,Kerala,65529.0,16,PhD,Single,None,Good
+GOI001452,Employee_452,49,Female,Administration,Karnataka,143499.0,13,Graduate,Married,Family,Average
+GOI001453,Employee_453,53,Female,Revenue,Delhi,48452.0,13,Diploma,Divorced,Basic,Excellent
+GOI001454,Employee_454,48,Female,Education,Maharashtra,79393.0,12,Diploma,Divorced,Family,Good
+GOI001455,Employee_455,41,Female,Health,Karnataka,61174.0,6,Post Graduate,Divorced,Individual,Below Average
+GOI001456,Employee_456,45,Male,Technology,Gujarat,94450.0,14,Professional,Married,Premium,Good
+GOI001457,Employee_457,33,Male,Health,Delhi,65436.0,18,Graduate,Single,Premium,Below Average
+GOI001458,Employee_458,56,Female,Defense,Karnataka,77406.0,34,Post Graduate,Married,None,Excellent
+GOI001459,Employee_459,54,Male,Technology,Tamil Nadu,93059.0,16,PhD,Married,Premium,Good
+GOI001460,Employee_460,54,Male,Agriculture,West Bengal,45954.0,34,Professional,Divorced,Basic,Average
+GOI001461,Employee_461,64,Male,Education,Karnataka,112722.0,18,Graduate,Single,Individual,Excellent
+GOI001462,Employee_462,58,Male,Agriculture,Kerala,149747.0,19,Diploma,Married,Family,Good
+GOI001463,Employee_463,33,Male,Agriculture,Rajasthan,42356.0,35,Graduate,Divorced,Individual,Good
+GOI001464,Employee_464,24,Female,Transport,Tamil Nadu,128499.0,34,Diploma,Married,Premium,Below Average
+GOI001465,Employee_465,22,Male,Health,Maharashtra,32187.0,31,Professional,Married,Family,Excellent
+GOI001466,Employee_466,54,Male,Revenue,Maharashtra,107243.0,39,Diploma,Divorced,None,Excellent
+GOI001467,Employee_467,61,Male,Agriculture,Maharashtra,65098.0,23,PhD,Divorced,Individual,Excellent
+GOI001468,Employee_468,31,Male,Defense,Maharashtra,122471.0,16,Diploma,Single,Family,Excellent
+GOI001469,Employee_469,64,Female,Education,Rajasthan,51225.0,6,PhD,Married,Family,Below Average
+GOI001470,Employee_470,50,Female,Finance,Karnataka,33606.0,0,Professional,Divorced,Family,Average
+GOI001471,Employee_471,34,Female,Agriculture,Uttar Pradesh,87620.0,34,Professional,Divorced,Basic,Excellent
+GOI001472,Employee_472,33,Female,Education,Karnataka,62828.0,31,Graduate,Single,Individual,Below Average
+GOI001473,Employee_473,52,Male,Technology,Gujarat,56489.0,35,PhD,Single,Family,Average
+GOI001474,Employee_474,23,Female,Health,West Bengal,44387.0,12,PhD,Divorced,Individual,Average
+GOI001475,Employee_475,56,Male,Administration,Delhi,99463.0,5,Post Graduate,Single,Family,Below Average
+GOI001476,Employee_476,44,Male,Transport,Uttar Pradesh,101832.0,13,Post Graduate,Divorced,None,Excellent
+GOI001477,Employee_477,38,Male,Education,Uttar Pradesh,125980.0,36,Post Graduate,Married,None,Average
+GOI001478,Employee_478,47,Male,Defense,Karnataka,141926.0,14,Diploma,Single,None,Excellent
+GOI001479,Employee_479,29,Male,Defense,Uttar Pradesh,142429.0,3,Post Graduate,Married,Premium,Excellent
+GOI001480,Employee_480,50,Female,Education,Punjab,32591.0,39,PhD,Married,Family,Good
+GOI001481,Employee_481,47,Female,Defense,Punjab,140431.0,15,Diploma,Married,Premium,Excellent
+GOI001482,Employee_482,31,Female,Health,Gujarat,78516.0,27,Professional,Divorced,Individual,Good
+GOI001483,Employee_483,47,Female,Defense,Delhi,121683.0,15,Graduate,Married,Premium,Average
+GOI001484,Employee_484,55,Male,Administration,Kerala,92061.0,3,Post Graduate,Married,Individual,Below Average
+GOI001485,Employee_485,62,Female,Defense,Rajasthan,134425.0,25,Professional,Married,Individual,Good
+GOI001486,Employee_486,28,Male,Administration,Karnataka,96736.0,27,PhD,Divorced,Individual,Below Average
+GOI001487,Employee_487,25,Female,Agriculture,Rajasthan,,31,Graduate,Married,Premium,Average
+GOI001488,Employee_488,32,Male,Revenue,Kerala,91753.0,1,Professional,Married,Family,Excellent
+GOI001489,Employee_489,50,Male,Health,Karnataka,114774.0,30,Graduate,Single,Premium,Average
+GOI001490,Employee_490,57,Female,Revenue,Karnataka,41087.0,2,Post Graduate,Divorced,Family,Below Average
+GOI001491,Employee_491,46,Male,Agriculture,Delhi,60816.0,7,PhD,Married,Family,Average
+GOI001492,Employee_492,42,Male,Health,Rajasthan,53408.0,23,Graduate,Single,Individual,Excellent
+GOI001493,Employee_493,57,Female,Education,Punjab,135276.0,14,Professional,Divorced,Premium,Average
+GOI001494,Employee_494,31,Male,Education,Maharashtra,30136.0,30,Post Graduate,Divorced,Family,Excellent
+GOI001495,Employee_495,58,Female,Administration,Rajasthan,47413.0,8,Post Graduate,Divorced,None,Good
+GOI001496,Employee_496,30,Female,Agriculture,West Bengal,143650.0,38,Professional,Divorced,Family,Below Average
+GOI001497,Employee_497,45,Female,Administration,West Bengal,89500.0,1,Professional,Divorced,None,Excellent
+GOI001498,Employee_498,56,Male,Transport,Karnataka,114514.0,7,Graduate,Divorced,Premium,Excellent
+GOI001499,Employee_499,56,Male,Defense,Maharashtra,86358.0,6,Diploma,Married,Premium,Average
+GOI001500,Employee_500,57,Male,Finance,Tamil Nadu,96197.0,38,Post Graduate,Married,Premium,Good
+GOI001501,Employee_501,39,Female,Transport,Kerala,,15,Graduate,Married,Family,Excellent
+GOI001502,Employee_502,60,Male,Defense,Gujarat,122789.0,34,Professional,Married,Basic,Good
+GOI001503,Employee_503,53,Female,Health,Maharashtra,122420.0,29,Graduate,Single,Family,Good
+GOI001504,Employee_504,45,Female,Administration,Gujarat,62854.0,9,Professional,Married,Family,Average
+GOI001505,Employee_505,44,Male,Health,Rajasthan,106240.0,37,PhD,Divorced,Individual,Excellent
+GOI001506,Employee_506,53,Female,Health,Rajasthan,134523.0,17,Professional,Married,Individual,Average
+GOI001507,Employee_507,58,Male,Defense,Gujarat,120063.0,4,Professional,Married,Family,Below Average
+GOI001508,Employee_508,33,Male,Agriculture,Kerala,46322.0,28,,Divorced,None,Below Average
+GOI001509,Employee_509,34,Male,Defense,Maharashtra,143053.0,38,Diploma,Married,Individual,Excellent
+GOI001510,Employee_510,44,Male,Technology,Tamil Nadu,36968.0,33,Professional,Married,Family,Good
+GOI001511,Employee_511,46,Male,Education,Karnataka,57518.0,22,Post Graduate,Married,Basic,Excellent
+GOI001512,Employee_512,56,Female,Education,Delhi,81925.0,4,Post Graduate,Single,None,Excellent
+GOI001513,Employee_513,62,Female,Transport,Rajasthan,89848.0,29,Graduate,Married,Premium,Below Average
+GOI001514,Employee_514,51,Female,Education,West Bengal,141900.0,5,Diploma,Divorced,Family,Below Average
+GOI001515,Employee_515,38,Male,Defense,Kerala,123422.0,3,Graduate,Divorced,Family,Good
+GOI001516,Employee_516,41,Male,Administration,Delhi,31700.0,28,Post Graduate,Married,None,Good
+GOI001517,Employee_517,46,Male,Defense,Tamil Nadu,123782.0,22,Post Graduate,Married,Individual,Excellent
+GOI001518,Employee_518,43,Female,Defense,Uttar Pradesh,,5,PhD,Married,Individual,Average
+GOI001519,Employee_519,34,Male,Finance,Karnataka,53199.0,31,Professional,Divorced,Individual,Excellent
+GOI001520,Employee_520,40,Female,Administration,Rajasthan,74589.0,17,Post Graduate,Divorced,Premium,Good
+GOI001521,Employee_521,57,Female,Technology,Karnataka,62115.0,14,Graduate,Single,None,Average
+GOI001522,Employee_522,33,Male,Education,Delhi,91934.0,39,Graduate,Single,None,Below Average
+GOI001523,Employee_523,62,Male,Administration,Karnataka,146335.0,31,Professional,Single,Individual,Good
+GOI001524,Employee_524,40,Female,Education,Uttar Pradesh,84316.0,8,Professional,Divorced,Individual,Good
+GOI001525,Employee_525,33,Male,Transport,Delhi,35520.0,36,PhD,Single,Basic,Average
+GOI001526,Employee_526,30,Female,Administration,Rajasthan,139814.0,9,Diploma,Married,Basic,Good
+GOI001527,Employee_527,28,Male,Education,Maharashtra,66455.0,19,Graduate,Married,Family,Good
+GOI001528,Employee_528,49,Male,Technology,West Bengal,145284.0,5,Professional,Divorced,Family,Good
+GOI001529,Employee_529,35,Female,Revenue,Delhi,116465.0,2,Graduate,Single,None,Good
+GOI001530,Employee_530,52,Male,Health,Punjab,71605.0,10,Professional,Married,None,Good
+GOI001531,Employee_531,40,Female,Health,Uttar Pradesh,44955.0,16,Post Graduate,Divorced,Premium,Good
+GOI001532,Employee_532,37,Male,Technology,Delhi,74049.0,31,Graduate,Single,Premium,Good
+GOI001533,Employee_533,26,Female,Finance,Delhi,43917.0,3,Post Graduate,Married,Basic,Good
+GOI001534,Employee_534,56,Female,Revenue,Punjab,100293.0,3,Graduate,Single,Family,Below Average
+GOI001535,Employee_535,33,Male,Transport,Rajasthan,108581.0,16,Diploma,Divorced,Basic,Good
+GOI001536,Employee_536,46,Female,Technology,Delhi,149072.0,18,PhD,Single,Basic,Below Average
+GOI001537,Employee_537,42,Male,Health,West Bengal,94925.0,4,Post Graduate,Divorced,Family,Below Average
+GOI001538,Employee_538,57,Male,Health,Karnataka,137216.0,31,Professional,Single,Premium,Excellent
+GOI001539,Employee_539,44,Male,Health,Rajasthan,100269.0,21,Diploma,Married,Family,Excellent
+GOI001540,Employee_540,37,Female,Agriculture,West Bengal,60954.0,5,Graduate,Divorced,Individual,Below Average
+GOI001541,Employee_541,60,Female,Technology,Rajasthan,,34,Post Graduate,Divorced,Individual,Below Average
+GOI001542,Employee_542,63,Male,Defense,West Bengal,102617.0,21,Graduate,Divorced,Individual,Good
+GOI001543,Employee_543,60,Male,Transport,Uttar Pradesh,71458.0,0,Graduate,Single,None,Excellent
+GOI001544,Employee_544,35,Female,Health,West Bengal,119037.0,19,Graduate,Single,Premium,Average
+GOI001545,Employee_545,52,Male,Education,Gujarat,51113.0,21,PhD,Married,Premium,Excellent
+GOI001546,Employee_546,26,Male,Technology,West Bengal,129977.0,10,PhD,Divorced,None,Below Average
+GOI001547,Employee_547,56,Female,Agriculture,Maharashtra,142622.0,12,Professional,Divorced,Basic,Below Average
+GOI001548,Employee_548,44,Male,Technology,Maharashtra,120226.0,2,Post Graduate,Single,Individual,Good
+GOI001549,Employee_549,50,Female,Transport,Kerala,73939.0,8,Diploma,Single,Individual,Good
+GOI001550,Employee_550,64,Male,Agriculture,Gujarat,59345.0,11,Diploma,Married,Basic,Excellent
+GOI001551,Employee_551,32,Female,Transport,Gujarat,76313.0,22,Diploma,Married,Family,Good
+GOI001552,Employee_552,39,Male,Technology,Karnataka,140107.0,13,Graduate,Single,Family,Average
+GOI001553,Employee_553,33,Male,Defense,Gujarat,122365.0,32,PhD,Divorced,Premium,Average
+GOI001554,Employee_554,30,Female,Transport,Karnataka,130598.0,17,Post Graduate,Married,None,Good
+GOI001555,Employee_555,31,Male,Agriculture,Kerala,99166.0,8,Graduate,Single,Premium,Average
+GOI001556,Employee_556,38,Female,Agriculture,Kerala,77861.0,22,PhD,Single,Family,Average
+GOI001557,Employee_557,59,Male,Transport,Uttar Pradesh,127406.0,9,PhD,Divorced,Basic,Excellent
+GOI001558,Employee_558,28,Female,Technology,Maharashtra,79298.0,18,Post Graduate,Single,Premium,Average
+GOI001559,Employee_559,34,Female,Finance,West Bengal,77221.0,4,Post Graduate,Single,Individual,Below Average
+GOI001560,Employee_560,61,Female,Technology,West Bengal,74942.0,22,Post Graduate,Married,Individual,Below Average
+GOI001561,Employee_561,63,Female,Transport,Punjab,33453.0,29,Graduate,Single,Basic,Excellent
+GOI001562,Employee_562,30,Male,Revenue,Punjab,132811.0,24,Professional,Single,Family,Good
+GOI001563,Employee_563,48,Male,Transport,Tamil Nadu,84935.0,27,Post Graduate,Married,Individual,Excellent
+GOI001564,Employee_564,23,Female,Defense,Rajasthan,73370.0,33,Professional,Divorced,Individual,Good
+GOI001565,Employee_565,26,Female,Transport,Uttar Pradesh,133932.0,24,Graduate,Divorced,None,Good
+GOI001566,Employee_566,50,Female,Transport,Tamil Nadu,38328.0,9,Professional,Married,Premium,Good
+GOI001567,Employee_567,58,Male,Defense,Tamil Nadu,45534.0,13,Diploma,Married,Family,Good
+GOI001568,Employee_568,59,Male,Transport,Delhi,115280.0,29,Professional,Divorced,Premium,Good
+GOI001569,Employee_569,40,Male,Health,Delhi,114925.0,24,Post Graduate,Divorced,Family,Excellent
+GOI001570,Employee_570,29,Male,Revenue,Tamil Nadu,66320.0,13,Graduate,Divorced,Individual,Good
+GOI001571,Employee_571,22,Female,Education,Gujarat,79170.0,34,Post Graduate,Divorced,None,Average
+GOI001572,Employee_572,43,Female,Revenue,Rajasthan,130546.0,33,Diploma,Divorced,Premium,Average
+GOI001573,Employee_573,38,Female,Transport,Uttar Pradesh,110201.0,9,Post Graduate,Married,Individual,Good
+GOI001574,Employee_574,28,Male,Health,Tamil Nadu,133401.0,34,Post Graduate,Single,Family,Average
+GOI001575,Employee_575,46,Male,Technology,West Bengal,38640.0,10,Post Graduate,Divorced,Premium,Below Average
+GOI001576,Employee_576,25,Male,Transport,Rajasthan,130252.0,10,,Divorced,Premium,Excellent
+GOI001577,Employee_577,57,Female,Health,Delhi,121057.0,20,Diploma,Single,Individual,Excellent
+GOI001578,Employee_578,27,Female,Defense,West Bengal,60049.0,20,Post Graduate,Single,Premium,Good
+GOI001579,Employee_579,52,Male,Health,Delhi,35618.0,21,Post Graduate,Single,None,Good
+GOI001580,Employee_580,40,Female,Defense,Delhi,132540.0,6,Post Graduate,Single,None,Below Average
+GOI001581,Employee_581,60,Male,Finance,Rajasthan,86053.0,16,Graduate,Single,Individual,Good
+GOI001582,Employee_582,48,Male,Education,Delhi,31920.0,1,PhD,Single,Family,Average
+GOI001583,Employee_583,31,Female,Administration,Kerala,73937.0,11,Graduate,Married,Individual,Below Average
+GOI001584,Employee_584,47,Male,Health,Maharashtra,99724.0,17,PhD,Single,None,Average
+GOI001585,Employee_585,40,Female,Agriculture,Kerala,42207.0,10,Post Graduate,Single,Basic,Excellent
+GOI001586,Employee_586,60,Male,Transport,Maharashtra,95774.0,15,Diploma,Married,Basic,Average
+GOI001587,Employee_587,24,Female,Revenue,Punjab,62972.0,17,Professional,Single,Premium,Excellent
+GOI001588,Employee_588,34,Female,Administration,Punjab,40799.0,34,Professional,Divorced,Premium,Average
+GOI001589,Employee_589,49,Female,Revenue,Delhi,101088.0,25,Post Graduate,Divorced,Basic,Excellent
+GOI001590,Employee_590,41,Male,Finance,Uttar Pradesh,58916.0,15,Graduate,Single,None,Good
+GOI001591,Employee_591,49,Male,Administration,Uttar Pradesh,100463.0,5,Diploma,Married,Premium,Average
+GOI001592,Employee_592,29,Female,Administration,Maharashtra,123500.0,11,PhD,Divorced,Individual,Excellent
+GOI001593,Employee_593,62,Female,Revenue,West Bengal,106700.0,12,Post Graduate,Married,Individual,Average
+GOI001594,Employee_594,60,Male,Defense,Rajasthan,67158.0,3,Diploma,Divorced,None,Below Average
+GOI001595,Employee_595,22,Male,Revenue,Delhi,114607.0,38,Diploma,Single,Premium,Good
+GOI001596,Employee_596,24,Male,Defense,Rajasthan,149639.0,1,PhD,Married,Individual,Excellent
+GOI001597,Employee_597,34,Female,Finance,Kerala,143945.0,25,Diploma,Married,Premium,Below Average
+GOI001598,Employee_598,49,Male,Transport,Uttar Pradesh,101696.0,26,Graduate,Married,Premium,Average
+GOI001599,Employee_599,46,Male,Technology,Gujarat,91510.0,26,Graduate,Divorced,Individual,Below Average
+GOI001600,Employee_600,54,Female,Defense,Kerala,88692.0,14,Graduate,Divorced,Basic,Average
+GOI001601,Employee_601,59,Male,Finance,Kerala,91744.0,7,Diploma,Divorced,Individual,Good
+GOI001602,Employee_602,27,Male,Agriculture,Maharashtra,45810.0,6,Graduate,Single,None,Below Average
+GOI001603,Employee_603,53,Male,Finance,Karnataka,35126.0,39,PhD,Divorced,Family,Good
+GOI001604,Employee_604,42,Female,Revenue,Kerala,60009.0,11,Diploma,Single,Individual,Excellent
+GOI001605,Employee_605,37,Female,Revenue,Delhi,129120.0,12,Professional,Married,Premium,Average
+GOI001606,Employee_606,42,Female,Technology,Tamil Nadu,141718.0,16,Diploma,Married,Premium,Average
+GOI001607,Employee_607,32,Female,Finance,Tamil Nadu,120932.0,16,PhD,Single,Individual,Good
+GOI001608,Employee_608,58,Female,Education,Delhi,30192.0,35,Professional,Divorced,Family,Good
+GOI001609,Employee_609,57,Female,Transport,Karnataka,146464.0,20,Diploma,Single,Individual,Excellent
+GOI001610,Employee_610,56,Female,Revenue,Karnataka,66413.0,7,Graduate,Married,Family,Below Average
+GOI001611,Employee_611,40,Male,Technology,Maharashtra,42816.0,4,Post Graduate,Married,Family,Average
+GOI001612,Employee_612,41,Male,Transport,Uttar Pradesh,69082.0,25,Post Graduate,Single,None,Average
+GOI001613,Employee_613,39,Female,Finance,Rajasthan,95048.0,15,Graduate,Divorced,Premium,Excellent
+GOI001614,Employee_614,62,Male,Finance,Karnataka,80940.0,35,Post Graduate,Divorced,Premium,Excellent
+GOI001615,Employee_615,35,Male,Administration,Gujarat,62130.0,27,Post Graduate,Single,Family,Good
+GOI001616,Employee_616,36,Female,Technology,Maharashtra,70142.0,28,Graduate,Single,Premium,Good
+GOI001617,Employee_617,52,Male,Revenue,Punjab,66468.0,11,Graduate,Divorced,Basic,Below Average
+GOI001618,Employee_618,22,Male,Education,West Bengal,60698.0,36,Diploma,Married,Family,Excellent
+GOI001619,Employee_619,24,Male,Finance,Punjab,40655.0,29,Diploma,Single,Premium,Below Average
+GOI001620,Employee_620,37,Male,Education,Maharashtra,77897.0,22,Graduate,Divorced,Basic,Excellent
+GOI001621,Employee_621,44,Male,Finance,Kerala,60075.0,15,PhD,Divorced,None,Average
+GOI001622,Employee_622,32,Female,Revenue,Rajasthan,39359.0,13,Post Graduate,Married,Premium,Excellent
+GOI001623,Employee_623,33,Female,Transport,West Bengal,132197.0,9,Diploma,Married,Basic,Excellent
+GOI001624,Employee_624,31,Female,Health,Punjab,135115.0,6,Post Graduate,Married,Individual,Average
+GOI001625,Employee_625,53,Male,Transport,West Bengal,72056.0,36,Professional,Married,Individual,Excellent
+GOI001626,Employee_626,37,Female,Finance,Gujarat,81831.0,28,Graduate,Married,Basic,Below Average
+GOI001627,Employee_627,29,Male,Health,Gujarat,89191.0,2,PhD,Single,Family,Good
+GOI001628,Employee_628,59,Male,Health,Gujarat,148592.0,14,Professional,Divorced,Family,Good
+GOI001629,Employee_629,33,Male,Education,Maharashtra,63272.0,35,Professional,Single,Premium,Below Average
+GOI001630,Employee_630,45,Male,Technology,Rajasthan,138117.0,18,Professional,Single,Individual,Average
+GOI001631,Employee_631,49,Female,Education,Maharashtra,44671.0,12,Graduate,Single,Family,Excellent
+GOI001632,Employee_632,29,Female,Education,Tamil Nadu,57048.0,20,Diploma,Single,Family,Below Average
+GOI001633,Employee_633,49,Male,Transport,Kerala,106274.0,36,Graduate,Single,Individual,Good
+GOI001634,Employee_634,57,Female,Transport,Kerala,55963.0,26,Diploma,Married,None,Good
+GOI001635,Employee_635,47,Male,Agriculture,Gujarat,73954.0,28,Professional,Married,Family,Below Average
+GOI001636,Employee_636,29,Female,Finance,Tamil Nadu,102309.0,19,Professional,Divorced,Basic,Good
+GOI001637,Employee_637,49,Female,Agriculture,Karnataka,132120.0,24,PhD,Single,Premium,Below Average
+GOI001638,Employee_638,49,Male,Revenue,Karnataka,125430.0,5,Diploma,Divorced,Family,Good
+GOI001639,Employee_639,58,Female,Finance,Gujarat,30717.0,35,Professional,Married,Family,Below Average
+GOI001640,Employee_640,62,Male,Finance,Punjab,41676.0,1,Post Graduate,Married,None,Excellent
+GOI001641,Employee_641,57,Female,Administration,Maharashtra,34434.0,21,PhD,Married,Basic,Excellent
+GOI001642,Employee_642,48,Male,Administration,Gujarat,79810.0,31,Graduate,Single,Premium,Excellent
+GOI001643,Employee_643,38,Male,Defense,Uttar Pradesh,133361.0,15,PhD,Single,Family,Excellent
+GOI001644,Employee_644,30,Female,Defense,West Bengal,148696.0,17,Post Graduate,Married,Premium,Good
+GOI001645,Employee_645,54,Female,Education,Kerala,124636.0,4,Diploma,Divorced,Individual,Average
+GOI001646,Employee_646,41,Male,Revenue,Karnataka,34994.0,35,Graduate,Divorced,Family,Below Average
+GOI001647,Employee_647,34,Female,Health,Delhi,,29,Graduate,Married,Family,Average
+GOI001648,Employee_648,49,Female,Health,Karnataka,99300.0,18,Diploma,Divorced,Individual,Good
+GOI001649,Employee_649,50,Male,Administration,Kerala,73949.0,22,PhD,Married,None,Good
+GOI001650,Employee_650,34,Male,Administration,West Bengal,67405.0,33,Professional,Divorced,Family,Average
+GOI001651,Employee_651,56,Female,Administration,Kerala,64872.0,12,PhD,Married,Premium,Average
+GOI001652,Employee_652,27,Male,Technology,Delhi,72215.0,28,Post Graduate,Divorced,Basic,Good
+GOI001653,Employee_653,39,Male,Defense,Gujarat,53185.0,35,Professional,Single,Premium,Good
+GOI001654,Employee_654,26,Male,Transport,Tamil Nadu,73442.0,21,PhD,Married,None,Below Average
+GOI001655,Employee_655,46,Female,Health,Delhi,81759.0,35,Diploma,Married,Basic,Excellent
+GOI001656,Employee_656,23,Female,Finance,Kerala,71153.0,8,Post Graduate,Divorced,Premium,Excellent
+GOI001657,Employee_657,31,Male,Defense,Kerala,107535.0,38,Post Graduate,Married,Premium,Below Average
+GOI001658,Employee_658,51,Female,Agriculture,Uttar Pradesh,132023.0,18,Post Graduate,Married,Individual,Average
+GOI001659,Employee_659,26,Male,Transport,Uttar Pradesh,32581.0,37,Professional,Married,None,Good
+GOI001660,Employee_660,54,Female,Defense,Rajasthan,81717.0,5,Graduate,Single,Individual,Average
+GOI001661,Employee_661,22,Male,Revenue,Uttar Pradesh,32763.0,14,Professional,Single,Basic,Excellent
+GOI001662,Employee_662,39,Male,Finance,Maharashtra,122910.0,19,PhD,Divorced,Individual,Excellent
+GOI001663,Employee_663,53,Female,Defense,Tamil Nadu,85480.0,8,Graduate,Single,None,Average
+GOI001664,Employee_664,32,Male,Technology,West Bengal,68759.0,31,PhD,Divorced,Family,Excellent
+GOI001665,Employee_665,42,Female,Administration,Delhi,106067.0,3,Graduate,Single,Family,Good
+GOI001666,Employee_666,47,Female,Administration,Kerala,148094.0,17,Professional,Divorced,Basic,Below Average
+GOI001667,Employee_667,46,Male,Finance,Rajasthan,55307.0,4,Post Graduate,Single,Family,Average
+GOI001668,Employee_668,43,Male,Administration,Rajasthan,126371.0,19,Diploma,Single,Individual,Good
+GOI001669,Employee_669,48,Female,Defense,West Bengal,41064.0,22,Post Graduate,Divorced,Basic,Good
+GOI001670,Employee_670,34,Male,Agriculture,Tamil Nadu,106848.0,10,Professional,Married,None,Excellent
+GOI001671,Employee_671,54,Male,Health,Delhi,67548.0,36,Graduate,Married,Basic,Good
+GOI001672,Employee_672,55,Male,Health,Karnataka,66945.0,21,Post Graduate,Single,Basic,Average
+GOI001673,Employee_673,62,Male,Transport,Uttar Pradesh,77937.0,3,Professional,Divorced,Premium,Good
+GOI001674,Employee_674,56,Male,Education,Gujarat,36476.0,28,PhD,Married,Premium,Below Average
+GOI001675,Employee_675,22,Female,Revenue,Rajasthan,81756.0,33,Diploma,Divorced,Basic,Good
+GOI001676,Employee_676,42,Female,Finance,Uttar Pradesh,120101.0,12,Post Graduate,Married,Family,Good
+GOI001677,Employee_677,27,Male,Transport,Uttar Pradesh,32382.0,8,Graduate,Divorced,Premium,Below Average
+GOI001678,Employee_678,49,Male,Education,Maharashtra,79683.0,30,PhD,Single,None,Good
+GOI001679,Employee_679,38,Male,Technology,Tamil Nadu,117999.0,6,Professional,Divorced,Individual,Good
+GOI001680,Employee_680,26,Female,Technology,Gujarat,75276.0,3,Diploma,Married,Premium,Excellent
+GOI001681,Employee_681,52,Male,Revenue,Karnataka,63402.0,18,Graduate,Single,Basic,Average
+GOI001682,Employee_682,26,Female,Administration,Kerala,121881.0,29,Professional,Divorced,Family,Excellent
+GOI001683,Employee_683,59,Female,Defense,Maharashtra,140300.0,30,Professional,Married,Individual,Average
+GOI001684,Employee_684,24,Female,Transport,Uttar Pradesh,56946.0,34,Post Graduate,Single,Premium,Below Average
+GOI001685,Employee_685,44,Male,Transport,Uttar Pradesh,109698.0,20,Post Graduate,Divorced,Family,Below Average
+GOI001686,Employee_686,58,Female,Finance,Punjab,144690.0,30,Graduate,Married,Family,Below Average
+GOI001687,Employee_687,58,Male,Finance,Gujarat,142309.0,18,Professional,Divorced,Family,Average
+GOI001688,Employee_688,31,Female,Technology,Gujarat,103933.0,30,Post Graduate,Divorced,Basic,Average
+GOI001689,Employee_689,31,Male,Technology,Punjab,52335.0,31,Diploma,Single,None,Average
+GOI001690,Employee_690,40,Female,Agriculture,Gujarat,75095.0,1,Diploma,Single,Family,Below Average
+GOI001691,Employee_691,38,Male,Agriculture,Uttar Pradesh,109930.0,9,Professional,Married,Individual,Average
+GOI001692,Employee_692,42,Female,Administration,Rajasthan,57197.0,1,Post Graduate,Single,Premium,Good
+GOI001693,Employee_693,35,Male,Agriculture,Delhi,52010.0,1,Graduate,Married,Individual,Excellent
+GOI001694,Employee_694,30,Male,Defense,Uttar Pradesh,54123.0,23,Graduate,Divorced,Basic,Below Average
+GOI001695,Employee_695,22,Male,Defense,Maharashtra,117923.0,16,,Divorced,Basic,Excellent
+GOI001696,Employee_696,34,Male,Transport,Tamil Nadu,32890.0,31,Diploma,Married,Individual,Good
+GOI001697,Employee_697,25,Female,Health,Punjab,123305.0,15,Post Graduate,Divorced,None,Average
+GOI001698,Employee_698,22,Female,Defense,Karnataka,139162.0,15,Post Graduate,Single,Basic,Excellent
+GOI001699,Employee_699,61,Male,Education,Kerala,38026.0,38,Diploma,Divorced,Basic,Good
+GOI001700,Employee_700,53,Female,Technology,Karnataka,94925.0,30,Graduate,Single,Individual,Good
+GOI001701,Employee_701,55,Male,Finance,Uttar Pradesh,98842.0,23,Graduate,Married,Basic,Excellent
+GOI001702,Employee_702,49,Male,Agriculture,Maharashtra,63665.0,0,Professional,Married,None,Below Average
+GOI001703,Employee_703,52,Female,Transport,Uttar Pradesh,39277.0,10,PhD,Divorced,None,Excellent
+GOI001704,Employee_704,29,Male,Revenue,Tamil Nadu,72239.0,20,,Divorced,None,Below Average
+GOI001705,Employee_705,60,Male,Finance,Rajasthan,77664.0,3,Post Graduate,Single,Premium,Average
+GOI001706,Employee_706,47,Female,Education,Kerala,78008.0,6,Post Graduate,Single,None,Below Average
+GOI001707,Employee_707,55,Male,Agriculture,Tamil Nadu,44683.0,25,PhD,Divorced,None,Average
+GOI001708,Employee_708,24,Male,Education,Punjab,30670.0,11,Professional,Divorced,Premium,Excellent
+GOI001709,Employee_709,33,Male,Technology,Punjab,119211.0,30,PhD,Married,Family,Average
+GOI001710,Employee_710,22,Male,Technology,Uttar Pradesh,47889.0,16,Graduate,Married,Basic,Good
+GOI001711,Employee_711,26,Female,Administration,Maharashtra,85612.0,32,Graduate,Married,None,Average
+GOI001712,Employee_712,51,Female,Transport,Tamil Nadu,74535.0,10,Post Graduate,Divorced,Basic,Below Average
+GOI001713,Employee_713,51,Female,Finance,West Bengal,108542.0,27,Diploma,Divorced,Individual,Below Average
+GOI001714,Employee_714,38,Male,Finance,Maharashtra,84319.0,31,Post Graduate,Divorced,Basic,Below Average
+GOI001715,Employee_715,44,Male,Revenue,Rajasthan,144072.0,0,Diploma,Married,Premium,Average
+GOI001716,Employee_716,36,Female,Transport,Punjab,122067.0,27,PhD,Divorced,Basic,Below Average
+GOI001717,Employee_717,58,Male,Education,Uttar Pradesh,51639.0,6,Graduate,Single,Basic,Below Average
+GOI001718,Employee_718,42,Male,Revenue,Gujarat,94712.0,1,Diploma,Divorced,Basic,Good
+GOI001719,Employee_719,35,Male,Health,Punjab,46633.0,23,PhD,Divorced,Family,Average
+GOI001720,Employee_720,23,Male,Finance,Kerala,64660.0,3,Graduate,Divorced,Family,Good
+GOI001721,Employee_721,32,Female,Education,Delhi,98975.0,18,Diploma,Divorced,Individual,Below Average
+GOI001722,Employee_722,60,Female,Defense,Gujarat,62172.0,25,Post Graduate,Divorced,Premium,Below Average
+GOI001723,Employee_723,59,Female,Administration,Uttar Pradesh,89197.0,10,Post Graduate,Single,Basic,Below Average
+GOI001724,Employee_724,55,Male,Transport,West Bengal,131158.0,39,Post Graduate,Single,Basic,Average
+GOI001725,Employee_725,59,Female,Technology,Gujarat,88847.0,10,PhD,Divorced,Basic,Excellent
+GOI001726,Employee_726,55,Female,Defense,Kerala,41577.0,2,Post Graduate,Married,Basic,Below Average
+GOI001727,Employee_727,39,Male,Administration,Maharashtra,107299.0,11,Professional,Divorced,Family,Below Average
+GOI001728,Employee_728,51,Male,Administration,West Bengal,50176.0,2,Graduate,Divorced,Individual,Below Average
+GOI001729,Employee_729,36,Female,Health,Punjab,74386.0,26,PhD,Divorced,None,Below Average
+GOI001730,Employee_730,48,Female,Health,West Bengal,93972.0,1,Post Graduate,Married,Premium,Average
+GOI001731,Employee_731,55,Female,Agriculture,Tamil Nadu,119791.0,15,Graduate,Married,Basic,Excellent
+GOI001732,Employee_732,59,Female,Agriculture,Kerala,71003.0,1,Diploma,Married,Individual,Excellent
+GOI001733,Employee_733,54,Male,Revenue,Gujarat,49996.0,29,Post Graduate,Single,None,Excellent
+GOI001734,Employee_734,45,Female,Administration,Tamil Nadu,130922.0,19,Graduate,Married,Individual,Below Average
+GOI001735,Employee_735,36,Female,Defense,West Bengal,116598.0,37,Professional,Single,Family,Below Average
+GOI001736,Employee_736,51,Male,Transport,Tamil Nadu,65931.0,27,Diploma,Single,None,Excellent
+GOI001737,Employee_737,63,Female,Administration,Karnataka,65710.0,24,Professional,Married,Individual,Excellent
+GOI001738,Employee_738,38,Male,Health,Kerala,64693.0,31,Graduate,Married,Family,Below Average
+GOI001739,Employee_739,26,Male,Education,Rajasthan,65740.0,9,Professional,Married,Individual,Below Average
+GOI001740,Employee_740,50,Male,Technology,Maharashtra,107241.0,39,Graduate,Single,Individual,Good
+GOI001741,Employee_741,25,Female,Agriculture,West Bengal,138944.0,32,Graduate,Divorced,None,Good
+GOI001742,Employee_742,31,Female,Finance,Kerala,123583.0,12,Professional,Married,Family,Good
+GOI001743,Employee_743,38,Male,Education,Rajasthan,106502.0,36,Graduate,Married,Basic,Excellent
+GOI001744,Employee_744,31,Female,Transport,Rajasthan,47374.0,15,Post Graduate,Married,Premium,Average
+GOI001745,Employee_745,38,Female,Health,Uttar Pradesh,106674.0,21,Graduate,Single,None,Below Average
+GOI001746,Employee_746,41,Male,Health,Tamil Nadu,146500.0,19,PhD,Single,Family,Good
+GOI001747,Employee_747,45,Male,Health,Rajasthan,111471.0,26,Graduate,Divorced,Individual,Average
+GOI001748,Employee_748,26,Female,Finance,Karnataka,75913.0,15,PhD,Married,Family,Below Average
+GOI001749,Employee_749,55,Male,Agriculture,Kerala,96025.0,33,Graduate,Single,Premium,Average
+GOI001750,Employee_750,27,Female,Education,Delhi,74516.0,31,Graduate,Divorced,Premium,Excellent
+GOI001751,Employee_751,23,Female,Transport,Delhi,117796.0,25,Professional,Married,Basic,Excellent
+GOI001752,Employee_752,34,Female,Agriculture,West Bengal,56069.0,24,Post Graduate,Single,Basic,Excellent
+GOI001753,Employee_753,64,Female,Transport,Punjab,148333.0,1,Post Graduate,Married,Premium,Good
+GOI001754,Employee_754,64,Male,Agriculture,Tamil Nadu,86233.0,11,Diploma,Married,None,Below Average
+GOI001755,Employee_755,32,Male,Finance,Punjab,114811.0,39,,Single,None,Excellent
+GOI001756,Employee_756,44,Male,Technology,Rajasthan,89049.0,8,Professional,Single,Individual,Good
+GOI001757,Employee_757,37,Male,Transport,Kerala,131820.0,11,Post Graduate,Single,Basic,Good
+GOI001758,Employee_758,52,Female,Agriculture,West Bengal,,25,Professional,Married,Individual,Good
+GOI001759,Employee_759,32,Female,Health,Gujarat,69178.0,8,Post Graduate,Married,Basic,Good
+GOI001760,Employee_760,37,Male,Administration,Rajasthan,62821.0,9,Professional,Divorced,Premium,Excellent
+GOI001761,Employee_761,29,Female,Health,Tamil Nadu,81727.0,31,Graduate,Married,None,Good
+GOI001762,Employee_762,25,Female,Revenue,Delhi,90935.0,33,Post Graduate,Single,None,Excellent
+GOI001763,Employee_763,61,Female,Technology,Uttar Pradesh,46999.0,19,Post Graduate,Married,Premium,Excellent
+GOI001764,Employee_764,25,Male,Technology,Kerala,92522.0,38,,Divorced,Individual,Good
+GOI001765,Employee_765,46,Male,Health,Maharashtra,68712.0,1,Professional,Divorced,Individual,Excellent
+GOI001766,Employee_766,24,Male,Education,Punjab,94551.0,0,Professional,Single,Family,Below Average
+GOI001767,Employee_767,53,Female,Finance,West Bengal,70172.0,35,Post Graduate,Single,Basic,Below Average
+GOI001768,Employee_768,24,Male,Transport,Punjab,63722.0,23,Graduate,Divorced,Individual,Average
+GOI001769,Employee_769,48,Male,Technology,Kerala,40625.0,26,Graduate,Divorced,Premium,Below Average
+GOI001770,Employee_770,50,Male,Health,Punjab,97165.0,1,Graduate,Divorced,Individual,Excellent
+GOI001771,Employee_771,53,Male,Health,Kerala,106509.0,30,Professional,Single,None,Excellent
+GOI001772,Employee_772,40,Male,Finance,Punjab,36859.0,13,PhD,Divorced,Basic,Below Average
+GOI001773,Employee_773,42,Male,Finance,Karnataka,,1,Post Graduate,Divorced,Family,Good
+GOI001774,Employee_774,26,Female,Defense,Gujarat,73307.0,28,Diploma,Single,Basic,Good
+GOI001775,Employee_775,39,Female,Defense,Rajasthan,140986.0,14,PhD,Married,None,Excellent
+GOI001776,Employee_776,49,Male,Education,Rajasthan,131582.0,11,Diploma,Married,None,Good
+GOI001777,Employee_777,63,Male,Education,Tamil Nadu,51839.0,36,PhD,Divorced,None,Average
+GOI001778,Employee_778,43,Female,Revenue,Maharashtra,57216.0,27,Graduate,Married,None,Average
+GOI001779,Employee_779,42,Female,Education,Maharashtra,82953.0,19,,Married,Premium,Below Average
+GOI001780,Employee_780,27,Male,Agriculture,Tamil Nadu,114481.0,38,,Married,Family,Below Average
+GOI001781,Employee_781,22,Male,Finance,Uttar Pradesh,90593.0,23,PhD,Married,None,Good
+GOI001782,Employee_782,26,Male,Agriculture,Rajasthan,102075.0,20,Professional,Divorced,None,Excellent
+GOI001783,Employee_783,62,Male,Transport,Uttar Pradesh,79522.0,9,Diploma,Married,Individual,Below Average
+GOI001784,Employee_784,33,Female,Health,Kerala,129161.0,13,Post Graduate,Married,Family,Average
+GOI001785,Employee_785,47,Male,Education,Kerala,34886.0,36,PhD,Single,Basic,Below Average
+GOI001786,Employee_786,55,Male,Health,Delhi,141249.0,17,Post Graduate,Divorced,Family,Below Average
+GOI001787,Employee_787,35,Male,Technology,Punjab,37485.0,23,Graduate,Single,Family,Average
+GOI001788,Employee_788,47,Male,Revenue,Maharashtra,61455.0,13,Post Graduate,Single,Family,Excellent
+GOI001789,Employee_789,48,Female,Technology,Delhi,141984.0,33,Post Graduate,Divorced,None,Below Average
+GOI001790,Employee_790,30,Female,Revenue,Gujarat,46767.0,11,PhD,Married,None,Below Average
+GOI001791,Employee_791,47,Female,Defense,Tamil Nadu,142701.0,21,Graduate,Single,Premium,Below Average
+GOI001792,Employee_792,43,Male,Health,Tamil Nadu,58453.0,5,Post Graduate,Divorced,Basic,Good
+GOI001793,Employee_793,51,Male,Revenue,Kerala,106280.0,35,Professional,Married,Individual,Below Average
+GOI001794,Employee_794,64,Female,Administration,Rajasthan,132638.0,35,Diploma,Divorced,Family,Average
+GOI001795,Employee_795,38,Male,Agriculture,Uttar Pradesh,83442.0,21,Post Graduate,Single,Basic,Excellent
+GOI001796,Employee_796,47,Male,Revenue,Maharashtra,81877.0,13,Graduate,Married,Basic,Excellent
+GOI001797,Employee_797,57,Female,Revenue,Delhi,42226.0,15,Post Graduate,Married,Premium,Average
+GOI001798,Employee_798,22,Female,Agriculture,Uttar Pradesh,123405.0,35,Diploma,Divorced,Individual,Good
+GOI001799,Employee_799,29,Female,Health,Delhi,52588.0,24,Graduate,Married,Family,Average
+GOI001800,Employee_800,56,Female,Health,Punjab,108976.0,31,PhD,Single,Individual,Excellent
+GOI001801,Employee_801,36,Male,Agriculture,Gujarat,61709.0,32,Graduate,Single,Premium,Average
+GOI001802,Employee_802,43,Male,Technology,Gujarat,77788.0,35,PhD,Single,None,Good
+GOI001803,Employee_803,35,Female,Administration,Uttar Pradesh,118031.0,19,Graduate,Divorced,Basic,Excellent
+GOI001804,Employee_804,47,Male,Transport,Uttar Pradesh,67019.0,17,Diploma,Married,Family,Good
+GOI001805,Employee_805,49,Female,Administration,Uttar Pradesh,74948.0,37,Diploma,Married,None,Average
+GOI001806,Employee_806,44,Female,Health,Delhi,95133.0,2,Graduate,Married,Premium,Below Average
+GOI001807,Employee_807,35,Male,Defense,Punjab,144444.0,22,Post Graduate,Single,Individual,Average
+GOI001808,Employee_808,45,Female,Education,Karnataka,96458.0,31,Diploma,Married,Basic,Good
+GOI001809,Employee_809,23,Male,Revenue,Uttar Pradesh,147603.0,15,PhD,Single,Family,Average
+GOI001810,Employee_810,47,Male,Agriculture,Rajasthan,57526.0,4,PhD,Married,None,Below Average
+GOI001811,Employee_811,35,Male,Agriculture,Maharashtra,103493.0,3,Professional,Single,None,Good
+GOI001812,Employee_812,28,Male,Revenue,Maharashtra,82198.0,20,PhD,Married,Basic,Average
+GOI001813,Employee_813,24,Female,Education,Delhi,144100.0,39,Professional,Divorced,Individual,Good
+GOI001814,Employee_814,44,Male,Transport,Uttar Pradesh,129534.0,13,Graduate,Divorced,Premium,Good
+GOI001815,Employee_815,64,Female,Education,Kerala,73395.0,38,Graduate,Single,Individual,Excellent
+GOI001816,Employee_816,39,Female,Education,Tamil Nadu,54031.0,30,Graduate,Single,Individual,Excellent
+GOI001817,Employee_817,59,Female,Education,Karnataka,105542.0,13,Post Graduate,Married,Individual,Good
+GOI001818,Employee_818,56,Female,Transport,Rajasthan,67701.0,5,Post Graduate,Married,Basic,Average
+GOI001819,Employee_819,36,Male,Transport,Punjab,142599.0,11,Professional,Divorced,Basic,Average
+GOI001820,Employee_820,46,Male,Health,Kerala,55939.0,15,PhD,Married,Premium,Average
+GOI001821,Employee_821,58,Female,Revenue,Gujarat,79145.0,16,PhD,Single,Individual,Below Average
+GOI001822,Employee_822,49,Female,Transport,Kerala,50324.0,22,Graduate,Single,Basic,Good
+GOI001823,Employee_823,31,Male,Transport,Delhi,52867.0,13,,Single,Premium,Good
+GOI001824,Employee_824,60,Female,Health,Karnataka,30203.0,6,Post Graduate,Single,Premium,Below Average
+GOI001825,Employee_825,38,Male,Agriculture,West Bengal,46544.0,31,Post Graduate,Single,Individual,Good
+GOI001826,Employee_826,60,Female,Health,West Bengal,45899.0,14,Graduate,Divorced,Family,Good
+GOI001827,Employee_827,43,Male,Technology,Uttar Pradesh,59063.0,16,Post Graduate,Divorced,Individual,Below Average
+GOI001828,Employee_828,47,Female,Technology,Uttar Pradesh,120880.0,33,Graduate,Single,Family,Excellent
+GOI001829,Employee_829,46,Female,Defense,Delhi,33748.0,4,Professional,Married,Premium,Good
+GOI001830,Employee_830,38,Male,Education,Punjab,135022.0,26,PhD,Single,Basic,Below Average
+GOI001831,Employee_831,34,Female,Revenue,Uttar Pradesh,147269.0,22,Diploma,Divorced,None,Average
+GOI001832,Employee_832,41,Female,Finance,Tamil Nadu,96629.0,39,PhD,Single,Premium,Excellent
+GOI001833,Employee_833,46,Male,Administration,Karnataka,110764.0,13,PhD,Divorced,Basic,Average
+GOI001834,Employee_834,25,Female,Health,Delhi,50884.0,14,Professional,Divorced,Premium,Good
+GOI001835,Employee_835,31,Male,Agriculture,Maharashtra,55183.0,32,Post Graduate,Single,Individual,Excellent
+GOI001836,Employee_836,24,Male,Administration,Gujarat,111570.0,30,Diploma,Single,Family,Below Average
+GOI001837,Employee_837,62,Female,Agriculture,Delhi,101246.0,34,Post Graduate,Married,Premium,Good
+GOI001838,Employee_838,39,Female,Administration,Delhi,138036.0,16,PhD,Divorced,Basic,Below Average
+GOI001839,Employee_839,57,Female,Health,West Bengal,49259.0,27,Graduate,Married,Individual,Excellent
+GOI001840,Employee_840,43,Female,Finance,Rajasthan,65959.0,18,PhD,Single,None,Average
+GOI001841,Employee_841,55,Female,Administration,Punjab,146525.0,22,Post Graduate,Divorced,Individual,Good
+GOI001842,Employee_842,29,Female,Health,Rajasthan,63457.0,31,PhD,Married,Family,Good
+GOI001843,Employee_843,61,Female,Transport,Tamil Nadu,115679.0,39,Graduate,Married,Individual,Below Average
+GOI001844,Employee_844,40,Male,Finance,Maharashtra,32103.0,12,Professional,Married,None,Excellent
+GOI001845,Employee_845,63,Female,Agriculture,West Bengal,,19,Post Graduate,Single,Basic,Below Average
+GOI001846,Employee_846,62,Male,Technology,Maharashtra,142314.0,34,PhD,Single,Premium,Excellent
+GOI001847,Employee_847,58,Female,Education,Tamil Nadu,74535.0,4,Post Graduate,Single,Family,Good
+GOI001848,Employee_848,27,Female,Technology,Rajasthan,46103.0,8,Professional,Divorced,None,Excellent
+GOI001849,Employee_849,47,Male,Finance,Delhi,128046.0,28,PhD,Single,Family,Good
+GOI001850,Employee_850,55,Female,Agriculture,Uttar Pradesh,120012.0,5,PhD,Divorced,Individual,Excellent
+GOI001851,Employee_851,27,Female,Administration,Uttar Pradesh,108278.0,24,Post Graduate,Married,Family,Average
+GOI001852,Employee_852,58,Male,Agriculture,Kerala,42391.0,30,Post Graduate,Married,None,Excellent
+GOI001853,Employee_853,54,Female,Administration,Gujarat,132476.0,21,Graduate,Single,Premium,Average
+GOI001854,Employee_854,43,Female,Health,Punjab,58901.0,1,Professional,Married,Premium,Excellent
+GOI001855,Employee_855,42,Female,Finance,Tamil Nadu,127537.0,4,Graduate,Single,Family,Excellent
+GOI001856,Employee_856,27,Male,Health,Gujarat,111159.0,26,PhD,Divorced,Basic,Below Average
+GOI001857,Employee_857,27,Female,Defense,Punjab,97914.0,24,Post Graduate,Married,Family,Below Average
+GOI001858,Employee_858,25,Female,Administration,Gujarat,80357.0,7,PhD,Single,Individual,Good
+GOI001859,Employee_859,51,Female,Transport,Rajasthan,116908.0,0,PhD,Married,Premium,Below Average
+GOI001860,Employee_860,32,Female,Health,Punjab,140335.0,19,,Married,Premium,Excellent
+GOI001861,Employee_861,51,Male,Defense,Rajasthan,68437.0,22,Diploma,Single,Premium,Below Average
+GOI001862,Employee_862,52,Male,Revenue,Delhi,65503.0,31,PhD,Married,Basic,Excellent
+GOI001863,Employee_863,45,Female,Technology,West Bengal,126282.0,10,Post Graduate,Married,Basic,Average
+GOI001864,Employee_864,30,Female,Agriculture,Rajasthan,123459.0,38,PhD,Married,None,Excellent
+GOI001865,Employee_865,24,Male,Defense,Uttar Pradesh,105403.0,23,Diploma,Married,Family,Good
+GOI001866,Employee_866,52,Male,Finance,Gujarat,71258.0,10,Post Graduate,Divorced,Family,Average
+GOI001867,Employee_867,61,Female,Health,Kerala,63724.0,28,PhD,Married,Individual,Good
+GOI001868,Employee_868,58,Male,Finance,Karnataka,94286.0,25,Professional,Married,Premium,Good
+GOI001869,Employee_869,57,Female,Technology,Punjab,104842.0,15,Professional,Single,Basic,Good
+GOI001870,Employee_870,45,Male,Transport,Tamil Nadu,134927.0,34,PhD,Divorced,Individual,Below Average
+GOI001871,Employee_871,52,Male,Finance,Kerala,44908.0,19,Post Graduate,Single,Individual,Good
+GOI001872,Employee_872,27,Male,Administration,Uttar Pradesh,122617.0,2,PhD,Single,Basic,Average
+GOI001873,Employee_873,23,Male,Transport,Rajasthan,80626.0,0,PhD,Single,Family,Excellent
+GOI001874,Employee_874,41,Female,Transport,West Bengal,67228.0,0,Diploma,Divorced,Premium,Good
+GOI001875,Employee_875,49,Male,Defense,Delhi,53386.0,16,Professional,Single,Family,Average
+GOI001876,Employee_876,32,Male,Transport,Karnataka,76754.0,1,Diploma,Single,Individual,Good
+GOI001877,Employee_877,25,Female,Education,Maharashtra,140942.0,28,Diploma,Single,Premium,Excellent
+GOI001878,Employee_878,36,Male,Technology,Kerala,58302.0,19,PhD,Married,None,Average
+GOI001879,Employee_879,27,Male,Transport,West Bengal,90815.0,5,Diploma,Single,Individual,Average
+GOI001880,Employee_880,51,Female,Finance,Maharashtra,114748.0,7,Professional,Divorced,Family,Excellent
+GOI001881,Employee_881,59,Male,Revenue,Karnataka,93344.0,28,Diploma,Divorced,Family,Average
+GOI001882,Employee_882,23,Female,Education,Tamil Nadu,65618.0,32,Professional,Married,Family,Excellent
+GOI001883,Employee_883,36,Female,Education,Tamil Nadu,141603.0,2,Diploma,Divorced,Basic,Average
+GOI001884,Employee_884,32,Female,Administration,Gujarat,106234.0,34,Professional,Divorced,Individual,Average
+GOI001885,Employee_885,29,Female,Transport,Karnataka,91114.0,4,Diploma,Married,Premium,Excellent
+GOI001886,Employee_886,47,Male,Administration,Karnataka,147652.0,26,,Single,Family,Excellent
+GOI001887,Employee_887,26,Female,Administration,Maharashtra,100130.0,11,Post Graduate,Married,Family,Average
+GOI001888,Employee_888,27,Male,Revenue,West Bengal,55525.0,19,Professional,Single,Basic,Average
+GOI001889,Employee_889,47,Male,Defense,Punjab,109818.0,19,Professional,Single,Premium,Excellent
+GOI001890,Employee_890,25,Male,Transport,Maharashtra,144589.0,8,Professional,Divorced,Individual,Below Average
+GOI001891,Employee_891,40,Male,Health,Delhi,44334.0,38,Graduate,Married,None,Excellent
+GOI001892,Employee_892,41,Male,Administration,Tamil Nadu,124715.0,3,Diploma,Divorced,Basic,Average
+GOI001893,Employee_893,54,Male,Technology,Tamil Nadu,92767.0,18,Professional,Divorced,Individual,Average
+GOI001894,Employee_894,41,Male,Agriculture,Gujarat,36644.0,37,Graduate,Single,None,Average
+GOI001895,Employee_895,33,Male,Technology,Delhi,131154.0,26,Post Graduate,Divorced,Family,Excellent
+GOI001896,Employee_896,22,Male,Revenue,Tamil Nadu,143237.0,12,Professional,Married,Family,Average
+GOI001897,Employee_897,47,Male,Revenue,Maharashtra,62933.0,12,Professional,Divorced,Premium,Below Average
+GOI001898,Employee_898,35,Female,Finance,Delhi,73469.0,21,Graduate,Divorced,None,Good
+GOI001899,Employee_899,59,Female,Defense,Maharashtra,63687.0,27,Diploma,Single,Family,Below Average
+GOI001900,Employee_900,58,Female,Administration,Punjab,136609.0,21,Post Graduate,Married,Family,Excellent
+GOI001901,Employee_901,32,Male,Technology,Punjab,82656.0,18,Professional,Divorced,Premium,Average
+GOI001902,Employee_902,57,Female,Agriculture,Tamil Nadu,47375.0,7,Diploma,Single,Individual,Excellent
+GOI001903,Employee_903,34,Female,Revenue,Tamil Nadu,144019.0,7,Post Graduate,Divorced,Family,Good
+GOI001904,Employee_904,64,Female,Revenue,West Bengal,95206.0,25,PhD,Married,Basic,Excellent
+GOI001905,Employee_905,24,Male,Defense,Punjab,126462.0,25,PhD,Divorced,Basic,Average
+GOI001906,Employee_906,54,Male,Agriculture,Kerala,66607.0,22,Post Graduate,Divorced,Individual,Good
+GOI001907,Employee_907,27,Male,Agriculture,Kerala,113178.0,12,Graduate,Single,None,Good
+GOI001908,Employee_908,31,Male,Defense,Gujarat,53993.0,27,Post Graduate,Divorced,Premium,Average
+GOI001909,Employee_909,26,Female,Revenue,Punjab,74386.0,8,Post Graduate,Single,Basic,Average
+GOI001910,Employee_910,44,Female,Transport,Maharashtra,76287.0,19,Graduate,Married,Basic,Average
+GOI001911,Employee_911,31,Female,Transport,Maharashtra,116724.0,18,Graduate,Divorced,Individual,Excellent
+GOI001912,Employee_912,23,Female,Defense,Uttar Pradesh,128132.0,38,Diploma,Married,None,Below Average
+GOI001913,Employee_913,34,Male,Agriculture,Delhi,123308.0,11,Diploma,Married,None,Excellent
+GOI001914,Employee_914,61,Male,Administration,Rajasthan,,14,Graduate,Divorced,Individual,Excellent
+GOI001915,Employee_915,23,Male,Defense,Kerala,106312.0,30,PhD,Single,Basic,Below Average
+GOI001916,Employee_916,41,Female,Defense,Tamil Nadu,128371.0,13,PhD,Married,Premium,Average
+GOI001917,Employee_917,22,Male,Education,Gujarat,105324.0,10,Post Graduate,Married,Basic,Average
+GOI001918,Employee_918,58,Male,Technology,Rajasthan,101196.0,25,Professional,Divorced,None,Below Average
+GOI001919,Employee_919,30,Female,Agriculture,Karnataka,100014.0,26,Post Graduate,Divorced,Basic,Below Average
+GOI001920,Employee_920,38,Female,Finance,Gujarat,38210.0,10,Post Graduate,Divorced,Premium,Excellent
+GOI001921,Employee_921,30,Male,Finance,Karnataka,40922.0,37,Professional,Divorced,Family,Good
+GOI001922,Employee_922,32,Male,Agriculture,Punjab,66289.0,33,Graduate,Divorced,Basic,Below Average
+GOI001923,Employee_923,36,Male,Education,Karnataka,63340.0,18,PhD,Divorced,Individual,Excellent
+GOI001924,Employee_924,45,Male,Education,Karnataka,69850.0,5,Post Graduate,Single,Family,Good
+GOI001925,Employee_925,59,Male,Revenue,West Bengal,86984.0,37,Professional,Married,Individual,Average
+GOI001926,Employee_926,56,Male,Technology,West Bengal,133699.0,27,Diploma,Single,Individual,Average
+GOI001927,Employee_927,51,Female,Transport,West Bengal,143711.0,0,Post Graduate,Single,Individual,Excellent
+GOI001928,Employee_928,52,Female,Health,Punjab,114178.0,34,PhD,Divorced,Basic,Excellent
+GOI001929,Employee_929,26,Female,Health,Rajasthan,41094.0,39,Graduate,Married,None,Below Average
+GOI001930,Employee_930,35,Male,Health,Gujarat,117959.0,7,Post Graduate,Single,Family,Average
+GOI001931,Employee_931,32,Female,Agriculture,Gujarat,63418.0,6,Post Graduate,Divorced,Premium,Excellent
+GOI001932,Employee_932,30,Male,Finance,Tamil Nadu,35741.0,10,Professional,Divorced,None,Average
+GOI001933,Employee_933,55,Male,Finance,West Bengal,141585.0,38,Diploma,Married,Basic,Average
+GOI001934,Employee_934,33,Female,Transport,Punjab,102374.0,3,Diploma,Single,Individual,Below Average
+GOI001935,Employee_935,56,Male,Agriculture,Tamil Nadu,147275.0,24,Graduate,Single,Premium,Good
+GOI001936,Employee_936,56,Male,Health,Delhi,98798.0,11,PhD,Single,Family,Below Average
+GOI001937,Employee_937,22,Female,Administration,Tamil Nadu,146026.0,25,Graduate,Divorced,None,Excellent
+GOI001938,Employee_938,61,Female,Finance,Rajasthan,100532.0,37,Post Graduate,Married,None,Below Average
+GOI001939,Employee_939,43,Female,Revenue,Kerala,140130.0,11,Post Graduate,Married,Premium,Below Average
+GOI001940,Employee_940,50,Male,Defense,Karnataka,52164.0,36,Diploma,Single,Basic,Average
+GOI001941,Employee_941,29,Female,Administration,West Bengal,65595.0,23,PhD,Divorced,Family,Below Average
+GOI001942,Employee_942,32,Female,Finance,Kerala,60257.0,15,Professional,Single,Premium,Excellent
+GOI001943,Employee_943,62,Male,Education,Tamil Nadu,44211.0,12,PhD,Married,Individual,Good
+GOI001944,Employee_944,58,Female,Finance,Punjab,125989.0,24,,Divorced,Family,Below Average
+GOI001945,Employee_945,35,Female,Revenue,Karnataka,35232.0,3,Professional,Single,None,Below Average
+GOI001946,Employee_946,51,Female,Health,Gujarat,97753.0,10,PhD,Single,Premium,Good
+GOI001947,Employee_947,56,Male,Education,Maharashtra,82691.0,31,PhD,Divorced,None,Excellent
+GOI001948,Employee_948,42,Male,Agriculture,Karnataka,119765.0,6,Professional,Married,None,Excellent
+GOI001949,Employee_949,58,Male,Technology,Rajasthan,109768.0,10,Post Graduate,Divorced,None,Below Average
+GOI001950,Employee_950,26,Male,Health,Rajasthan,55613.0,27,PhD,Single,Basic,Average
+GOI001951,Employee_951,40,Female,Technology,Tamil Nadu,44026.0,22,Professional,Single,None,Below Average
+GOI001952,Employee_952,35,Male,Administration,Delhi,83535.0,22,Post Graduate,Single,Individual,Good
+GOI001953,Employee_953,47,Male,Defense,Rajasthan,124090.0,27,Professional,Single,Individual,Good
+GOI001954,Employee_954,25,Female,Education,Rajasthan,60908.0,25,Professional,Married,Family,Good
+GOI001955,Employee_955,46,Female,Transport,Punjab,82113.0,24,PhD,Married,None,Below Average
+GOI001956,Employee_956,63,Female,Education,Tamil Nadu,49610.0,28,Post Graduate,Single,None,Below Average
+GOI001957,Employee_957,46,Male,Finance,Karnataka,,18,PhD,Married,Premium,Excellent
+GOI001958,Employee_958,39,Male,Finance,Delhi,135141.0,32,Graduate,Married,Basic,Average
+GOI001959,Employee_959,61,Male,Finance,Kerala,93185.0,35,Graduate,Married,Family,Below Average
+GOI001960,Employee_960,29,Female,Administration,Maharashtra,102567.0,13,Post Graduate,Single,None,Excellent
+GOI001961,Employee_961,60,Female,Health,West Bengal,77574.0,13,Professional,Divorced,Premium,Below Average
+GOI001962,Employee_962,61,Male,Transport,Gujarat,121051.0,34,PhD,Divorced,Basic,Excellent
+GOI001963,Employee_963,35,Female,Transport,Rajasthan,132020.0,29,PhD,Divorced,Family,Excellent
+GOI001964,Employee_964,53,Female,Finance,Tamil Nadu,66182.0,27,Post Graduate,Single,Family,Average
+GOI001965,Employee_965,59,Female,Technology,West Bengal,146136.0,16,Post Graduate,Married,None,Below Average
+GOI001966,Employee_966,54,Male,Administration,Gujarat,30570.0,2,Graduate,Married,Family,Excellent
+GOI001967,Employee_967,44,Female,Finance,Gujarat,127790.0,15,Diploma,Single,Premium,Good
+GOI001968,Employee_968,36,Female,Defense,Kerala,49288.0,29,Post Graduate,Single,Family,Good
+GOI001969,Employee_969,54,Male,Health,Kerala,108824.0,28,Diploma,Divorced,Individual,Good
+GOI001970,Employee_970,46,Male,Agriculture,Kerala,59877.0,14,Post Graduate,Divorced,Premium,Average
+GOI001971,Employee_971,38,Female,Defense,Uttar Pradesh,114425.0,24,Professional,Single,Basic,Excellent
+GOI001972,Employee_972,54,Female,Technology,Uttar Pradesh,30917.0,37,Professional,Divorced,Basic,Average
+GOI001973,Employee_973,23,Male,Education,Gujarat,105602.0,37,Graduate,Married,None,Below Average
+GOI001974,Employee_974,35,Male,Education,Kerala,,22,Graduate,Single,None,Below Average
+GOI001975,Employee_975,61,Female,Defense,Punjab,94575.0,24,Diploma,Single,Individual,Excellent
+GOI001976,Employee_976,61,Female,Finance,Rajasthan,102518.0,6,Post Graduate,Married,Basic,Good
+GOI001977,Employee_977,60,Female,Agriculture,West Bengal,69104.0,21,PhD,Married,Basic,Excellent
+GOI001978,Employee_978,27,Female,Revenue,West Bengal,48062.0,16,Graduate,Married,Basic,Excellent
+GOI001979,Employee_979,27,Male,Revenue,Uttar Pradesh,46999.0,17,PhD,Divorced,Basic,Excellent
+GOI001980,Employee_980,24,Female,Technology,Gujarat,91845.0,9,PhD,Single,Family,Average
+GOI001981,Employee_981,28,Female,Finance,Tamil Nadu,39941.0,9,Post Graduate,Divorced,Premium,Below Average
+GOI001982,Employee_982,29,Male,Transport,Karnataka,91169.0,6,Diploma,Married,Premium,Excellent
+GOI001983,Employee_983,63,Female,Transport,Karnataka,53470.0,37,Post Graduate,Divorced,Individual,Excellent
+GOI001984,Employee_984,36,Male,Health,Uttar Pradesh,140684.0,26,Graduate,Married,Family,Excellent
+GOI001985,Employee_985,50,Female,Agriculture,Tamil Nadu,89821.0,32,PhD,Divorced,Basic,Average
+GOI001986,Employee_986,54,Female,Agriculture,Uttar Pradesh,116669.0,0,Post Graduate,Divorced,Basic,Average
+GOI001987,Employee_987,51,Male,Education,Karnataka,148193.0,33,Post Graduate,Married,None,Average
+GOI001988,Employee_988,60,Male,Administration,Tamil Nadu,74435.0,3,Post Graduate,Divorced,None,Excellent
+GOI001989,Employee_989,48,Female,Technology,Kerala,34529.0,16,Graduate,Single,Individual,Good
+GOI001990,Employee_990,57,Female,Revenue,Gujarat,113055.0,3,Diploma,Divorced,Basic,Good
+GOI001991,Employee_991,50,Female,Technology,West Bengal,42192.0,25,Post Graduate,Divorced,Individual,Good
+GOI001992,Employee_992,59,Male,Transport,Punjab,104102.0,3,Graduate,Single,Family,Below Average
+GOI001993,Employee_993,54,Female,Transport,Delhi,102762.0,0,PhD,Married,Premium,Excellent
+GOI001994,Employee_994,58,Male,Defense,Gujarat,133466.0,6,Professional,Single,Basic,Good
+GOI001995,Employee_995,48,Male,Health,Kerala,144894.0,29,Graduate,Divorced,Family,Good
+GOI001996,Employee_996,54,Female,Agriculture,Karnataka,116795.0,8,Professional,Married,Basic,Good
+GOI001997,Employee_997,25,Male,Technology,Kerala,64087.0,34,Post Graduate,Divorced,None,Excellent
+GOI001998,Employee_998,43,Female,Transport,Uttar Pradesh,96677.0,7,Post Graduate,Divorced,Individual,Good
+GOI001999,Employee_999,23,Female,Administration,Tamil Nadu,34627.0,23,Graduate,Single,None,Good
+GOI002000,Employee_1000,31,Female,Education,West Bengal,86541.0,18,Professional,Single,Premium,Excellent
+GOI001001,Employee_1,60,Male,Defense,Maharashtra,57127.0,37,PhD,Married,Premium,Excellent
+GOI001002,Employee_2,50,Male,Agriculture,Tamil Nadu,35141.0,2,Post Graduate,Divorced,Premium,Excellent
+GOI001003,Employee_3,36,Female,Administration,Kerala,58884.0,27,PhD,Divorced,Premium,Good
+GOI001004,Employee_4,64,Male,Revenue,Tamil Nadu,120421.0,25,Diploma,Married,Family,Excellent
+GOI001005,Employee_5,29,Female,Agriculture,Delhi,32708.0,29,Diploma,Single,Basic,Excellent
+GOI001006,Employee_6,42,Female,Administration,Punjab,48375.0,12,Diploma,Married,None,Good
+GOI001007,Employee_7,60,Male,Finance,Gujarat,45088.0,12,Graduate,Married,None,Average
+GOI001008,Employee_8,40,Male,Agriculture,Karnataka,87615.0,1,Post Graduate,Married,Premium,Good
+GOI001009,Employee_9,44,Male,Education,Kerala,140138.0,36,PhD,Married,Basic,Excellent
+GOI001010,Employee_10,32,Female,Finance,Tamil Nadu,75046.0,37,PhD,Single,Basic,Below Average

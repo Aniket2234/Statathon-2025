@@ -52,14 +52,59 @@ class SafeDataGUI:
         self.status_queue = queue.Queue()
         self.root.after(100, self.check_status_queue)
     
+    def setup_styles(self):
+        """Setup ttk styles for better appearance"""
+        style = ttk.Style()
+        
+        # Configure notebook style
+        style.configure('TNotebook', background='#f8f9fa')
+        style.configure('TNotebook.Tab', padding=[20, 8], font=('Arial', 10, 'bold'))
+        
+        # Configure frame styles
+        style.configure('Card.TLabelFrame', relief='solid', borderwidth=1, background='white')
+        style.configure('Card.TLabelFrame.Label', font=('Arial', 11, 'bold'), foreground='#2c3e50')
+        
+        # Create custom style if it doesn't exist
+        try:
+            style.element_create('Card.TLabelFrame.border', 'from', 'TLabelFrame.border')
+            style.layout('Card.TLabelFrame', [('Card.TLabelFrame.border', {'children': [('Card.TLabelFrame.padding', {'children': [('Card.TLabelFrame.label', {'side': 'top'}), ('Card.TLabelFrame.text', {'expand': '1', 'sticky': 'nswe'})], 'sticky': 'nswe'})], 'sticky': 'nswe'})])
+        except:
+            # Fallback to default style if custom style creation fails
+            pass
+        
+        # Configure button styles
+        style.configure('Primary.TButton', font=('Arial', 10, 'bold'))
+        style.map('Primary.TButton',
+                 background=[('active', '#3498db'), ('!active', '#2980b9')],
+                 foreground=[('active', 'white'), ('!active', 'white')])
+        
+        # Configure entry and combobox styles
+        style.configure('TEntry', fieldbackground='white', borderwidth=1)
+        style.configure('TCombobox', fieldbackground='white', borderwidth=1)
+        
+        # Configure treeview style
+        style.configure('Treeview', background='white', foreground='black', 
+                       fieldbackground='white', borderwidth=1)
+        style.configure('Treeview.Heading', font=('Arial', 10, 'bold'),
+                       background='#ecf0f1', foreground='#2c3e50')
+    
     def setup_gui(self):
         """Setup the main GUI interface"""
+        # Configure main window
+        self.root.title("SafeData Pipeline - Government of India")
+        self.root.geometry("1400x900")
+        self.root.minsize(1200, 800)
+        self.root.configure(bg='#f8f9fa')
+        
+        # Setup styles
+        self.setup_styles()
+        
         # Create header with Government of India branding
         self.create_header()
         
         # Create notebook for different modules
         self.notebook = ttk.Notebook(self.root)
-        self.notebook.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        self.notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         # Create tabs
         self.create_data_upload_tab()
@@ -75,53 +120,89 @@ class SafeDataGUI:
     
     def create_header(self):
         """Create header with government branding"""
-        header_frame = tk.Frame(self.root, bg='#FF6B35', height=80)
+        header_frame = tk.Frame(self.root, bg='#FF6B35', height=100)
         header_frame.pack(fill=tk.X, padx=0, pady=0)
         header_frame.pack_propagate(False)
         
-        # Title
+        # Left section with logo placeholder and title
+        left_frame = tk.Frame(header_frame, bg='#FF6B35')
+        left_frame.pack(side=tk.LEFT, fill=tk.Y, padx=20, pady=15)
+        
+        # Government emblem placeholder (could be replaced with actual image)
+        emblem_frame = tk.Frame(left_frame, bg='white', width=60, height=60)
+        emblem_frame.pack(side=tk.LEFT, padx=(0, 15))
+        emblem_frame.pack_propagate(False)
+        
+        emblem_label = tk.Label(emblem_frame, text="🇮🇳", font=('Arial', 24), bg='white')
+        emblem_label.pack(expand=True)
+        
+        # Title section
+        title_frame = tk.Frame(left_frame, bg='#FF6B35')
+        title_frame.pack(side=tk.LEFT, fill=tk.Y)
+        
         title_label = tk.Label(
-            header_frame,
+            title_frame,
             text="SafeData Pipeline",
-            font=('Arial', 24, 'bold'),
+            font=('Arial', 22, 'bold'),
             bg='#FF6B35',
             fg='white'
         )
-        title_label.pack(side=tk.LEFT, padx=20, pady=20)
+        title_label.pack(anchor=tk.W)
         
-        # Subtitle
         subtitle_label = tk.Label(
-            header_frame,
-            text="Government of India - Ministry of Electronics and IT\nData Privacy Protection & Anonymization System",
+            title_frame,
+            text="Data Privacy Protection & Anonymization System",
+            font=('Arial', 11),
+            bg='#FF6B35',
+            fg='#FFE4D6'
+        )
+        subtitle_label.pack(anchor=tk.W)
+        
+        # Right section with ministry info
+        right_frame = tk.Frame(header_frame, bg='#FF6B35')
+        right_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=20, pady=15)
+        
+        ministry_label = tk.Label(
+            right_frame,
+            text="Government of India",
+            font=('Arial', 12, 'bold'),
+            bg='#FF6B35',
+            fg='white'
+        )
+        ministry_label.pack(anchor=tk.E)
+        
+        dept_label = tk.Label(
+            right_frame,
+            text="Ministry of Electronics and IT",
             font=('Arial', 10),
             bg='#FF6B35',
-            fg='white',
-            justify=tk.LEFT
+            fg='#FFE4D6'
         )
-        subtitle_label.pack(side=tk.RIGHT, padx=20, pady=20)
+        dept_label.pack(anchor=tk.E)
     
     def create_data_upload_tab(self):
         """Create data upload and quality assessment tab"""
         self.data_tab = ttk.Frame(self.notebook)
         self.notebook.add(self.data_tab, text="📁 Data Upload")
         
-        # File selection frame
-        file_frame = ttk.LabelFrame(self.data_tab, text="File Selection", padding=10)
-        file_frame.pack(fill=tk.X, padx=10, pady=5)
+        # File selection frame with improved styling
+        file_frame = ttk.LabelFrame(self.data_tab, text="📁 File Selection", padding=15)
+        file_frame.pack(fill=tk.X, padx=15, pady=10)
         
         ttk.Button(
             file_frame,
-            text="Select Data File",
+            text="📂 Select Data File",
             command=self.select_file,
-            width=20
+            width=20,
+            style='Primary.TButton'
         ).pack(side=tk.LEFT, padx=5)
         
         self.file_label = ttk.Label(file_frame, text="No file selected")
         self.file_label.pack(side=tk.LEFT, padx=10)
         
-        # Data preview frame
-        preview_frame = ttk.LabelFrame(self.data_tab, text="Data Preview", padding=10)
-        preview_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        # Data preview frame with improved styling
+        preview_frame = ttk.LabelFrame(self.data_tab, text="📋 Data Preview", padding=15)
+        preview_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         # Create treeview for data display
         self.data_tree = ttk.Treeview(preview_frame, show='headings', height=15)
@@ -132,9 +213,9 @@ class SafeDataGUI:
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.data_tree.configure(yscrollcommand=scrollbar.set)
         
-        # Quality assessment frame
-        quality_frame = ttk.LabelFrame(self.data_tab, text="Data Quality Assessment", padding=10)
-        quality_frame.pack(fill=tk.X, padx=10, pady=5)
+        # Quality assessment frame with improved styling
+        quality_frame = ttk.LabelFrame(self.data_tab, text="🔍 Data Quality Assessment", padding=15)
+        quality_frame.pack(fill=tk.X, padx=15, pady=10)
         
         self.quality_text = scrolledtext.ScrolledText(quality_frame, height=6, wrap=tk.WORD)
         self.quality_text.pack(fill=tk.BOTH, expand=True)
@@ -145,16 +226,17 @@ class SafeDataGUI:
         
         ttk.Button(
             action_frame,
-            text="Apply Automatic Fixes",
+            text="🔧 Apply Automatic Fixes",
             command=self.apply_fixes,
-            width=20
+            width=22,
+            style='Primary.TButton'
         ).pack(side=tk.LEFT, padx=5)
         
         ttk.Button(
             action_frame,
-            text="Refresh Preview",
+            text="🔄 Refresh Preview",
             command=self.refresh_preview,
-            width=15
+            width=17
         ).pack(side=tk.LEFT, padx=5)
     
     def create_risk_assessment_tab(self):
@@ -163,8 +245,8 @@ class SafeDataGUI:
         self.notebook.add(self.risk_tab, text="⚠️ Risk Assessment")
         
         # Configuration frame
-        config_frame = ttk.LabelFrame(self.risk_tab, text="Assessment Configuration", padding=10)
-        config_frame.pack(fill=tk.X, padx=10, pady=5)
+        config_frame = ttk.LabelFrame(self.risk_tab, text="⚙️ Assessment Configuration", padding=15)
+        config_frame.pack(fill=tk.X, padx=15, pady=10)
         
         # Quasi-identifiers selection
         ttk.Label(config_frame, text="Quasi-Identifiers:").grid(row=0, column=0, sticky=tk.W, pady=2)
@@ -199,14 +281,15 @@ class SafeDataGUI:
         # Run assessment button
         ttk.Button(
             config_frame,
-            text="Run Risk Assessment",
+            text="🔍 Run Risk Assessment",
             command=self.run_risk_assessment,
-            width=20
-        ).grid(row=4, column=1, pady=10)
+            width=22,
+            style='Primary.TButton'
+        ).grid(row=4, column=1, pady=15)
         
         # Results frame
-        results_frame = ttk.LabelFrame(self.risk_tab, text="Risk Assessment Results", padding=10)
-        results_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        results_frame = ttk.LabelFrame(self.risk_tab, text="📊 Risk Assessment Results", padding=15)
+        results_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         self.risk_results_text = scrolledtext.ScrolledText(results_frame, wrap=tk.WORD)
         self.risk_results_text.pack(fill=tk.BOTH, expand=True)

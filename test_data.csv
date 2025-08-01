@@ -1,0 +1,26 @@
+citizen_id,name,age,gender,city,state,income,medical_condition,education,occupation
+1001,Amit Kumar,34,Male,Mumbai,Maharashtra,75000,Diabetes,Graduate,Engineer
+1002,Priya Singh,28,Female,Delhi,Delhi,65000,Hypertension,Post Graduate,Teacher
+1003,Rajesh Sharma,45,Male,Bangalore,Karnataka,90000,None,Graduate,Manager
+1004,Sunita Patel,38,Female,Ahmedabad,Gujarat,55000,Asthma,Diploma,Nurse
+1005,Vikash Gupta,29,Male,Chennai,Tamil Nadu,70000,None,Graduate,Analyst
+1006,Meera Reddy,41,Female,Hyderabad,Telangana,85000,Diabetes,Post Graduate,Doctor
+1007,Arun Joshi,52,Male,Pune,Maharashtra,95000,Heart Disease,Graduate,Director
+1008,Kavita Nair,33,Female,Kochi,Kerala,60000,None,Graduate,Consultant
+1009,Deepak Yadav,26,Male,Jaipur,Rajasthan,45000,None,Diploma,Technician
+1010,Sanjana Iyer,31,Female,Coimbatore,Tamil Nadu,72000,Migraine,Graduate,Designer
+1011,Rohit Agarwal,37,Male,Indore,Madhya Pradesh,68000,None,Graduate,Sales Manager
+1012,Pooja Mehta,44,Female,Surat,Gujarat,58000,Thyroid,Diploma,Accountant
+1013,Manoj Singh,39,Male,Lucknow,Uttar Pradesh,63000,Diabetes,Graduate,Officer
+1014,Asha Pillai,35,Female,Thiruvananthapuram,Kerala,67000,None,Post Graduate,Researcher
+1015,Suresh Chandra,48,Male,Bhopal,Madhya Pradesh,82000,Hypertension,Graduate,Principal
+1016,Neha Kapoor,27,Female,Chandigarh,Punjab,59000,None,Graduate,Marketing Executive
+1017,Kiran Kumar,42,Male,Visakhapatnam,Andhra Pradesh,74000,None,Diploma,Supervisor
+1018,Ritu Saxena,36,Female,Gwalior,Madhya Pradesh,61000,Asthma,Graduate,HR Manager
+1019,Ashok Mishra,50,Male,Patna,Bihar,56000,Diabetes,Diploma,Clerk
+1020,Divya Krishnan,32,Female,Madurai,Tamil Nadu,69000,None,Post Graduate,Scientist
+1021,Gopal Tiwari,43,Male,Varanasi,Uttar Pradesh,52000,Heart Disease,Graduate,Professor
+1022,Lata Jain,29,Female,Jodhpur,Rajasthan,48000,None,Graduate,Journalist
+1023,Narendra Rao,46,Male,Mangalore,Karnataka,78000,Hypertension,Graduate,Business Owner
+1024,Shweta Agrawal,30,Female,Nagpur,Maharashtra,64000,None,Graduate,Software Engineer
+1025,Tushar Bhatt,38,Male,Rajkot,Gujarat,71000,None,Diploma,Production Manager
