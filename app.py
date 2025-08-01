@@ -597,16 +597,25 @@ def show_utility_measurement():
                 with col1:
                     st.metric("Overall Utility", f"{utility_results['overall_utility']:.3f}")
                 with col2:
-                    st.metric("Statistical Similarity", f"{utility_results.get('statistical_similarity', 0):.3f}")
+                    stat_sim = utility_results.get('statistical_similarity', {})
+                    stat_val = stat_sim.get('overall', 0) if isinstance(stat_sim, dict) else stat_sim
+                    st.metric("Statistical Similarity", f"{stat_val:.3f}")
                 with col3:
-                    st.metric("Information Loss", f"{utility_results.get('information_loss', 0):.3f}")
+                    info_loss = utility_results.get('information_loss', {})
+                    info_val = info_loss.get('information_preservation', 0) if isinstance(info_loss, dict) else info_loss
+                    st.metric("Information Preservation", f"{info_val:.3f}")
                 
                 # Detailed metrics
                 st.subheader("Detailed Utility Metrics")
                 
                 for metric, value in utility_results.items():
-                    if metric not in ['overall_utility', 'visualizations']:
-                        st.write(f"**{metric.replace('_', ' ').title()}**: {value:.4f}")
+                    if metric not in ['overall_utility', 'visualizations', 'metrics_computed', 'dataset_sizes', 'utility_level', 'recommendations']:
+                        if isinstance(value, (int, float)):
+                            st.write(f"**{metric.replace('_', ' ').title()}**: {value:.4f}")
+                        elif isinstance(value, dict) and 'overall' in value:
+                            st.write(f"**{metric.replace('_', ' ').title()}**: {value['overall']:.4f}")
+                        else:
+                            st.write(f"**{metric.replace('_', ' ').title()}**: {str(value)}")
                 
                 # Visualizations
                 if 'visualizations' in utility_results:

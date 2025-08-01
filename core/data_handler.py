@@ -21,7 +21,7 @@ class DataHandler:
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
     
-    def load_data(self, file_obj, file_type: str = None) -> pd.DataFrame:
+    def load_data(self, file_obj, file_type: Optional[str] = None) -> pd.DataFrame:
         """
         Load data from various file formats with error handling
         
