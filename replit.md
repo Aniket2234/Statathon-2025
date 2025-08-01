@@ -8,6 +8,15 @@ SafeData Pipeline is a comprehensive web-based data privacy protection and anony
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+**August 1, 2025**: Enhanced Help section with comprehensive documentation
+- Added detailed explanations for all modules (Data Upload, Risk Assessment, Privacy Enhancement, Utility Measurement, Report Generation, Configuration)
+- Included step-by-step guides with parameter explanations and best practices
+- Added API Reference with complete technical documentation
+- Provided troubleshooting guides and performance optimization tips
+- Created extensive examples and use case scenarios for each feature
+
 ## System Architecture
 
 ### Frontend Architecture
