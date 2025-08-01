@@ -473,39 +473,195 @@ class DataHandler:
     
     def apply_fixes(self, data: pd.DataFrame, issues: List[str]) -> pd.DataFrame:
         """
-        Apply specific fixes based on identified issues
+        Apply comprehensive automatic fixes for any dataset issues including PyArrow compatibility
         
         Args:
             data: Input DataFrame
             issues: List of specific issues to fix
         
         Returns:
-            Fixed DataFrame
+            Fixed DataFrame with full compatibility
         """
         fixed_data = data.copy()
         
+        # Apply PyArrow compatibility fixes first
+        fixed_data = self._fix_pyarrow_compatibility(fixed_data)
+        
+        # Apply specific issue fixes
         for issue in issues:
             if "Missing values" in issue:
-                # Apply missing value imputation
                 fixed_data = self._fix_missing_values(fixed_data)
             elif "negative values" in issue:
-                # Fix negative values in positive-only columns
                 fixed_data = self._fix_negative_values(fixed_data, issue)
             elif "numeric data stored as text" in issue:
-                # Convert text to numeric
                 fixed_data = self._fix_text_numeric(fixed_data, issue)
             elif "date formats" in issue:
-                # Standardize date formats
                 fixed_data = self._fix_date_formats(fixed_data, issue)
         
+        # Apply comprehensive data cleaning
+        fixed_data = self._apply_comprehensive_fixes(fixed_data)
+        
         return fixed_data
+    
+    def _fix_pyarrow_compatibility(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Fix PyArrow compatibility issues that cause Streamlit display problems
+        """
+        fixed_data = data.copy()
+        
+        for col in fixed_data.columns:
+            series = fixed_data[col]
+            
+            # Handle nullable integer types that cause PyArrow issues
+            if hasattr(series.dtype, 'name') and 'Int' in str(series.dtype):
+                try:
+                    # Convert to standard numpy types
+                    if series.dtype.name.startswith('Int'):
+                        fixed_data[col] = series.astype('int64', errors='ignore')
+                    elif series.dtype.name.startswith('Float'):
+                        fixed_data[col] = series.astype('float64', errors='ignore')
+                except:
+                    # Convert to object if conversion fails
+                    fixed_data[col] = series.astype('object')
+            
+            # Handle mixed types in object columns
+            if series.dtype == 'object':
+                try:
+                    # Try to infer and convert to appropriate type
+                    cleaned_series = self._clean_mixed_types(series)
+                    fixed_data[col] = cleaned_series
+                except:
+                    # Keep as string if all else fails
+                    fixed_data[col] = series.astype(str)
+            
+            # Handle datetime issues
+            if 'datetime' in str(series.dtype):
+                try:
+                    # Ensure timezone-naive datetime for PyArrow compatibility
+                    if hasattr(series.dt, 'tz') and series.dt.tz is not None:
+                        fixed_data[col] = series.dt.tz_localize(None)
+                except:
+                    fixed_data[col] = series.astype(str)
+        
+        return fixed_data
+    
+    def _clean_mixed_types(self, series: pd.Series) -> pd.Series:
+        """Clean series with mixed data types"""
+        if series.empty:
+            return series
+        
+        # Try numeric conversion first
+        try:
+            # Remove common non-numeric characters
+            cleaned_str = series.astype(str).str.replace(r'[^\d\.\-\+]', '', regex=True)
+            numeric_series = pd.to_numeric(cleaned_str, errors='coerce')
+            
+            # If >70% can be converted to numeric, use numeric
+            valid_numeric = numeric_series.notna().sum()
+            if valid_numeric > len(series) * 0.7:
+                # Fill NaN with 0 for numeric columns
+                return numeric_series.fillna(0)
+        except:
+            pass
+        
+        # Try datetime conversion
+        try:
+            datetime_series = pd.to_datetime(series, errors='coerce', infer_datetime_format=True)
+            valid_datetime = datetime_series.notna().sum()
+            if valid_datetime > len(series) * 0.7:
+                return datetime_series
+        except:
+            pass
+        
+        # Clean as string
+        return series.astype(str).str.strip()
+    
+    def _apply_comprehensive_fixes(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Apply comprehensive automatic fixes for any dataset
+        """
+        fixed_data = data.copy()
+        
+        # Fix 1: Clean column names
+        fixed_data.columns = [self._clean_column_name(col) for col in fixed_data.columns]
+        
+        # Fix 2: Handle duplicate column names
+        fixed_data.columns = self._fix_duplicate_columns(fixed_data.columns)
+        
+        # Fix 3: Remove empty rows/columns
+        fixed_data = fixed_data.dropna(how='all')  # Remove completely empty rows
+        fixed_data = fixed_data.loc[:, fixed_data.notna().any()]  # Remove completely empty columns
+        
+        # Fix 4: Standardize data types
+        for col in fixed_data.columns:
+            series = fixed_data[col]
+            
+            # Handle boolean-like columns
+            if series.dtype == 'object':
+                unique_vals = series.dropna().unique()
+                if len(unique_vals) <= 10:  # Small number of unique values
+                    bool_vals = {'true', 'false', 'yes', 'no', '1', '0', 'y', 'n'}
+                    if all(str(val).lower() in bool_vals for val in unique_vals):
+                        bool_map = {'true': True, 'false': False, 'yes': True, 'no': False, 
+                                   '1': True, '0': False, 'y': True, 'n': False}
+                        fixed_data[col] = series.map(lambda x: bool_map.get(str(x).lower(), x))
+        
+        # Fix 5: Handle special characters and encoding issues
+        for col in fixed_data.columns:
+            if fixed_data[col].dtype == 'object':
+                try:
+                    # Remove non-printable characters
+                    fixed_data[col] = fixed_data[col].astype(str).str.replace(r'[^\x20-\x7E]', '', regex=True)
+                except:
+                    pass
+        
+        # Fix 6: Ensure all data is JSON serializable for compatibility
+        for col in fixed_data.columns:
+            series = fixed_data[col]
+            if series.dtype == 'object':
+                # Convert complex objects to strings
+                fixed_data[col] = series.apply(lambda x: str(x) if not pd.isna(x) else x)
+        
+        return fixed_data
+    
+    def _clean_column_name(self, col_name: str) -> str:
+        """Clean column names for better compatibility"""
+        import re
+        # Convert to string and clean
+        cleaned = str(col_name).strip()
+        # Replace special characters with underscores
+        cleaned = re.sub(r'[^\w\s]', '_', cleaned)
+        # Replace spaces with underscores
+        cleaned = re.sub(r'\s+', '_', cleaned)
+        # Remove multiple underscores
+        cleaned = re.sub(r'_+', '_', cleaned)
+        # Remove leading/trailing underscores
+        cleaned = cleaned.strip('_')
+        return cleaned if cleaned else 'column'
+    
+    def _fix_duplicate_columns(self, columns):
+        """Fix duplicate column names"""
+        seen = {}
+        new_columns = []
+        
+        for col in columns:
+            if col in seen:
+                seen[col] += 1
+                new_columns.append(f"{col}_{seen[col]}")
+            else:
+                seen[col] = 0
+                new_columns.append(col)
+        
+        return new_columns
     
     def _fix_missing_values(self, data: pd.DataFrame) -> pd.DataFrame:
         """Fix missing values using appropriate imputation"""
         for col in data.columns:
             if data[col].isnull().any():
                 if data[col].dtype in ['int64', 'float64']:
-                    data[col].fillna(data[col].median(), inplace=True)
+                    median_val = data[col].median()
+                    if not pd.isna(median_val):
+                        data[col].fillna(median_val, inplace=True)
                 else:
                     if not data[col].mode().empty:
                         data[col].fillna(data[col].mode()[0], inplace=True)
@@ -531,8 +687,10 @@ class DataHandler:
             if col_name in data.columns:
                 try:
                     cleaned = data[col_name].astype(str).str.replace('[$,]', '', regex=True)
-                    data[col_name] = pd.to_numeric(cleaned, errors='coerce')
-                    data[col_name].fillna(data[col_name].median(), inplace=True)
+                    numeric_series = pd.to_numeric(cleaned, errors='coerce')
+                    median_val = numeric_series.median()
+                    if not pd.isna(median_val):
+                        data[col_name] = numeric_series.fillna(median_val)
                 except:
                     pass
         return data

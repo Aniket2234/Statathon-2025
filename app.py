@@ -16,6 +16,7 @@ from core.report_generator import ReportGenerator
 from utils.file_operations import FileOperations
 from utils.validation import DataValidator
 from utils.encryption import DataEncryption
+import streamlit.components.v1 as stc
 
 # Configure page
 st.set_page_config(
@@ -684,8 +685,7 @@ def show_reports():
                     
                     # Display HTML report
                     with st.expander("View HTML Report", expanded=True):
-                        import streamlit.components.v1 as components
-                        components.html(html_report, height=600, scrolling=True)
+                        stc.html(html_report, height=600, scrolling=True)
                     
                     # Provide download link
                     b64_html = base64.b64encode(html_report.encode()).decode()
