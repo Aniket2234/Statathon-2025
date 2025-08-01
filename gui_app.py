@@ -639,6 +639,8 @@ Issues Detected:
         """Refresh data preview"""
         if self.current_data is not None:
             self.update_data_preview(self.current_data)
+        else:
+            messagebox.showinfo("Info", "No data loaded to refresh")
     
     def run_risk_assessment(self):
         """Run risk assessment"""
@@ -690,6 +692,8 @@ Issues Detected:
         
         if result_type == "risk":
             self.display_risk_results(results)
+        elif result_type == "privacy":
+            self.display_privacy_results(results)
         elif result_type == "utility":
             self.display_utility_results(results)
     
@@ -721,6 +725,33 @@ Attack Scenario Results:
                 report += f"• {rec}\n"
         
         self.risk_results_text.insert(1.0, report)
+    
+    def display_privacy_results(self, processed_data):
+        """Display privacy enhancement results"""
+        self.privacy_results_text.delete(1.0, tk.END)
+        
+        if processed_data is not None:
+            original_rows = len(self.current_data) if self.current_data is not None else 0
+            processed_rows = len(processed_data)
+            
+            report = f"""Privacy Enhancement Results:
+            
+Technique Applied: {self.privacy_technique.get()}
+Original Data Shape: {self.current_data.shape if self.current_data is not None else 'Unknown'}
+Processed Data Shape: {processed_data.shape}
+
+Records Summary:
+• Original Records: {original_rows:,}
+• Processed Records: {processed_rows:,}
+• Information Loss: {((original_rows - processed_rows) / original_rows * 100) if original_rows > 0 else 0:.1f}%
+
+Status: Privacy enhancement completed successfully.
+You can now proceed to Utility Measurement to assess data quality preservation.
+"""
+        else:
+            report = "Privacy enhancement failed. Please check your parameters and try again."
+        
+        self.privacy_results_text.insert(1.0, report)
     
     def update_privacy_params(self):
         """Update privacy technique parameters"""
@@ -775,7 +806,7 @@ Attack Scenario Results:
                 # Get quasi-identifiers
                 qi_indices = self.qi_listbox.curselection()
                 if not qi_indices:
-                    self.status_queue.put(("error", "Please select quasi-identifiers first"))
+                    self.status_queue.put(("error", "Please select quasi-identifiers from Risk Assessment tab first"))
                     return
                 
                 qi_cols = [self.qi_listbox.get(i) for i in qi_indices]
