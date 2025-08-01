@@ -2143,4 +2143,16 @@ def clear_session_data():
     st.rerun()
 
 if __name__ == "__main__":
+    # Configure Streamlit to be accessible from any IP
+    import sys
+    sys.argv = [
+        "streamlit", 
+        "run", 
+        __file__,
+        "--server.address=0.0.0.0",
+        "--server.port=5000",
+        "--server.headless=true",
+        "--server.enableCORS=false",
+        "--server.enableXsrfProtection=false"
+    ]
     main()

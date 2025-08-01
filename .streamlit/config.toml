@@ -6,6 +6,7 @@ enableCORS = false
 enableXsrfProtection = false
 allowRunOnSave = true
 runOnSave = false
+baseUrlPath = ""
 
 [browser]
 gatherUsageStats = false
@@ -14,3 +15,7 @@ serverPort = 5000
 
 [global]
 developmentMode = false
+
+[client]
+caching = true
+displayEnabled = true

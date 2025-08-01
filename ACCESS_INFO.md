@@ -13,13 +13,17 @@
 ## For VSCode/Local Development:
 The Streamlit app is configured to run on:
 - Port: 5000
-- Address: 0.0.0.0 (binds to all network interfaces)
-- IP: 172.31.100.34
+- Address: 0.0.0.0 (binds to ALL network interfaces - like React apps)
+- Accessible from ANY IP address on port 5000
 
-If you're accessing from VSCode or another local environment:
-1. Try: http://172.31.100.34:5000
-2. Or: http://localhost:5000
-3. Or use the Replit web URL: https://workspace.replit30tousebr.repl.co
+Access URLs (should work from any machine on the network):
+1. http://172.31.100.34:5000 (server IP)
+2. http://localhost:5000 (local access)
+3. http://127.0.0.1:5000 (loopback)
+4. http://[YOUR_LOCAL_IP]:5000 (from other machines)
+5. https://workspace.replit30tousebr.repl.co (Replit web URL)
+
+The app now behaves like React development servers - accessible from any IP!
 
 ## Test Data
 - Use `test_dataset_sample.csv` for testing
