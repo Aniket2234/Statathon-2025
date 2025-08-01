@@ -1,0 +1,32 @@
+# SafeData Pipeline Dependencies for Local Installation
+# Copy this file to requirements.txt when setting up locally
+
+# Core data processing
+pandas>=1.5.0
+numpy>=1.21.0
+
+# Visualization and plotting
+matplotlib>=3.5.0
+plotly>=5.0.0
+seaborn>=0.11.0
+
+# Machine learning and analysis
+scikit-learn>=1.1.0
+scipy>=1.9.0
+
+# File format support
+openpyxl>=3.0.0
+chardet>=5.0.0
+
+# Security and encryption
+cryptography>=37.0.0
+
+# Report generation
+fpdf2>=2.5.0
+jinja2>=3.1.0
+
+# Web interface (optional)
+streamlit>=1.25.0
+
+# GUI support (usually included with Python)
+# tkinter - included with most Python installations
