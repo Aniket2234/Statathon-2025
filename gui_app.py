@@ -89,21 +89,48 @@ class SafeDataGUI:
                        background='#ecf0f1', foreground='#2c3e50')
     
     def setup_gui(self):
-        """Setup the main GUI interface"""
+        """Setup the main GUI interface with scrollable content"""
         # Configure main window
         self.root.title("SafeData Pipeline - Government of India")
-        self.root.geometry("1400x900")
-        self.root.minsize(1200, 800)
+        self.root.geometry("1200x800")
+        self.root.minsize(1000, 700)
         self.root.configure(bg='#f8f9fa')
+        
+        # Make window resizable
+        self.root.resizable(True, True)
         
         # Setup styles
         self.setup_styles()
+        
+        # Create main container with scrollbars
+        self.main_canvas = tk.Canvas(self.root, bg='#f8f9fa')
+        self.main_scrollbar_v = ttk.Scrollbar(self.root, orient="vertical", command=self.main_canvas.yview)
+        self.main_scrollbar_h = ttk.Scrollbar(self.root, orient="horizontal", command=self.main_canvas.xview)
+        self.scrollable_frame = ttk.Frame(self.main_canvas)
+        
+        self.scrollable_frame.bind(
+            "<Configure>",
+            lambda e: self.main_canvas.configure(scrollregion=self.main_canvas.bbox("all"))
+        )
+        
+        self.main_canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
+        self.main_canvas.configure(yscrollcommand=self.main_scrollbar_v.set, xscrollcommand=self.main_scrollbar_h.set)
+        
+        # Pack canvas and scrollbars
+        self.main_canvas.pack(side="left", fill="both", expand=True)
+        self.main_scrollbar_v.pack(side="right", fill="y")
+        self.main_scrollbar_h.pack(side="bottom", fill="x")
+        
+        # Bind mouse wheel to canvas
+        self.main_canvas.bind("<MouseWheel>", self._on_mousewheel)
+        self.main_canvas.bind("<Button-4>", self._on_mousewheel)
+        self.main_canvas.bind("<Button-5>", self._on_mousewheel)
         
         # Create header with Government of India branding
         self.create_header()
         
         # Create notebook for different modules
-        self.notebook = ttk.Notebook(self.root)
+        self.notebook = ttk.Notebook(self.scrollable_frame)
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         # Create tabs
@@ -118,9 +145,18 @@ class SafeDataGUI:
         # Create status bar
         self.create_status_bar()
     
+    def _on_mousewheel(self, event):
+        """Handle mouse wheel scrolling"""
+        if event.delta:
+            self.main_canvas.yview_scroll(int(-1*(event.delta/120)), "units")
+        elif event.num == 4:
+            self.main_canvas.yview_scroll(-1, "units")
+        elif event.num == 5:
+            self.main_canvas.yview_scroll(1, "units")
+    
     def create_header(self):
         """Create header with government branding"""
-        header_frame = tk.Frame(self.root, bg='#FF6B35', height=100)
+        header_frame = tk.Frame(self.scrollable_frame, bg='#FF6B35', height=100)
         header_frame.pack(fill=tk.X, padx=0, pady=0)
         header_frame.pack_propagate(False)
         
@@ -248,15 +284,25 @@ class SafeDataGUI:
         config_frame = ttk.LabelFrame(self.risk_tab, text="⚙️ Assessment Configuration", padding=15)
         config_frame.pack(fill=tk.X, padx=15, pady=10)
         
-        # Quasi-identifiers selection
+        # Quasi-identifiers selection with scrollbar
         ttk.Label(config_frame, text="Quasi-Identifiers:").grid(row=0, column=0, sticky=tk.W, pady=2)
-        self.qi_listbox = tk.Listbox(config_frame, selectmode=tk.MULTIPLE, height=4)
-        self.qi_listbox.grid(row=0, column=1, padx=10, pady=2, sticky=tk.W+tk.E)
+        qi_frame = ttk.Frame(config_frame)
+        qi_frame.grid(row=0, column=1, padx=10, pady=2, sticky=tk.W+tk.E)
+        self.qi_listbox = tk.Listbox(qi_frame, selectmode=tk.MULTIPLE, height=4)
+        qi_scrollbar = ttk.Scrollbar(qi_frame, orient=tk.VERTICAL, command=self.qi_listbox.yview)
+        self.qi_listbox.configure(yscrollcommand=qi_scrollbar.set)
+        self.qi_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        qi_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
-        # Sensitive attributes selection
+        # Sensitive attributes selection with scrollbar
         ttk.Label(config_frame, text="Sensitive Attributes:").grid(row=1, column=0, sticky=tk.W, pady=2)
-        self.sa_listbox = tk.Listbox(config_frame, selectmode=tk.MULTIPLE, height=4)
-        self.sa_listbox.grid(row=1, column=1, padx=10, pady=2, sticky=tk.W+tk.E)
+        sa_frame = ttk.Frame(config_frame)
+        sa_frame.grid(row=1, column=1, padx=10, pady=2, sticky=tk.W+tk.E)
+        self.sa_listbox = tk.Listbox(sa_frame, selectmode=tk.MULTIPLE, height=4)
+        sa_scrollbar = ttk.Scrollbar(sa_frame, orient=tk.VERTICAL, command=self.sa_listbox.yview)
+        self.sa_listbox.configure(yscrollcommand=sa_scrollbar.set)
+        self.sa_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        sa_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
         # K-threshold
         ttk.Label(config_frame, text="K-Anonymity Threshold:").grid(row=2, column=0, sticky=tk.W, pady=2)
@@ -538,7 +584,7 @@ class SafeDataGUI:
     
     def create_status_bar(self):
         """Create status bar at bottom"""
-        self.status_bar = ttk.Frame(self.root)
+        self.status_bar = ttk.Frame(self.scrollable_frame)
         self.status_bar.pack(fill=tk.X, side=tk.BOTTOM)
         
         self.status_label = ttk.Label(self.status_bar, text="Ready", relief=tk.SUNKEN, anchor=tk.W)
@@ -577,8 +623,7 @@ class SafeDataGUI:
                 self.status_queue.put(("progress", "start"))
                 
                 # Load data using DataHandler
-                with open(filename, 'rb') as f:
-                    self.current_data = self.data_handler.load_data(f, os.path.splitext(filename)[1][1:])
+                self.current_data = self.data_handler.load_file(filename)
                 
                 # Assess quality
                 quality_results = self.data_handler.assess_data_quality(self.current_data)
@@ -1177,406 +1222,264 @@ Detailed Metrics:
                 'max_file_size': self.max_file_size.get(),
                 'chunk_size': self.chunk_size.get(),
                 'enable_encryption': self.enable_encryption.get(),
-                'enable_logging': self.enable_logging.get()
+                'enable_logging': self.enable_logging.get(),
+                'updated_date': datetime.now().isoformat()
             }
             
             os.makedirs('config', exist_ok=True)
-            with open('config/system_config.json', 'w') as f:
+            with open('config/system_settings.json', 'w') as f:
                 json.dump(settings, f, indent=2)
             
-            messagebox.showinfo("Success", "System settings saved successfully")
+            messagebox.showinfo("Success", "Settings saved successfully")
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to save settings: {str(e)}")
     
     def show_help_content(self, event=None):
-        """Show help content for selected topic"""
+        """Show help content based on selected topic"""
         topic = self.help_topic.get()
         
         help_content = {
-            "Quick Start Guide": """SafeData Pipeline Quick Start Guide
+            "Quick Start Guide": """
+SafeData Pipeline - Quick Start Guide
 
-1. DATA UPLOAD
-   • Click 'Select Data File' to choose your dataset
+1. LOAD DATA
+   • Click 'Select Data File' to upload your dataset
    • Supported formats: CSV, Excel, JSON, XML, Parquet
-   • Review data preview and quality assessment
-   • Apply automatic fixes if issues are detected
+   • Review the data quality assessment
 
-2. RISK ASSESSMENT
-   • Select quasi-identifiers (demographic columns)
-   • Select sensitive attributes (private information) 
-   • Set K-anonymity threshold (minimum group size)
-   • Run assessment to identify privacy risks
+2. ASSESS RISK
+   • Go to Risk Assessment tab
+   • Select quasi-identifiers (age, location, etc.)
+   • Select sensitive attributes (salary, medical info, etc.)
+   • Click 'Run Risk Assessment'
 
-3. PRIVACY ENHANCEMENT
-   • Choose anonymization technique:
-     - K-Anonymity: Basic privacy protection
-     - L-Diversity: Protects sensitive attributes
-     - T-Closeness: Preserves distributions
-     - Differential Privacy: Mathematical guarantees
-   • Configure parameters based on your needs
-   • Apply technique to anonymize data
+3. ENHANCE PRIVACY
+   • Go to Privacy Enhancement tab
+   • Choose a privacy technique
+   • Configure parameters
+   • Click 'Apply Privacy Enhancement'
 
-4. UTILITY MEASUREMENT
-   • Select utility metrics to evaluate
-   • Compare original vs anonymized data
-   • Review preservation of analytical value
-   • Get recommendations for improvement
+4. MEASURE UTILITY
+   • Go to Utility Measurement tab
+   • Select metrics to evaluate
+   • Click 'Measure Utility'
 
-5. REPORT GENERATION
+5. GENERATE REPORTS
+   • Go to Reports tab
    • Choose report type and format
-   • Generate comprehensive documentation
-   • Export processed data in various formats
-   • Save reports for compliance and sharing""",
+   • Click 'Generate Report'
+            """,
             
-            "Data Upload": """Data Upload Guide
+            "Data Upload": """
+Data Upload Module
 
 SUPPORTED FORMATS:
-• CSV: Comma-separated values with auto-encoding detection
-• Excel: .xlsx and .xls files with multi-sheet support
-• JSON: JavaScript Object Notation with nested structures
-• XML: Extensible Markup Language
-• Parquet: Columnar storage for big data
-• TSV: Tab-separated values
-
-FILE SELECTION PROCESS:
-1. Click 'Select Data File' button
-2. Choose file from file dialog
-3. System automatically detects format and loads data
-4. Preview shows first 100 rows
-5. Quality assessment runs automatically
+• CSV files (.csv)
+• Excel files (.xlsx, .xls)
+• JSON files (.json)
+• XML files (.xml)
+• Parquet files (.parquet)
 
 DATA QUALITY CHECKS:
 • Missing value detection
 • Data type validation
-• Format consistency checks
-• Outlier identification
-• Duplicate record detection
+• Duplicate record identification
+• Format consistency verification
+• Statistical outlier detection
 
 AUTOMATIC FIXES:
-• Missing value imputation using median/mode
-• Data type corrections and conversions
-• Format standardization
-• Column name cleaning
-• PyArrow compatibility fixes
-
-BEST PRACTICES:
-• Use clean, descriptive column names
-• Maintain consistent data formats
-• Minimize missing values where possible
-• Start with smaller files for testing
-• Keep backup of original data""",
+• Fill missing values
+• Standardize data types
+• Remove duplicates
+• Correct formatting issues
+            """,
             
-            "Risk Assessment": """Risk Assessment Guide
+            "Risk Assessment": """
+Risk Assessment Module
 
-KEY CONCEPTS:
-• Quasi-Identifiers: Columns that could identify individuals when combined
-• Sensitive Attributes: Private information requiring protection
-• K-Anonymity: Each person indistinguishable from K-1 others
-• Attack Scenarios: Different ways data could be misused
+PURPOSE:
+Evaluate re-identification risks in your dataset
 
-CONFIGURATION:
-1. Select Quasi-Identifiers:
-   - Demographic information (age, gender, location)
-   - Publicly available attributes
-   - NOT direct identifiers or sensitive data
+QUASI-IDENTIFIERS:
+• Attributes that can identify individuals
+• Examples: Age, Gender, ZIP code, Education
+• Select multiple columns from the list
 
-2. Select Sensitive Attributes:
-   - Medical conditions, financial data
-   - Personal preferences, private information
-   - Information requiring protection
+SENSITIVE ATTRIBUTES:
+• Information you want to protect
+• Examples: Salary, Medical conditions, Religion
+• Optional but recommended for comprehensive assessment
 
-3. Set K-Threshold:
-   - K=3: Basic privacy (minimum recommended)
-   - K=5: Balanced privacy and utility
-   - K=10+: High privacy, may reduce utility
+PARAMETERS:
+• K-Anonymity Threshold: Minimum group size (2-20)
+• Sample Size: Percentage of data to analyze (10-100%)
 
-4. Sample Size:
-   - 100%: Complete assessment (recommended)
-   - 50%: Faster for large datasets
-   - 10-30%: Quick assessment for very large data
-
-RISK METRICS:
-• Overall Risk Score: 0.0 (safe) to 1.0 (critical)
-• K-Anonymity Violations: Groups smaller than K
-• Unique Records: Individuals easily identifiable
-• Attack Scenario Results: Risk under different attacks
-
-INTERPRETATION:
-• Low Risk (0.0-0.2): Safe for most sharing
-• Medium Risk (0.2-0.5): Needs privacy enhancement
-• High Risk (0.5-0.8): Significant privacy concerns
-• Critical Risk (0.8-1.0): Urgent action required""",
+RESULTS:
+• Overall risk score and level
+• K-anonymity violations
+• Attack scenario simulations
+• Recommendations for improvement
+            """,
             
-            "Privacy Enhancement": """Privacy Enhancement Guide
+            "Privacy Enhancement": """
+Privacy Enhancement Module
 
 AVAILABLE TECHNIQUES:
 
 K-ANONYMITY:
-• Purpose: Group similar records together
-• K Value: Minimum group size (2-20)
-• Methods:
-  - Global Recoding: Same rules for all data
-  - Local Recoding: Adaptive rules by region
-  - Clustering: Natural groupings first
-• Best for: Basic anonymization, compliance
+• Ensures each record appears in groups of at least k individuals
+• Parameters: K value (2-20), Method (Global/Local/Clustering)
+• Best for: General privacy protection
 
 L-DIVERSITY:
-• Purpose: Ensure diversity in sensitive attributes
-• L Value: Minimum different values (2-10)
-• Methods:
-  - Distinct: At least L different values
-  - Entropy: Considers value distribution
-  - Recursive: Prevents single value dominance
-• Best for: Protecting sensitive attributes
+• Ensures diversity in sensitive attributes within each group
+• Parameters: L value (2-10)
+• Best for: Protecting against homogeneity attacks
 
 T-CLOSENESS:
-• Purpose: Preserve statistical distributions
-• T Value: Maximum distance from global (0.1-1.0)
-• Maintains analytical accuracy
-• Best for: Research requiring statistics
+• Maintains distribution similarity between groups and population
+• Parameters: T value (0.1-1.0)
+• Best for: Protecting against skewness attacks
 
 DIFFERENTIAL PRIVACY:
-• Purpose: Mathematical privacy guarantees
-• Epsilon: Privacy budget (0.1-10.0)
-• Lower epsilon = stronger privacy, more noise
-• Best for: Strong mathematical guarantees
-
-PARAMETER GUIDELINES:
-• Start with conservative values
-• Increase gradually based on utility needs
-• Consider data sharing context
-• Balance privacy vs analytical requirements
-
-BEFORE/AFTER COMPARISON:
-• Row count changes (suppression)
-• Column modifications (generalization)
-• Value transformations
-• Statistical property changes""",
+• Adds statistical noise to protect individual privacy
+• Parameters: Epsilon (0.1-10.0)
+• Best for: Statistical analysis and research
+            """,
             
-            "Utility Measurement": """Utility Measurement Guide
+            "Utility Measurement": """
+Utility Measurement Module
+
+PURPOSE:
+Assess how much data quality is preserved after anonymization
 
 AVAILABLE METRICS:
 
 STATISTICAL SIMILARITY:
-• Measures preservation of basic statistics
-• Compares means, standard deviations, ranges
-• Score: 1.0 (perfect) to 0.0 (completely different)
-• Critical for descriptive analytics
+• Compares basic statistics (mean, std, etc.)
+• Measures distribution preservation
 
 CORRELATION PRESERVATION:
-• Evaluates relationship maintenance
-• Compares correlation matrices
-• Essential for regression analysis
-• Important for data mining applications
+• Evaluates relationship maintenance between variables
+• Important for analytical validity
 
 DISTRIBUTION SIMILARITY:
-• Tests if data distributions remain similar
-• Uses Kolmogorov-Smirnov and Wasserstein tests
-• Critical for statistical inference
-• Important for research validity
+• Compares data distributions using statistical tests
+• Ensures representative samples
 
 INFORMATION LOSS:
-• Quantifies entropy reduction
-• Measures information content preservation
-• Higher preservation = better utility
-• Affects all analytical applications
+• Quantifies amount of information removed
+• Lower is better for utility
 
 CLASSIFICATION UTILITY:
-• Tests predictive model performance
-• Trains models on original, tests on anonymized
-• Evaluates feature importance changes
-• Critical for machine learning applications
-
-OVERALL UTILITY SCORE:
-• Weighted average of all metrics
-• Scale: 0.0 (no utility) to 1.0 (perfect utility)
-• Interpretation:
-  - >0.9: Excellent utility
-  - 0.7-0.9: Good utility
-  - 0.5-0.7: Fair utility
-  - <0.5: Poor utility
-
-UTILITY LEVELS:
-• Excellent: Ready for most applications
-• Good: Suitable for general research
-• Fair: Basic statistics and trends only
-• Poor: Limited analytical value
-
-RECOMMENDATIONS:
-• System provides automatic suggestions
-• Based on specific utility weaknesses
-• Guides parameter adjustments
-• Helps optimize privacy-utility trade-off""",
+• Tests machine learning model performance
+• Practical utility assessment
+            """,
             
-            "Report Generation": """Report Generation Guide
+            "Report Generation": """
+Report Generation Module
 
 REPORT TYPES:
 
 EXECUTIVE SUMMARY:
-• Target: Senior management, decision makers
-• Content: High-level findings and recommendations
-• Length: 2-4 pages
-• Language: Business-friendly, minimal technical terms
+• High-level overview for management
+• 2-5 pages, non-technical language
+• Focus on compliance and recommendations
 
 TECHNICAL REPORT:
-• Target: Data scientists, privacy engineers
-• Content: Detailed methodology and metrics
-• Length: 10-20 pages
-• Language: Technical terminology, detailed analysis
+• Detailed analysis for technical teams
+• 10-20 pages with methodology details
+• Complete statistical analysis
 
-COMPREHENSIVE REPORT:
-• Target: Mixed audience, compliance documentation
-• Content: Complete analysis with all details
-• Length: 15-30 pages
-• Language: Mixed levels for different sections
+COMPREHENSIVE:
+• Complete documentation for all audiences
+• 15-30 pages with appendices
+• Suitable for compliance and archival
 
 OUTPUT FORMATS:
+• PDF: Professional, printable format
+• HTML: Interactive, web-friendly format
+• Both: Generate both formats
 
-PDF REPORTS:
-• Professional appearance
-• Consistent formatting
-• Suitable for printing
-• Easy sharing and archiving
-• Government-compliant layout
-
-HTML REPORTS:
-• Interactive visualizations
-• Easy web sharing
-• Responsive design
-• Searchable content
-• Modern styling
-
-CONFIGURATION OPTIONS:
-• Include Visualizations: Charts and graphs
-• Include Recommendations: AI-generated insights
-• Custom metadata: Title, organization, author
-
-DATA EXPORT:
-• CSV: Comma-separated for analysis
-• Excel: Spreadsheet format with formatting
+EXPORT OPTIONS:
+• CSV: Processed data for analysis
+• Excel: Formatted data with multiple sheets
 • JSON: Structured data for applications
-• All formats preserve data integrity
-
-BEST PRACTICES:
-• Choose appropriate report type for audience
-• Include visualizations for better understanding
-• Generate both PDF and HTML for flexibility
-• Document all configuration choices
-• Keep reports for compliance and audit trails""",
+            """,
             
-            "Configuration": """Configuration Guide
+            "Configuration": """
+Configuration Module
 
 PRIVACY PROFILES:
-• Pre-configured settings for common scenarios
-• Consistent application across projects
+• Save commonly used settings
 • Quick setup for routine tasks
-• Organizational standards enforcement
-
-DEFAULT PROFILES:
-• Low Risk: K=3, Medium tolerance, K-Anonymity
-• Medium Risk: K=5, Low tolerance, L-Diversity  
-• High Risk: K=10, Very low tolerance, T-Closeness
-
-CUSTOM PROFILES:
-• Create profiles for specific use cases
-• Save current settings as new profile
-• Share profiles across team members
-• Version control for profile changes
+• Share configurations across team
+• Version control for settings
 
 SYSTEM SETTINGS:
 
-MAX FILE SIZE:
-• Default: 100 MB
-• Range: 1-1000 MB
-• Balance capability with system resources
-• Larger files need more memory
+Max File Size (1-1000 MB):
+• Controls maximum upload size
+• Adjust based on system resources
 
-CHUNK SIZE:
-• Default: 10,000 rows
-• Range: 1,000-100,000 rows
-• Smaller chunks for limited memory
-• Larger chunks for better performance
+Chunk Size (1,000-100,000):
+• Processing batch size
+• Smaller for limited memory
+• Larger for better performance
 
 SECURITY OPTIONS:
 • Enable Data Encryption: Protects data in memory
 • Enable Detailed Logging: Comprehensive audit trail
-• Both recommended for production use
-
-CONFIGURATION MANAGEMENT:
-• Settings automatically saved
-• Profiles stored in JSON format
-• Easy backup and restore
-• Migration between systems supported
 
 BEST PRACTICES:
 • Start with default profiles
-• Create custom profiles for specific needs
-• Document profile rationale
-• Regular review and updates
+• Test with small datasets first
+• Document configuration rationale
 • Enable all security features
-• Monitor system performance
-• Plan for data growth""",
+            """,
             
-            "Troubleshooting": """Troubleshooting Guide
+            "Troubleshooting": """
+Troubleshooting Guide
 
 COMMON ISSUES:
 
 FILE LOADING ERRORS:
-• Check file format is supported
-• Verify file is not corrupted
-• Ensure file size under limit
-• Try different encoding if CSV fails
+• Check file format and encoding
+• Ensure file is not corrupted
+• Try smaller sample first
+• Verify column headers
 
-MEMORY ISSUES:
-• Reduce chunk size in settings
-• Use smaller sample sizes
+MEMORY ERRORS:
+• Reduce file size or chunk size
 • Close other applications
-• Consider upgrading system memory
+• Use sampling for large datasets
+• Consider system upgrade
 
-PRIVACY ENHANCEMENT FAILURES:
-• Verify quasi-identifiers are selected
-• Check parameter ranges are valid
-• Ensure data has sufficient diversity
-• Try different anonymization technique
+PRIVACY TECHNIQUE FAILURES:
+• Check quasi-identifier selection
+• Verify data types are compatible
+• Try different parameter values
+• Ensure sufficient data volume
 
-UTILITY MEASUREMENT ERRORS:
-• Complete privacy enhancement first
-• Ensure both datasets have same columns
-• Check for data type compatibility
-• Verify sufficient data for analysis
+POOR UTILITY SCORES:
+• Adjust privacy parameters
+• Try different techniques
+• Consider hybrid approaches
+• Balance privacy vs utility
 
-REPORT GENERATION PROBLEMS:
-• Complete all required analyses first
-• Check file permissions for save location
-• Verify template files exist
-• Ensure sufficient disk space
+EXPORT ISSUES:
+• Check disk space availability
+• Verify write permissions
+• Try different file locations
+• Contact system administrator
 
-PERFORMANCE OPTIMIZATION:
-• Use appropriate sample sizes
-• Enable chunked processing
-• Close unnecessary applications
+PERFORMANCE TIPS:
+• Use appropriate chunk sizes
+• Enable system optimizations
+• Process during low-usage hours
 • Monitor system resources
-• Consider SSD storage for better I/O
-
-ERROR RECOVERY:
-• Check error messages carefully
-• Try restarting the application
-• Use smaller datasets for testing
-• Contact support with error details
-
-GETTING HELP:
-• Review all error messages
-• Check system requirements
-• Try with sample data first
-• Document steps to reproduce issues
-• Contact technical support if needed
-
-SYSTEM REQUIREMENTS:
-• Python 3.8 or higher
-• 8GB RAM minimum (16GB recommended)
-• 2GB free disk space
-• Modern processor (quad-core recommended)"""
+            """
         }
         
         content = help_content.get(topic, "Help content not available for this topic.")
@@ -1584,11 +1487,25 @@ SYSTEM REQUIREMENTS:
         self.help_text.delete(1.0, tk.END)
         self.help_text.insert(1.0, content)
 
+
 def main():
-    """Main application entry point"""
+    """Main function to run the GUI application"""
     root = tk.Tk()
     app = SafeDataGUI(root)
-    root.mainloop()
+    
+    # Center window on screen
+    root.update_idletasks()
+    width = root.winfo_width()
+    height = root.winfo_height()
+    x = (root.winfo_screenwidth() // 2) - (width // 2)
+    y = (root.winfo_screenheight() // 2) - (height // 2)
+    root.geometry(f'{width}x{height}+{x}+{y}')
+    
+    try:
+        root.mainloop()
+    except KeyboardInterrupt:
+        root.quit()
+
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,21 @@
+Name,Age,City,Income,Email,Phone,SSN,Gender,Department,Salary
+John Smith,34,Mumbai,75000,john.smith@email.com,9876543210,123-45-6789,Male,Engineering,75000
+Priya Sharma,28,Delhi,65000,priya.sharma@email.com,8765432109,234-56-7890,Female,Marketing,65000
+Rahul Kumar,42,Bangalore,85000,rahul.kumar@email.com,7654321098,345-67-8901,Male,Sales,85000
+Anjali Patel,31,Chennai,70000,anjali.patel@email.com,6543210987,456-78-9012,Female,HR,70000
+Vikram Singh,37,Hyderabad,80000,vikram.singh@email.com,5432109876,567-89-0123,Male,Finance,80000
+Sunita Reddy,29,Pune,62000,sunita.reddy@email.com,4321098765,678-90-1234,Female,IT,62000
+Amit Gupta,45,Kolkata,90000,amit.gupta@email.com,3210987654,789-01-2345,Male,Operations,90000
+Kavita Joshi,33,Ahmedabad,68000,kavita.joshi@email.com,2109876543,890-12-3456,Female,Legal,68000
+Rajesh Mehta,39,Surat,77000,rajesh.mehta@email.com,1098765432,901-23-4567,Male,Admin,77000
+Neha Agarwal,26,Jaipur,58000,neha.agarwal@email.com,0987654321,012-34-5678,Female,Design,58000
+Suresh Yadav,41,Lucknow,82000,suresh.yadav@email.com,9876543211,123-45-6790,Male,Engineering,82000
+Deepika Rao,35,Indore,72000,deepika.rao@email.com,8765432110,234-56-7891,Female,Marketing,72000
+Manoj Tiwari,38,Bhopal,79000,manoj.tiwari@email.com,7654321099,345-67-8902,Male,Sales,79000
+Pooja Mishra,30,Kanpur,66000,pooja.mishra@email.com,6543210988,456-78-9013,Female,HR,66000
+Arjun Nair,43,Kochi,87000,arjun.nair@email.com,5432109877,567-89-0124,Male,Finance,87000
+Ritu Kapoor,32,Chandigarh,69000,ritu.kapoor@email.com,4321098766,678-90-1235,Female,IT,69000
+Sanjay Verma,46,Nagpur,92000,sanjay.verma@email.com,3210987655,789-01-2346,Male,Operations,92000
+Meera Shah,27,Vadodara,61000,meera.shah@email.com,2109876544,890-12-3457,Female,Legal,61000
+Kiran Pandey,40,Patna,78000,kiran.pandey@email.com,1098765433,901-23-4568,Male,Admin,78000
+Shweta Singh,34,Gurgaon,74000,shweta.singh@email.com,0987654322,012-34-5679,Female,Design,74000

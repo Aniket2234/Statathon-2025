@@ -21,6 +21,24 @@ class DataHandler:
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
     
+    def load_file(self, filename: str) -> pd.DataFrame:
+        """
+        Load data file from filesystem path
+        
+        Args:
+            filename: Path to the file
+            
+        Returns:
+            Loaded pandas DataFrame
+        """
+        try:
+            with open(filename, 'rb') as f:
+                file_type = Path(filename).suffix.lower()[1:]
+                return self.load_data(f, file_type)
+        except Exception as e:
+            self.logger.error(f"Error loading file {filename}: {str(e)}")
+            raise
+    
     def load_data(self, file_obj, file_type: Optional[str] = None) -> pd.DataFrame:
         """
         Load data from various file formats with error handling
