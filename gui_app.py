@@ -240,14 +240,26 @@ class SafeDataGUI:
         preview_frame = ttk.LabelFrame(self.data_tab, text="📋 Data Preview", padding=15)
         preview_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
-        # Create treeview for data display
-        self.data_tree = ttk.Treeview(preview_frame, show='headings', height=15)
-        self.data_tree.pack(fill=tk.BOTH, expand=True, side=tk.LEFT)
+        # Create frame for treeview with scrollbars
+        tree_frame = ttk.Frame(preview_frame)
+        tree_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Scrollbar for treeview
-        scrollbar = ttk.Scrollbar(preview_frame, orient=tk.VERTICAL, command=self.data_tree.yview)
-        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-        self.data_tree.configure(yscrollcommand=scrollbar.set)
+        # Create treeview for data display
+        self.data_tree = ttk.Treeview(tree_frame, show='headings', height=15)
+        
+        # Scrollbars for treeview
+        v_scrollbar = ttk.Scrollbar(tree_frame, orient=tk.VERTICAL, command=self.data_tree.yview)
+        h_scrollbar = ttk.Scrollbar(tree_frame, orient=tk.HORIZONTAL, command=self.data_tree.xview)
+        
+        self.data_tree.configure(yscrollcommand=v_scrollbar.set, xscrollcommand=h_scrollbar.set)
+        
+        # Grid layout for proper scrollbar placement
+        self.data_tree.grid(row=0, column=0, sticky='nsew')
+        v_scrollbar.grid(row=0, column=1, sticky='ns')
+        h_scrollbar.grid(row=1, column=0, sticky='ew')
+        
+        tree_frame.grid_rowconfigure(0, weight=1)
+        tree_frame.grid_columnconfigure(0, weight=1)
         
         # Quality assessment frame with improved styling
         quality_frame = ttk.LabelFrame(self.data_tab, text="🔍 Data Quality Assessment", padding=15)
@@ -284,25 +296,51 @@ class SafeDataGUI:
         config_frame = ttk.LabelFrame(self.risk_tab, text="⚙️ Assessment Configuration", padding=15)
         config_frame.pack(fill=tk.X, padx=15, pady=10)
         
-        # Quasi-identifiers selection with scrollbar
-        ttk.Label(config_frame, text="Quasi-Identifiers:").grid(row=0, column=0, sticky=tk.W, pady=2)
+        # Quasi-identifiers selection with improved multi-select
+        ttk.Label(config_frame, text="Quasi-Identifiers:").grid(row=0, column=0, sticky=tk.NW, pady=2)
         qi_frame = ttk.Frame(config_frame)
-        qi_frame.grid(row=0, column=1, padx=10, pady=2, sticky=tk.W+tk.E)
-        self.qi_listbox = tk.Listbox(qi_frame, selectmode=tk.MULTIPLE, height=4)
-        qi_scrollbar = ttk.Scrollbar(qi_frame, orient=tk.VERTICAL, command=self.qi_listbox.yview)
-        self.qi_listbox.configure(yscrollcommand=qi_scrollbar.set)
-        self.qi_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        qi_frame.grid(row=0, column=1, padx=10, pady=2, sticky=tk.W+tk.E+tk.N+tk.S)
+        
+        # Create frame for checkboxes with scrollbar
+        qi_canvas = tk.Canvas(qi_frame, height=100)
+        qi_scrollbar = ttk.Scrollbar(qi_frame, orient=tk.VERTICAL, command=qi_canvas.yview)
+        self.qi_scrollable_frame = ttk.Frame(qi_canvas)
+        
+        self.qi_scrollable_frame.bind(
+            "<Configure>",
+            lambda e: qi_canvas.configure(scrollregion=qi_canvas.bbox("all"))
+        )
+        
+        qi_canvas.create_window((0, 0), window=self.qi_scrollable_frame, anchor="nw")
+        qi_canvas.configure(yscrollcommand=qi_scrollbar.set)
+        
+        qi_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         qi_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         
-        # Sensitive attributes selection with scrollbar
-        ttk.Label(config_frame, text="Sensitive Attributes:").grid(row=1, column=0, sticky=tk.W, pady=2)
+        self.qi_vars = {}  # Store checkbox variables
+        
+        # Sensitive attributes selection with improved multi-select
+        ttk.Label(config_frame, text="Sensitive Attributes:").grid(row=1, column=0, sticky=tk.NW, pady=2)
         sa_frame = ttk.Frame(config_frame)
-        sa_frame.grid(row=1, column=1, padx=10, pady=2, sticky=tk.W+tk.E)
-        self.sa_listbox = tk.Listbox(sa_frame, selectmode=tk.MULTIPLE, height=4)
-        sa_scrollbar = ttk.Scrollbar(sa_frame, orient=tk.VERTICAL, command=self.sa_listbox.yview)
-        self.sa_listbox.configure(yscrollcommand=sa_scrollbar.set)
-        self.sa_listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+        sa_frame.grid(row=1, column=1, padx=10, pady=2, sticky=tk.W+tk.E+tk.N+tk.S)
+        
+        # Create frame for checkboxes with scrollbar
+        sa_canvas = tk.Canvas(sa_frame, height=100)
+        sa_scrollbar = ttk.Scrollbar(sa_frame, orient=tk.VERTICAL, command=sa_canvas.yview)
+        self.sa_scrollable_frame = ttk.Frame(sa_canvas)
+        
+        self.sa_scrollable_frame.bind(
+            "<Configure>",
+            lambda e: sa_canvas.configure(scrollregion=sa_canvas.bbox("all"))
+        )
+        
+        sa_canvas.create_window((0, 0), window=self.sa_scrollable_frame, anchor="nw")
+        sa_canvas.configure(yscrollcommand=sa_scrollbar.set)
+        
+        sa_canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
         sa_scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        
+        self.sa_vars = {}  # Store checkbox variables
         
         # K-threshold
         ttk.Label(config_frame, text="K-Anonymity Threshold:").grid(row=2, column=0, sticky=tk.W, pady=2)
@@ -346,12 +384,13 @@ class SafeDataGUI:
         self.notebook.add(self.privacy_tab, text="🔒 Privacy Enhancement")
         
         # Technique selection frame
-        technique_frame = ttk.LabelFrame(self.privacy_tab, text="Privacy Technique Selection", padding=10)
-        technique_frame.pack(fill=tk.X, padx=10, pady=5)
+        technique_frame = ttk.LabelFrame(self.privacy_tab, text="🔧 Privacy Technique Selection", padding=15)
+        technique_frame.pack(fill=tk.X, padx=15, pady=10)
         
         self.privacy_technique = tk.StringVar(value="K-Anonymity")
         techniques = ["K-Anonymity", "L-Diversity", "T-Closeness", "Differential Privacy"]
         
+        # Create a grid layout for better organization
         for i, technique in enumerate(techniques):
             ttk.Radiobutton(
                 technique_frame,
@@ -359,25 +398,32 @@ class SafeDataGUI:
                 variable=self.privacy_technique,
                 value=technique,
                 command=self.update_privacy_params
-            ).grid(row=0, column=i, padx=10, pady=5)
+            ).grid(row=i//2, column=i%2, padx=15, pady=8, sticky=tk.W)
+        
+        technique_frame.columnconfigure(0, weight=1)
+        technique_frame.columnconfigure(1, weight=1)
         
         # Parameters frame
-        self.params_frame = ttk.LabelFrame(self.privacy_tab, text="Technique Parameters", padding=10)
-        self.params_frame.pack(fill=tk.X, padx=10, pady=5)
+        self.params_frame = ttk.LabelFrame(self.privacy_tab, text="⚙️ Technique Parameters", padding=15)
+        self.params_frame.pack(fill=tk.X, padx=15, pady=10)
         
         self.update_privacy_params()
         
         # Apply button
+        button_frame = ttk.Frame(self.privacy_tab)
+        button_frame.pack(fill=tk.X, padx=15, pady=10)
+        
         ttk.Button(
-            self.privacy_tab,
-            text="Apply Privacy Enhancement",
+            button_frame,
+            text="🔒 Apply Privacy Enhancement",
             command=self.apply_privacy_enhancement,
-            width=25
-        ).pack(pady=10)
+            width=30,
+            style='Primary.TButton'
+        ).pack(side=tk.LEFT, padx=5)
         
         # Results frame
-        results_frame = ttk.LabelFrame(self.privacy_tab, text="Enhancement Results", padding=10)
-        results_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        results_frame = ttk.LabelFrame(self.privacy_tab, text="📊 Enhancement Results", padding=15)
+        results_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         self.privacy_results_text = scrolledtext.ScrolledText(results_frame, wrap=tk.WORD)
         self.privacy_results_text.pack(fill=tk.BOTH, expand=True)
@@ -388,38 +434,82 @@ class SafeDataGUI:
         self.notebook.add(self.utility_tab, text="📊 Utility Measurement")
         
         # Metrics selection frame
-        metrics_frame = ttk.LabelFrame(self.utility_tab, text="Utility Metrics Selection", padding=10)
-        metrics_frame.pack(fill=tk.X, padx=10, pady=5)
+        metrics_frame = ttk.LabelFrame(self.utility_tab, text="📈 Utility Metrics Selection", padding=15)
+        metrics_frame.pack(fill=tk.X, padx=15, pady=10)
         
         self.selected_metrics = {}
         metrics = [
-            "Statistical Similarity",
-            "Correlation Preservation", 
-            "Distribution Similarity",
-            "Information Loss",
-            "Classification Utility"
+            ("Statistical Similarity", "Compares basic statistics between datasets"),
+            ("Correlation Preservation", "Evaluates relationship maintenance"),
+            ("Distribution Similarity", "Tests distribution preservation"),
+            ("Information Loss", "Quantifies information reduction"),
+            ("Classification Utility", "Tests ML model performance")
         ]
         
-        for i, metric in enumerate(metrics):
+        # Create scrollable frame for metrics
+        canvas = tk.Canvas(metrics_frame, height=120)
+        scrollbar = ttk.Scrollbar(metrics_frame, orient="vertical", command=canvas.yview)
+        scrollable_frame = ttk.Frame(canvas)
+        
+        scrollable_frame.bind(
+            "<Configure>",
+            lambda e: canvas.configure(scrollregion=canvas.bbox("all"))
+        )
+        
+        canvas.create_window((0, 0), window=scrollable_frame, anchor="nw")
+        canvas.configure(yscrollcommand=scrollbar.set)
+        
+        for i, (metric, description) in enumerate(metrics):
             var = tk.BooleanVar(value=True)
             self.selected_metrics[metric.lower().replace(' ', '_')] = var
+            
+            metric_frame = ttk.Frame(scrollable_frame)
+            metric_frame.pack(fill=tk.X, padx=5, pady=3)
+            
             ttk.Checkbutton(
-                metrics_frame,
+                metric_frame,
                 text=metric,
                 variable=var
-            ).grid(row=i//3, column=i%3, padx=10, pady=5, sticky=tk.W)
+            ).pack(side=tk.LEFT)
+            
+            ttk.Label(
+                metric_frame,
+                text=f"- {description}",
+                foreground="gray"
+            ).pack(side=tk.LEFT, padx=(10, 0))
         
-        # Run measurement button
+        canvas.pack(side="left", fill="both", expand=True)
+        scrollbar.pack(side="right", fill="y")
+        
+        # Control buttons frame
+        button_frame = ttk.Frame(self.utility_tab)
+        button_frame.pack(fill=tk.X, padx=15, pady=10)
+        
         ttk.Button(
-            metrics_frame,
-            text="Measure Utility",
+            button_frame,
+            text="📊 Measure Utility",
             command=self.measure_utility,
-            width=20
-        ).grid(row=2, column=1, pady=10)
+            width=20,
+            style='Primary.TButton'
+        ).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(
+            button_frame,
+            text="✅ Select All",
+            command=self.select_all_metrics,
+            width=15
+        ).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(
+            button_frame,
+            text="❌ Clear All",
+            command=self.clear_all_metrics,
+            width=15
+        ).pack(side=tk.LEFT, padx=5)
         
         # Results frame
-        results_frame = ttk.LabelFrame(self.utility_tab, text="Utility Measurement Results", padding=10)
-        results_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
+        results_frame = ttk.LabelFrame(self.utility_tab, text="📊 Utility Measurement Results", padding=15)
+        results_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         self.utility_results_text = scrolledtext.ScrolledText(results_frame, wrap=tk.WORD)
         self.utility_results_text.pack(fill=tk.BOTH, expand=True)
@@ -723,15 +813,37 @@ Issues Detected:
             self.quality_text.insert(1.0, quality_report)
     
     def update_column_lists(self, columns):
-        """Update column lists for risk assessment"""
-        # Clear existing items
-        self.qi_listbox.delete(0, tk.END)
-        self.sa_listbox.delete(0, tk.END)
+        """Update column lists for risk assessment with checkboxes"""
+        # Clear existing checkboxes
+        for widget in self.qi_scrollable_frame.winfo_children():
+            widget.destroy()
+        for widget in self.sa_scrollable_frame.winfo_children():
+            widget.destroy()
         
-        # Add columns
-        for col in columns:
-            self.qi_listbox.insert(tk.END, col)
-            self.sa_listbox.insert(tk.END, col)
+        self.qi_vars.clear()
+        self.sa_vars.clear()
+        
+        # Add columns as checkboxes for quasi-identifiers
+        for i, col in enumerate(columns):
+            var = tk.BooleanVar()
+            self.qi_vars[col] = var
+            cb = ttk.Checkbutton(
+                self.qi_scrollable_frame,
+                text=col,
+                variable=var
+            )
+            cb.pack(anchor=tk.W, padx=5, pady=2)
+        
+        # Add columns as checkboxes for sensitive attributes
+        for i, col in enumerate(columns):
+            var = tk.BooleanVar()
+            self.sa_vars[col] = var
+            cb = ttk.Checkbutton(
+                self.sa_scrollable_frame,
+                text=col,
+                variable=var
+            )
+            cb.pack(anchor=tk.W, padx=5, pady=2)
     
     def apply_fixes(self):
         """Apply automatic data fixes"""
@@ -776,16 +888,13 @@ Issues Detected:
             messagebox.showwarning("Warning", "Please load data first")
             return
         
-        # Get selected quasi-identifiers and sensitive attributes
-        qi_indices = self.qi_listbox.curselection()
-        sa_indices = self.sa_listbox.curselection()
+        # Get selected quasi-identifiers and sensitive attributes from checkboxes
+        qi_cols = [col for col, var in self.qi_vars.items() if var.get()]
+        sa_cols = [col for col, var in self.sa_vars.items() if var.get()]
         
-        if not qi_indices:
+        if not qi_cols:
             messagebox.showwarning("Warning", "Please select at least one quasi-identifier")
             return
-        
-        qi_cols = [self.qi_listbox.get(i) for i in qi_indices]
-        sa_cols = [self.sa_listbox.get(i) for i in sa_indices] if sa_indices else []
         
         def assess_in_thread():
             try:
@@ -1036,6 +1145,16 @@ Detailed Metrics:
                 report += f"• {rec}\n"
         
         self.utility_results_text.insert(1.0, report)
+    
+    def select_all_metrics(self):
+        """Select all utility metrics"""
+        for var in self.selected_metrics.values():
+            var.set(True)
+    
+    def clear_all_metrics(self):
+        """Clear all utility metric selections"""
+        for var in self.selected_metrics.values():
+            var.set(False)
     
     def generate_report(self):
         """Generate analysis report"""
