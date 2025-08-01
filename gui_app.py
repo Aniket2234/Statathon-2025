@@ -95,42 +95,34 @@ class SafeDataGUI:
                        background='#ecf0f1', foreground='#2c3e50')
     
     def setup_gui(self):
-        """Setup the main GUI interface with full responsive design for all screen sizes"""
-        # Configure main window with adaptive sizing
+        """Setup the main GUI interface with fixed game-like window and fullscreen option"""
+        # Configure main window with fixed size like games
         self.root.title("SafeData Pipeline - Government of India")
         
-        # Get screen dimensions for responsive sizing
+        # Fixed window size like games - 1600x900
+        self.window_width = 1600
+        self.window_height = 900
+        self.is_fullscreen = False
+        
+        # Get screen dimensions for centering
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()
         
-        # Calculate optimal window size based on screen resolution
-        # Use 90% width and 85% height for better screen utilization
-        window_width = int(screen_width * 0.90)
-        window_height = int(screen_height * 0.85)
-        
-        # Set minimum sizes based on screen type
-        if screen_width <= 1366:  # Small/laptop screens
-            min_width, min_height = 900, 650
-            window_width = min(window_width, 1300)
-            window_height = min(window_height, 750)
-        elif screen_width <= 1920:  # Standard HD screens
-            min_width, min_height = 1100, 750
-            window_width = min(window_width, 1600)
-            window_height = min(window_height, 900)
-        else:  # Large/4K screens
-            min_width, min_height = 1200, 800
-        
         # Center window on screen
-        x = max(0, (screen_width - window_width) // 2)
-        y = max(0, (screen_height - window_height) // 2)
+        x = max(0, (screen_width - self.window_width) // 2)
+        y = max(0, (screen_height - self.window_height) // 2)
         
-        self.root.geometry(f"{window_width}x{window_height}+{x}+{y}")
-        self.root.minsize(min_width, min_height)
+        self.root.geometry(f"{self.window_width}x{self.window_height}+{x}+{y}")
+        self.root.minsize(1200, 700)  # Minimum size for functionality
         self.root.configure(bg='#f8f9fa')
         
-        # Make window fully resizable and maximizable
+        # Make window resizable but default to fixed size
         self.root.resizable(True, True)
         self.root.state('normal')
+        
+        # Bind fullscreen toggle (F11 key like games)
+        self.root.bind('<F11>', self.toggle_fullscreen)
+        self.root.bind('<Escape>', self.exit_fullscreen)
         
         # Bind window resize event for dynamic content adjustment
         self.root.bind('<Configure>', self.on_window_resize)
@@ -255,6 +247,35 @@ class SafeDataGUI:
         )
         dept_label.pack(anchor=tk.E)
     
+    def toggle_fullscreen(self, event=None):
+        """Toggle fullscreen mode like games (F11)"""
+        self.is_fullscreen = not self.is_fullscreen
+        if self.is_fullscreen:
+            self.root.state('zoomed')  # Windows maximize
+            self.root.attributes('-fullscreen', True)  # True fullscreen
+        else:
+            self.root.attributes('-fullscreen', False)
+            self.root.state('normal')
+            # Return to fixed size
+            screen_width = self.root.winfo_screenwidth()
+            screen_height = self.root.winfo_screenheight()
+            x = max(0, (screen_width - self.window_width) // 2)
+            y = max(0, (screen_height - self.window_height) // 2)
+            self.root.geometry(f"{self.window_width}x{self.window_height}+{x}+{y}")
+    
+    def exit_fullscreen(self, event=None):
+        """Exit fullscreen mode (Escape key)"""
+        if self.is_fullscreen:
+            self.is_fullscreen = False
+            self.root.attributes('-fullscreen', False)
+            self.root.state('normal')
+            # Return to fixed size
+            screen_width = self.root.winfo_screenwidth()
+            screen_height = self.root.winfo_screenheight()
+            x = max(0, (screen_width - self.window_width) // 2)
+            y = max(0, (screen_height - self.window_height) // 2)
+            self.root.geometry(f"{self.window_width}x{self.window_height}+{x}+{y}")
+
     def on_window_resize(self, event):
         """Handle window resize events for responsive content"""
         # Only handle resize events for the main window
@@ -267,10 +288,10 @@ class SafeDataGUI:
         self.main_tab = ttk.Frame(self.notebook)
         self.notebook.add(self.main_tab, text="🏠 Dashboard")
         
-        # Welcome section with responsive padding
-        padding = max(10, min(20, int(self.root.winfo_width() / 80)))
+        # Welcome section with fixed padding optimized for 1600x900
+        padding = 15  # Fixed padding for consistent layout
         welcome_frame = ttk.LabelFrame(self.main_tab, text="🏛️ Welcome to SafeData Pipeline", padding=padding)
-        welcome_frame.pack(fill=tk.X, padx=10, pady=8)
+        welcome_frame.pack(fill=tk.X, padx=12, pady=8)
         
         welcome_text = """
 Welcome to SafeData Pipeline - Government of India's comprehensive data privacy protection system.
@@ -286,8 +307,8 @@ Key Features:
 • Government-grade security and data protection standards
         """
         
-        # Calculate wrap length based on window width
-        wrap_length = max(600, int(self.root.winfo_width() * 0.7))
+        # Fixed wrap length optimized for 1600x900 window
+        wrap_length = 1200  # Fixed width that works well with 1600px window
         
         welcome_label = tk.Label(
             welcome_frame,
@@ -300,9 +321,9 @@ Key Features:
         )
         welcome_label.pack(anchor=tk.W)
         
-        # Quick start section with responsive padding
+        # Quick start section with fixed padding
         quickstart_frame = ttk.LabelFrame(self.main_tab, text="🚀 Quick Start Guide", padding=padding)
-        quickstart_frame.pack(fill=tk.X, padx=10, pady=8)
+        quickstart_frame.pack(fill=tk.X, padx=12, pady=8)
         
         steps = [
             "1. Upload your data file using the 'Data Upload' tab",
@@ -324,12 +345,12 @@ Key Features:
             )
             step_label.pack(fill=tk.X, pady=2)
         
-        # Status overview with responsive height
+        # Status overview with fixed height optimized for 1600x900
         status_frame = ttk.LabelFrame(self.main_tab, text="📊 System Status", padding=padding)
-        status_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=8)
+        status_frame.pack(fill=tk.BOTH, expand=True, padx=12, pady=8)
         
-        # Calculate text area height based on available space
-        text_height = max(6, min(12, int(self.root.winfo_height() / 80)))
+        # Fixed text area height optimized for 1600x900 window
+        text_height = 10  # Fixed height that works well with our window size
         
         self.status_overview = tk.Text(
             status_frame,
@@ -341,6 +362,20 @@ Key Features:
             state=tk.DISABLED
         )
         self.status_overview.pack(fill=tk.BOTH, expand=True)
+        
+        # Add fullscreen controls info
+        info_frame = ttk.Frame(self.main_tab)
+        info_frame.pack(fill=tk.X, padx=12, pady=5)
+        
+        fullscreen_info = tk.Label(
+            info_frame,
+            text="💡 Press F11 for fullscreen mode • Press Escape to exit fullscreen • Window optimized for 1600x900 resolution",
+            font=('Arial', 9),
+            bg='#f8f9fa',
+            fg='#7f8c8d',
+            justify=tk.CENTER
+        )
+        fullscreen_info.pack()
         
         # Update status overview
         self.update_status_overview()
@@ -371,10 +406,10 @@ Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(s
         self.data_tab = ttk.Frame(self.notebook)
         self.notebook.add(self.data_tab, text="📁 Data Upload")
         
-        # File selection frame with responsive styling
-        padding = max(8, min(15, int(self.root.winfo_width() / 100)))
+        # File selection frame with fixed styling for 1600x900
+        padding = 12  # Fixed padding for consistent layout
         file_frame = ttk.LabelFrame(self.data_tab, text="📁 File Selection", padding=padding)
-        file_frame.pack(fill=tk.X, padx=8, pady=6)
+        file_frame.pack(fill=tk.X, padx=10, pady=6)
         
         ttk.Button(
             file_frame,
@@ -387,17 +422,16 @@ Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(s
         self.file_label = ttk.Label(file_frame, text="No file selected")
         self.file_label.pack(side=tk.LEFT, padx=10)
         
-        # Data preview frame with responsive styling
+        # Data preview frame with fixed styling for 1600x900
         preview_frame = ttk.LabelFrame(self.data_tab, text="📋 Data Preview", padding=padding)
-        preview_frame.pack(fill=tk.BOTH, expand=True, padx=8, pady=6)
+        preview_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=6)
         
         # Create frame for treeview with scrollbars
         tree_frame = ttk.Frame(preview_frame)
         tree_frame.pack(fill=tk.BOTH, expand=True)
         
-        # Create treeview for data display with fully adaptive height
-        screen_height = self.root.winfo_screenheight()
-        tree_height = max(8, min(25, int(screen_height / 45)))
+        # Create treeview for data display with fixed height for 1600x900
+        tree_height = 15  # Fixed height optimized for our window size
         self.data_tree = ttk.Treeview(tree_frame, show='headings', height=tree_height)
         
         # ONLY vertical scrollbar for treeview
@@ -412,18 +446,18 @@ Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(s
         tree_frame.grid_rowconfigure(0, weight=1)
         tree_frame.grid_columnconfigure(0, weight=1)
         
-        # Quality assessment frame with responsive styling
+        # Quality assessment frame with fixed styling for 1600x900
         quality_frame = ttk.LabelFrame(self.data_tab, text="🔍 Data Quality Assessment", padding=padding)
-        quality_frame.pack(fill=tk.X, padx=8, pady=6)
+        quality_frame.pack(fill=tk.X, padx=10, pady=6)
         
-        # Adaptive quality text height
-        quality_height = max(4, min(8, int(screen_height / 100)))
+        # Fixed quality text height for 1600x900 window
+        quality_height = 6  # Fixed height optimized for our window
         self.quality_text = scrolledtext.ScrolledText(quality_frame, height=quality_height, wrap=tk.WORD)
         self.quality_text.pack(fill=tk.BOTH, expand=True)
         
-        # Action buttons with responsive spacing
+        # Action buttons with fixed spacing for 1600x900
         action_frame = ttk.Frame(self.data_tab)
-        action_frame.pack(fill=tk.X, padx=8, pady=4)
+        action_frame.pack(fill=tk.X, padx=10, pady=5)
         
         ttk.Button(
             action_frame,
@@ -934,9 +968,9 @@ Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(s
             columns = list(data.columns)
             self.data_tree['columns'] = columns
             
-            # Calculate column width based on window size
-            available_width = max(600, int(self.root.winfo_width() * 0.8))
-            col_width = max(80, min(150, available_width // len(columns))) if columns else 100
+            # Fixed column width optimized for 1600x900 window
+            available_width = 1400  # Fixed width for our window size
+            col_width = max(100, min(180, available_width // len(columns))) if columns else 120
             
             for col in columns:
                 self.data_tree.heading(col, text=col)
