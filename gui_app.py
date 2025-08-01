@@ -72,10 +72,16 @@ class SafeDataGUI:
             # Fallback to default style if custom style creation fails
             pass
         
-        # Configure button styles
+        # Configure button styles with blue and orange theme
         style.configure('Primary.TButton', font=('Arial', 10, 'bold'))
         style.map('Primary.TButton',
                  background=[('active', '#3498db'), ('!active', '#2980b9')],
+                 foreground=[('active', 'white'), ('!active', 'white')])
+        
+        # Configure secondary button with orange theme
+        style.configure('Secondary.TButton', font=('Arial', 10))
+        style.map('Secondary.TButton',
+                 background=[('active', '#e67e22'), ('!active', '#d35400')],
                  foreground=[('active', 'white'), ('!active', 'white')])
         
         # Configure entry and combobox styles
@@ -102,10 +108,9 @@ class SafeDataGUI:
         # Setup styles
         self.setup_styles()
         
-        # Create main container with scrollbars
+        # Create main container with ONLY vertical scrollbar
         self.main_canvas = tk.Canvas(self.root, bg='#f8f9fa')
         self.main_scrollbar_v = ttk.Scrollbar(self.root, orient="vertical", command=self.main_canvas.yview)
-        self.main_scrollbar_h = ttk.Scrollbar(self.root, orient="horizontal", command=self.main_canvas.xview)
         self.scrollable_frame = ttk.Frame(self.main_canvas)
         
         self.scrollable_frame.bind(
@@ -114,12 +119,11 @@ class SafeDataGUI:
         )
         
         self.main_canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
-        self.main_canvas.configure(yscrollcommand=self.main_scrollbar_v.set, xscrollcommand=self.main_scrollbar_h.set)
+        self.main_canvas.configure(yscrollcommand=self.main_scrollbar_v.set)
         
-        # Pack canvas and scrollbars
+        # Pack canvas and ONLY vertical scrollbar
         self.main_canvas.pack(side="left", fill="both", expand=True)
         self.main_scrollbar_v.pack(side="right", fill="y")
-        self.main_scrollbar_h.pack(side="bottom", fill="x")
         
         # Bind mouse wheel to canvas
         self.main_canvas.bind("<MouseWheel>", self._on_mousewheel)
@@ -133,7 +137,8 @@ class SafeDataGUI:
         self.notebook = ttk.Notebook(self.scrollable_frame)
         self.notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
-        # Create tabs
+        # Create tabs with main screen first
+        self.create_main_dashboard_tab()
         self.create_data_upload_tab()
         self.create_risk_assessment_tab()
         self.create_privacy_enhancement_tab()
@@ -216,6 +221,103 @@ class SafeDataGUI:
         )
         dept_label.pack(anchor=tk.E)
     
+    def create_main_dashboard_tab(self):
+        """Create main dashboard tab with overview"""
+        self.main_tab = ttk.Frame(self.notebook)
+        self.notebook.add(self.main_tab, text="🏠 Dashboard")
+        
+        # Welcome section
+        welcome_frame = ttk.LabelFrame(self.main_tab, text="🏛️ Welcome to SafeData Pipeline", padding=20)
+        welcome_frame.pack(fill=tk.X, padx=15, pady=15)
+        
+        welcome_text = """
+Welcome to SafeData Pipeline - Government of India's comprehensive data privacy protection system.
+
+This application provides advanced privacy enhancement techniques while preserving data utility for analytical purposes, 
+ensuring compliance with Digital Personal Data Protection Act requirements and government data protection frameworks.
+
+Key Features:
+• Advanced risk assessment with K-anonymity analysis
+• Multiple privacy enhancement techniques (K-Anonymity, L-Diversity, T-Closeness, Differential Privacy)
+• Comprehensive utility measurement and quality assessment
+• Professional report generation for compliance documentation
+• Government-grade security and data protection standards
+        """
+        
+        welcome_label = tk.Label(
+            welcome_frame,
+            text=welcome_text,
+            font=('Arial', 11),
+            bg='white',
+            fg='#2c3e50',
+            justify=tk.LEFT,
+            wraplength=800
+        )
+        welcome_label.pack(anchor=tk.W)
+        
+        # Quick start section
+        quickstart_frame = ttk.LabelFrame(self.main_tab, text="🚀 Quick Start Guide", padding=20)
+        quickstart_frame.pack(fill=tk.X, padx=15, pady=15)
+        
+        steps = [
+            "1. Upload your data file using the 'Data Upload' tab",
+            "2. Review data quality assessment and apply fixes if needed",
+            "3. Configure and run risk assessment to evaluate privacy risks",
+            "4. Apply appropriate privacy enhancement techniques",
+            "5. Measure utility to ensure data remains useful for analysis",
+            "6. Generate comprehensive reports for documentation"
+        ]
+        
+        for step in steps:
+            step_label = tk.Label(
+                quickstart_frame,
+                text=step,
+                font=('Arial', 10),
+                bg='white',
+                fg='#34495e',
+                anchor=tk.W
+            )
+            step_label.pack(fill=tk.X, pady=2)
+        
+        # Status overview
+        status_frame = ttk.LabelFrame(self.main_tab, text="📊 System Status", padding=20)
+        status_frame.pack(fill=tk.BOTH, expand=True, padx=15, pady=15)
+        
+        self.status_overview = tk.Text(
+            status_frame,
+            height=8,
+            font=('Arial', 10),
+            bg='#f8f9fa',
+            fg='#2c3e50',
+            wrap=tk.WORD,
+            state=tk.DISABLED
+        )
+        self.status_overview.pack(fill=tk.BOTH, expand=True)
+        
+        # Update status overview
+        self.update_status_overview()
+    
+    def update_status_overview(self):
+        """Update the status overview"""
+        self.status_overview.config(state=tk.NORMAL)
+        self.status_overview.delete(1.0, tk.END)
+        
+        status_text = f"""System Status Overview:
+
+Data Loaded: {'✓ Yes' if self.current_data is not None else '✗ No data loaded'}
+Records Count: {len(self.current_data) if self.current_data is not None else 'N/A'}
+Columns Count: {len(self.current_data.columns) if self.current_data is not None else 'N/A'}
+
+Risk Assessment: {'✓ Completed' if hasattr(self, 'risk_results') and self.risk_results else '○ Pending'}
+Privacy Enhancement: {'✓ Applied' if hasattr(self, 'enhanced_data') and self.enhanced_data is not None else '○ Pending'}
+Utility Measurement: {'✓ Completed' if hasattr(self, 'utility_results') and self.utility_results else '○ Pending'}
+
+Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(self, 'risk_results')]) else 'Data Upload and Analysis'}
+        """
+        
+        self.status_overview.insert(1.0, status_text)
+        self.status_overview.config(state=tk.DISABLED)
+    
     def create_data_upload_tab(self):
         """Create data upload and quality assessment tab"""
         self.data_tab = ttk.Frame(self.notebook)
@@ -247,16 +349,14 @@ class SafeDataGUI:
         # Create treeview for data display
         self.data_tree = ttk.Treeview(tree_frame, show='headings', height=15)
         
-        # Scrollbars for treeview
+        # ONLY vertical scrollbar for treeview
         v_scrollbar = ttk.Scrollbar(tree_frame, orient=tk.VERTICAL, command=self.data_tree.yview)
-        h_scrollbar = ttk.Scrollbar(tree_frame, orient=tk.HORIZONTAL, command=self.data_tree.xview)
         
-        self.data_tree.configure(yscrollcommand=v_scrollbar.set, xscrollcommand=h_scrollbar.set)
+        self.data_tree.configure(yscrollcommand=v_scrollbar.set)
         
         # Grid layout for proper scrollbar placement
         self.data_tree.grid(row=0, column=0, sticky='nsew')
         v_scrollbar.grid(row=0, column=1, sticky='ns')
-        h_scrollbar.grid(row=1, column=0, sticky='ew')
         
         tree_frame.grid_rowconfigure(0, weight=1)
         tree_frame.grid_columnconfigure(0, weight=1)
@@ -766,6 +866,9 @@ class SafeDataGUI:
         
         # Update column lists for risk assessment
         self.update_column_lists(data_df.columns)
+        
+        # Update main dashboard status
+        self.update_status_overview()
     
     def update_data_preview(self, data):
         """Update data preview treeview"""
@@ -935,33 +1038,77 @@ Issues Detected:
             self.display_utility_results(results)
     
     def display_risk_results(self, results):
-        """Display risk assessment results"""
+        """Display comprehensive risk assessment results like Streamlit version"""
         self.risk_results_text.delete(1.0, tk.END)
         
-        report = f"""Risk Assessment Results:
+        # Comprehensive report matching Streamlit output
+        report = f"""
+=== COMPREHENSIVE RISK ASSESSMENT RESULTS ===
 
-Overall Risk Score: {results.get('overall_risk', 0):.3f}
+📊 OVERALL RISK METRICS
+Overall Risk Score: {results.get('overall_risk', 0):.4f}
 Risk Level: {results.get('risk_level', 'Unknown')}
+Risk Classification: {results.get('risk_classification', 'Not Available')}
 
-K-Anonymity Analysis:
-• K-Anonymity Violations: {results.get('k_anonymity_violations', 0)}
-• Unique Records: {results.get('unique_records', 0)}
-• Total Equivalence Classes: {results.get('total_classes', 0)}
+🔍 K-ANONYMITY ANALYSIS
+K-Anonymity Threshold: {results.get('k_threshold', 'N/A')}
+K-Anonymity Violations: {results.get('k_anonymity_violations', 0)}
+Unique Records (Singleton Groups): {results.get('unique_records', 0)}
+Total Equivalence Classes: {results.get('total_classes', 0)}
+Average Group Size: {results.get('average_group_size', 0):.2f}
+Minimum Group Size: {results.get('min_group_size', 0)}
+Maximum Group Size: {results.get('max_group_size', 0)}
 
-Attack Scenario Results:
+⚔️ ATTACK SCENARIO SIMULATION
 """
         
         attack_results = results.get('attack_scenarios', {})
-        for attack, score in attack_results.items():
-            report += f"• {attack.title()} Attack Risk: {score:.3f}\n"
+        if attack_results:
+            for attack, score in attack_results.items():
+                report += f"• {attack.replace('_', ' ').title()} Attack Risk: {score:.4f}\n"
+        else:
+            report += "• No attack scenarios evaluated\n"
         
+        report += f"""
+📈 PRIVACY METRICS
+Re-identification Risk: {results.get('reidentification_risk', 0):.4f}
+Information Loss: {results.get('information_loss', 0):.4f}
+Utility Score: {results.get('utility_score', 0):.4f}
+"""
+        
+        # Add distribution analysis if available
+        if 'distribution_analysis' in results:
+            dist = results['distribution_analysis']
+            report += f"""
+📊 DISTRIBUTION ANALYSIS
+Group Size Variance: {dist.get('group_size_variance', 0):.4f}
+Distribution Skewness: {dist.get('skewness', 0):.4f}
+Entropy Score: {dist.get('entropy', 0):.4f}
+"""
+        
+        # Add detailed recommendations
         recommendations = results.get('recommendations', [])
         if recommendations:
-            report += "\nRecommendations:\n"
-            for rec in recommendations:
-                report += f"• {rec}\n"
+            report += "\n💡 DETAILED RECOMMENDATIONS:\n"
+            for i, rec in enumerate(recommendations, 1):
+                report += f"{i}. {rec}\n"
+        else:
+            report += "\n💡 RECOMMENDATIONS:\n• No specific recommendations available\n"
+        
+        # Add compliance status
+        report += f"""
+✅ COMPLIANCE STATUS
+GDPR Compliance: {'✓ Likely Compliant' if results.get('overall_risk', 1) < 0.3 else '⚠ Needs Review'}
+CCPA Compliance: {'✓ Likely Compliant' if results.get('overall_risk', 1) < 0.3 else '⚠ Needs Review'}
+Government Standards: {'✓ Meets Standards' if results.get('overall_risk', 1) < 0.2 else '⚠ Requires Enhancement'}
+
+=== END OF ASSESSMENT ===
+"""
         
         self.risk_results_text.insert(1.0, report)
+        
+        # Update main dashboard status
+        self.update_status_overview()
     
     def display_privacy_results(self, processed_data):
         """Display privacy enhancement results"""
