@@ -26,6 +26,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# Display external URL information for Replit deployment
+if 'REPL_SLUG' in os.environ:
+    repl_slug = os.environ.get('REPL_SLUG', 'workspace')
+    repl_owner = os.environ.get('REPL_OWNER', 'fitnessanddietm') 
+    external_url = f"https://{repl_slug}.{repl_owner}.repl.co"
+    st.sidebar.info(f"🌐 External Access: {external_url}")
+    print(f"SafeData Pipeline is accessible at: {external_url}")
+
 # Initialize session state
 if 'data' not in st.session_state:
     st.session_state.data = None
