@@ -949,6 +949,10 @@ if 'utility_results' not in st.session_state:
     st.session_state.utility_results = None
 if 'config' not in st.session_state:
     st.session_state.config = {}
+if 'uploaded_file_info' not in st.session_state:
+    st.session_state.uploaded_file_info = None
+if 'file_uploaded' not in st.session_state:
+    st.session_state.file_uploaded = False
 
 # Initialize core components
 @st.cache_resource
@@ -1333,10 +1337,56 @@ def show_data_upload():
             "Choose a file",
             type=['csv', 'xlsx', 'xls', 'json', 'xml', 'parquet'],
             help="Supported formats: CSV, Excel, JSON, XML, Parquet",
-            label_visibility="collapsed"
+            label_visibility="collapsed",
+            key="main_file_uploader"
         )
         
+        # Handle file upload and persistence
+        process_new_file = False
         if uploaded_file is not None:
+            # Store file info in session state if it's a new file
+            if (st.session_state.uploaded_file_info is None or 
+                st.session_state.uploaded_file_info['name'] != uploaded_file.name or
+                st.session_state.uploaded_file_info['size'] != uploaded_file.size):
+                
+                st.session_state.uploaded_file_info = {
+                    'name': uploaded_file.name,
+                    'size': uploaded_file.size,
+                    'type': uploaded_file.type
+                }
+                st.session_state.file_uploaded = True
+                
+                # Process the new file
+                process_new_file = True
+            else:
+                # File already processed, skip reprocessing
+                process_new_file = False
+        
+        # Display existing data if available and no new file to process
+        if st.session_state.data is not None and st.session_state.uploaded_file_info is not None:
+            if uploaded_file is None or not process_new_file:
+                # Show existing file information
+                st.success("✅ Data loaded successfully!")
+                
+                # File information metrics from session state
+                col_a, col_b, col_c, col_d = st.columns(4)
+                with col_a:
+                    st.markdown(create_metric_card("Rows", f"{len(st.session_state.data):,}"), unsafe_allow_html=True)
+                with col_b:
+                    st.markdown(create_metric_card("Columns", len(st.session_state.data.columns)), unsafe_allow_html=True)
+                with col_c:
+                    file_size_mb = st.session_state.uploaded_file_info['size'] / (1024**2)
+                    st.markdown(create_metric_card("Size", f"{file_size_mb:.2f} MB"), unsafe_allow_html=True)
+                with col_d:
+                    file_ext = st.session_state.uploaded_file_info['name'].split('.')[-1].upper()
+                    st.markdown(create_metric_card("File Type", file_ext), unsafe_allow_html=True)
+                
+                # Data preview with modern styling
+                st.markdown("### 📋 Data Preview")
+                st.dataframe(st.session_state.data.head(10), use_container_width=True)
+        
+        # Process new file upload
+        if uploaded_file is not None and process_new_file:
             try:
                 with st.spinner("🔄 Loading and validating data..."):
                     # Load data based on file type
@@ -1408,6 +1458,19 @@ def show_data_upload():
         - Avoid special characters in column names
         - Ensure numerical data doesn't contain text
         """)
+        
+        # Clear data option
+        if st.session_state.data is not None:
+            st.markdown("---")
+            if st.button("🗑️ Clear Uploaded Data", use_container_width=True, help="Remove current dataset and start fresh"):
+                st.session_state.data = None
+                st.session_state.uploaded_file_info = None
+                st.session_state.file_uploaded = False
+                st.session_state.processed_data = None
+                st.session_state.risk_results = None
+                st.session_state.utility_results = None
+                st.success("Data cleared successfully!")
+                st.rerun()
         
         st.markdown('</div>', unsafe_allow_html=True)
         
