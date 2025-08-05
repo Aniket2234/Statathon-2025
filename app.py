@@ -349,29 +349,63 @@ def load_css():
         box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.15);
     }
     
-    /* Fix slider and number input styling - keep white background */
-    .stSlider > div > div > div > div {
-        background-color: white !important;
+    /* Fix slider styling - remove blue boxes and use white background */
+    .stSlider {
         color: #1a202c !important;
     }
     
+    .stSlider [data-baseweb="slider"] {
+        background-color: transparent !important;
+    }
+    
+    .stSlider [role="slider"] {
+        background-color: #3b82f6 !important;
+        border: 2px solid white !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+    }
+    
+    .stSlider [data-testid="stSlider"] [data-baseweb="slider"] [data-baseweb="slider-tick-bar"] div {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+        font-size: 0.875rem !important;
+    }
+    
+    .stSlider div[data-baseweb="slider"] div[role="presentation"] div {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Number input styling */
     .stNumberInput > div > div > input {
         background-color: white !important;
         color: #1a202c !important;
         border: 1px solid #d1d5db !important;
     }
     
-    /* Slider thumb and track styling */
-    .stSlider > div > div > div > div > div {
-        background-color: #3b82f6 !important;
-    }
-    
-    /* Slider labels */
-    .stSlider > div > div > div > div > div > div {
+    /* Target specific slider tick elements that show blue boxes */
+    div[data-baseweb="slider"] div[data-baseweb="tick-bar"] > div {
         background-color: white !important;
         color: #1a202c !important;
         border: 1px solid #d1d5db !important;
-        font-weight: 600 !important;
+        font-weight: 500 !important;
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+    }
+    
+    /* Alternative targeting for slider values */
+    .stSlider [data-baseweb="tick-bar"] div {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+    }
+    
+    /* Ensure all slider-related text is black */
+    .stSlider * {
+        color: #1a202c !important;
     }
     
     /* Sidebar styling - Light theme only */
@@ -978,6 +1012,10 @@ if 'uploaded_file_info' not in st.session_state:
     st.session_state.uploaded_file_info = None
 if 'file_uploaded' not in st.session_state:
     st.session_state.file_uploaded = False
+if 'fixes_applied' not in st.session_state:
+    st.session_state.fixes_applied = False
+if 'data_quality_assessed' not in st.session_state:
+    st.session_state.data_quality_assessed = False
 
 # Initialize core components
 @st.cache_resource
@@ -1494,6 +1532,8 @@ def show_data_upload():
                 st.session_state.processed_data = None
                 st.session_state.risk_results = None
                 st.session_state.utility_results = None
+                st.session_state.fixes_applied = False
+                st.session_state.data_quality_assessed = False
                 st.success("Data cleared successfully!")
                 st.rerun()
         
@@ -1510,14 +1550,18 @@ def show_data_upload():
             st.markdown(create_metric_card("Quality Score", f"{quality_report['overall_quality']:.1f}%"), unsafe_allow_html=True)
             st.markdown(create_metric_card("Completeness", f"{quality_report['completeness']:.1f}%"), unsafe_allow_html=True)
             
-            # Show status if fixes were recently applied
-            if 'fixes_applied' in st.session_state and st.session_state.fixes_applied:
+            # Show status if fixes were recently applied and persist across tabs
+            if st.session_state.fixes_applied:
                 st.success("✅ Auto-fixes applied successfully! Data has been cleaned and standardized.")
                 st.info("• Fixed missing values in numeric columns\n• Standardized date formats\n• Removed whitespace")
-                # Reset the flag after showing the message
-                st.session_state.fixes_applied = False
                 
-            elif quality_report['issues']:
+                # Add option to reset fixes flag
+                if st.button("🔄 Reset Fix Status", use_container_width=True, help="Mark data as needing quality check again"):
+                    st.session_state.fixes_applied = False
+                    st.session_state.data_quality_assessed = False
+                    st.rerun()
+                
+            elif quality_report['issues'] and not st.session_state.fixes_applied:
                 st.warning("Issues detected:")
                 for issue in quality_report['issues'][:3]:  # Show top 3 issues
                     st.write(f"• {issue}")
