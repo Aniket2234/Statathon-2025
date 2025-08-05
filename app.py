@@ -19,6 +19,8 @@ from core.report_generator import ReportGenerator
 from utils.file_operations import FileOperations
 from utils.validation import DataValidator
 from utils.encryption import DataEncryption
+from auth import AuthManager
+from user_profile import display_user_profile
 
 # Configure page
 st.set_page_config(
@@ -1280,8 +1282,16 @@ def show_status_indicator(status, text):
 def main():
     """Main application function with modern dashboard design"""
     
+    # Initialize authentication manager
+    auth_manager = AuthManager()
+    
     # Load custom CSS
     load_css()
+    
+    # Check authentication status
+    if not auth_manager.is_authenticated():
+        auth_manager.login_page()
+        return
     
     # Sidebar navigation with icons
     with st.sidebar:
@@ -1296,12 +1306,28 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        # Navigation menu with icons
+        # User profile section with logout
+        user_profile = st.session_state.get('user_profile', {})
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); 
+                    padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: white;">
+            <div style="font-size: 0.9rem; opacity: 0.9;">Welcome back,</div>
+            <div style="font-weight: 700; font-size: 1.1rem;">{user_profile.get('full_name', 'Administrator')}</div>
+            <div style="font-size: 0.8rem; opacity: 0.8;">{user_profile.get('role', 'System Admin')}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if st.button("🚪 Logout", use_container_width=True):
+            auth_manager.logout()
+        
+        st.markdown("---")
+        
+        # Navigation menu with icons (including User Profile)
         selected = option_menu(
             menu_title=None,
-            options=["Dashboard", "Data Upload", "Risk Assessment", "Privacy Enhancement", 
+            options=["Dashboard", "User Profile", "Data Upload", "Risk Assessment", "Privacy Enhancement", 
                     "Utility Analysis", "Reports", "Configuration", "Help"],
-            icons=["house-door", "cloud-upload", "shield-exclamation", "lock", 
+            icons=["house-door", "person-circle", "cloud-upload", "shield-exclamation", "lock", 
                   "graph-up", "file-earmark-text", "gear", "question-circle"],
             menu_icon="cast",
             default_index=0,
@@ -1350,6 +1376,8 @@ def main():
     # Main content based on selected page
     if selected == "Dashboard":
         show_dashboard()
+    elif selected == "User Profile":
+        display_user_profile()
     elif selected == "Data Upload":
         show_data_upload()
     elif selected == "Risk Assessment":
@@ -1364,14 +1392,28 @@ def main():
         show_configuration()
     elif selected == "Help":
         show_help()
+    
+    # Add AIRAVATA Technologies footer at the bottom of every page
+    st.markdown("""
+    <div style='text-align: center; margin-top: 3rem; padding: 2rem; 
+                background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+                border-radius: 12px; border: 1px solid #cbd5e1;'>
+        <h4 style='color: #475569; margin: 0;'>🚀 Made by AIRAVATA Technologies</h4>
+        <p style='color: #64748b; margin: 0.5rem 0 0 0;'>Advanced AI Solutions for Government Applications</p>
+        <p style='color: #94a3b8; margin: 0; font-size: 0.9rem;'>© 2025 AIRAVATA Technologies - All Rights Reserved</p>
+    </div>
+    """, unsafe_allow_html=True)
 
 def show_dashboard():
     """Display modern dashboard with metrics and overview"""
     
-    # Dashboard header
+    # Dashboard header with AIRAVATA branding
     st.markdown("""
     <div class="dashboard-header fade-in">
         <div class="dashboard-title">SafeData Pipeline Dashboard</div>
+        <div style="text-align: right; font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+            🚀 Made by AIRAVATA Technologies
+        </div>
         <div class="dashboard-subtitle">Data Privacy Protection & Anonymization System</div>
         <div style="margin-top: 1rem; opacity: 0.8;">Ministry of Electronics and Information Technology • Government of India</div>
     </div>
