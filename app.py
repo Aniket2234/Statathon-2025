@@ -866,12 +866,49 @@ def load_css():
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 6px !important;
     }
     
     [data-testid="stToolbar"] {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+    }
+    
+    /* Keep settings button and sidebar toggle white */
+    [data-testid="stToolbar"] button,
+    [data-testid="stSidebarNav"] button,
+    button[kind="header"],
+    button[aria-label*="sidebar"],
+    button[aria-label*="menu"],
+    .stSidebar button,
+    button[title*="sidebar"],
+    button[title*="Sidebar"] {
+        background: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #e5e7eb !important;
+        border-radius: 6px !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Slider handle styling - keep white */
+    .stSlider > div > div > div > div[role="slider"] {
+        background: #ffffff !important;
+        border: 2px solid #3b82f6 !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* Slider track */
+    .stSlider > div > div > div > div[data-baseweb="slider"] {
+        background: #e5e7eb !important;
+    }
+    
+    /* Active slider track */
+    .stSlider > div > div > div > div[data-baseweb="slider"] > div:first-child {
+        background: #3b82f6 !important;
     }
     
     </style>
