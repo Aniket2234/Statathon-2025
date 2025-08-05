@@ -62,15 +62,15 @@ def load_css():
     .metric-value {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #0f172a;
+        color: #1a202c;
         margin: 0;
         font-family: 'Inter', sans-serif;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
     
     .metric-label {
         font-size: 0.875rem;
-        color: #475569;
+        color: #2d3748;
         font-weight: 600;
         margin-top: 0.5rem;
         font-family: 'Inter', sans-serif;
@@ -176,7 +176,7 @@ def load_css():
     .card-header {
         font-size: 1.375rem;
         font-weight: 700;
-        color: #0f172a;
+        color: #1a202c;
         margin-bottom: 1.25rem;
         font-family: 'Inter', sans-serif;
         border-bottom: 2px solid #e2e8f0;
@@ -244,7 +244,24 @@ def load_css():
     
     /* Improve text readability */
     .stMarkdown, .stText, .stWrite {
-        color: #1e293b !important;
+        color: #1a202c !important;
+    }
+    
+    /* Force high contrast for important text */
+    .main .stMarkdown h1,
+    .main .stMarkdown h2, 
+    .main .stMarkdown h3,
+    .main .stMarkdown p,
+    .main .stMarkdown div,
+    .main .stText,
+    .main .stWrite {
+        color: #2d3748 !important;
+    }
+    
+    /* Upload area text visibility */
+    .upload-area div {
+        color: #2d3748 !important;
+        font-weight: 600;
     }
     
     /* Better table styling */
@@ -252,6 +269,29 @@ def load_css():
         border-radius: 12px;
         overflow: hidden;
         border: 2px solid #e2e8f0;
+    }
+    
+    /* Ensure all text in cards is visible */
+    .dashboard-card .stMarkdown,
+    .dashboard-card .stText,
+    .dashboard-card .stWrite,
+    .dashboard-card p,
+    .dashboard-card div,
+    .dashboard-card li {
+        color: #2d3748 !important;
+    }
+    
+    /* Fix warning and info text visibility */
+    .stAlert > div {
+        color: #1a202c !important;
+    }
+    
+    /* Better button contrast */
+    .stButton > button {
+        background: linear-gradient(145deg, #2563eb, #1d4ed8) !important;
+        color: white !important;
+        font-weight: 600 !important;
+        border: none !important;
     }
     
     /* Animation keyframes */
@@ -621,9 +661,9 @@ def show_data_upload():
         st.markdown("""
         <div class="upload-area">
             <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
-            <div style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Drag and drop your file here</div>
-            <div style="color: #64748b; margin-bottom: 1rem;">or click to browse</div>
-            <div style="font-size: 0.875rem; color: #94a3b8;">Supported formats: CSV, Excel, JSON, XML, Parquet</div>
+            <div style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a202c;">Drag and drop your file here</div>
+            <div style="color: #4a5568; margin-bottom: 1rem; font-weight: 500;">or click to browse</div>
+            <div style="font-size: 0.875rem; color: #2d3748; font-weight: 500;">Supported formats: CSV, Excel, JSON, XML, Parquet</div>
         </div>
         """, unsafe_allow_html=True)
         
