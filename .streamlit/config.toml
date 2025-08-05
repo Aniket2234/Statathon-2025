@@ -14,7 +14,7 @@ textColor = "#1a202c"
 
 [client]
 showErrorDetails = true
-toolbarMode = "viewer"
+toolbarMode = "auto"
 
 [browser]
 serverAddress = "0.0.0.0"

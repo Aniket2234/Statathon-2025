@@ -33,12 +33,60 @@ st.set_page_config(
     }
 )
 
-# Custom CSS for modern dashboard styling
+# Custom CSS for premium SaaS dashboard styling
 def load_css():
     st.markdown("""
     <style>
-    /* Import Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    /* Import Google Fonts and Font Awesome */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+    
+    /* Hide Streamlit branding and menu options */
+    #MainMenu {visibility: visible !important;}
+    .stDeployButton {display: none;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* Premium body and root styling */
+    .stApp {
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    
+    /* Sidebar premium styling */
+    .css-1d391kg, .css-1lcbmhc {
+        background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+        border-right: 1px solid rgba(148, 163, 184, 0.1);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Sidebar text and icons */
+    .css-1d391kg .css-17eq0hr, .css-1lcbmhc .css-17eq0hr {
+        color: #f1f5f9 !important;
+        font-weight: 500;
+    }
+    
+    /* Navigation menu styling */
+    .nav-link {
+        color: #94a3b8 !important;
+        transition: all 0.3s ease;
+        border-radius: 12px;
+        padding: 12px 16px !important;
+        margin: 4px 0;
+        font-weight: 500;
+    }
+    
+    .nav-link:hover {
+        color: #ffffff !important;
+        background: rgba(59, 130, 246, 0.15) !important;
+        transform: translateX(4px);
+    }
+    
+    .nav-link-selected {
+        color: #ffffff !important;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
     
     /* Main container styling */
     .main .block-container {
@@ -356,8 +404,8 @@ def load_css():
         border-radius: 4px;
     }
     
-    /* Hide Streamlit default elements */
-    #MainMenu {visibility: hidden;}
+    /* Show Streamlit menu but hide deploy button */
+    #MainMenu {visibility: visible !important;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
     
@@ -570,179 +618,209 @@ def load_css():
     }
     
     /* STREAMLIT OPTION MENU FIXES */
-    /* Target the specific menu component */
     .nav-link, 
     .nav-link-selected,
     .nav-link:hover,
-    [data-testid="stSidebar"] .nav-link,
-    [data-testid="stSidebar"] .nav-link-selected,
-    .css-1d391kg .nav-link,
-    .css-1d391kg .nav-link-selected {
+    [data-testid="stSidebar"] .nav-link {
         color: #000000 !important;
-        font-weight: 700 !important;
-        background-color: transparent !important;
+        font-weight: 600 !important;
+        background: rgba(248, 250, 252, 0.8) !important;
+        border-radius: 8px !important;
+        padding: 12px 16px !important;
+        margin: 4px 0 !important;
+        transition: all 0.3s ease !important;
     }
     
-    /* Force menu text visibility */
-    .css-1d391kg div[data-testid="stVerticalBlock"] div,
-    .css-1d391kg div[data-testid="stVerticalBlock"] span,
-    .css-1d391kg div[data-testid="stVerticalBlock"] p,
-    .css-1d391kg [class*="nav"],
-    .css-1d391kg [class*="menu"],
-    .css-1d391kg [class*="option"] {
-        color: #000000 !important;
+    .nav-link-selected {
+        background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+        color: #ffffff !important;
         font-weight: 700 !important;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
     }
     
-    /* Streamlit option menu specific targeting */
-    .css-1d391kg .stSelectbox,
-    .css-1d391kg .stSelectbox *,
-    .css-1d391kg .stSelectbox label,
-    .css-1d391kg .stSelectbox div,
-    .css-1d391kg iframe,
-    .css-1d391kg iframe *,
-    .css-1d391kg [title*="streamlit_option_menu"],
-    .css-1d391kg [title*="streamlit_option_menu"] * {
+    .nav-link:hover {
+        background: linear-gradient(135deg, #e5e7eb, #d1d5db) !important;
         color: #000000 !important;
-        font-weight: 700 !important;
-        background: transparent !important;
+        transform: translateX(4px) !important;
     }
     
-    /* Force all sidebar content to be black */
-    .css-1d391kg * {
+    /* Floating action button styling */
+    .floating-action-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        border-radius: 50%;
+        box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000;
+    }
+    
+    .floating-action-btn:hover {
+        transform: scale(1.1) translateY(-2px);
+        box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4);
+    }
+    
+    /* Loading spinner animation */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .loading-spinner {
+        border: 3px solid #f3f4f6;
+        border-top: 3px solid #3b82f6;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        animation: spin 1s linear infinite;
+        display: inline-block;
+        margin-right: 8px;
+    }
+    
+    /* Premium data table styling */
+    .stDataFrame {
+        background: #ffffff !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05) !important;
+        border: 1px solid #e5e7eb !important;
+    }
+    
+    .stDataFrame thead th {
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9) !important;
+        color: #374151 !important;
+        font-weight: 700 !important;
+        border-bottom: 2px solid #e5e7eb !important;
+        padding: 16px !important;
+    }
+    
+    .stDataFrame tbody td {
+        color: #1f2937 !important;
+        font-weight: 500 !important;
+        padding: 12px 16px !important;
+        border-bottom: 1px solid #f3f4f6 !important;
+    }
+    
+    /* Enhanced form controls */
+    .stSelectbox > div > div {
+        background: #ffffff !important;
+        border: 2px solid #e5e7eb !important;
+        border-radius: 8px !important;
         color: #000000 !important;
         font-weight: 600 !important;
     }
     
-    /* Target iframe content if menu is in iframe */
-    iframe[title*="streamlit_option_menu"] {
-        background: #f8fafc !important;
-    }
-    
-    /* Additional option menu overrides */
-    .option-menu,
-    .option-menu *,
-    .nav-item,
-    .nav-item *,
-    .menu-item,
-    .menu-item * {
+    .stTextInput > div > div > input {
+        background: #ffffff !important;
+        border: 2px solid #e5e7eb !important;
+        border-radius: 8px !important;
         color: #000000 !important;
-        font-weight: 700 !important;
+        font-weight: 600 !important;
+        padding: 12px 16px !important;
     }
     
-    /* Enhanced animation keyframes */
-    @keyframes fadeIn {
-        from { 
-            opacity: 0; 
-            transform: translateY(30px) scale(0.95); 
-        }
-        to { 
-            opacity: 1; 
-            transform: translateY(0) scale(1); 
-        }
+    .stTextInput > div > div > input:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
     }
     
-    @keyframes slideInLeft {
-        from { 
-            opacity: 0; 
-            transform: translateX(-50px); 
-        }
-        to { 
-            opacity: 1; 
-            transform: translateX(0); 
-        }
+    /* Enhanced sliders */
+    .stSlider > div > div > div {
+        background: #3b82f6 !important;
     }
     
-    @keyframes slideInRight {
-        from { 
-            opacity: 0; 
-            transform: translateX(50px); 
-        }
-        to { 
-            opacity: 1; 
-            transform: translateX(0); 
-        }
+    /* Top navigation bar - floating style */
+    .top-nav {
+        position: fixed;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        padding: 12px 24px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 16px;
     }
     
-    @keyframes scaleIn {
-        from { 
-            opacity: 0; 
-            transform: scale(0.8); 
-        }
-        to { 
-            opacity: 1; 
-            transform: scale(1); 
-        }
+    /* Enhanced tooltip styling */
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        cursor: help;
     }
     
-    @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-6px); }
+    .tooltip::after {
+        content: attr(data-tooltip);
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1f2937;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
     
-    .fade-in {
-        animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    .tooltip:hover::after {
+        opacity: 1;
+        visibility: visible;
     }
     
-    .slide-in-left {
-        animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Notification toast styling */
+    .toast {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 16px 24px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+        z-index: 1001;
+        animation: slideIn 0.3s ease;
     }
     
-    .slide-in-right {
-        animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
     
-    .scale-in {
-        animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    /* FINAL OVERRIDE - Ensure settings menu is visible */
+    button[title="Show main menu"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
-    .float {
-        animation: float 3s ease-in-out infinite;
+    [data-testid="stToolbar"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
     }
     
-    /* Staggered animations */
-    .stagger-1 { animation-delay: 0.1s; }
-    .stagger-2 { animation-delay: 0.2s; }
-    .stagger-3 { animation-delay: 0.3s; }
-    .stagger-4 { animation-delay: 0.4s; }
-    
-    /* Universal button text fixes */
-    .stButton button span p,
-    .stDownloadButton button span p,
-    .stButton button span,
-    .stDownloadButton button span,
-    button span p,
-    button span,
-    button div p,
-    button div {
-        color: #ffffff !important;
-        font-weight: 700 !important;
-        text-shadow: none !important;
-    }
-    
-    /* Force white text on all blue buttons */
-    button[kind="primary"],
-    button[kind="primary"] span,
-    button[kind="primary"] div,
-    button[kind="primary"] p,
-    .stButton > button,
-    .stButton > button span,
-    .stButton > button div,
-    .stButton > button p {
-        color: #ffffff !important;
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
-    }
-    
-    /* Download button specific */
-    .stDownloadButton > button,
-    .stDownloadButton > button span,
-    .stDownloadButton > button div,
-    .stDownloadButton > button p {
-        color: #ffffff !important;
-        background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%) !important;
-    }
     </style>
     """, unsafe_allow_html=True)
+
 
 # Display external URL information for Replit deployment
 if 'REPL_SLUG' in os.environ:
