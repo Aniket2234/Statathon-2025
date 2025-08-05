@@ -1081,14 +1081,16 @@ def show_dashboard():
                 risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
                 st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
             else:
-                st.markdown(create_metric_card("Risk Level", "Not Assessed"), unsafe_allow_html=True)
+                # Don't show empty card - create a spacer or show completion status
+                st.markdown('<div style="text-align: center; padding: 2rem; color: #6b7280; font-weight: 600;">Risk Assessment Pending</div>', unsafe_allow_html=True)
         
         with col4:
             if st.session_state.utility_results is not None:
                 utility_score = st.session_state.utility_results.get('overall_utility', 0)
                 st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
             else:
-                st.markdown(create_metric_card("Utility Score", "Not Measured"), unsafe_allow_html=True)
+                # Don't show empty card - create a spacer or show completion status
+                st.markdown('<div style="text-align: center; padding: 2rem; color: #6b7280; font-weight: 600;">Utility Analysis Pending</div>', unsafe_allow_html=True)
     
     # Main dashboard content - only show if data is loaded
     if st.session_state.data is not None:
