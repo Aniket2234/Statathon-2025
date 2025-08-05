@@ -1119,16 +1119,6 @@ def show_dashboard():
                 st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
             else:
                 st.markdown(create_metric_card("Utility Score", "Pending Analysis"), unsafe_allow_html=True)
-    else:
-        # Show welcome message when no data is loaded
-        st.markdown("""
-        <div class="welcome-banner">
-            <div style="text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white; margin: 2rem 0;">
-                <h2 style="margin: 0; font-weight: 700; font-size: 2rem;">Welcome to SafeData Pipeline</h2>
-                <p style="margin: 1rem 0 0 0; font-size: 1.1rem; opacity: 0.9;">Upload your dataset to begin the privacy protection process</p>
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
     
     # Main dashboard content
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
