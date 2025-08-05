@@ -349,6 +349,31 @@ def load_css():
         box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.15);
     }
     
+    /* Fix slider and number input styling - keep white background */
+    .stSlider > div > div > div > div {
+        background-color: white !important;
+        color: #1a202c !important;
+    }
+    
+    .stNumberInput > div > div > input {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+    }
+    
+    /* Slider thumb and track styling */
+    .stSlider > div > div > div > div > div {
+        background-color: #3b82f6 !important;
+    }
+    
+    /* Slider labels */
+    .stSlider > div > div > div > div > div > div {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 600 !important;
+    }
+    
     /* Sidebar styling - Light theme only */
     .css-1d391kg {
         background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
@@ -1485,17 +1510,17 @@ def show_data_upload():
             st.markdown(create_metric_card("Quality Score", f"{quality_report['overall_quality']:.1f}%"), unsafe_allow_html=True)
             st.markdown(create_metric_card("Completeness", f"{quality_report['completeness']:.1f}%"), unsafe_allow_html=True)
             
-            if quality_report['issues']:
+            # Show status if fixes were recently applied
+            if 'fixes_applied' in st.session_state and st.session_state.fixes_applied:
+                st.success("✅ Auto-fixes applied successfully! Data has been cleaned and standardized.")
+                st.info("• Fixed missing values in numeric columns\n• Standardized date formats\n• Removed whitespace")
+                # Reset the flag after showing the message
+                st.session_state.fixes_applied = False
+                
+            elif quality_report['issues']:
                 st.warning("Issues detected:")
                 for issue in quality_report['issues'][:3]:  # Show top 3 issues
                     st.write(f"• {issue}")
-                
-                # Show status if fixes were recently applied
-                if 'fixes_applied' in st.session_state and st.session_state.fixes_applied:
-                    st.success("✅ Auto-fixes applied successfully! Data has been cleaned and standardized.")
-                    st.info("• Fixed missing values in numeric columns\n• Standardized date formats\n• Removed whitespace")
-                    # Reset the flag after showing the message
-                    st.session_state.fixes_applied = False
                 
                 if st.button("🔧 Apply Auto-Fixes", use_container_width=True, key="apply_fixes_btn"):
                     with st.spinner("Applying auto-fixes..."):
