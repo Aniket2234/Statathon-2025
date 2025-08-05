@@ -40,6 +40,32 @@ def load_css():
         padding-top: 2rem;
         padding-bottom: 2rem;
         max-width: 1200px;
+        background: transparent !important;
+    }
+    
+    /* Remove white backgrounds from containers */
+    .main > div,
+    .main .element-container,
+    .main .stMarkdown,
+    .main .stMetric,
+    .main .stColumn {
+        background: transparent !important;
+    }
+    
+    /* Fix white boxes in charts and plots */
+    .js-plotly-plot,
+    .plotly,
+    .plotly-graph-div {
+        background: transparent !important;
+    }
+    
+    /* Remove white backgrounds from all main content */
+    [data-testid="stAppViewContainer"] > .main {
+        background: transparent !important;
+    }
+    
+    [data-testid="stAppViewContainer"] .main .block-container > div {
+        background: transparent !important;
     }
     
     /* Enhanced metric card styling with animations */
@@ -475,7 +501,7 @@ def load_css():
         font-weight: 700 !important;
     }
     
-    /* Enhanced animated buttons */
+    /* Enhanced animated buttons with proper text visibility */
     .stButton > button {
         background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
         color: #ffffff !important;
@@ -487,6 +513,12 @@ def load_css():
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         position: relative !important;
         overflow: hidden !important;
+        text-shadow: none !important;
+    }
+    
+    .stButton > button span {
+        color: #ffffff !important;
+        font-weight: 700 !important;
     }
     
     .stButton > button::before {
@@ -506,12 +538,30 @@ def load_css():
     
     .stButton > button:hover {
         background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%) !important;
+        color: #ffffff !important;
         transform: translateY(-2px) scale(1.05) !important;
         box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.4) !important;
     }
     
+    .stButton > button:hover span {
+        color: #ffffff !important;
+    }
+    
     .stButton > button:active {
         transform: translateY(0) scale(0.98) !important;
+    }
+    
+    /* Fix all button variants */
+    button[kind="primary"] {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+    }
+    
+    button[kind="secondary"] {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
     }
     
     /* STREAMLIT OPTION MENU FIXES */
@@ -650,6 +700,42 @@ def load_css():
     .stagger-2 { animation-delay: 0.2s; }
     .stagger-3 { animation-delay: 0.3s; }
     .stagger-4 { animation-delay: 0.4s; }
+    
+    /* Universal button text fixes */
+    .stButton button span p,
+    .stDownloadButton button span p,
+    .stButton button span,
+    .stDownloadButton button span,
+    button span p,
+    button span,
+    button div p,
+    button div {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-shadow: none !important;
+    }
+    
+    /* Force white text on all blue buttons */
+    button[kind="primary"],
+    button[kind="primary"] span,
+    button[kind="primary"] div,
+    button[kind="primary"] p,
+    .stButton > button,
+    .stButton > button span,
+    .stButton > button div,
+    .stButton > button p {
+        color: #ffffff !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
+    }
+    
+    /* Download button specific */
+    .stDownloadButton > button,
+    .stDownloadButton > button span,
+    .stDownloadButton > button div,
+    .stDownloadButton > button p {
+        color: #ffffff !important;
+        background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%) !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
