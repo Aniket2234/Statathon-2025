@@ -17,18 +17,38 @@ def display_user_profile():
     user_profile = st.session_state.get('user_profile', {})
     username = st.session_state.get('username', 'Unknown')
     
-    # Profile header with AIRAVATA branding
+    # Profile header with AIRAVATA branding - Sky Blue Theme
     st.markdown("""
-    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                padding: 2rem; border-radius: 15px; color: white; margin-bottom: 2rem;
-                box-shadow: 0 8px 25px rgba(0,0,0,0.1);'>
-        <div style='display: flex; align-items: center; justify-content: space-between;'>
-            <div>
-                <h1 style='margin: 0; font-size: 2.5rem;'>👤 User Profile</h1>
-                <p style='margin: 0; opacity: 0.9; font-size: 1.1rem;'>Government of India - SafeData Pipeline</p>
+    <div style='background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%); 
+                padding: 2.5rem; border-radius: 18px; color: white; margin-bottom: 2rem;
+                box-shadow: 0 12px 35px rgba(14, 165, 233, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.1);'>
+        <div style='display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;'>
+            <div style='flex: 1; min-width: 300px;'>
+                <div style='display: flex; align-items: center; margin-bottom: 1rem;'>
+                    <div style='background: rgba(255, 255, 255, 0.15); 
+                                padding: 1rem; border-radius: 12px; margin-right: 1.5rem;
+                                backdrop-filter: blur(10px);'>
+                        <span style='font-size: 2.5rem;'>👤</span>
+                    </div>
+                    <div>
+                        <h1 style='margin: 0; font-size: 2.8rem; font-weight: 800; 
+                                   text-shadow: 0 2px 4px rgba(0,0,0,0.1);'>User Profile</h1>
+                        <p style='margin: 0.5rem 0 0 0; opacity: 0.95; font-size: 1.1rem; font-weight: 500;'>
+                            Government of India - SafeData Pipeline
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div style='text-align: right;'>
-                <p style='margin: 0; font-size: 0.9rem; opacity: 0.8;'>🚀 Made by AIRAVATA Technologies</p>
+            <div style='text-align: right; background: rgba(255, 255, 255, 0.1); 
+                        padding: 1rem 1.5rem; border-radius: 12px; backdrop-filter: blur(10px);
+                        border: 1px solid rgba(255, 255, 255, 0.2);'>
+                <p style='margin: 0; font-size: 1rem; font-weight: 600; opacity: 0.9;'>
+                    🚀 Made by AIRAVATA Technologies
+                </p>
+                <p style='margin: 0.5rem 0 0 0; font-size: 0.85rem; opacity: 0.8;'>
+                    Advanced AI Solutions
+                </p>
             </div>
         </div>
     </div>
@@ -38,12 +58,21 @@ def display_user_profile():
     col1, col2 = st.columns(2)
     
     with col1:
-        # Personal Information Card
+        # Personal Information Card - Sky Blue Theme
         st.markdown("""
-        <div style='background: white; padding: 1.5rem; border-radius: 12px; 
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 1rem;
-                    border-left: 4px solid #3b82f6;'>
-            <h3 style='color: #1e293b; margin-top: 0;'>👨‍💼 Personal Information</h3>
+        <div style='background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); 
+                    padding: 1.8rem; border-radius: 15px; 
+                    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08); margin-bottom: 1.5rem;
+                    border-left: 5px solid #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.1);'>
+            <div style='display: flex; align-items: center; margin-bottom: 1rem;'>
+                <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                            color: white; padding: 0.8rem; border-radius: 10px; margin-right: 1rem;'>
+                    <span style='font-size: 1.2rem;'>👨‍💼</span>
+                </div>
+                <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
+                    Personal Information
+                </h3>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -58,20 +87,32 @@ def display_user_profile():
         
         for key, value in profile_data.items():
             st.markdown(f"""
-            <div style='background: #f8fafc; padding: 0.75rem; margin: 0.5rem 0; 
-                        border-radius: 8px; border-left: 3px solid #3b82f6;'>
-                <strong style='color: #374151;'>{key}:</strong> 
-                <span style='color: #1f2937;'>{value}</span>
+            <div style='background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); 
+                        padding: 1rem; margin: 0.8rem 0; 
+                        border-radius: 10px; border-left: 4px solid #0ea5e9;
+                        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+                        transition: all 0.3s ease;'>
+                <strong style='color: #0c4a6e; font-size: 0.95rem; font-weight: 600;'>{key}:</strong> 
+                <span style='color: #164e63; font-weight: 500; margin-left: 0.5rem;'>{value}</span>
             </div>
             """, unsafe_allow_html=True)
     
     with col2:
-        # Account Information Card
+        # Account Information Card - Sky Blue Theme
         st.markdown("""
-        <div style='background: white; padding: 1.5rem; border-radius: 12px; 
-                    box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 1rem;
-                    border-left: 4px solid #10b981;'>
-            <h3 style='color: #1e293b; margin-top: 0;'>⚙️ Account Information</h3>
+        <div style='background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); 
+                    padding: 1.8rem; border-radius: 15px; 
+                    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08); margin-bottom: 1.5rem;
+                    border-left: 5px solid #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.1);'>
+            <div style='display: flex; align-items: center; margin-bottom: 1rem;'>
+                <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                            color: white; padding: 0.8rem; border-radius: 10px; margin-right: 1rem;'>
+                    <span style='font-size: 1.2rem;'>⚙️</span>
+                </div>
+                <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
+                    Account Information
+                </h3>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -85,21 +126,41 @@ def display_user_profile():
         }
         
         for key, value in account_data.items():
-            color = "#10b981" if key == "Account Status" else "#3b82f6"
+            if key == "Account Status":
+                bg_color = "linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%)"
+                border_color = "#10b981"
+                text_color = "#065f46"
+            else:
+                bg_color = "linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%)"
+                border_color = "#0ea5e9"
+                text_color = "#164e63"
+            
             st.markdown(f"""
-            <div style='background: #f8fafc; padding: 0.75rem; margin: 0.5rem 0; 
-                        border-radius: 8px; border-left: 3px solid {color};'>
-                <strong style='color: #374151;'>{key}:</strong> 
-                <span style='color: #1f2937;'>{value}</span>
+            <div style='background: {bg_color}; 
+                        padding: 1rem; margin: 0.8rem 0; 
+                        border-radius: 10px; border-left: 4px solid {border_color};
+                        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+                        transition: all 0.3s ease;'>
+                <strong style='color: #0c4a6e; font-size: 0.95rem; font-weight: 600;'>{key}:</strong> 
+                <span style='color: {text_color}; font-weight: 500; margin-left: 0.5rem;'>{value}</span>
             </div>
             """, unsafe_allow_html=True)
     
-    # Permissions and Access Rights
+    # Permissions and Access Rights - Sky Blue Theme
     st.markdown("""
-    <div style='background: white; padding: 1.5rem; border-radius: 12px; 
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 2rem 0;
-                border-left: 4px solid #f59e0b;'>
-        <h3 style='color: #1e293b; margin-top: 0;'>🔐 Permissions & Access Rights</h3>
+    <div style='background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); 
+                padding: 2rem; border-radius: 15px; 
+                box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08); margin: 2rem 0;
+                border-left: 5px solid #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.1);'>
+        <div style='display: flex; align-items: center; margin-bottom: 1.5rem;'>
+            <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                        color: white; padding: 0.8rem; border-radius: 10px; margin-right: 1rem;'>
+                <span style='font-size: 1.2rem;'>🔐</span>
+            </div>
+            <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
+                Permissions & Access Rights
+            </h3>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
@@ -113,24 +174,36 @@ def display_user_profile():
         "system_config": "⚙️ System Configuration - Manage system settings"
     }
     
-    # Display permissions in a grid
+    # Display permissions in a grid - Sky Blue Theme
     cols = st.columns(2)
     for i, permission in enumerate(permissions):
         with cols[i % 2]:
             description = permission_descriptions.get(permission, f"✅ {permission.replace('_', ' ').title()}")
             st.markdown(f"""
-            <div style='background: #ecfdf5; padding: 1rem; margin: 0.5rem 0; 
-                        border-radius: 8px; border: 1px solid #10b981;'>
-                <span style='color: #059669; font-weight: 600;'>{description}</span>
+            <div style='background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); 
+                        padding: 1.2rem; margin: 0.8rem 0; 
+                        border-radius: 12px; border: 2px solid #0ea5e9;
+                        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+                        transition: all 0.3s ease; cursor: pointer;'>
+                <span style='color: #0c4a6e; font-weight: 600; font-size: 0.95rem;'>{description}</span>
             </div>
             """, unsafe_allow_html=True)
     
-    # Activity Statistics
+    # Activity Statistics - Sky Blue Theme
     st.markdown("""
-    <div style='background: white; padding: 1.5rem; border-radius: 12px; 
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin: 2rem 0;
-                border-left: 4px solid #8b5cf6;'>
-        <h3 style='color: #1e293b; margin-top: 0;'>📈 Activity Statistics</h3>
+    <div style='background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); 
+                padding: 2rem; border-radius: 15px; 
+                box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08); margin: 2rem 0;
+                border-left: 5px solid #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.1);'>
+        <div style='display: flex; align-items: center; margin-bottom: 1.5rem;'>
+            <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                        color: white; padding: 0.8rem; border-radius: 10px; margin-right: 1rem;'>
+                <span style='font-size: 1.2rem;'>📈</span>
+            </div>
+            <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
+                Activity Statistics
+            </h3>
+        </div>
     </div>
     """, unsafe_allow_html=True)
     

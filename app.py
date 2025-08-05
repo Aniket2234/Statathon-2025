@@ -1317,7 +1317,33 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("🚪 Logout", use_container_width=True):
+        # Logout button with better visibility
+        st.markdown("""
+        <style>
+        .logout-button > button {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            border: 2px solid #ef4444 !important;
+            border-radius: 8px !important;
+            padding: 0.5rem 1rem !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3) !important;
+        }
+        .logout-button > button:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%) !important;
+            border-color: #dc2626 !important;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+            transform: translateY(-1px) !important;
+        }
+        .logout-button > button span {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        if st.button("🚪 Logout", use_container_width=True, key="logout_btn", help="Click to logout"):
             auth_manager.logout()
         
         st.markdown("---")
