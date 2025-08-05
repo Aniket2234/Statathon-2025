@@ -481,6 +481,33 @@ def load_css():
         font-weight: 500 !important;
     }
     
+    /* FINAL NUCLEAR APPROACH - Use pseudo-elements to cover blue backgrounds */
+    [data-testid="stSlider"] div[style*="rgb(59, 130, 246)"]::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: white;
+        border: 1px solid #d1d5db;
+        border-radius: 4px;
+        z-index: 1;
+    }
+    
+    [data-testid="stSlider"] div[style*="rgb(59, 130, 246)"] {
+        position: relative;
+        color: #1a202c !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Ensure text appears above the pseudo-element */
+    [data-testid="stSlider"] div[style*="rgb(59, 130, 246)"] * {
+        position: relative;
+        z-index: 2;
+        color: #1a202c !important;
+    }
+    
     /* Force override on all slider-related divs */
     .stSlider > div > div > div > div > div:not([role="slider"]) {
         background-color: white !important;
@@ -525,15 +552,46 @@ def load_css():
                     div.style.setProperty('border', '1px solid #d1d5db', 'important');
                 });
                 
-                // Also target any div within sliders that has blue styling
+                // More aggressive targeting - create overlay divs
                 const allSliderDivs = container.querySelectorAll('div');
                 allSliderDivs.forEach(div => {
+                    const computedStyle = window.getComputedStyle(div);
                     if (div.style.backgroundColor === 'rgb(59, 130, 246)' || 
-                        window.getComputedStyle(div).backgroundColor === 'rgb(59, 130, 246)') {
-                        div.style.setProperty('background-color', 'white', 'important');
-                        div.style.setProperty('color', '#1a202c', 'important');
-                        div.style.setProperty('border', '1px solid #d1d5db', 'important');
-                        div.style.setProperty('font-weight', '500', 'important');
+                        computedStyle.backgroundColor === 'rgb(59, 130, 246)') {
+                        
+                        // Create a white overlay div
+                        if (!div.querySelector('.white-overlay')) {
+                            const overlay = document.createElement('div');
+                            overlay.className = 'white-overlay';
+                            overlay.style.cssText = `
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                right: 0;
+                                bottom: 0;
+                                background-color: white;
+                                border: 1px solid #d1d5db;
+                                border-radius: 4px;
+                                z-index: 1;
+                                pointer-events: none;
+                            `;
+                            
+                            div.style.position = 'relative';
+                            div.style.color = '#1a202c';
+                            div.style.fontWeight = '500';
+                            
+                            // Make sure text is above overlay
+                            const textNodes = div.childNodes;
+                            textNodes.forEach(node => {
+                                if (node.nodeType === Node.ELEMENT_NODE) {
+                                    node.style.position = 'relative';
+                                    node.style.zIndex = '2';
+                                    node.style.color = '#1a202c';
+                                }
+                            });
+                            
+                            div.appendChild(overlay);
+                        }
                     }
                 });
             });
