@@ -478,47 +478,57 @@ def load_css():
     }
     </style>
     
+    /* TARGET THE EXACT CLASS FROM INSPECTOR */
+    .css-16txtl3.eiipil42 {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+    }
+    
+    /* TARGET THE SPECIFIC DIV STRUCTURE */
+    div[style*="background-color: rgb(59, 130, 246)"] {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+    }
+    
     <script>
     // JavaScript solution to forcibly remove blue backgrounds from sliders
     function fixSliderStyling() {
-        // Wait for elements to load
-        setTimeout(function() {
-            // Find all elements with blue backgrounds in sliders
-            const sliderElements = document.querySelectorAll('[data-testid="stSlider"] div');
-            sliderElements.forEach(element => {
-                const computedStyle = window.getComputedStyle(element);
-                const bgColor = computedStyle.backgroundColor;
-                
-                // Check if background is blue (various formats)
-                if (bgColor.includes('59, 130, 246') || 
-                    bgColor.includes('#3b82f6') || 
-                    element.style.backgroundColor.includes('rgb(59, 130, 246)')) {
-                    element.style.backgroundColor = 'white';
-                    element.style.color = '#1a202c';
-                    element.style.border = '1px solid #d1d5db';
-                    element.style.fontWeight = '500';
-                }
-            });
-            
-            // Target specific slider value boxes
-            const valueBoxes = document.querySelectorAll('[data-baseweb="tick"]');
-            valueBoxes.forEach(box => {
-                box.style.backgroundColor = 'white';
-                box.style.color = '#1a202c';
-                box.style.border = '1px solid #d1d5db';
-                box.style.fontWeight = '500';
-            });
-        }, 100);
+        // Target the specific class seen in inspector
+        const blueElements = document.querySelectorAll('.css-16txtl3.eiipil42');
+        blueElements.forEach(element => {
+            element.style.backgroundColor = 'white';
+            element.style.color = '#1a202c';
+            element.style.border = '1px solid #d1d5db';
+            element.style.fontWeight = '500';
+        });
+        
+        // Target any element with the exact blue color
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(element => {
+            const style = window.getComputedStyle(element);
+            if (style.backgroundColor === 'rgb(59, 130, 246)') {
+                element.style.backgroundColor = 'white';
+                element.style.color = '#1a202c';
+                element.style.border = '1px solid #d1d5db';
+                element.style.fontWeight = '500';
+            }
+        });
     }
     
-    // Run the fix when page loads
+    // Run immediately and repeatedly
+    fixSliderStyling();
+    setInterval(fixSliderStyling, 500);
+    
+    // Run when page loads and updates
     document.addEventListener('DOMContentLoaded', fixSliderStyling);
-    
-    // Run periodically to catch dynamically created elements
-    setInterval(fixSliderStyling, 1000);
-    
-    // Run when Streamlit updates
     window.addEventListener('load', fixSliderStyling);
+    
+    // Use MutationObserver to catch dynamic changes
+    const observer = new MutationObserver(fixSliderStyling);
+    observer.observe(document.body, { childList: true, subtree: true });
     </script>
     
     <style>
