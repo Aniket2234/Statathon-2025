@@ -42,20 +42,37 @@ def load_css():
         max-width: 1200px;
     }
     
-    /* Custom metric card styling */
+    /* Enhanced metric card styling with animations */
     .metric-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
-        padding: 1.5rem;
-        border-radius: 12px;
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+        padding: 2rem;
+        border-radius: 20px;
         border: 2px solid #e2e8f0;
-        box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
-        margin-bottom: 1rem;
-        transition: all 0.3s ease;
+        box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(59, 130, 246, 0.05);
+        margin-bottom: 1.5rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .metric-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: left 0.6s ease;
+    }
+    
+    .metric-card:hover::before {
+        left: 100%;
     }
     
     .metric-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12);
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px -8px rgba(59, 130, 246, 0.2), 0 0 0 1px rgba(59, 130, 246, 0.1);
         border-color: #3b82f6;
     }
     
@@ -90,15 +107,42 @@ def load_css():
         font-weight: 600;
     }
     
-    /* Header styling */
+    /* Enhanced header with animated gradients */
     .dashboard-header {
-        background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #581c87 100%);
-        padding: 2.5rem;
-        border-radius: 16px;
+        background: linear-gradient(135deg, #1e40af 0%, #3730a3 25%, #581c87 50%, #7c3aed 75%, #2563eb 100%);
+        background-size: 200% 200%;
+        padding: 3rem;
+        border-radius: 24px;
         color: white;
-        margin-bottom: 2rem;
-        box-shadow: 0 20px 40px -12px rgba(30, 64, 175, 0.25);
+        margin-bottom: 2.5rem;
+        box-shadow: 0 25px 50px -12px rgba(30, 64, 175, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        animation: gradientShift 8s ease infinite;
+    }
+    
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    
+    .dashboard-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+        transform: translateX(-100%);
+        animation: headerShine 3s ease-in-out infinite;
+    }
+    
+    @keyframes headerShine {
+        0% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+        100% { transform: translateX(100%); }
     }
     
     .dashboard-title {
@@ -156,21 +200,47 @@ def load_css():
         border-color: #3b82f6;
     }
     
-    /* Card containers */
+    /* Enhanced card containers with glassmorphism */
     .dashboard-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-        border-radius: 16px;
-        padding: 2rem;
-        border: 2px solid #e2e8f0;
-        box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.08);
-        margin-bottom: 1.5rem;
-        transition: all 0.3s ease;
+        background: linear-gradient(145deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.8) 100%);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 2px solid rgba(226, 232, 240, 0.6);
+        box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.2);
+        margin-bottom: 2rem;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .dashboard-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+        background-size: 200% 100%;
+        animation: borderFlow 3s linear infinite;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    @keyframes borderFlow {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+    
+    .dashboard-card:hover::before {
+        opacity: 1;
     }
     
     .dashboard-card:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
-        border-color: #cbd5e1;
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 20px 48px -8px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1);
+        border-color: rgba(59, 130, 246, 0.3);
     }
     
     .card-header {
@@ -206,21 +276,47 @@ def load_css():
         border-right: 2px solid #e2e8f0 !important;
     }
     
-    /* Upload area styling */
+    /* Enhanced upload area with pulse animation */
     .upload-area {
         border: 3px dashed #94a3b8;
-        border-radius: 16px;
-        padding: 3rem;
+        border-radius: 20px;
+        padding: 4rem;
         text-align: center;
-        background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
-        transition: all 0.3s ease;
+        background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .upload-area::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        transform: translate(-50%, -50%);
+        transition: all 0.6s ease;
+        border-radius: 50%;
+    }
+    
+    .upload-area:hover::before {
+        width: 300px;
+        height: 300px;
     }
     
     .upload-area:hover {
         border-color: #3b82f6;
-        background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
+        background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%);
+        transform: translateY(-4px) scale(1.02);
+        box-shadow: 0 16px 40px -8px rgba(59, 130, 246, 0.2);
+        animation: uploadPulse 2s ease-in-out infinite;
+    }
+    
+    @keyframes uploadPulse {
+        0%, 100% { box-shadow: 0 16px 40px -8px rgba(59, 130, 246, 0.2); }
+        50% { box-shadow: 0 20px 48px -8px rgba(59, 130, 246, 0.3); }
     }
     
     /* Progress bars */
@@ -379,18 +475,43 @@ def load_css():
         font-weight: 700 !important;
     }
     
-    /* Buttons with high contrast */
+    /* Enhanced animated buttons */
     .stButton > button {
-        background: #1d4ed8 !important;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
         color: #ffffff !important;
         font-weight: 700 !important;
         border: none !important;
-        border-radius: 8px !important;
-        padding: 0.75rem 1.5rem !important;
+        border-radius: 12px !important;
+        padding: 0.875rem 2rem !important;
+        box-shadow: 0 4px 14px -2px rgba(59, 130, 246, 0.3) !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+    
+    .stButton > button::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+        transition: left 0.5s ease !important;
+    }
+    
+    .stButton > button:hover::before {
+        left: 100% !important;
     }
     
     .stButton > button:hover {
-        background: #1e40af !important;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%) !important;
+        transform: translateY(-2px) scale(1.05) !important;
+        box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.4) !important;
+    }
+    
+    .stButton > button:active {
+        transform: translateY(0) scale(0.98) !important;
     }
     
     /* STREAMLIT OPTION MENU FIXES */
@@ -454,15 +575,81 @@ def load_css():
         font-weight: 700 !important;
     }
     
-    /* Animation keyframes */
+    /* Enhanced animation keyframes */
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
+        from { 
+            opacity: 0; 
+            transform: translateY(30px) scale(0.95); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
+        }
+    }
+    
+    @keyframes slideInLeft {
+        from { 
+            opacity: 0; 
+            transform: translateX(-50px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateX(0); 
+        }
+    }
+    
+    @keyframes slideInRight {
+        from { 
+            opacity: 0; 
+            transform: translateX(50px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateX(0); 
+        }
+    }
+    
+    @keyframes scaleIn {
+        from { 
+            opacity: 0; 
+            transform: scale(0.8); 
+        }
+        to { 
+            opacity: 1; 
+            transform: scale(1); 
+        }
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-6px); }
     }
     
     .fade-in {
-        animation: fadeIn 0.6s ease-out;
+        animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
+    
+    .slide-in-left {
+        animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .slide-in-right {
+        animation: slideInRight 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .scale-in {
+        animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Staggered animations */
+    .stagger-1 { animation-delay: 0.1s; }
+    .stagger-2 { animation-delay: 0.2s; }
+    .stagger-3 { animation-delay: 0.3s; }
+    .stagger-4 { animation-delay: 0.4s; }
     </style>
     """, unsafe_allow_html=True)
 
