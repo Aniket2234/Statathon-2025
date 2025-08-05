@@ -408,6 +408,75 @@ def load_css():
         color: #1a202c !important;
     }
     
+    /* MORE SPECIFIC TARGETING FOR SLIDER VALUE BOXES */
+    .stSlider [data-baseweb="slider"] [data-baseweb="slider-tick-bar"] [data-baseweb="tick"] {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        box-shadow: none !important;
+    }
+    
+    /* Target the specific blue elements in sliders */
+    .stSlider [data-baseweb="tick"] {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+    }
+    
+    /* Override any blue backgrounds in slider components */
+    .stSlider [style*="background-color"] {
+        background-color: white !important;
+    }
+    
+    /* Force white background on all slider tick elements */
+    div[data-baseweb="slider"] div[data-baseweb="tick"] {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Nuclear option - target any blue elements in sliders */
+    .stSlider div[style*="rgb(59, 130, 246)"],
+    .stSlider div[style*="#3b82f6"],
+    .stSlider div[style*="blue"] {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+    }
+    
+    /* ULTIMATE OVERRIDE - Target all possible slider elements */
+    [data-testid="stSlider"] div div div div {
+        background-color: white !important;
+        color: #1a202c !important;
+    }
+    
+    [data-testid="stSlider"] [role="slider"] + div {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Override specific blue color values */
+    div[style*="background-color: rgb(59, 130, 246)"] {
+        background-color: white !important;
+    }
+    
+    div[style*="background-color:#3b82f6"] {
+        background-color: white !important;
+    }
+    
+    /* Force override on all slider-related divs */
+    .stSlider > div > div > div > div > div:not([role="slider"]) {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+        padding: 4px 8px !important;
+        border-radius: 4px !important;
+    }
+    
     /* Sidebar styling - Light theme only */
     .css-1d391kg {
         background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
