@@ -911,6 +911,22 @@ def load_css():
         background: #3b82f6 !important;
     }
     
+    /* Welcome banner styling */
+    .welcome-banner {
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
     </style>
     """, unsafe_allow_html=True)
 
@@ -1078,36 +1094,41 @@ def show_dashboard():
     </div>
     """, unsafe_allow_html=True)
     
-    # Key metrics row
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        if st.session_state.data is not None:
+    # Key metrics row - only show when data is available
+    if st.session_state.data is not None:
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
             rows = len(st.session_state.data)
             st.markdown(create_metric_card("Total Records", f"{rows:,}"), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Total Records", "0"), unsafe_allow_html=True)
-    
-    with col2:
-        if st.session_state.data is not None:
+        
+        with col2:
             cols = len(st.session_state.data.columns)
             st.markdown(create_metric_card("Data Columns", cols), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Data Columns", "0"), unsafe_allow_html=True)
-    
-    with col3:
-        if st.session_state.risk_results is not None:
-            risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
-            st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Risk Level", "Not Assessed"), unsafe_allow_html=True)
-    
-    with col4:
-        if st.session_state.utility_results is not None:
-            utility_score = st.session_state.utility_results.get('overall_utility', 0)
-            st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Utility Score", "Not Measured"), unsafe_allow_html=True)
+        
+        with col3:
+            if st.session_state.risk_results is not None:
+                risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
+                st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
+            else:
+                st.markdown(create_metric_card("Risk Level", "Pending Analysis"), unsafe_allow_html=True)
+        
+        with col4:
+            if st.session_state.utility_results is not None:
+                utility_score = st.session_state.utility_results.get('overall_utility', 0)
+                st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
+            else:
+                st.markdown(create_metric_card("Utility Score", "Pending Analysis"), unsafe_allow_html=True)
+    else:
+        # Show welcome message when no data is loaded
+        st.markdown("""
+        <div class="welcome-banner">
+            <div style="text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px; color: white; margin: 2rem 0;">
+                <h2 style="margin: 0; font-weight: 700; font-size: 2rem;">Welcome to SafeData Pipeline</h2>
+                <p style="margin: 1rem 0 0 0; font-size: 1.1rem; opacity: 0.9;">Upload your dataset to begin the privacy protection process</p>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
     
     # Main dashboard content
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
@@ -1118,7 +1139,7 @@ def show_dashboard():
         st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
         st.markdown('<div class="card-header">📊 Data Processing Pipeline</div>', unsafe_allow_html=True)
         
-        # Processing pipeline visualization
+        # Processing pipeline visualization - only show when data is loaded
         if st.session_state.data is not None:
             pipeline_data = {
                 'Stage': ['Data Upload', 'Risk Assessment', 'Privacy Enhancement', 'Utility Measurement', 'Report Generation'],
@@ -1151,7 +1172,23 @@ def show_dashboard():
             )
             st.plotly_chart(fig, use_container_width=True)
         else:
-            st.info("Upload a dataset to begin the privacy protection pipeline")
+            # Show getting started steps instead of empty pipeline
+            st.markdown("""
+            <div style="padding: 2rem; text-align: center; background: #f8fafc; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                <h4 style="color: #1e40af; margin: 0 0 1rem 0;">Get Started in 3 Easy Steps</h4>
+                <div style="text-align: left; max-width: 500px; margin: 0 auto;">
+                    <div style="margin: 1rem 0; padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;">
+                        <strong>1. Upload Data</strong> - Import your dataset using the Data Upload tab
+                    </div>
+                    <div style="margin: 1rem 0; padding: 0.5rem 0; border-bottom: 1px solid #e2e8f0;">
+                        <strong>2. Assess Risk</strong> - Analyze privacy vulnerabilities
+                    </div>
+                    <div style="margin: 1rem 0; padding: 0.5rem 0;">
+                        <strong>3. Enhance Privacy</strong> - Apply anonymization techniques
+                    </div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
         st.markdown('</div>', unsafe_allow_html=True)
         
@@ -1172,11 +1209,11 @@ def show_dashboard():
         st.markdown('</div>', unsafe_allow_html=True)
     
     with col2:
-        # Current Session Status
-        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-        st.markdown('<div class="card-header">🎯 Current Session</div>', unsafe_allow_html=True)
-        
+        # Current Session Status - only show when data is loaded
         if st.session_state.data is not None:
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🎯 Current Session</div>', unsafe_allow_html=True)
+            
             data_info = st.session_state.data
             st.markdown(f"""
             **Dataset Information:**
@@ -1201,25 +1238,50 @@ def show_dashboard():
                 font=dict(family="Inter, sans-serif", size=10)
             )
             st.plotly_chart(fig, use_container_width=True)
+            st.markdown('</div>', unsafe_allow_html=True)
         else:
-            st.warning("No dataset loaded. Start by uploading your data.")
+            # Show feature highlights when no data is loaded
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🔒 Privacy Protection Features</div>', unsafe_allow_html=True)
+            st.markdown("""
+            **Advanced Anonymization:**
+            - K-anonymity with global/local recoding
+            - L-diversity for attribute diversity
+            - T-closeness for distribution preservation
+            - Differential privacy with noise addition
+            
+            **Risk Assessment:**
+            - Re-identification vulnerability analysis
+            - Attack simulation scenarios
+            - Compliance evaluation tools
+            """)
+            st.markdown('</div>', unsafe_allow_html=True)
         
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Quick Actions
+        # Quick Actions - show different actions based on data availability
         st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
         st.markdown('<div class="card-header">⚡ Quick Actions</div>', unsafe_allow_html=True)
         
-        if st.button("🔧 Load Sample Configuration", use_container_width=True):
-            load_sample_config()
-            st.success("Sample configuration loaded!")
-        
-        if st.button("🗑️ Clear All Data", use_container_width=True):
-            clear_session_data()
-            st.success("All session data cleared!")
-        
-        if st.button("📊 View System Stats", use_container_width=True):
-            show_system_stats()
+        if st.session_state.data is not None:
+            if st.button("🗑️ Clear All Data", use_container_width=True):
+                clear_session_data()
+                st.success("All session data cleared!")
+            
+            if st.button("📊 View System Stats", use_container_width=True):
+                show_system_stats()
+                
+            if st.button("⚙️ Load Sample Configuration", use_container_width=True):
+                load_sample_config()
+                st.success("Sample configuration loaded!")
+        else:
+            if st.button("📂 Go to Data Upload", use_container_width=True):
+                st.switch_page("Data Upload")
+                
+            if st.button("📖 View Documentation", use_container_width=True):
+                st.info("Navigate to Help section using the sidebar menu")
+                
+            if st.button("⚙️ Load Sample Configuration", use_container_width=True):
+                load_sample_config()
+                st.success("Sample configuration loaded!")
         
         st.markdown('</div>', unsafe_allow_html=True)
     
