@@ -200,18 +200,10 @@ def load_css():
         box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.15);
     }
     
-    /* Sidebar styling */
+    /* Sidebar styling - Light theme only */
     .css-1d391kg {
-        background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-    }
-    
-    /* Sidebar text visibility */
-    .css-1d391kg .stMarkdown h1,
-    .css-1d391kg .stMarkdown h2,
-    .css-1d391kg .stMarkdown h3,
-    .css-1d391kg .stMarkdown p,
-    .css-1d391kg .stMarkdown div {
-        color: #f1f5f9 !important;
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
+        border-right: 2px solid #e2e8f0 !important;
     }
     
     /* Upload area styling */
@@ -247,169 +239,84 @@ def load_css():
         color: #1a202c !important;
     }
     
-    /* COMPREHENSIVE LIGHT MODE TEXT VISIBILITY FIXES */
+    /* LIGHT THEME ONLY - SIMPLE AND CLEAN */
     
-    /* Force ALL text elements to be dark and visible */
-    .stApp .main * {
+    /* Force Streamlit to use light theme only */
+    .stApp {
+        background-color: #ffffff !important;
         color: #1a202c !important;
     }
     
-    /* Override any inherited text colors */
+    /* All text elements - dark color for visibility */
     * {
         color: #1a202c !important;
     }
     
-    /* Specific overrides for common Streamlit elements */
-    .stMarkdown,
-    .stMarkdown *,
-    .stText,
-    .stText *,
-    .stWrite,
-    .stWrite *,
-    p, div, span, label, h1, h2, h3, h4, h5, h6 {
+    /* Sidebar - light theme with dark text */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
         color: #1a202c !important;
     }
     
-    /* Force metric text visibility */
-    .stMetric .metric-label,
-    .stMetric .metric-value,
-    .stMetric .metric-delta {
+    .css-1d391kg * {
         color: #1a202c !important;
     }
     
-    /* Upload area and all children */
-    .upload-area,
-    .upload-area *,
-    .upload-area div,
-    .upload-area span,
-    .upload-area p {
-        color: #1a202c !important;
-        font-weight: 600 !important;
+    /* Header - keep gradient but make it lighter */
+    .dashboard-header {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%) !important;
+        color: white !important;
     }
     
-    /* Dashboard cards and all content */
-    .dashboard-card,
-    .dashboard-card *,
-    .dashboard-card .stMarkdown,
-    .dashboard-card .stText,
-    .dashboard-card .stWrite,
-    .dashboard-card p,
-    .dashboard-card div,
-    .dashboard-card span,
-    .dashboard-card li {
-        color: #1a202c !important;
-    }
-    
-    /* Form elements and inputs */
-    .stSelectbox label,
-    .stSelectbox *,
-    .stSlider label,
-    .stSlider *,
-    .stCheckbox label,
-    .stCheckbox *,
-    .stRadio label,
-    .stRadio *,
-    .stTextInput label,
-    .stTextInput *,
-    .stNumberInput label,
-    .stNumberInput * {
-        color: #1a202c !important;
-    }
-    
-    /* Tables and dataframes */
-    .stDataFrame,
-    .stDataFrame *,
-    table,
-    table *,
-    th,
-    td {
-        color: #1a202c !important;
-        border-radius: 12px;
-        overflow: hidden;
-        border: 2px solid #e2e8f0;
-    }
-    
-    /* Alerts and messages */
-    .stAlert,
-    .stAlert *,
-    .stSuccess,
-    .stSuccess *,
-    .stWarning,
-    .stWarning *,
-    .stError,
-    .stError *,
-    .stInfo,
-    .stInfo * {
-        color: #1a202c !important;
-    }
-    
-    /* Exception: Keep sidebar text light for dark sidebar */
-    .css-1d391kg,
-    .css-1d391kg *,
-    .css-1d391kg .stMarkdown,
-    .css-1d391kg .stMarkdown *,
-    .css-1d391kg p,
-    .css-1d391kg div,
-    .css-1d391kg span {
-        color: #f1f5f9 !important;
-    }
-    
-    /* Exception: Keep header text light for dark header */
-    .dashboard-header,
     .dashboard-header *,
     .dashboard-title,
     .dashboard-subtitle {
         color: white !important;
     }
     
-    /* Better button styling */
+    /* Upload area text */
+    .upload-area * {
+        color: #1a202c !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Cards and content */
+    .dashboard-card * {
+        color: #1a202c !important;
+    }
+    
+    /* Forms and inputs */
+    .stSelectbox *,
+    .stSlider *,
+    .stCheckbox *,
+    .stRadio *,
+    .stTextInput *,
+    .stNumberInput * {
+        color: #1a202c !important;
+    }
+    
+    /* Tables */
+    .stDataFrame *,
+    table *,
+    th, td {
+        color: #1a202c !important;
+    }
+    
+    /* Alerts */
+    .stAlert *,
+    .stSuccess *,
+    .stWarning *,
+    .stError *,
+    .stInfo * {
+        color: #1a202c !important;
+    }
+    
+    /* Buttons */
     .stButton > button {
         background: linear-gradient(145deg, #2563eb, #1d4ed8) !important;
         color: white !important;
         font-weight: 600 !important;
         border: none !important;
-    }
-    
-    /* FINAL OVERRIDE - Force everything to be visible */
-    .main .element-container,
-    .main .element-container *,
-    .main .stMarkdown,
-    .main .stMarkdown *,
-    .main .block-container,
-    .main .block-container *,
-    .main .row-widget,
-    .main .row-widget * {
-        color: #1a202c !important;
-    }
-    
-    /* Specific Streamlit component overrides */
-    [data-testid="stMarkdownContainer"],
-    [data-testid="stMarkdownContainer"] *,
-    [data-testid="stText"],
-    [data-testid="stText"] *,
-    [data-testid="metric-container"],
-    [data-testid="metric-container"] *,
-    [data-testid="metric-label"],
-    [data-testid="metric-value"] {
-        color: #1a202c !important;
-        font-weight: 600 !important;
-    }
-    
-    /* Force all text elements in light mode */
-    body:not(.dark-mode) *,
-    html:not(.dark-mode) *,
-    .stApp:not(.dark-mode) * {
-        color: #1a202c !important;
-    }
-    
-    /* Override Streamlit's default text colors completely */
-    .css-1v0mbdj,
-    .css-1v0mbdj *,
-    .css-16huue1,
-    .css-16huue1 *,
-    .css-1wbqy5l,
-    .css-1wbqy5l * {
-        color: #1a202c !important;
     }
     
     /* Animation keyframes */
