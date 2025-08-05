@@ -1915,7 +1915,7 @@ def show_reports():
                     
                     # Display HTML report
                     with st.expander("View HTML Report", expanded=True):
-                        stc.html(html_report, height=600, scrolling=True)
+                        st.html(html_report)
                     
                     # Provide download link
                     b64_html = base64.b64encode(html_report.encode()).decode()
@@ -3334,26 +3334,7 @@ def show_help():
     with st.expander("View Complete Guide", expanded=False):
         st.text(guide_content)
 
-def load_sample_config():
-    """Load sample configuration"""
-    sample_config = {
-        'k_threshold': 3,
-        'risk_level': 'Medium',
-        'privacy_technique': 'K-Anonymity',
-        'utility_threshold': 0.7
-    }
-    st.session_state.config = sample_config
-    st.success("Sample configuration loaded!")
 
-def clear_session_data():
-    """Clear all session data"""
-    st.session_state.data = None
-    st.session_state.processed_data = None
-    st.session_state.risk_results = None
-    st.session_state.utility_results = None
-    st.session_state.config = {}
-    st.success("All data cleared!")
-    st.rerun()
 
 if __name__ == "__main__":
     # Configure Streamlit to be accessible from any IP

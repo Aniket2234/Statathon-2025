@@ -392,7 +392,7 @@ Records Count: {len(self.current_data) if self.current_data is not None else 'N/
 Columns Count: {len(self.current_data.columns) if self.current_data is not None else 'N/A'}
 
 Risk Assessment: {'✓ Completed' if hasattr(self, 'risk_results') and self.risk_results else '○ Pending'}
-Privacy Enhancement: {'✓ Applied' if hasattr(self, 'enhanced_data') and self.enhanced_data is not None else '○ Pending'}
+Privacy Enhancement: {'✓ Applied' if hasattr(self, 'processed_data') and self.processed_data is not None else '○ Pending'}
 Utility Measurement: {'✓ Completed' if hasattr(self, 'utility_results') and self.utility_results else '○ Pending'}
 
 Ready for: {'Report Generation' if all([self.current_data is not None, hasattr(self, 'risk_results')]) else 'Data Upload and Analysis'}
@@ -1007,7 +1007,7 @@ Column Information:
 """
             
             # Add column type information
-            for col in self.current_data.columns[:5]:  # Show first 5 columns
+            for col in list(self.current_data.columns)[:5]:  # Show first 5 columns
                 dtype = str(self.current_data[col].dtype)
                 non_null = self.current_data[col].count()
                 unique_vals = self.current_data[col].nunique()
@@ -1303,13 +1303,11 @@ You can now proceed to Utility Measurement to assess data quality preservation.
                 self.status_queue.put(("status", f"Applying {technique}..."))
                 self.status_queue.put(("progress", "start"))
                 
-                # Get quasi-identifiers
-                qi_indices = self.qi_listbox.curselection()
-                if not qi_indices:
+                # Get quasi-identifiers from checkboxes
+                qi_cols = [col for col, var in self.qi_vars.items() if var.get()]
+                if not qi_cols:
                     self.status_queue.put(("error", "Please select quasi-identifiers from Risk Assessment tab first"))
                     return
-                
-                qi_cols = [self.qi_listbox.get(i) for i in qi_indices]
                 
                 # Apply technique based on selection
                 if self.current_data is None:
@@ -1324,12 +1322,12 @@ You can now proceed to Utility Measurement to assess data quality preservation.
                     )
                 
                 elif technique == "L-Diversity":
-                    sa_indices = self.sa_listbox.curselection()
-                    if not sa_indices:
+                    sa_cols = [col for col, var in self.sa_vars.items() if var.get()]
+                    if not sa_cols:
                         self.status_queue.put(("error", "Please select sensitive attributes for L-Diversity"))
                         return
                     
-                    sa_col = self.sa_listbox.get(sa_indices[0])  # Use first selected
+                    sa_col = sa_cols[0]  # Use first selected
                     self.processed_data = self.privacy_enhancement.apply_l_diversity(
                         self.current_data,
                         l=self.l_value.get(),
