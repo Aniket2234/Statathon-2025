@@ -604,13 +604,11 @@ def load_css():
         transform: translateY(0) scale(0.98) !important;
     }
     
-    /* ALL BUTTONS ARE BLUE WITH WHITE TEXT */
-    button[kind="primary"],
-    button[kind="secondary"],
+    /* ONLY MAIN ACTION BUTTONS ARE BLUE WITH WHITE TEXT */
     .stButton > button,
     .stDownloadButton > button,
     .stFormSubmitButton > button,
-    button {
+    button[kind="primary"] {
         background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
         color: #ffffff !important;
         border: none !important;
@@ -619,6 +617,30 @@ def load_css():
         padding: 0.75rem 1.5rem !important;
         transition: all 0.3s ease !important;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    /* KEEP SETTINGS AND SLIDER BUTTONS IN DEFAULT STYLE */
+    button[kind="secondary"],
+    button[title="Show main menu"],
+    button[aria-label*="menu"],
+    button[aria-label*="settings"],
+    button[data-testid*="baseButton-secondary"],
+    .stSlider button,
+    [data-testid="stToolbar"] button {
+        background: #ffffff !important;
+        color: #374151 !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+    }
+    
+    /* Settings button hover */
+    button[kind="secondary"]:hover,
+    button[title="Show main menu"]:hover,
+    [data-testid="stToolbar"] button:hover {
+        background: #f9fafb !important;
+        color: #374151 !important;
+        border-color: #9ca3af !important;
     }
     
     /* Button hover effects */
@@ -1041,36 +1063,32 @@ def show_dashboard():
     </div>
     """, unsafe_allow_html=True)
     
-    # Key metrics row
-    col1, col2, col3, col4 = st.columns(4)
-    
-    with col1:
-        if st.session_state.data is not None:
+    # Only show metrics if data is loaded
+    if st.session_state.data is not None:
+        # Key metrics row
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
             rows = len(st.session_state.data)
             st.markdown(create_metric_card("Total Records", f"{rows:,}"), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Total Records", "0"), unsafe_allow_html=True)
-    
-    with col2:
-        if st.session_state.data is not None:
+        
+        with col2:
             cols = len(st.session_state.data.columns)
             st.markdown(create_metric_card("Data Columns", cols), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Data Columns", "0"), unsafe_allow_html=True)
-    
-    with col3:
-        if st.session_state.risk_results is not None:
-            risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
-            st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Risk Level", "Not Assessed"), unsafe_allow_html=True)
-    
-    with col4:
-        if st.session_state.utility_results is not None:
-            utility_score = st.session_state.utility_results.get('overall_utility', 0)
-            st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
-        else:
-            st.markdown(create_metric_card("Utility Score", "Not Measured"), unsafe_allow_html=True)
+        
+        with col3:
+            if st.session_state.risk_results is not None:
+                risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
+                st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
+            else:
+                st.markdown(create_metric_card("Risk Level", "Not Assessed"), unsafe_allow_html=True)
+        
+        with col4:
+            if st.session_state.utility_results is not None:
+                utility_score = st.session_state.utility_results.get('overall_utility', 0)
+                st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
+            else:
+                st.markdown(create_metric_card("Utility Score", "Not Measured"), unsafe_allow_html=True)
     
     # Main dashboard content
     st.markdown('<div class="fade-in">', unsafe_allow_html=True)
@@ -1169,22 +1187,35 @@ def show_dashboard():
         
         st.markdown('</div>', unsafe_allow_html=True)
         
-        # Quick Actions
-        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-        st.markdown('<div class="card-header">⚡ Quick Actions</div>', unsafe_allow_html=True)
-        
-        if st.button("🔧 Load Sample Configuration", use_container_width=True):
-            load_sample_config()
-            st.success("Sample configuration loaded!")
-        
-        if st.button("🗑️ Clear All Data", use_container_width=True):
-            clear_session_data()
-            st.success("All session data cleared!")
-        
-        if st.button("📊 View System Stats", use_container_width=True):
-            show_system_stats()
-        
-        st.markdown('</div>', unsafe_allow_html=True)
+        # Quick Actions - only show if data is loaded
+        if st.session_state.data is not None:
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">⚡ Quick Actions</div>', unsafe_allow_html=True)
+            
+            if st.button("🔧 Load Sample Configuration", use_container_width=True):
+                load_sample_config()
+                st.success("Sample configuration loaded!")
+            
+            if st.button("🗑️ Clear All Data", use_container_width=True):
+                clear_session_data()
+                st.success("All session data cleared!")
+            
+            if st.button("📊 View System Stats", use_container_width=True):
+                show_system_stats()
+            
+            st.markdown('</div>', unsafe_allow_html=True)
+        else:
+            # Show getting started message when no data is loaded
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🚀 Get Started</div>', unsafe_allow_html=True)
+            st.markdown("""
+            **Welcome to SafeData Pipeline!**
+            
+            Start by uploading your dataset using the **Data Upload** page in the sidebar.
+            
+            Supported formats: CSV, Excel, JSON, XML, Parquet
+            """)
+            st.markdown('</div>', unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
