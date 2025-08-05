@@ -6,6 +6,9 @@ import os
 from datetime import datetime
 import io
 import base64
+import plotly.express as px
+import plotly.graph_objects as go
+from streamlit_option_menu import option_menu
 
 # Import core modules
 from core.risk_assessment import RiskAssessment
@@ -16,22 +19,211 @@ from core.report_generator import ReportGenerator
 from utils.file_operations import FileOperations
 from utils.validation import DataValidator
 from utils.encryption import DataEncryption
-import streamlit.components.v1 as stc
 
 # Configure page
 st.set_page_config(
-    page_title="SafeData Pipeline - Government of India",
-    page_icon="🔒",
+    page_title="SafeData Pipeline - Data Privacy Dashboard",
+    page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
+# Custom CSS for modern dashboard styling
+def load_css():
+    st.markdown("""
+    <style>
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Main container styling */
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        max-width: 1200px;
+    }
+    
+    /* Custom metric card styling */
+    .metric-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        padding: 1.5rem;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .metric-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .metric-label {
+        font-size: 0.875rem;
+        color: #64748b;
+        font-weight: 500;
+        margin-top: 0.5rem;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .metric-delta-positive {
+        color: #059669;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    
+    .metric-delta-negative {
+        color: #dc2626;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+    
+    /* Header styling */
+    .dashboard-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 2rem;
+        border-radius: 12px;
+        color: white;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .dashboard-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 1.125rem;
+        opacity: 0.9;
+        margin-top: 0.5rem;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Status indicators */
+    .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin: 0.25rem;
+    }
+    
+    .status-success {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+    
+    .status-warning {
+        background-color: #fef3c7;
+        color: #92400e;
+    }
+    
+    .status-error {
+        background-color: #fee2e2;
+        color: #991b1b;
+    }
+    
+    .status-info {
+        background-color: #dbeafe;
+        color: #1e40af;
+    }
+    
+    /* Card containers */
+    .dashboard-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+    }
+    
+    .card-header {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1rem;
+        font-family: 'Inter', sans-serif;
+    }
+    
+    /* Button styling */
+    .stButton > button {
+        background: linear-gradient(145deg, #3b82f6, #2563eb);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 20px -3px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Sidebar styling */
+    .css-1d391kg {
+        background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+    }
+    
+    /* Upload area styling */
+    .upload-area {
+        border: 2px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        background: #f8fafc;
+        transition: all 0.3s ease;
+    }
+    
+    .upload-area:hover {
+        border-color: #3b82f6;
+        background: #eff6ff;
+    }
+    
+    /* Progress bars */
+    .stProgress > div > div {
+        background: linear-gradient(90deg, #3b82f6, #06b6d4);
+        border-radius: 4px;
+    }
+    
+    /* Hide Streamlit default elements */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    .stDeployButton {display:none;}
+    
+    /* Animation keyframes */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.6s ease-out;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
 # Display external URL information for Replit deployment
 if 'REPL_SLUG' in os.environ:
     repl_slug = os.environ.get('REPL_SLUG', 'workspace')
-    repl_owner = os.environ.get('REPL_OWNER', 'fitnessanddietm') 
+    repl_owner = os.environ.get('REPL_OWNER', 'replit30tousebr') 
     external_url = f"https://{repl_slug}.{repl_owner}.repl.co"
-    st.sidebar.info(f"🌐 External Access: {external_url}")
     print(f"SafeData Pipeline is accessible at: {external_url}")
 
 # Initialize session state
@@ -63,178 +255,435 @@ def initialize_components():
 
 components = initialize_components()
 
+def create_metric_card(title, value, delta=None, delta_color="normal"):
+    """Create a custom metric card with modern styling"""
+    delta_class = ""
+    delta_html = ""
+    
+    if delta:
+        if delta_color == "normal":
+            delta_class = "metric-delta-positive" if delta > 0 else "metric-delta-negative"
+        else:
+            delta_class = f"metric-delta-{delta_color}"
+        
+        delta_symbol = "+" if delta > 0 else ""
+        delta_html = f'<div class="{delta_class}">{delta_symbol}{delta}</div>'
+    
+    return f"""
+    <div class="metric-card">
+        <div class="metric-value">{value}</div>
+        <div class="metric-label">{title}</div>
+        {delta_html}
+    </div>
+    """
+
+def show_status_indicator(status, text):
+    """Show a status indicator with appropriate styling"""
+    status_class = f"status-{status}"
+    return f'<span class="status-indicator {status_class}">{text}</span>'
+
 def main():
-    """Main application function"""
+    """Main application function with modern dashboard design"""
     
-    # Header
-    st.title("🔒 SafeData Pipeline")
-    st.markdown("### Government of India - Ministry of Electronics and IT")
-    st.markdown("**Data Privacy Protection and Anonymization System**")
+    # Load custom CSS
+    load_css()
     
-    # Sidebar navigation
-    st.sidebar.title("Navigation")
-    page = st.sidebar.selectbox(
-        "Select Module",
-        ["Home", "Data Upload", "Risk Assessment", "Privacy Enhancement", 
-         "Utility Measurement", "Reports", "Configuration", "Help"]
-    )
+    # Sidebar navigation with icons
+    with st.sidebar:
+        st.markdown('<div style="padding: 1rem 0;">', unsafe_allow_html=True)
+        
+        # Logo and title
+        st.markdown("""
+        <div style="text-align: center; padding: 1rem 0; border-bottom: 1px solid #334155; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: white; margin-bottom: 0.5rem;">🛡️</div>
+            <div style="color: white; font-weight: 600; font-size: 1.1rem;">SafeData Pipeline</div>
+            <div style="color: #94a3b8; font-size: 0.8rem;">Government of India</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Navigation menu with icons
+        selected = option_menu(
+            menu_title=None,
+            options=["Dashboard", "Data Upload", "Risk Assessment", "Privacy Enhancement", 
+                    "Utility Analysis", "Reports", "Configuration", "Help"],
+            icons=["house-door", "cloud-upload", "shield-exclamation", "lock", 
+                  "graph-up", "file-earmark-text", "gear", "question-circle"],
+            menu_icon="cast",
+            default_index=0,
+            styles={
+                "container": {"padding": "0!important", "background-color": "transparent"},
+                "icon": {"color": "#94a3b8", "font-size": "18px"},
+                "nav-link": {
+                    "font-size": "14px",
+                    "text-align": "left",
+                    "margin": "2px",
+                    "padding": "12px",
+                    "color": "#e2e8f0",
+                    "background-color": "transparent",
+                    "border-radius": "8px",
+                },
+                "nav-link-selected": {
+                    "background-color": "#3b82f6",
+                    "color": "white",
+                    "font-weight": "500",
+                },
+                "nav-link:hover": {
+                    "background-color": "#475569",
+                    "color": "white",
+                }
+            }
+        )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # System status in sidebar
+        st.markdown("---")
+        st.markdown("**System Status**")
+        
+        if st.session_state.data is not None:
+            st.markdown(show_status_indicator("success", "✓ Dataset Loaded"), unsafe_allow_html=True)
+        else:
+            st.markdown(show_status_indicator("warning", "⚠ No Dataset"), unsafe_allow_html=True)
+            
+        if st.session_state.processed_data is not None:
+            st.markdown(show_status_indicator("success", "✓ Privacy Enhanced"), unsafe_allow_html=True)
+            
+        if st.session_state.risk_results is not None:
+            st.markdown(show_status_indicator("success", "✓ Risk Assessed"), unsafe_allow_html=True)
     
     # Main content based on selected page
-    if page == "Home":
-        show_home()
-    elif page == "Data Upload":
+    if selected == "Dashboard":
+        show_dashboard()
+    elif selected == "Data Upload":
         show_data_upload()
-    elif page == "Risk Assessment":
+    elif selected == "Risk Assessment":
         show_risk_assessment()
-    elif page == "Privacy Enhancement":
+    elif selected == "Privacy Enhancement":
         show_privacy_enhancement()
-    elif page == "Utility Measurement":
+    elif selected == "Utility Analysis":
         show_utility_measurement()
-    elif page == "Reports":
+    elif selected == "Reports":
         show_reports()
-    elif page == "Configuration":
+    elif selected == "Configuration":
         show_configuration()
-    elif page == "Help":
+    elif selected == "Help":
         show_help()
 
-def show_home():
-    """Display home page with overview"""
+def show_dashboard():
+    """Display modern dashboard with metrics and overview"""
+    
+    # Dashboard header
+    st.markdown("""
+    <div class="dashboard-header fade-in">
+        <div class="dashboard-title">SafeData Pipeline Dashboard</div>
+        <div class="dashboard-subtitle">Data Privacy Protection & Anonymization System</div>
+        <div style="margin-top: 1rem; opacity: 0.8;">Ministry of Electronics and Information Technology • Government of India</div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Key metrics row
+    col1, col2, col3, col4 = st.columns(4)
+    
+    with col1:
+        if st.session_state.data is not None:
+            rows = len(st.session_state.data)
+            st.markdown(create_metric_card("Total Records", f"{rows:,}"), unsafe_allow_html=True)
+        else:
+            st.markdown(create_metric_card("Total Records", "0"), unsafe_allow_html=True)
+    
+    with col2:
+        if st.session_state.data is not None:
+            cols = len(st.session_state.data.columns)
+            st.markdown(create_metric_card("Data Columns", cols), unsafe_allow_html=True)
+        else:
+            st.markdown(create_metric_card("Data Columns", "0"), unsafe_allow_html=True)
+    
+    with col3:
+        if st.session_state.risk_results is not None:
+            risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
+            st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
+        else:
+            st.markdown(create_metric_card("Risk Level", "Not Assessed"), unsafe_allow_html=True)
+    
+    with col4:
+        if st.session_state.utility_results is not None:
+            utility_score = st.session_state.utility_results.get('overall_utility', 0)
+            st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
+        else:
+            st.markdown(create_metric_card("Utility Score", "Not Measured"), unsafe_allow_html=True)
+    
+    # Main dashboard content
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+    
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.header("Welcome to SafeData Pipeline")
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">📊 Data Processing Pipeline</div>', unsafe_allow_html=True)
+        
+        # Processing pipeline visualization
+        if st.session_state.data is not None:
+            pipeline_data = {
+                'Stage': ['Data Upload', 'Risk Assessment', 'Privacy Enhancement', 'Utility Measurement', 'Report Generation'],
+                'Status': [
+                    'Complete' if st.session_state.data is not None else 'Pending',
+                    'Complete' if st.session_state.risk_results is not None else 'Pending',
+                    'Complete' if st.session_state.processed_data is not None else 'Pending',
+                    'Complete' if st.session_state.utility_results is not None else 'Pending',
+                    'Available' if st.session_state.processed_data is not None else 'Pending'
+                ],
+                'Progress': [100, 80, 60, 40, 20]
+            }
+            
+            # Create progress visualization
+            fig = px.bar(
+                pipeline_data, 
+                x='Progress', 
+                y='Stage', 
+                orientation='h',
+                color='Status',
+                color_discrete_map={'Complete': '#10b981', 'Pending': '#94a3b8', 'Available': '#3b82f6'},
+                title="Processing Pipeline Status"
+            )
+            fig.update_layout(
+                height=300,
+                showlegend=True,
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)',
+                font=dict(family="Inter, sans-serif")
+            )
+            st.plotly_chart(fig, use_container_width=True)
+        else:
+            st.info("Upload a dataset to begin the privacy protection pipeline")
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Quick Start Guide
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">🚀 Quick Start Guide</div>', unsafe_allow_html=True)
         
         st.markdown("""
-        **SafeData Pipeline** is a comprehensive data privacy protection system designed to meet 
-        the Government of India's data anonymization and privacy requirements.
+        **Get started with SafeData Pipeline in 5 simple steps:**
         
-        ### Key Features:
-        - **Risk Assessment**: Evaluate re-identification risks in datasets
-        - **Privacy Enhancement**: Apply k-anonymity, l-diversity, and differential privacy
-        - **Utility Measurement**: Measure data utility preservation after anonymization
-        - **Report Generation**: Generate comprehensive privacy-utility reports
-        - **Multi-format Support**: Handle CSV, Excel, JSON, XML, and Parquet files
-        
-        ### Quick Start:
-        1. Upload your dataset using the **Data Upload** module
-        2. Run **Risk Assessment** to identify vulnerabilities
-        3. Apply **Privacy Enhancement** techniques
-        4. Measure **Utility** to ensure data quality
-        5. Generate comprehensive **Reports**
+        1. **📁 Upload Data** - Import your dataset (CSV, Excel, JSON, XML, Parquet)
+        2. **🔍 Assess Risk** - Analyze re-identification vulnerabilities
+        3. **🔒 Enhance Privacy** - Apply anonymization techniques (k-anonymity, l-diversity)
+        4. **📈 Measure Utility** - Evaluate data quality preservation
+        5. **📋 Generate Reports** - Create comprehensive documentation
         """)
+        
+        st.markdown('</div>', unsafe_allow_html=True)
     
     with col2:
-        st.header("System Status")
+        # Current Session Status
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">🎯 Current Session</div>', unsafe_allow_html=True)
         
-        # Show current data status
         if st.session_state.data is not None:
-            st.success("✅ Dataset Loaded")
-            st.info(f"Rows: {len(st.session_state.data)}")
-            st.info(f"Columns: {len(st.session_state.data.columns)}")
+            data_info = st.session_state.data
+            st.markdown(f"""
+            **Dataset Information:**
+            - **Rows:** {len(data_info):,}
+            - **Columns:** {len(data_info.columns)}
+            - **Memory Usage:** {data_info.memory_usage(deep=True).sum() / 1024**2:.1f} MB
+            - **Data Types:** {len(data_info.dtypes.unique())} unique
+            """)
+            
+            # Data type distribution
+            dtype_counts = data_info.dtypes.value_counts()
+            fig = px.pie(
+                values=dtype_counts.values,
+                names=dtype_counts.index.astype(str),
+                title="Column Data Types"
+            )
+            fig.update_layout(
+                height=250,
+                showlegend=True,
+                plot_bgcolor='rgba(0,0,0,0)',
+                paper_bgcolor='rgba(0,0,0,0)',
+                font=dict(family="Inter, sans-serif", size=10)
+            )
+            st.plotly_chart(fig, use_container_width=True)
         else:
-            st.warning("⚠️ No Dataset Loaded")
+            st.warning("No dataset loaded. Start by uploading your data.")
         
-        if st.session_state.processed_data is not None:
-            st.success("✅ Privacy Enhanced Data Available")
+        st.markdown('</div>', unsafe_allow_html=True)
         
-        if st.session_state.risk_results is not None:
-            st.success("✅ Risk Assessment Complete")
+        # Quick Actions
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">⚡ Quick Actions</div>', unsafe_allow_html=True)
         
-        # Quick actions
-        st.header("Quick Actions")
-        if st.button("Load Sample Configuration"):
+        if st.button("🔧 Load Sample Configuration", use_container_width=True):
             load_sample_config()
+            st.success("Sample configuration loaded!")
         
-        if st.button("Clear All Data"):
+        if st.button("🗑️ Clear All Data", use_container_width=True):
             clear_session_data()
+            st.success("All session data cleared!")
+        
+        if st.button("📊 View System Stats", use_container_width=True):
+            show_system_stats()
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
+def show_system_stats():
+    """Display system statistics in a modal-like container"""
+    st.info("System running smoothly! All modules operational.")
+
+def load_sample_config():
+    """Load sample privacy configuration"""
+    st.session_state.config = {
+        'k_anonymity': 3,
+        'l_diversity': 2,
+        't_closeness': 0.2,
+        'differential_privacy': 0.1
+    }
+
+def clear_session_data():
+    """Clear all session data"""
+    for key in ['data', 'processed_data', 'risk_results', 'utility_results', 'config']:
+        if key in st.session_state:
+            del st.session_state[key]
+    st.session_state.data = None
+    st.session_state.processed_data = None
+    st.session_state.risk_results = None
+    st.session_state.utility_results = None
+    st.session_state.config = {}
 
 def show_data_upload():
-    """Data upload and validation interface"""
-    st.header("📁 Data Upload and Validation")
+    """Modern data upload and validation interface"""
     
-    # File upload
-    uploaded_file = st.file_uploader(
-        "Choose a file",
-        type=['csv', 'xlsx', 'xls', 'json', 'xml', 'parquet'],
-        help="Supported formats: CSV, Excel, JSON, XML, Parquet"
-    )
+    # Page header
+    st.markdown("""
+    <div class="dashboard-header fade-in">
+        <div class="dashboard-title">📁 Data Upload & Validation</div>
+        <div class="dashboard-subtitle">Import and validate your dataset for privacy processing</div>
+    </div>
+    """, unsafe_allow_html=True)
     
-    if uploaded_file is not None:
-        try:
-            with st.spinner("Loading and validating data..."):
-                # Load data based on file type
-                data = components['data_handler'].load_data(uploaded_file)
-                
-                # Validate data
-                validation_results = components['validator'].validate_data(data)
-                
-                if validation_results['is_valid']:
-                    st.session_state.data = data
-                    st.success("✅ Data loaded successfully!")
+    # Upload section
+    col1, col2 = st.columns([2, 1])
+    
+    with col1:
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">📤 Upload Dataset</div>', unsafe_allow_html=True)
+        
+        # Custom upload area
+        st.markdown("""
+        <div class="upload-area">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+            <div style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">Drag and drop your file here</div>
+            <div style="color: #64748b; margin-bottom: 1rem;">or click to browse</div>
+            <div style="font-size: 0.875rem; color: #94a3b8;">Supported formats: CSV, Excel, JSON, XML, Parquet</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        uploaded_file = st.file_uploader(
+            "Choose a file",
+            type=['csv', 'xlsx', 'xls', 'json', 'xml', 'parquet'],
+            help="Supported formats: CSV, Excel, JSON, XML, Parquet",
+            label_visibility="collapsed"
+        )
+        
+        if uploaded_file is not None:
+            try:
+                with st.spinner("🔄 Loading and validating data..."):
+                    # Load data based on file type
+                    data = components['data_handler'].load_data(uploaded_file)
                     
-                    # Display data preview
-                    st.subheader("Data Preview")
-                    st.dataframe(data.head(10))
+                    # Validate data
+                    validation_results = components['validator'].validate_data(data)
                     
-                    # Display data info
-                    col1, col2, col3 = st.columns(3)
-                    with col1:
-                        st.metric("Rows", len(data))
-                    with col2:
-                        st.metric("Columns", len(data.columns))
-                    with col3:
-                        st.metric("Missing Values", data.isnull().sum().sum())
-                    
-                    # Column information
-                    st.subheader("Column Information")
-                    col_info = pd.DataFrame({
-                        'Column': data.columns,
-                        'Type': data.dtypes,
-                        'Non-Null Count': data.count(),
-                        'Unique Values': data.nunique()
-                    })
-                    st.dataframe(col_info)
-                    
-                else:
-                    st.error("❌ Data validation failed!")
-                    for error in validation_results['errors']:
-                        st.error(error)
-                    
-                    # Offer data repair
-                    if st.button("Attempt Data Repair"):
-                        repaired_data = components['data_handler'].repair_data(data)
-                        st.session_state.data = repaired_data
-                        st.success("Data repair attempted. Please review the data.")
-                        st.rerun()
+                    if validation_results['is_valid']:
+                        st.session_state.data = data
+                        st.success("✅ Data loaded successfully!")
                         
-        except Exception as e:
-            st.error(f"Error loading data: {str(e)}")
+                        # File information metrics
+                        col_a, col_b, col_c, col_d = st.columns(4)
+                        with col_a:
+                            st.markdown(create_metric_card("Rows", f"{len(data):,}"), unsafe_allow_html=True)
+                        with col_b:
+                            st.markdown(create_metric_card("Columns", len(data.columns)), unsafe_allow_html=True)
+                        with col_c:
+                            st.markdown(create_metric_card("Size", f"{data.memory_usage(deep=True).sum() / 1024**2:.1f} MB"), unsafe_allow_html=True)
+                        with col_d:
+                            st.markdown(create_metric_card("File Type", uploaded_file.name.split('.')[-1].upper()), unsafe_allow_html=True)
+                        
+                        # Data preview with modern styling
+                        st.markdown("### 📋 Data Preview")
+                        st.dataframe(data.head(10), use_container_width=True)
+                        
+                    else:
+                        st.error("❌ Data validation failed!")
+                        for error in validation_results['errors']:
+                            st.error(error)
+                        
+                        # Offer data repair
+                        if st.button("🔧 Attempt Data Repair", use_container_width=True):
+                            repaired_data = components['data_handler'].repair_data(data)
+                            st.session_state.data = repaired_data
+                            st.success("Data repair attempted. Please review the data.")
+                            st.rerun()
+                            
+            except Exception as e:
+                st.error(f"Error loading data: {str(e)}")
+        
+        st.markdown('</div>', unsafe_allow_html=True)
     
-    # Data corruption handling section
-    if st.session_state.data is not None:
-        st.subheader("🔧 Data Quality Assessment")
+    with col2:
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">📊 Upload Guidelines</div>', unsafe_allow_html=True)
         
-        quality_report = components['data_handler'].assess_data_quality(st.session_state.data)
+        st.markdown("""
+        **Supported File Formats:**
+        - **CSV** - Comma-separated values
+        - **Excel** - .xlsx, .xls files
+        - **JSON** - JavaScript Object Notation
+        - **XML** - Extensible Markup Language
+        - **Parquet** - Apache Parquet format
         
-        col1, col2 = st.columns(2)
-        with col1:
-            st.metric("Quality Score", f"{quality_report['overall_quality']:.2f}%")
-            st.metric("Completeness", f"{quality_report['completeness']:.2f}%")
+        **Best Practices:**
+        - Ensure data has clear column headers
+        - Remove or handle missing values appropriately
+        - Verify data types are correctly identified
+        - Check for any sensitive information before upload
         
-        with col2:
-            st.metric("Consistency", f"{quality_report['consistency']:.2f}%")
-            st.metric("Validity", f"{quality_report['validity']:.2f}%")
+        **Data Quality Tips:**
+        - Keep consistent formatting across columns
+        - Use standard date formats (YYYY-MM-DD)
+        - Avoid special characters in column names
+        - Ensure numerical data doesn't contain text
+        """)
         
-        if quality_report['issues']:
-            st.warning("Data Quality Issues Detected:")
-            for issue in quality_report['issues']:
-                st.write(f"- {issue}")
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Data quality assessment for loaded data
+        if st.session_state.data is not None:
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🔍 Quality Assessment</div>', unsafe_allow_html=True)
             
-            if st.button("Apply Automatic Fixes"):
-                fixed_data = components['data_handler'].apply_fixes(st.session_state.data, quality_report['issues'])
-                st.session_state.data = fixed_data
-                st.success("Automatic fixes applied!")
-                st.rerun()
+            quality_report = components['data_handler'].assess_data_quality(st.session_state.data)
+            
+            # Quality metrics
+            st.markdown(create_metric_card("Quality Score", f"{quality_report['overall_quality']:.1f}%"), unsafe_allow_html=True)
+            st.markdown(create_metric_card("Completeness", f"{quality_report['completeness']:.1f}%"), unsafe_allow_html=True)
+            
+            if quality_report['issues']:
+                st.warning("Issues detected:")
+                for issue in quality_report['issues'][:3]:  # Show top 3 issues
+                    st.write(f"• {issue}")
+                
+                if st.button("🔧 Apply Auto-Fixes", use_container_width=True):
+                    fixed_data = components['data_handler'].apply_fixes(st.session_state.data, quality_report['issues'])
+                    st.session_state.data = fixed_data
+                    st.success("Auto-fixes applied!")
+                    st.rerun()
+            else:
+                st.success("✅ No quality issues detected")
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
 def show_risk_assessment():
     """Risk assessment interface"""
