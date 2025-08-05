@@ -247,51 +247,169 @@ def load_css():
         color: #1a202c !important;
     }
     
-    /* Force high contrast for important text */
-    .main .stMarkdown h1,
-    .main .stMarkdown h2, 
-    .main .stMarkdown h3,
-    .main .stMarkdown p,
-    .main .stMarkdown div,
-    .main .stText,
-    .main .stWrite {
-        color: #2d3748 !important;
+    /* COMPREHENSIVE LIGHT MODE TEXT VISIBILITY FIXES */
+    
+    /* Force ALL text elements to be dark and visible */
+    .stApp .main * {
+        color: #1a202c !important;
     }
     
-    /* Upload area text visibility */
-    .upload-area div {
-        color: #2d3748 !important;
-        font-weight: 600;
+    /* Override any inherited text colors */
+    * {
+        color: #1a202c !important;
     }
     
-    /* Better table styling */
-    .stDataFrame {
-        border-radius: 12px;
-        overflow: hidden;
-        border: 2px solid #e2e8f0;
+    /* Specific overrides for common Streamlit elements */
+    .stMarkdown,
+    .stMarkdown *,
+    .stText,
+    .stText *,
+    .stWrite,
+    .stWrite *,
+    p, div, span, label, h1, h2, h3, h4, h5, h6 {
+        color: #1a202c !important;
     }
     
-    /* Ensure all text in cards is visible */
+    /* Force metric text visibility */
+    .stMetric .metric-label,
+    .stMetric .metric-value,
+    .stMetric .metric-delta {
+        color: #1a202c !important;
+    }
+    
+    /* Upload area and all children */
+    .upload-area,
+    .upload-area *,
+    .upload-area div,
+    .upload-area span,
+    .upload-area p {
+        color: #1a202c !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Dashboard cards and all content */
+    .dashboard-card,
+    .dashboard-card *,
     .dashboard-card .stMarkdown,
     .dashboard-card .stText,
     .dashboard-card .stWrite,
     .dashboard-card p,
     .dashboard-card div,
+    .dashboard-card span,
     .dashboard-card li {
-        color: #2d3748 !important;
-    }
-    
-    /* Fix warning and info text visibility */
-    .stAlert > div {
         color: #1a202c !important;
     }
     
-    /* Better button contrast */
+    /* Form elements and inputs */
+    .stSelectbox label,
+    .stSelectbox *,
+    .stSlider label,
+    .stSlider *,
+    .stCheckbox label,
+    .stCheckbox *,
+    .stRadio label,
+    .stRadio *,
+    .stTextInput label,
+    .stTextInput *,
+    .stNumberInput label,
+    .stNumberInput * {
+        color: #1a202c !important;
+    }
+    
+    /* Tables and dataframes */
+    .stDataFrame,
+    .stDataFrame *,
+    table,
+    table *,
+    th,
+    td {
+        color: #1a202c !important;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+    }
+    
+    /* Alerts and messages */
+    .stAlert,
+    .stAlert *,
+    .stSuccess,
+    .stSuccess *,
+    .stWarning,
+    .stWarning *,
+    .stError,
+    .stError *,
+    .stInfo,
+    .stInfo * {
+        color: #1a202c !important;
+    }
+    
+    /* Exception: Keep sidebar text light for dark sidebar */
+    .css-1d391kg,
+    .css-1d391kg *,
+    .css-1d391kg .stMarkdown,
+    .css-1d391kg .stMarkdown *,
+    .css-1d391kg p,
+    .css-1d391kg div,
+    .css-1d391kg span {
+        color: #f1f5f9 !important;
+    }
+    
+    /* Exception: Keep header text light for dark header */
+    .dashboard-header,
+    .dashboard-header *,
+    .dashboard-title,
+    .dashboard-subtitle {
+        color: white !important;
+    }
+    
+    /* Better button styling */
     .stButton > button {
         background: linear-gradient(145deg, #2563eb, #1d4ed8) !important;
         color: white !important;
         font-weight: 600 !important;
         border: none !important;
+    }
+    
+    /* FINAL OVERRIDE - Force everything to be visible */
+    .main .element-container,
+    .main .element-container *,
+    .main .stMarkdown,
+    .main .stMarkdown *,
+    .main .block-container,
+    .main .block-container *,
+    .main .row-widget,
+    .main .row-widget * {
+        color: #1a202c !important;
+    }
+    
+    /* Specific Streamlit component overrides */
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stMarkdownContainer"] *,
+    [data-testid="stText"],
+    [data-testid="stText"] *,
+    [data-testid="metric-container"],
+    [data-testid="metric-container"] *,
+    [data-testid="metric-label"],
+    [data-testid="metric-value"] {
+        color: #1a202c !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Force all text elements in light mode */
+    body:not(.dark-mode) *,
+    html:not(.dark-mode) *,
+    .stApp:not(.dark-mode) * {
+        color: #1a202c !important;
+    }
+    
+    /* Override Streamlit's default text colors completely */
+    .css-1v0mbdj,
+    .css-1v0mbdj *,
+    .css-16huue1,
+    .css-16huue1 *,
+    .css-1wbqy5l,
+    .css-1wbqy5l * {
+        color: #1a202c !important;
     }
     
     /* Animation keyframes */
@@ -661,9 +779,9 @@ def show_data_upload():
         st.markdown("""
         <div class="upload-area">
             <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
-            <div style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a202c;">Drag and drop your file here</div>
-            <div style="color: #4a5568; margin-bottom: 1rem; font-weight: 500;">or click to browse</div>
-            <div style="font-size: 0.875rem; color: #2d3748; font-weight: 500;">Supported formats: CSV, Excel, JSON, XML, Parquet</div>
+            <div style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: #1a202c !important;">Drag and drop your file here</div>
+            <div style="color: #1a202c !important; margin-bottom: 1rem; font-weight: 600;">or click to browse</div>
+            <div style="font-size: 0.875rem; color: #1a202c !important; font-weight: 600;">Supported formats: CSV, Excel, JSON, XML, Parquet</div>
         </div>
         """, unsafe_allow_html=True)
         
