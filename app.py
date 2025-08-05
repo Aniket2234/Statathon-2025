@@ -478,58 +478,7 @@ def load_css():
     }
     </style>
     
-    /* TARGET THE EXACT CLASS FROM INSPECTOR */
-    .css-16txtl3.eiipil42 {
-        background-color: white !important;
-        color: #1a202c !important;
-        border: 1px solid #d1d5db !important;
-        font-weight: 500 !important;
-    }
-    
-    /* TARGET THE SPECIFIC DIV STRUCTURE */
-    div[style*="background-color: rgb(59, 130, 246)"] {
-        background-color: white !important;
-        color: #1a202c !important;
-        border: 1px solid #d1d5db !important;
-    }
-    
-    <script>
-    // JavaScript solution to forcibly remove blue backgrounds from sliders
-    function fixSliderStyling() {
-        // Target the specific class seen in inspector
-        const blueElements = document.querySelectorAll('.css-16txtl3.eiipil42');
-        blueElements.forEach(element => {
-            element.style.backgroundColor = 'white';
-            element.style.color = '#1a202c';
-            element.style.border = '1px solid #d1d5db';
-            element.style.fontWeight = '500';
-        });
-        
-        // Target any element with the exact blue color
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(element => {
-            const style = window.getComputedStyle(element);
-            if (style.backgroundColor === 'rgb(59, 130, 246)') {
-                element.style.backgroundColor = 'white';
-                element.style.color = '#1a202c';
-                element.style.border = '1px solid #d1d5db';
-                element.style.fontWeight = '500';
-            }
-        });
-    }
-    
-    // Run immediately and repeatedly
-    fixSliderStyling();
-    setInterval(fixSliderStyling, 500);
-    
-    // Run when page loads and updates
-    document.addEventListener('DOMContentLoaded', fixSliderStyling);
-    window.addEventListener('load', fixSliderStyling);
-    
-    // Use MutationObserver to catch dynamic changes
-    const observer = new MutationObserver(fixSliderStyling);
-    observer.observe(document.body, { childList: true, subtree: true });
-    </script>
+
     
     <style>
     
@@ -1779,8 +1728,8 @@ def show_risk_assessment():
     # Risk assessment parameters
     col1, col2 = st.columns(2)
     with col1:
-        k_threshold = st.slider("K-Anonymity Threshold", 2, 20, 3)
-        sample_size = st.slider("Sample Size for Assessment (%)", 10, 100, 50)
+        k_threshold = st.number_input("K-Anonymity Threshold", min_value=2, max_value=20, value=3, step=1)
+        sample_size = st.number_input("Sample Size for Assessment (%)", min_value=10, max_value=100, value=50, step=5)
     
     with col2:
         attack_scenarios = st.multiselect(
