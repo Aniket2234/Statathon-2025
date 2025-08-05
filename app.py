@@ -1293,126 +1293,101 @@ def main():
         auth_manager.login_page()
         return
     
-    # Get user profile for header
-    user_profile = st.session_state.get('user_profile', {})
-    
-    # Modern Website Header Navigation
-    st.markdown("""
-    <div style='background: linear-gradient(135deg, #1e293b 0%, #334155 100%); 
-                padding: 1rem 2rem; margin: -1rem -1rem 2rem -1rem; 
-                box-shadow: 0 4px 20px rgba(0,0,0,0.1);'>
-        <div style='display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto;'>
-            <!-- Logo and Title -->
-            <div style='display: flex; align-items: center;'>
-                <div style='background: rgba(59, 130, 246, 0.2); padding: 0.8rem; border-radius: 12px; margin-right: 1.5rem;'>
-                    <span style='font-size: 1.8rem; color: #60a5fa;'>🛡️</span>
-                </div>
-                <div>
-                    <h1 style='color: white; margin: 0; font-size: 1.6rem; font-weight: 800;'>SafeData Pipeline</h1>
-                    <p style='color: #94a3b8; margin: 0; font-size: 0.9rem;'>Government of India - Data Privacy Protection</p>
-                </div>
-            </div>
-            
-            <!-- User Info and Actions -->
-            <div style='display: flex; align-items: center; gap: 1rem;'>
-                <div style='text-align: right; margin-right: 1rem;'>
-                    <div style='color: white; font-weight: 600; font-size: 0.95rem;'>{user_profile.get('full_name', 'Administrator')}</div>
-                    <div style='color: #94a3b8; font-size: 0.8rem;'>{user_profile.get('role', 'System Admin')}</div>
-                </div>
-                <div style='background: rgba(59, 130, 246, 0.2); padding: 0.6rem; border-radius: 8px;'>
-                    <span style='color: #60a5fa; font-size: 1.2rem;'>👤</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Horizontal Navigation Menu
-    st.markdown("""
-    <style>
-    .nav-container {
-        background: white;
-        padding: 1rem 2rem;
-        margin: -1rem -1rem 2rem -1rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        border-bottom: 1px solid #e2e8f0;
-    }
-    
-    .nav-tabs {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-        flex-wrap: wrap;
-    }
-    
-    .nav-tab {
-        padding: 0.8rem 1.5rem;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: 600;
-        color: #64748b;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .nav-tab:hover {
-        background: #f1f5f9;
-        color: #3b82f6;
-        transform: translateY(-1px);
-    }
-    
-    .nav-tab.active {
-        background: linear-gradient(135deg, #3b82f6, #2563eb);
-        color: white;
-        border-color: #3b82f6;
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
-    }
-    </style>
-    """, unsafe_allow_html=True)
-    
-    # Navigation Menu
-    navigation_options = [
-        ("🏠", "Dashboard"),
-        ("👤", "User Profile"), 
-        ("📂", "Data Upload"),
-        ("⚠️", "Risk Assessment"),
-        ("🔒", "Privacy Enhancement"),
-        ("📊", "Utility Analysis"),
-        ("📋", "Reports"),
-        ("⚙️", "Configuration"),
-        ("❓", "Help")
-    ]
-    
-    # Create navigation tabs
-    nav_cols = st.columns(len(navigation_options))
-    selected = None
-    
-    for i, (icon, option) in enumerate(navigation_options):
-        with nav_cols[i]:
-            if st.button(f"{icon} {option}", key=f"nav_{option}", use_container_width=True):
-                selected = option
-    
-    # Default to Dashboard if nothing selected
-    if selected is None:
-        selected = "Dashboard"
-    
-    # Logout button in sidebar (minimal)
+    # Sidebar navigation with icons
     with st.sidebar:
-        # Minimalist sidebar with system status and logout
+        st.markdown('<div style="padding: 1rem 0;">', unsafe_allow_html=True)
+        
+        # Logo and title
         st.markdown("""
-        <div style="background: linear-gradient(180deg, #1e293b 0%, #334155 100%); 
-                    padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
-            <h4 style="color: white; margin: 0 0 1rem 0; text-align: center;">System Status</h4>
+        <div style="text-align: center; padding: 1rem 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: #1a202c; margin-bottom: 0.5rem;">🛡️</div>
+            <div style="color: #1a202c; font-weight: 700; font-size: 1.1rem;">SafeData Pipeline</div>
+            <div style="color: #4a5568; font-size: 0.8rem; font-weight: 600;">Government of India</div>
         </div>
         """, unsafe_allow_html=True)
         
-        # System status indicators
+        # User profile section with logout
+        user_profile = st.session_state.get('user_profile', {})
+        st.markdown(f"""
+        <div style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); 
+                    padding: 1rem; border-radius: 8px; margin-bottom: 1rem; color: white;">
+            <div style="font-size: 0.9rem; opacity: 0.9;">Welcome back,</div>
+            <div style="font-weight: 700; font-size: 1.1rem;">{user_profile.get('full_name', 'Administrator')}</div>
+            <div style="font-size: 0.8rem; opacity: 0.8;">{user_profile.get('role', 'System Admin')}</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Logout button with better visibility
+        st.markdown("""
+        <style>
+        .logout-button > button {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #b91c1c 100%) !important;
+            color: #ffffff !important;
+            font-weight: 700 !important;
+            border: 2px solid #ef4444 !important;
+            border-radius: 8px !important;
+            padding: 0.5rem 1rem !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3) !important;
+        }
+        .logout-button > button:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 50%, #991b1b 100%) !important;
+            border-color: #dc2626 !important;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4) !important;
+            transform: translateY(-1px) !important;
+        }
+        .logout-button > button span {
+            color: #ffffff !important;
+            font-weight: 700 !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        if st.button("🚪 Logout", use_container_width=True, key="logout_btn", help="Click to logout"):
+            auth_manager.logout()
+        
+        st.markdown("---")
+        
+        # Navigation menu with icons (including User Profile)
+        selected = option_menu(
+            menu_title=None,
+            options=["Dashboard", "User Profile", "Data Upload", "Risk Assessment", "Privacy Enhancement", 
+                    "Utility Analysis", "Reports", "Configuration", "Help"],
+            icons=["house-door", "person-circle", "cloud-upload", "shield-exclamation", "lock", 
+                  "graph-up", "file-earmark-text", "gear", "question-circle"],
+            menu_icon="cast",
+            default_index=0,
+            styles={
+                "container": {"padding": "0!important", "background-color": "#f8fafc"},
+                "icon": {"color": "#1a202c", "font-size": "18px"},
+                "nav-link": {
+                    "font-size": "14px",
+                    "text-align": "left",
+                    "margin": "2px",
+                    "padding": "12px",
+                    "color": "#1a202c",
+                    "background-color": "#f8fafc",
+                    "border-radius": "8px",
+                    "font-weight": "600",
+                },
+                "nav-link-selected": {
+                    "background-color": "#3b82f6",
+                    "color": "#ffffff",
+                    "font-weight": "700",
+                },
+                "nav-link:hover": {
+                    "background-color": "#e2e8f0",
+                    "color": "#1a202c",
+                }
+            }
+        )
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+        # System status in sidebar
+        st.markdown("---")
+        st.markdown("**System Status**")
+        
         if st.session_state.data is not None:
             st.markdown(show_status_indicator("success", "✓ Dataset Loaded"), unsafe_allow_html=True)
         else:
@@ -1423,12 +1398,6 @@ def main():
             
         if st.session_state.risk_results is not None:
             st.markdown(show_status_indicator("success", "✓ Risk Assessed"), unsafe_allow_html=True)
-        
-        st.markdown("---")
-        
-        # Logout button
-        if st.button("🚪 Logout", use_container_width=True, key="logout_btn", help="Click to logout"):
-            auth_manager.logout()
     
     # Main content based on selected page
     if selected == "Dashboard":
@@ -1462,116 +1431,54 @@ def main():
     """, unsafe_allow_html=True)
 
 def show_dashboard():
-    """Display modern website-style dashboard with metrics and overview"""
+    """Display modern dashboard with metrics and overview"""
     
-    # Hero Section
+    # Dashboard header with AIRAVATA branding
     st.markdown("""
-    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                padding: 3rem 2rem; border-radius: 20px; color: white; margin-bottom: 2rem;
-                text-align: center; position: relative; overflow: hidden;'>
-        <div style='position: relative; z-index: 2;'>
-            <h1 style='font-size: 3rem; font-weight: 900; margin: 0 0 1rem 0; text-shadow: 0 2px 4px rgba(0,0,0,0.3);'>
-                Welcome to SafeData Pipeline
-            </h1>
-            <p style='font-size: 1.3rem; margin: 0 0 2rem 0; opacity: 0.95; font-weight: 500;'>
-                Advanced Data Privacy Protection & Anonymization System
-            </p>
-            <div style='display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;'>
-                <div style='background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 12px; backdrop-filter: blur(10px);'>
-                    <div style='font-size: 0.9rem; opacity: 0.8;'>Developed for</div>
-                    <div style='font-weight: 700;'>Government of India</div>
-                </div>
-                <div style='background: rgba(255,255,255,0.2); padding: 1rem 2rem; border-radius: 12px; backdrop-filter: blur(10px);'>
-                    <div style='font-size: 0.9rem; opacity: 0.8;'>Made by</div>
-                    <div style='font-weight: 700;'>AIRAVATA Technologies</div>
-                </div>
-            </div>
+    <div class="dashboard-header fade-in">
+        <div class="dashboard-title">SafeData Pipeline Dashboard</div>
+        <div style="text-align: right; font-size: 0.9rem; opacity: 0.8; margin-top: 0.5rem;">
+            🚀 Made by AIRAVATA Technologies
         </div>
-        <div style='position: absolute; top: -50%; right: -20%; width: 300px; height: 300px; 
-                    background: rgba(255,255,255,0.1); border-radius: 50%; z-index: 1;'></div>
-        <div style='position: absolute; bottom: -30%; left: -10%; width: 200px; height: 200px; 
-                    background: rgba(255,255,255,0.05); border-radius: 50%; z-index: 1;'></div>
+        <div class="dashboard-subtitle">Data Privacy Protection & Anonymization System</div>
+        <div style="margin-top: 1rem; opacity: 0.8;">Ministry of Electronics and Information Technology • Government of India</div>
     </div>
     """, unsafe_allow_html=True)
-
     
-    # Key metrics cards with modern design
+    # Key metrics row - only show when data is available
     if st.session_state.data is not None:
-        st.markdown("## 📊 Current Session Overview")
         col1, col2, col3, col4 = st.columns(4)
         
         with col1:
             rows = len(st.session_state.data)
-            st.markdown(f"""
-            <div style='background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); 
-                        padding: 2rem; border-radius: 15px; color: white; text-align: center;
-                        box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3); margin-bottom: 1rem;'>
-                <div style='font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;'>{rows:,}</div>
-                <div style='font-size: 1rem; opacity: 0.9;'>Total Records</div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(create_metric_card("Total Records", f"{rows:,}"), unsafe_allow_html=True)
         
         with col2:
             cols = len(st.session_state.data.columns)
-            st.markdown(f"""
-            <div style='background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
-                        padding: 2rem; border-radius: 15px; color: white; text-align: center;
-                        box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3); margin-bottom: 1rem;'>
-                <div style='font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;'>{cols}</div>
-                <div style='font-size: 1rem; opacity: 0.9;'>Data Columns</div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(create_metric_card("Data Columns", cols), unsafe_allow_html=True)
         
         with col3:
             if st.session_state.risk_results is not None:
                 risk_level = st.session_state.risk_results.get('overall_risk', 'Unknown')
-                risk_color = "#ef4444" if risk_level == "High" else "#f59e0b" if risk_level == "Medium" else "#10b981"
+                st.markdown(create_metric_card("Risk Level", risk_level), unsafe_allow_html=True)
             else:
-                risk_level = "Pending"
-                risk_color = "#6b7280"
-            
-            st.markdown(f"""
-            <div style='background: linear-gradient(135deg, {risk_color} 0%, {risk_color}dd 100%); 
-                        padding: 2rem; border-radius: 15px; color: white; text-align: center;
-                        box-shadow: 0 10px 30px {risk_color}50; margin-bottom: 1rem;'>
-                <div style='font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;'>{risk_level}</div>
-                <div style='font-size: 1rem; opacity: 0.9;'>Risk Level</div>
-            </div>
-            """, unsafe_allow_html=True)
+                st.markdown(create_metric_card("Risk Level", "Pending Analysis"), unsafe_allow_html=True)
         
         with col4:
             if st.session_state.utility_results is not None:
                 utility_score = st.session_state.utility_results.get('overall_utility', 0)
-                utility_text = f"{utility_score:.1%}"
+                st.markdown(create_metric_card("Utility Score", f"{utility_score:.1%}"), unsafe_allow_html=True)
             else:
-                utility_text = "Pending"
-            
-            st.markdown(f"""
-            <div style='background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); 
-                        padding: 2rem; border-radius: 15px; color: white; text-align: center;
-                        box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3); margin-bottom: 1rem;'>
-                <div style='font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem;'>{utility_text}</div>
-                <div style='font-size: 1rem; opacity: 0.9;'>Utility Score</div>
-            </div>
-            """, unsafe_allow_html=True)
+                st.markdown(create_metric_card("Utility Score", "Pending Analysis"), unsafe_allow_html=True)
     
-    # Main dashboard content with website-style sections
+    # Main dashboard content
+    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+    
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        # Processing Pipeline Section
-        st.markdown("""
-        <div style='background: white; padding: 2rem; border-radius: 15px; 
-                    box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 2rem;
-                    border: 1px solid #e2e8f0;'>
-            <h3 style='color: #1e293b; margin: 0 0 1.5rem 0; font-size: 1.4rem; font-weight: 700;
-                      display: flex; align-items: center;'>
-                <span style='background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; 
-                           padding: 0.5rem; border-radius: 8px; margin-right: 1rem; font-size: 1.2rem;'>📊</span>
-                Data Processing Pipeline
-            </h3>
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+        st.markdown('<div class="card-header">📊 Data Processing Pipeline</div>', unsafe_allow_html=True)
         
         # Processing pipeline visualization - only show when data is loaded
         if st.session_state.data is not None:
