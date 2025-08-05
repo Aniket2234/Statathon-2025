@@ -44,34 +44,38 @@ def load_css():
     
     /* Custom metric card styling */
     .metric-card {
-        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        background: linear-gradient(145deg, #ffffff 0%, #f1f5f9 100%);
         padding: 1.5rem;
         border-radius: 12px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        border: 2px solid #e2e8f0;
+        box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
         margin-bottom: 1rem;
         transition: all 0.3s ease;
     }
     
     .metric-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12);
+        border-color: #3b82f6;
     }
     
     .metric-value {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #1e293b;
+        color: #0f172a;
         margin: 0;
         font-family: 'Inter', sans-serif;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
     
     .metric-label {
         font-size: 0.875rem;
-        color: #64748b;
-        font-weight: 500;
+        color: #475569;
+        font-weight: 600;
         margin-top: 0.5rem;
         font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }
     
     .metric-delta-positive {
@@ -88,75 +92,95 @@ def load_css():
     
     /* Header styling */
     .dashboard-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 2rem;
-        border-radius: 12px;
+        background: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #581c87 100%);
+        padding: 2.5rem;
+        border-radius: 16px;
         color: white;
         margin-bottom: 2rem;
-        box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 20px 40px -12px rgba(30, 64, 175, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
     
     .dashboard-title {
-        font-size: 2.5rem;
-        font-weight: 700;
+        font-size: 2.75rem;
+        font-weight: 800;
         margin: 0;
         font-family: 'Inter', sans-serif;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
     .dashboard-subtitle {
-        font-size: 1.125rem;
-        opacity: 0.9;
-        margin-top: 0.5rem;
+        font-size: 1.25rem;
+        opacity: 0.95;
+        margin-top: 0.75rem;
         font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
     
     /* Status indicators */
     .status-indicator {
         display: inline-flex;
         align-items: center;
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1.2rem;
         border-radius: 9999px;
         font-size: 0.875rem;
-        font-weight: 500;
+        font-weight: 600;
         margin: 0.25rem;
+        border: 1px solid;
+        text-transform: uppercase;
+        letter-spacing: 0.025em;
     }
     
     .status-success {
-        background-color: #dcfce7;
-        color: #166534;
+        background-color: #d1fae5;
+        color: #065f46;
+        border-color: #10b981;
     }
     
     .status-warning {
         background-color: #fef3c7;
-        color: #92400e;
+        color: #78350f;
+        border-color: #f59e0b;
     }
     
     .status-error {
         background-color: #fee2e2;
-        color: #991b1b;
+        color: #7f1d1d;
+        border-color: #ef4444;
     }
     
     .status-info {
         background-color: #dbeafe;
-        color: #1e40af;
+        color: #1e3a8a;
+        border-color: #3b82f6;
     }
     
     /* Card containers */
     .dashboard-card {
-        background: white;
-        border-radius: 12px;
-        padding: 1.5rem;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 16px;
+        padding: 2rem;
+        border: 2px solid #e2e8f0;
+        box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.08);
         margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .dashboard-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.12);
+        border-color: #cbd5e1;
     }
     
     .card-header {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #1e293b;
-        margin-bottom: 1rem;
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 1.25rem;
         font-family: 'Inter', sans-serif;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 0.75rem;
     }
     
     /* Button styling */
@@ -178,22 +202,33 @@ def load_css():
     
     /* Sidebar styling */
     .css-1d391kg {
-        background: linear-gradient(180deg, #1e293b 0%, #334155 100%);
+        background: linear-gradient(180deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+    }
+    
+    /* Sidebar text visibility */
+    .css-1d391kg .stMarkdown h1,
+    .css-1d391kg .stMarkdown h2,
+    .css-1d391kg .stMarkdown h3,
+    .css-1d391kg .stMarkdown p,
+    .css-1d391kg .stMarkdown div {
+        color: #f1f5f9 !important;
     }
     
     /* Upload area styling */
     .upload-area {
-        border: 2px dashed #cbd5e1;
-        border-radius: 12px;
-        padding: 2rem;
+        border: 3px dashed #94a3b8;
+        border-radius: 16px;
+        padding: 3rem;
         text-align: center;
-        background: #f8fafc;
+        background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
         transition: all 0.3s ease;
     }
     
     .upload-area:hover {
         border-color: #3b82f6;
-        background: #eff6ff;
+        background: linear-gradient(145deg, #eff6ff 0%, #dbeafe 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px -5px rgba(59, 130, 246, 0.15);
     }
     
     /* Progress bars */
@@ -206,6 +241,18 @@ def load_css():
     #MainMenu {visibility: hidden;}
     footer {visibility: hidden;}
     .stDeployButton {display:none;}
+    
+    /* Improve text readability */
+    .stMarkdown, .stText, .stWrite {
+        color: #1e293b !important;
+    }
+    
+    /* Better table styling */
+    .stDataFrame {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+    }
     
     /* Animation keyframes */
     @keyframes fadeIn {
