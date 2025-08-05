@@ -476,6 +476,52 @@ def load_css():
         padding: 4px 8px !important;
         border-radius: 4px !important;
     }
+    </style>
+    
+    <script>
+    // JavaScript solution to forcibly remove blue backgrounds from sliders
+    function fixSliderStyling() {
+        // Wait for elements to load
+        setTimeout(function() {
+            // Find all elements with blue backgrounds in sliders
+            const sliderElements = document.querySelectorAll('[data-testid="stSlider"] div');
+            sliderElements.forEach(element => {
+                const computedStyle = window.getComputedStyle(element);
+                const bgColor = computedStyle.backgroundColor;
+                
+                // Check if background is blue (various formats)
+                if (bgColor.includes('59, 130, 246') || 
+                    bgColor.includes('#3b82f6') || 
+                    element.style.backgroundColor.includes('rgb(59, 130, 246)')) {
+                    element.style.backgroundColor = 'white';
+                    element.style.color = '#1a202c';
+                    element.style.border = '1px solid #d1d5db';
+                    element.style.fontWeight = '500';
+                }
+            });
+            
+            // Target specific slider value boxes
+            const valueBoxes = document.querySelectorAll('[data-baseweb="tick"]');
+            valueBoxes.forEach(box => {
+                box.style.backgroundColor = 'white';
+                box.style.color = '#1a202c';
+                box.style.border = '1px solid #d1d5db';
+                box.style.fontWeight = '500';
+            });
+        }, 100);
+    }
+    
+    // Run the fix when page loads
+    document.addEventListener('DOMContentLoaded', fixSliderStyling);
+    
+    // Run periodically to catch dynamically created elements
+    setInterval(fixSliderStyling, 1000);
+    
+    // Run when Streamlit updates
+    window.addEventListener('load', fixSliderStyling);
+    </script>
+    
+    <style>
     
     /* Sidebar styling - Light theme only */
     .css-1d391kg {
