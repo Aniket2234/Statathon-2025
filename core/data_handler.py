@@ -409,26 +409,30 @@ class DataHandler:
         
         # Repair 1: Handle missing values
         for col in repaired_data.columns:
-            if repaired_data[col].isnull().any():
-                if repaired_data[col].dtype in ['int64', 'float64']:
-                    # Fill numeric missing values with median
-                    median_val = repaired_data[col].median()
-                    repaired_data[col].fillna(median_val, inplace=True)
-                else:
-                    # Fill categorical missing values with mode
-                    if not repaired_data[col].mode().empty:
-                        mode_val = repaired_data[col].mode()[0]
-                        repaired_data[col].fillna(mode_val, inplace=True)
+            try:
+                if repaired_data[col].isnull().any():
+                    if pd.api.types.is_numeric_dtype(repaired_data[col]):
+                        # Fill numeric missing values with median
+                        median_val = repaired_data[col].median()
+                        if pd.notna(median_val):
+                            repaired_data[col] = repaired_data[col].fillna(median_val)
                     else:
-                        repaired_data[col].fillna("Unknown", inplace=True)
+                        # Fill categorical missing values with mode
+                        mode_series = repaired_data[col].mode()
+                        if len(mode_series) > 0:
+                            repaired_data[col] = repaired_data[col].fillna(mode_series.iloc[0])
+                        else:
+                            repaired_data[col] = repaired_data[col].fillna("Unknown")
+            except Exception as e:
+                self.logger.warning(f"Could not repair missing values in column {col}: {e}")
+                continue
         
         # Repair 2: Convert numeric strings to proper numeric types
         for col in repaired_data.columns:
-            if repaired_data[col].dtype == 'object':
-                # Try to convert to numeric
-                try:
-                    # Remove common non-numeric characters
-                    cleaned_series = repaired_data[col].astype(str).str.replace('[$,]', '', regex=True)
+            try:
+                if repaired_data[col].dtype == 'object':
+                    # Try to convert to numeric
+                    cleaned_series = repaired_data[col].astype(str).str.replace(r'[$,]', '', regex=True)
                     numeric_series = pd.to_numeric(cleaned_series, errors='coerce')
                     
                     # If >80% of values can be converted, make the conversion
@@ -436,31 +440,39 @@ class DataHandler:
                     if non_null_count > len(repaired_data) * 0.8:
                         repaired_data[col] = numeric_series
                         # Fill remaining NaN with median
-                        repaired_data[col].fillna(repaired_data[col].median(), inplace=True)
-                except:
-                    pass
+                        median_val = repaired_data[col].median()
+                        if pd.notna(median_val):
+                            repaired_data[col] = repaired_data[col].fillna(median_val)
+            except Exception as e:
+                self.logger.warning(f"Could not convert column {col} to numeric: {e}")
+                continue
         
         # Repair 3: Standardize text data
         for col in repaired_data.columns:
-            if repaired_data[col].dtype == 'object':
-                # Remove leading/trailing whitespace
-                repaired_data[col] = repaired_data[col].astype(str).str.strip()
-                
-                # Standardize case for categorical-looking data
-                unique_values = repaired_data[col].nunique()
-                if unique_values < len(repaired_data) * 0.1:  # <10% unique values (likely categorical)
-                    repaired_data[col] = repaired_data[col].str.title()
+            try:
+                if repaired_data[col].dtype == 'object':
+                    # Remove leading/trailing whitespace
+                    repaired_data[col] = repaired_data[col].astype(str).str.strip()
+                    
+                    # Standardize case for categorical-looking data
+                    unique_values = repaired_data[col].nunique()
+                    if unique_values < len(repaired_data) * 0.1:  # <10% unique values (likely categorical)
+                        repaired_data[col] = repaired_data[col].str.title()
+            except Exception as e:
+                self.logger.warning(f"Could not standardize text in column {col}: {e}")
+                continue
         
         # Repair 4: Handle date columns (especially date_of_birth)
         for col in repaired_data.columns:
-            if repaired_data[col].dtype == 'object' and ('date' in col.lower() or 'birth' in col.lower()):
-                # Try to parse as dates
-                try:
+            try:
+                if repaired_data[col].dtype == 'object' and ('date' in col.lower() or 'birth' in col.lower()):
+                    # Try to parse as dates
                     date_series = pd.to_datetime(repaired_data[col], errors='coerce', infer_datetime_format=True)
                     if date_series.notna().sum() > len(repaired_data) * 0.8:
-                        repaired_data[col] = date_series
-                except:
-                    pass
+                        repaired_data[col] = date_series.dt.strftime('%Y-%m-%d')  # Standardize format
+            except Exception as e:
+                self.logger.warning(f"Could not parse dates in column {col}: {e}")
+                continue
         
         # Repair 5: Remove completely duplicate rows
         before_dedup = len(repaired_data)
@@ -472,19 +484,25 @@ class DataHandler:
         
         # Repair 6: Handle extreme outliers in numeric columns
         for col in repaired_data.columns:
-            if repaired_data[col].dtype in ['int64', 'float64']:
-                q1 = repaired_data[col].quantile(0.25)
-                q3 = repaired_data[col].quantile(0.75)
-                iqr = q3 - q1
-                
-                # Cap extreme outliers (beyond 3*IQR)
-                lower_bound = q1 - 3 * iqr
-                upper_bound = q3 + 3 * iqr
-                
-                outlier_count = ((repaired_data[col] < lower_bound) | (repaired_data[col] > upper_bound)).sum()
-                if outlier_count > 0:
-                    repaired_data[col] = repaired_data[col].clip(lower=lower_bound, upper=upper_bound)
-                    self.logger.info(f"Capped {outlier_count} outliers in column '{col}'")
+            try:
+                if pd.api.types.is_numeric_dtype(repaired_data[col]):
+                    q1 = repaired_data[col].quantile(0.25)
+                    q3 = repaired_data[col].quantile(0.75)
+                    iqr = q3 - q1
+                    
+                    if pd.notna(q1) and pd.notna(q3) and iqr > 0:
+                        # Cap extreme outliers (beyond 3*IQR)
+                        lower_bound = q1 - 3 * iqr
+                        upper_bound = q3 + 3 * iqr
+                        
+                        outlier_mask = (repaired_data[col] < lower_bound) | (repaired_data[col] > upper_bound)
+                        outlier_count = outlier_mask.sum()
+                        if outlier_count > 0:
+                            repaired_data[col] = repaired_data[col].clip(lower=lower_bound, upper=upper_bound)
+                            self.logger.info(f"Capped {outlier_count} outliers in column '{col}'")
+            except Exception as e:
+                self.logger.warning(f"Could not handle outliers in column {col}: {e}")
+                continue
         
         self.logger.info("Data repair process completed")
         return repaired_data
