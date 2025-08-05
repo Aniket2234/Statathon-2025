@@ -11,11 +11,15 @@ import pandas as pd
 import numpy as np
 
 def display_user_profile():
-    """Display comprehensive user profile dashboard"""
+    """Display comprehensive user profile dashboard with editing capabilities"""
     
     # Get user profile from session state
     user_profile = st.session_state.get('user_profile', {})
     username = st.session_state.get('username', 'Unknown')
+    
+    # Initialize edit mode in session state
+    if 'profile_edit_mode' not in st.session_state:
+        st.session_state.profile_edit_mode = False
     
     # Profile header with AIRAVATA branding - Sky Blue Theme
     st.markdown("""
@@ -54,51 +58,105 @@ def display_user_profile():
     </div>
     """, unsafe_allow_html=True)
     
-    # Profile information cards
+    # Profile information cards with edit functionality
     col1, col2 = st.columns(2)
     
     with col1:
-        # Personal Information Card - Sky Blue Theme
+        # Personal Information Card Header - Sky Blue Theme
         st.markdown("""
         <div style='background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); 
                     padding: 1.8rem; border-radius: 15px; 
                     box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08); margin-bottom: 1.5rem;
                     border-left: 5px solid #0ea5e9; border: 1px solid rgba(14, 165, 233, 0.1);'>
-            <div style='display: flex; align-items: center; margin-bottom: 1rem;'>
-                <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
-                            color: white; padding: 0.8rem; border-radius: 10px; margin-right: 1rem;'>
-                    <span style='font-size: 1.2rem;'>👨‍💼</span>
+            <div style='display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;'>
+                <div style='display: flex; align-items: center;'>
+                    <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                                color: white; padding: 0.8rem; border-radius: 10px; margin-right: 1rem;'>
+                        <span style='font-size: 1.2rem;'>👨‍💼</span>
+                    </div>
+                    <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
+                        Personal Information
+                    </h3>
                 </div>
-                <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
-                    Personal Information
-                </h3>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Profile details in a clean format
-        profile_data = {
-            "Full Name": user_profile.get('full_name', 'N/A'),
-            "Username": username,
-            "Email": user_profile.get('email', 'N/A'),
-            "Role": user_profile.get('role', 'N/A'),
-            "Department": user_profile.get('department', 'N/A'),
-        }
+        # Edit/Save button
+        col_btn1, col_btn2 = st.columns(2)
+        with col_btn1:
+            if not st.session_state.profile_edit_mode:
+                if st.button("✏️ Edit Profile", use_container_width=True, key="edit_profile_btn"):
+                    st.session_state.profile_edit_mode = True
+                    st.rerun()
+            else:
+                if st.button("💾 Save Changes", use_container_width=True, key="save_profile_btn"):
+                    # Update the actual user profile with edited values
+                    if 'edited_profile' in st.session_state:
+                        for key, value in st.session_state.edited_profile.items():
+                            st.session_state.user_profile[key] = value
+                    st.session_state.profile_edit_mode = False
+                    st.success("✅ Profile updated successfully!")
+                    st.balloons()  # Add celebration effect
+                    st.rerun()
         
-        for key, value in profile_data.items():
-            st.markdown(f"""
-            <div style='background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); 
-                        padding: 1rem; margin: 0.8rem 0; 
-                        border-radius: 10px; border-left: 4px solid #0ea5e9;
-                        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
-                        transition: all 0.3s ease;'>
-                <strong style='color: #0c4a6e; font-size: 0.95rem; font-weight: 600;'>{key}:</strong> 
-                <span style='color: #164e63; font-weight: 500; margin-left: 0.5rem;'>{value}</span>
-            </div>
-            """, unsafe_allow_html=True)
+        with col_btn2:
+            if st.session_state.profile_edit_mode:
+                if st.button("❌ Cancel", use_container_width=True, key="cancel_profile_btn"):
+                    st.session_state.profile_edit_mode = False
+                    st.rerun()
+        
+        # Profile details - editable or display mode
+        if not st.session_state.profile_edit_mode:
+            # Display mode
+            profile_data = {
+                "Full Name": user_profile.get('full_name', 'N/A'),
+                "Username": username,
+                "Email": user_profile.get('email', 'N/A'),
+                "Role": user_profile.get('role', 'N/A'),
+                "Department": user_profile.get('department', 'N/A'),
+            }
+            
+            for key, value in profile_data.items():
+                st.markdown(f"""
+                <div style='background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); 
+                            padding: 1rem; margin: 0.8rem 0; 
+                            border-radius: 10px; border-left: 4px solid #0ea5e9;
+                            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+                            transition: all 0.3s ease;'>
+                    <strong style='color: #0c4a6e; font-size: 0.95rem; font-weight: 600;'>{key}:</strong> 
+                    <span style='color: #164e63; font-weight: 500; margin-left: 0.5rem;'>{value}</span>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            # Edit mode
+            st.markdown("### Edit Personal Information")
+            
+            with st.container():
+                new_full_name = st.text_input("Full Name", value=user_profile.get('full_name', ''), key="edit_full_name")
+                new_email = st.text_input("Email", value=user_profile.get('email', ''), key="edit_email")
+                new_role = st.selectbox("Role", 
+                                       options=["Administrator", "Data Analyst", "Privacy Officer", "System Manager"],
+                                       index=0 if user_profile.get('role') == 'Administrator' else 0,
+                                       key="edit_role")
+                new_department = st.selectbox("Department",
+                                            options=["Ministry of Electronics and IT", "Ministry of Home Affairs", "Ministry of Defence", "Other"],
+                                            index=0 if user_profile.get('department') == 'Ministry of Electronics and IT' else 0,
+                                            key="edit_department")
+                
+                # Store the edited values in session state
+                if 'edited_profile' not in st.session_state:
+                    st.session_state.edited_profile = {}
+                
+                st.session_state.edited_profile.update({
+                    'full_name': new_full_name,
+                    'email': new_email,
+                    'role': new_role,
+                    'department': new_department
+                })
     
     with col2:
-        # Account Information Card - Sky Blue Theme
+        # Account Settings Card - Sky Blue Theme
         st.markdown("""
         <div style='background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); 
                     padding: 1.8rem; border-radius: 15px; 
@@ -110,41 +168,80 @@ def display_user_profile():
                     <span style='font-size: 1.2rem;'>⚙️</span>
                 </div>
                 <h3 style='color: #0f172a; margin: 0; font-size: 1.4rem; font-weight: 700;'>
-                    Account Information
+                    Account Settings
                 </h3>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        # Account details
-        account_data = {
-            "Account Created": user_profile.get('created_date', 'N/A'),
-            "Last Login": user_profile.get('last_login', 'Never'),
-            "Account Status": "Active",
-            "Security Level": "High",
-            "Session Duration": "8 hours"
-        }
-        
-        for key, value in account_data.items():
-            if key == "Account Status":
-                bg_color = "linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%)"
-                border_color = "#10b981"
-                text_color = "#065f46"
-            else:
-                bg_color = "linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%)"
-                border_color = "#0ea5e9"
-                text_color = "#164e63"
+        if not st.session_state.profile_edit_mode:
+            # Display account information
+            account_data = {
+                "Account Created": user_profile.get('created_date', 'N/A'),
+                "Last Login": user_profile.get('last_login', 'Never'),
+                "Account Status": "Active",
+                "Security Level": "High",
+                "Session Duration": "8 hours"
+            }
             
-            st.markdown(f"""
-            <div style='background: {bg_color}; 
-                        padding: 1rem; margin: 0.8rem 0; 
-                        border-radius: 10px; border-left: 4px solid {border_color};
-                        box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
-                        transition: all 0.3s ease;'>
-                <strong style='color: #0c4a6e; font-size: 0.95rem; font-weight: 600;'>{key}:</strong> 
-                <span style='color: {text_color}; font-weight: 500; margin-left: 0.5rem;'>{value}</span>
-            </div>
-            """, unsafe_allow_html=True)
+            for key, value in account_data.items():
+                if key == "Account Status":
+                    bg_color = "linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%)"
+                    border_color = "#10b981"
+                    text_color = "#065f46"
+                else:
+                    bg_color = "linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%)"
+                    border_color = "#0ea5e9"
+                    text_color = "#164e63"
+                
+                st.markdown(f"""
+                <div style='background: {bg_color}; 
+                            padding: 1rem; margin: 0.8rem 0; 
+                            border-radius: 10px; border-left: 4px solid {border_color};
+                            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+                            transition: all 0.3s ease;'>
+                    <strong style='color: #0c4a6e; font-size: 0.95rem; font-weight: 600;'>{key}:</strong> 
+                    <span style='color: {text_color}; font-weight: 500; margin-left: 0.5rem;'>{value}</span>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            # Account settings in edit mode
+            st.markdown("### Account Preferences")
+            
+            # Security settings
+            st.markdown("**Security Settings**")
+            enable_2fa = st.checkbox("Enable Two-Factor Authentication", value=True)
+            session_timeout = st.selectbox("Session Timeout", 
+                                         options=["2 hours", "4 hours", "8 hours", "12 hours"],
+                                         index=2)
+            
+            # Notification preferences
+            st.markdown("**Notification Preferences**")
+            email_notifications = st.checkbox("Email Notifications", value=True)
+            security_alerts = st.checkbox("Security Alerts", value=True)
+            system_updates = st.checkbox("System Update Notifications", value=False)
+            
+            # Privacy settings
+            st.markdown("**Privacy Settings**")
+            profile_visibility = st.selectbox("Profile Visibility",
+                                            options=["Private", "Department Only", "Organization Wide"],
+                                            index=1)
+            data_sharing = st.checkbox("Allow Anonymous Usage Analytics", value=False)
+            
+            # Password change section
+            st.markdown("**Change Password**")
+            with st.expander("🔒 Change Password", expanded=False):
+                current_password = st.text_input("Current Password", type="password", key="current_pwd")
+                new_password = st.text_input("New Password", type="password", key="new_pwd")
+                confirm_password = st.text_input("Confirm New Password", type="password", key="confirm_pwd")
+                
+                if st.button("🔄 Update Password", key="update_pwd_btn"):
+                    if new_password and new_password == confirm_password:
+                        st.success("Password updated successfully!")
+                    elif new_password != confirm_password:
+                        st.error("Passwords do not match!")
+                    else:
+                        st.warning("Please enter a new password.")
     
     # Permissions and Access Rights - Sky Blue Theme
     st.markdown("""
@@ -175,19 +272,41 @@ def display_user_profile():
     }
     
     # Display permissions in a grid - Sky Blue Theme
-    cols = st.columns(2)
-    for i, permission in enumerate(permissions):
-        with cols[i % 2]:
-            description = permission_descriptions.get(permission, f"✅ {permission.replace('_', ' ').title()}")
-            st.markdown(f"""
-            <div style='background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); 
-                        padding: 1.2rem; margin: 0.8rem 0; 
-                        border-radius: 12px; border: 2px solid #0ea5e9;
-                        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
-                        transition: all 0.3s ease; cursor: pointer;'>
-                <span style='color: #0c4a6e; font-weight: 600; font-size: 0.95rem;'>{description}</span>
-            </div>
-            """, unsafe_allow_html=True)
+    if not st.session_state.profile_edit_mode:
+        # Display mode
+        cols = st.columns(2)
+        for i, permission in enumerate(permissions):
+            with cols[i % 2]:
+                description = permission_descriptions.get(permission, f"✅ {permission.replace('_', ' ').title()}")
+                st.markdown(f"""
+                <div style='background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%); 
+                            padding: 1.2rem; margin: 0.8rem 0; 
+                            border-radius: 12px; border: 2px solid #0ea5e9;
+                            box-shadow: 0 4px 12px rgba(14, 165, 233, 0.15);
+                            transition: all 0.3s ease;'>
+                    <span style='color: #0c4a6e; font-weight: 600; font-size: 0.95rem;'>{description}</span>
+                </div>
+                """, unsafe_allow_html=True)
+    else:
+        # Permission management in edit mode (Admin only)
+        st.markdown("### 🔐 Manage Permissions")
+        st.info("⚠️ Permission changes require administrator approval")
+        
+        for permission, description in permission_descriptions.items():
+            current_status = permission in permissions
+            checkbox_key = f"perm_{permission}"
+            new_status = st.checkbox(description, value=current_status, key=checkbox_key, disabled=True)
+        
+        st.markdown("**Request Additional Permissions:**")
+        additional_request = st.text_area("Describe additional permissions needed:", 
+                                        placeholder="Please specify what additional access you require and the business justification...",
+                                        key="perm_request")
+        
+        if st.button("📨 Submit Permission Request", key="submit_perm_req"):
+            if additional_request.strip():
+                st.success("Permission request submitted to administrator!")
+            else:
+                st.warning("Please provide details for your permission request.")
     
     # Activity Statistics - Sky Blue Theme
     st.markdown("""
