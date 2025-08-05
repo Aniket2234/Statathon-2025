@@ -25,7 +25,12 @@ st.set_page_config(
     page_title="SafeData Pipeline - Data Privacy Dashboard",
     page_icon="🛡️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://github.com/streamlit/streamlit/wiki',
+        'Report a bug': 'https://github.com/streamlit/streamlit/issues',
+        'About': 'SafeData Pipeline - Government of India Data Privacy Protection System'
+    }
 )
 
 # Custom CSS for modern dashboard styling
