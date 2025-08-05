@@ -1427,22 +1427,30 @@ def show_data_upload():
                 for issue in quality_report['issues'][:3]:  # Show top 3 issues
                     st.write(f"• {issue}")
                 
+                # Show status if fixes were recently applied
+                if 'fixes_applied' in st.session_state and st.session_state.fixes_applied:
+                    st.success("✅ Auto-fixes applied successfully! Data has been cleaned and standardized.")
+                    st.info("• Fixed missing values in numeric columns\n• Standardized date formats\n• Removed whitespace")
+                    # Reset the flag after showing the message
+                    st.session_state.fixes_applied = False
+                
                 if st.button("🔧 Apply Auto-Fixes", use_container_width=True, key="apply_fixes_btn"):
                     with st.spinner("Applying auto-fixes..."):
                         try:
-                            # Store original issues for comparison
-                            original_issues = quality_report['issues'].copy()
-                            original_quality = quality_report['overall_quality']
-                            
                             # Apply simple data fixes
                             fixed_data = st.session_state.data.copy()
+                            fixes_applied_count = 0
                             
                             # Fix 1: Handle missing values in numeric columns
                             for col in fixed_data.columns:
                                 if pd.api.types.is_numeric_dtype(fixed_data[col]) and fixed_data[col].isnull().any():
                                     median_val = fixed_data[col].median()
                                     if pd.notna(median_val):
+                                        before_nulls = fixed_data[col].isnull().sum()
                                         fixed_data[col] = fixed_data[col].fillna(median_val)
+                                        after_nulls = fixed_data[col].isnull().sum()
+                                        if before_nulls > after_nulls:
+                                            fixes_applied_count += 1
                             
                             # Fix 2: Standardize date formats (specifically for date_of_birth)
                             for col in fixed_data.columns:
@@ -1453,7 +1461,9 @@ def show_data_upload():
                                             date_series = pd.to_datetime(fixed_data[col], errors='coerce')
                                             valid_dates = date_series.dropna()
                                             if len(valid_dates) > len(fixed_data) * 0.5:  # If >50% are valid dates
+                                                old_format = fixed_data[col].iloc[0] if len(fixed_data) > 0 else ""
                                                 fixed_data[col] = date_series.dt.strftime('%Y-%m-%d')
+                                                fixes_applied_count += 1
                                         except:
                                             pass
                             
@@ -1461,18 +1471,18 @@ def show_data_upload():
                             for col in fixed_data.columns:
                                 if fixed_data[col].dtype == 'object':
                                     try:
+                                        before_data = fixed_data[col].copy()
                                         fixed_data[col] = fixed_data[col].astype(str).str.strip()
+                                        if not before_data.equals(fixed_data[col]):
+                                            fixes_applied_count += 1
                                     except:
                                         pass
                             
                             # Update session state
                             st.session_state.data = fixed_data
+                            st.session_state.fixes_applied = True
                             
-                            # Success message
-                            st.success("✅ Auto-fixes applied successfully! Data has been cleaned and standardized.")
-                            st.info("• Fixed missing values in numeric columns\n• Standardized date formats\n• Removed whitespace")
-                            
-                            # Force page refresh
+                            # Force page refresh to show updated data and success message
                             st.rerun()
                             
                         except Exception as e:
