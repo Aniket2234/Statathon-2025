@@ -239,84 +239,158 @@ def load_css():
         color: #1a202c !important;
     }
     
-    /* LIGHT THEME ONLY - SIMPLE AND CLEAN */
+    /* ULTIMATE TEXT VISIBILITY FIX - FORCE EVERYTHING TO BE DARK AND VISIBLE */
     
-    /* Force Streamlit to use light theme only */
+    /* Global app settings */
     .stApp {
         background-color: #ffffff !important;
-        color: #1a202c !important;
+        color: #000000 !important;
     }
     
-    /* All text elements - dark color for visibility */
-    * {
-        color: #1a202c !important;
+    /* NUCLEAR OPTION - Force all text to be black */
+    *, 
+    *::before, 
+    *::after,
+    .stApp *,
+    .main *,
+    div, span, p, h1, h2, h3, h4, h5, h6, label, li, td, th,
+    .stMarkdown, .stMarkdown *,
+    .stText, .stText *,
+    .stWrite, .stWrite *,
+    .stMetric, .stMetric *,
+    .stSelectbox, .stSelectbox *,
+    .stSlider, .stSlider *,
+    .stCheckbox, .stCheckbox *,
+    .stRadio, .stRadio *,
+    .stTextInput, .stTextInput *,
+    .stNumberInput, .stNumberInput *,
+    .stDataFrame, .stDataFrame *,
+    .stAlert, .stAlert *,
+    .stSuccess, .stSuccess *,
+    .stWarning, .stWarning *,
+    .stError, .stError *,
+    .stInfo, .stInfo *,
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stMarkdownContainer"] *,
+    [data-testid="stText"],
+    [data-testid="stText"] *,
+    [data-testid="metric-container"],
+    [data-testid="metric-container"] *,
+    [data-testid="metric-label"],
+    [data-testid="metric-value"] {
+        color: #000000 !important;
+        font-weight: 600 !important;
     }
     
-    /* Sidebar - light theme with dark text */
+    /* Sidebar - light background with black text */
     .css-1d391kg {
         background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%) !important;
-        color: #1a202c !important;
+        border-right: 2px solid #e2e8f0 !important;
     }
     
+    .css-1d391kg,
     .css-1d391kg * {
-        color: #1a202c !important;
+        color: #000000 !important;
+        font-weight: 600 !important;
     }
     
-    /* Header - keep gradient but make it lighter */
+    /* Header - keep colorful but ensure white text */
     .dashboard-header {
         background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%) !important;
-        color: white !important;
     }
     
+    .dashboard-header,
     .dashboard-header *,
     .dashboard-title,
     .dashboard-subtitle {
-        color: white !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
     }
     
-    /* Upload area text */
+    /* Upload area - black text on light background */
+    .upload-area {
+        background: #f8fafc !important;
+        border: 3px dashed #94a3b8 !important;
+    }
+    
+    .upload-area,
     .upload-area * {
-        color: #1a202c !important;
-        font-weight: 600 !important;
+        color: #000000 !important;
+        font-weight: 700 !important;
     }
     
-    /* Cards and content */
+    /* Cards - white background with black text */
+    .dashboard-card {
+        background: #ffffff !important;
+        border: 2px solid #e2e8f0 !important;
+    }
+    
+    .dashboard-card,
     .dashboard-card * {
-        color: #1a202c !important;
-    }
-    
-    /* Forms and inputs */
-    .stSelectbox *,
-    .stSlider *,
-    .stCheckbox *,
-    .stRadio *,
-    .stTextInput *,
-    .stNumberInput * {
-        color: #1a202c !important;
-    }
-    
-    /* Tables */
-    .stDataFrame *,
-    table *,
-    th, td {
-        color: #1a202c !important;
-    }
-    
-    /* Alerts */
-    .stAlert *,
-    .stSuccess *,
-    .stWarning *,
-    .stError *,
-    .stInfo * {
-        color: #1a202c !important;
-    }
-    
-    /* Buttons */
-    .stButton > button {
-        background: linear-gradient(145deg, #2563eb, #1d4ed8) !important;
-        color: white !important;
+        color: #000000 !important;
         font-weight: 600 !important;
+    }
+    
+    /* Card headers */
+    .card-header {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        border-bottom: 2px solid #e2e8f0 !important;
+    }
+    
+    /* Metric cards */
+    .metric-card {
+        background: #ffffff !important;
+        border: 2px solid #e2e8f0 !important;
+    }
+    
+    .metric-value,
+    .metric-label {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Status indicators with better contrast */
+    .status-success {
+        background-color: #dcfce7 !important;
+        color: #15803d !important;
+        border-color: #16a34a !important;
+        font-weight: 700 !important;
+    }
+    
+    .status-warning {
+        background-color: #fef3c7 !important;
+        color: #b45309 !important;
+        border-color: #f59e0b !important;
+        font-weight: 700 !important;
+    }
+    
+    .status-error {
+        background-color: #fee2e2 !important;
+        color: #dc2626 !important;
+        border-color: #ef4444 !important;
+        font-weight: 700 !important;
+    }
+    
+    .status-info {
+        background-color: #dbeafe !important;
+        color: #2563eb !important;
+        border-color: #3b82f6 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Buttons with high contrast */
+    .stButton > button {
+        background: #1d4ed8 !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
         border: none !important;
+        border-radius: 8px !important;
+        padding: 0.75rem 1.5rem !important;
+    }
+    
+    .stButton > button:hover {
+        background: #1e40af !important;
     }
     
     /* Animation keyframes */
