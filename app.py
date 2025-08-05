@@ -1090,17 +1090,17 @@ def show_dashboard():
             else:
                 st.markdown(create_metric_card("Utility Score", "Not Measured"), unsafe_allow_html=True)
     
-    # Main dashboard content
-    st.markdown('<div class="fade-in">', unsafe_allow_html=True)
-    
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-        st.markdown('<div class="card-header">📊 Data Processing Pipeline</div>', unsafe_allow_html=True)
+    # Main dashboard content - only show if data is loaded
+    if st.session_state.data is not None:
+        st.markdown('<div class="fade-in">', unsafe_allow_html=True)
         
-        # Processing pipeline visualization
-        if st.session_state.data is not None:
+        col1, col2 = st.columns([2, 1])
+        
+        with col1:
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">📊 Data Processing Pipeline</div>', unsafe_allow_html=True)
+            
+            # Processing pipeline visualization
             pipeline_data = {
                 'Stage': ['Data Upload', 'Risk Assessment', 'Privacy Enhancement', 'Utility Measurement', 'Report Generation'],
                 'Status': [
@@ -1131,33 +1131,14 @@ def show_dashboard():
                 font=dict(family="Inter, sans-serif")
             )
             st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.info("Upload a dataset to begin the privacy protection pipeline")
+            
+            st.markdown('</div>', unsafe_allow_html=True)
         
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Quick Start Guide
-        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-        st.markdown('<div class="card-header">🚀 Quick Start Guide</div>', unsafe_allow_html=True)
-        
-        st.markdown("""
-        **Get started with SafeData Pipeline in 5 simple steps:**
-        
-        1. **📁 Upload Data** - Import your dataset (CSV, Excel, JSON, XML, Parquet)
-        2. **🔍 Assess Risk** - Analyze re-identification vulnerabilities
-        3. **🔒 Enhance Privacy** - Apply anonymization techniques (k-anonymity, l-diversity)
-        4. **📈 Measure Utility** - Evaluate data quality preservation
-        5. **📋 Generate Reports** - Create comprehensive documentation
-        """)
-        
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    with col2:
-        # Current Session Status
-        st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-        st.markdown('<div class="card-header">🎯 Current Session</div>', unsafe_allow_html=True)
-        
-        if st.session_state.data is not None:
+        with col2:
+            # Current Session Status
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🎯 Current Session</div>', unsafe_allow_html=True)
+            
             data_info = st.session_state.data
             st.markdown(f"""
             **Dataset Information:**
@@ -1182,13 +1163,10 @@ def show_dashboard():
                 font=dict(family="Inter, sans-serif", size=10)
             )
             st.plotly_chart(fig, use_container_width=True)
-        else:
-            st.warning("No dataset loaded. Start by uploading your data.")
-        
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Quick Actions - only show if data is loaded
-        if st.session_state.data is not None:
+            
+            st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Quick Actions
             st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
             st.markdown('<div class="card-header">⚡ Quick Actions</div>', unsafe_allow_html=True)
             
@@ -1204,20 +1182,48 @@ def show_dashboard():
                 show_system_stats()
             
             st.markdown('</div>', unsafe_allow_html=True)
-        else:
-            # Show getting started message when no data is loaded
+        
+        st.markdown('</div>', unsafe_allow_html=True)
+    else:
+        # Show welcome message when no data is loaded
+        st.markdown('<div class="fade-in">', unsafe_allow_html=True)
+        
+        col1, col2 = st.columns([1, 1])
+        
+        with col1:
             st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
-            st.markdown('<div class="card-header">🚀 Get Started</div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🚀 Quick Start Guide</div>', unsafe_allow_html=True)
+            
+            st.markdown("""
+            **Get started with SafeData Pipeline in 5 simple steps:**
+            
+            1. **📁 Upload Data** - Import your dataset (CSV, Excel, JSON, XML, Parquet)
+            2. **🔍 Assess Risk** - Analyze re-identification vulnerabilities
+            3. **🔒 Enhance Privacy** - Apply anonymization techniques (k-anonymity, l-diversity)
+            4. **📈 Measure Utility** - Evaluate data quality preservation
+            5. **📋 Generate Reports** - Create comprehensive documentation
+            """)
+            
+            st.markdown('</div>', unsafe_allow_html=True)
+        
+        with col2:
+            st.markdown('<div class="dashboard-card">', unsafe_allow_html=True)
+            st.markdown('<div class="card-header">🎯 Get Started</div>', unsafe_allow_html=True)
             st.markdown("""
             **Welcome to SafeData Pipeline!**
             
-            Start by uploading your dataset using the **Data Upload** page in the sidebar.
+            This is a comprehensive data privacy protection and anonymization system developed for the Government of India.
             
-            Supported formats: CSV, Excel, JSON, XML, Parquet
+            **To begin:**
+            - Navigate to **Data Upload** in the sidebar
+            - Upload your dataset in supported formats
+            - Follow the guided workflow for privacy enhancement
+            
+            **Supported formats:** CSV, Excel, JSON, XML, Parquet
             """)
             st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+        
+        st.markdown('</div>', unsafe_allow_html=True)
 
 def show_system_stats():
     """Display system statistics in a modal-like container"""
