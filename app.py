@@ -1435,10 +1435,15 @@ def show_data_upload():
                     st.write(f"• {issue}")
                 
                 if st.button("🔧 Apply Auto-Fixes", use_container_width=True):
-                    fixed_data = components['data_handler'].apply_fixes(st.session_state.data, quality_report['issues'])
-                    st.session_state.data = fixed_data
-                    st.success("Auto-fixes applied!")
-                    st.rerun()
+                    with st.spinner("Applying auto-fixes..."):
+                        try:
+                            fixed_data = components['data_handler'].repair_data(st.session_state.data)
+                            st.session_state.data = fixed_data
+                            st.success("Auto-fixes applied successfully! Data quality has been improved.")
+                            st.rerun()
+                        except Exception as e:
+                            st.error(f"Error applying auto-fixes: {str(e)}")
+                            st.error("Please try manual data cleaning or contact support.")
             else:
                 st.success("✅ No quality issues detected")
             
