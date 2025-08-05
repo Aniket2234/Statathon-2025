@@ -524,6 +524,18 @@ def load_css():
                     div.style.setProperty('color', '#1a202c', 'important');
                     div.style.setProperty('border', '1px solid #d1d5db', 'important');
                 });
+                
+                // Also target any div within sliders that has blue styling
+                const allSliderDivs = container.querySelectorAll('div');
+                allSliderDivs.forEach(div => {
+                    if (div.style.backgroundColor === 'rgb(59, 130, 246)' || 
+                        window.getComputedStyle(div).backgroundColor === 'rgb(59, 130, 246)') {
+                        div.style.setProperty('background-color', 'white', 'important');
+                        div.style.setProperty('color', '#1a202c', 'important');
+                        div.style.setProperty('border', '1px solid #d1d5db', 'important');
+                        div.style.setProperty('font-weight', '500', 'important');
+                    }
+                });
             });
         }, 50);
     }
@@ -531,8 +543,19 @@ def load_css():
     // Run the fix when page loads
     document.addEventListener('DOMContentLoaded', fixSliderStyling);
     
-    // Run periodically to catch dynamically created elements
-    setInterval(fixSliderStyling, 100);
+    // Run more aggressively to catch dynamically created elements
+    setInterval(fixSliderStyling, 50);
+    
+    // Also run on any DOM mutations
+    const observer = new MutationObserver(function(mutations) {
+        fixSliderStyling();
+    });
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['style', 'class']
+    });
     
     // Run when Streamlit updates
     window.addEventListener('load', fixSliderStyling);
