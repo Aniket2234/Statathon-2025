@@ -458,13 +458,27 @@ def load_css():
         font-weight: 500 !important;
     }
     
-    /* Override specific blue color values */
+    /* Override specific blue color values - ULTIMATE OVERRIDE */
     div[style*="background-color: rgb(59, 130, 246)"] {
         background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
     }
     
     div[style*="background-color:#3b82f6"] {
         background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Target ANY element with that exact RGB value */
+    div[style="background-color: rgb(59, 130, 246);"] {
+        background-color: white !important;
+        color: #1a202c !important;
+        border: 1px solid #d1d5db !important;
+        font-weight: 500 !important;
     }
     
     /* Force override on all slider-related divs */
@@ -483,39 +497,42 @@ def load_css():
     function fixSliderStyling() {
         // Wait for elements to load
         setTimeout(function() {
-            // Find all elements with blue backgrounds in sliders
-            const sliderElements = document.querySelectorAll('[data-testid="stSlider"] div');
-            sliderElements.forEach(element => {
+            // Find ALL div elements and check for blue backgrounds
+            const allDivs = document.querySelectorAll('div');
+            allDivs.forEach(element => {
                 const computedStyle = window.getComputedStyle(element);
                 const bgColor = computedStyle.backgroundColor;
+                const inlineStyle = element.style.backgroundColor || '';
                 
-                // Check if background is blue (various formats)
-                if (bgColor.includes('59, 130, 246') || 
-                    bgColor.includes('#3b82f6') || 
-                    element.style.backgroundColor.includes('rgb(59, 130, 246)')) {
-                    element.style.backgroundColor = 'white';
-                    element.style.color = '#1a202c';
-                    element.style.border = '1px solid #d1d5db';
-                    element.style.fontWeight = '500';
+                // Check if background is the specific blue color #3b82f6
+                if (bgColor === 'rgb(59, 130, 246)' || 
+                    inlineStyle === 'rgb(59, 130, 246)' ||
+                    inlineStyle === '#3b82f6') {
+                    element.style.setProperty('background-color', 'white', 'important');
+                    element.style.setProperty('color', '#1a202c', 'important');
+                    element.style.setProperty('border', '1px solid #d1d5db', 'important');
+                    element.style.setProperty('font-weight', '500', 'important');
                 }
             });
             
-            // Target specific slider value boxes
-            const valueBoxes = document.querySelectorAll('[data-baseweb="tick"]');
-            valueBoxes.forEach(box => {
-                box.style.backgroundColor = 'white';
-                box.style.color = '#1a202c';
-                box.style.border = '1px solid #d1d5db';
-                box.style.fontWeight = '500';
+            // Specifically target slider container elements
+            const sliderContainers = document.querySelectorAll('[data-testid="stSlider"]');
+            sliderContainers.forEach(container => {
+                const blueDivs = container.querySelectorAll('div[style*="rgb(59, 130, 246)"]');
+                blueDivs.forEach(div => {
+                    div.style.setProperty('background-color', 'white', 'important');
+                    div.style.setProperty('color', '#1a202c', 'important');
+                    div.style.setProperty('border', '1px solid #d1d5db', 'important');
+                });
             });
-        }, 100);
+        }, 50);
     }
     
     // Run the fix when page loads
     document.addEventListener('DOMContentLoaded', fixSliderStyling);
     
     // Run periodically to catch dynamically created elements
-    setInterval(fixSliderStyling, 1000);
+    setInterval(fixSliderStyling, 100);
     
     // Run when Streamlit updates
     window.addEventListener('load', fixSliderStyling);
