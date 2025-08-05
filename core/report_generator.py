@@ -61,7 +61,14 @@ class ReportGenerator:
         # Recommendations
         self._add_recommendations(pdf, report_data)
         
-        return pdf.output(dest='S').encode('latin-1')
+        # Get PDF output as bytes
+        pdf_output = pdf.output(dest='S')
+        
+        # Handle both string and bytes output
+        if isinstance(pdf_output, str):
+            return pdf_output.encode('latin-1')
+        else:
+            return pdf_output
     
     def generate_html_report(self, report_data: Dict[str, Any], 
                             report_type: str = "Comprehensive Report") -> str:

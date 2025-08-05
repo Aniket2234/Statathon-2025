@@ -1056,9 +1056,12 @@ def load_css():
         font-weight: 600 !important;
     }
     
-    /* Enhanced sliders */
+    /* Enhanced sliders - FINAL WHITE BACKGROUND FIX */
     .stSlider > div > div > div {
-        background: #3b82f6 !important;
+        background: white !important;
+        border: 1px solid #d1d5db !important;
+        color: #1a202c !important;
+        font-weight: 500 !important;
     }
     
     .stSlider label {
