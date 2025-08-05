@@ -393,6 +393,67 @@ def load_css():
         background: #1e40af !important;
     }
     
+    /* STREAMLIT OPTION MENU FIXES */
+    /* Target the specific menu component */
+    .nav-link, 
+    .nav-link-selected,
+    .nav-link:hover,
+    [data-testid="stSidebar"] .nav-link,
+    [data-testid="stSidebar"] .nav-link-selected,
+    .css-1d391kg .nav-link,
+    .css-1d391kg .nav-link-selected {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        background-color: transparent !important;
+    }
+    
+    /* Force menu text visibility */
+    .css-1d391kg div[data-testid="stVerticalBlock"] div,
+    .css-1d391kg div[data-testid="stVerticalBlock"] span,
+    .css-1d391kg div[data-testid="stVerticalBlock"] p,
+    .css-1d391kg [class*="nav"],
+    .css-1d391kg [class*="menu"],
+    .css-1d391kg [class*="option"] {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Streamlit option menu specific targeting */
+    .css-1d391kg .stSelectbox,
+    .css-1d391kg .stSelectbox *,
+    .css-1d391kg .stSelectbox label,
+    .css-1d391kg .stSelectbox div,
+    .css-1d391kg iframe,
+    .css-1d391kg iframe *,
+    .css-1d391kg [title*="streamlit_option_menu"],
+    .css-1d391kg [title*="streamlit_option_menu"] * {
+        color: #000000 !important;
+        font-weight: 700 !important;
+        background: transparent !important;
+    }
+    
+    /* Force all sidebar content to be black */
+    .css-1d391kg * {
+        color: #000000 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Target iframe content if menu is in iframe */
+    iframe[title*="streamlit_option_menu"] {
+        background: #f8fafc !important;
+    }
+    
+    /* Additional option menu overrides */
+    .option-menu,
+    .option-menu *,
+    .nav-item,
+    .nav-item *,
+    .menu-item,
+    .menu-item * {
+        color: #000000 !important;
+        font-weight: 700 !important;
+    }
+    
     /* Animation keyframes */
     @keyframes fadeIn {
         from { opacity: 0; transform: translateY(20px); }
@@ -480,10 +541,10 @@ def main():
         
         # Logo and title
         st.markdown("""
-        <div style="text-align: center; padding: 1rem 0; border-bottom: 1px solid #334155; margin-bottom: 1rem;">
-            <div style="font-size: 2rem; color: white; margin-bottom: 0.5rem;">🛡️</div>
-            <div style="color: white; font-weight: 600; font-size: 1.1rem;">SafeData Pipeline</div>
-            <div style="color: #94a3b8; font-size: 0.8rem;">Government of India</div>
+        <div style="text-align: center; padding: 1rem 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 1rem;">
+            <div style="font-size: 2rem; color: #1a202c; margin-bottom: 0.5rem;">🛡️</div>
+            <div style="color: #1a202c; font-weight: 700; font-size: 1.1rem;">SafeData Pipeline</div>
+            <div style="color: #4a5568; font-size: 0.8rem; font-weight: 600;">Government of India</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -497,25 +558,26 @@ def main():
             menu_icon="cast",
             default_index=0,
             styles={
-                "container": {"padding": "0!important", "background-color": "transparent"},
-                "icon": {"color": "#94a3b8", "font-size": "18px"},
+                "container": {"padding": "0!important", "background-color": "#f8fafc"},
+                "icon": {"color": "#1a202c", "font-size": "18px"},
                 "nav-link": {
                     "font-size": "14px",
                     "text-align": "left",
                     "margin": "2px",
                     "padding": "12px",
-                    "color": "#e2e8f0",
-                    "background-color": "transparent",
+                    "color": "#1a202c",
+                    "background-color": "#f8fafc",
                     "border-radius": "8px",
+                    "font-weight": "600",
                 },
                 "nav-link-selected": {
                     "background-color": "#3b82f6",
-                    "color": "white",
-                    "font-weight": "500",
+                    "color": "#ffffff",
+                    "font-weight": "700",
                 },
                 "nav-link:hover": {
-                    "background-color": "#475569",
-                    "color": "white",
+                    "background-color": "#e2e8f0",
+                    "color": "#1a202c",
                 }
             }
         )
