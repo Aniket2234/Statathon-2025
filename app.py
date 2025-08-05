@@ -604,20 +604,49 @@ def load_css():
         transform: translateY(0) scale(0.98) !important;
     }
     
-    /* Fix all button variants */
-    button[kind="primary"] {
+    /* ALL BUTTONS ARE BLUE WITH WHITE TEXT */
+    button[kind="primary"],
+    button[kind="secondary"],
+    .stButton > button,
+    .stDownloadButton > button,
+    .stFormSubmitButton > button,
+    button {
         background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%) !important;
         color: #ffffff !important;
         border: none !important;
+        font-weight: 700 !important;
+        border-radius: 8px !important;
+        padding: 0.75rem 1.5rem !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
     }
     
-    button[kind="secondary"] {
-        background: linear-gradient(135deg, #6b7280 0%, #4b5563 50%, #374151 100%) !important;
+    /* Button hover effects */
+    button:hover,
+    .stButton > button:hover,
+    .stDownloadButton > button:hover,
+    .stFormSubmitButton > button:hover {
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%) !important;
         color: #ffffff !important;
-        border: none !important;
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 20px -3px rgba(59, 130, 246, 0.4) !important;
     }
     
-    /* STREAMLIT OPTION MENU FIXES */
+    /* Ensure all button text is white */
+    button span,
+    button div,
+    button p,
+    .stButton > button span,
+    .stButton > button div,
+    .stButton > button p,
+    .stDownloadButton > button span,
+    .stDownloadButton > button div,
+    .stDownloadButton > button p {
+        color: #ffffff !important;
+        font-weight: 700 !important;
+    }
+    
+    /* SIDEBAR NAVIGATION - BLACK TEXT WITH BLUE SELECTED STATE */
     .nav-link, 
     .nav-link-selected,
     .nav-link:hover,
@@ -639,9 +668,20 @@ def load_css():
     }
     
     .nav-link:hover {
-        background: linear-gradient(135deg, #e5e7eb, #d1d5db) !important;
+        background: rgba(59, 130, 246, 0.1) !important;
         color: #000000 !important;
         transform: translateX(4px) !important;
+    }
+    
+    /* Force sidebar menu text to be black */
+    [data-testid="stSidebar"] * {
+        color: #000000 !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Option menu component styling */
+    iframe[title*="streamlit_option_menu"] {
+        background: #f8fafc !important;
     }
     
     /* Floating action button styling */
@@ -710,11 +750,17 @@ def load_css():
         border-bottom: 1px solid #f3f4f6 !important;
     }
     
-    /* Enhanced form controls */
+    /* Enhanced form controls - black text, white backgrounds */
     .stSelectbox > div > div {
         background: #ffffff !important;
         border: 2px solid #e5e7eb !important;
         border-radius: 8px !important;
+        color: #000000 !important;
+        font-weight: 600 !important;
+    }
+    
+    .stSelectbox label,
+    .stSelectbox div {
         color: #000000 !important;
         font-weight: 600 !important;
     }
@@ -733,9 +779,19 @@ def load_css():
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
     }
     
+    .stTextInput label {
+        color: #000000 !important;
+        font-weight: 600 !important;
+    }
+    
     /* Enhanced sliders */
     .stSlider > div > div > div {
         background: #3b82f6 !important;
+    }
+    
+    .stSlider label {
+        color: #000000 !important;
+        font-weight: 600 !important;
     }
     
     /* Top navigation bar - floating style */
