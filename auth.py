@@ -48,27 +48,31 @@ class AuthManager:
         <style>
         .login-header {
             text-align: center;
-            padding: 2rem 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 50%, #0369a1 100%);
             color: white;
-            border-radius: 10px;
+            border-radius: 18px;
             margin-bottom: 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 35px rgba(14, 165, 233, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .login-form {
-            max-width: 400px;
+            max-width: 450px;
             margin: 0 auto;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(14, 165, 233, 0.1);
+            border: 1px solid rgba(14, 165, 233, 0.1);
         }
         .credentials-info {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid #3b82f6;
-            margin: 1rem 0;
+            background: linear-gradient(145deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid #0ea5e9;
+            border: 1px solid rgba(14, 165, 233, 0.2);
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.1);
         }
         .airavata-brand {
             text-align: center;
@@ -79,12 +83,21 @@ class AuthManager:
         </style>
         """, unsafe_allow_html=True)
         
-        # Login header
+        # Login header with sky blue theme
         st.markdown("""
         <div class="login-header">
-            <h1>🛡️ SafeData Pipeline</h1>
-            <h3>Government of India - Data Privacy Protection System</h3>
-            <p>Secure Login Portal</p>
+            <div style='display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;'>
+                <div style='background: rgba(255, 255, 255, 0.15); 
+                            padding: 1rem; border-radius: 12px; margin-right: 1.5rem;
+                            backdrop-filter: blur(10px);'>
+                    <span style='font-size: 2.5rem;'>🛡️</span>
+                </div>
+                <div style='text-align: left;'>
+                    <h1 style='margin: 0; font-size: 2.8rem; font-weight: 800;'>SafeData Pipeline</h1>
+                    <h3 style='margin: 0.5rem 0; font-size: 1.3rem; font-weight: 600; opacity: 0.9;'>Government of India - Data Privacy Protection System</h3>
+                </div>
+            </div>
+            <p style='font-size: 1.1rem; font-weight: 500; opacity: 0.95; margin: 0;'>Secure Login Portal</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -92,12 +105,22 @@ class AuthManager:
         with st.container():
             st.markdown('<div class="login-form">', unsafe_allow_html=True)
             
-            # Credentials reminder
+            # Credentials reminder with sky blue theme
             st.markdown("""
             <div class="credentials-info">
-                <h4>📋 Login Credentials</h4>
-                <p><strong>Username:</strong> admin</p>
-                <p><strong>Password:</strong> admin@123</p>
+                <div style='display: flex; align-items: center; margin-bottom: 1rem;'>
+                    <div style='background: linear-gradient(135deg, #0ea5e9, #0284c7); 
+                                color: white; padding: 0.6rem; border-radius: 8px; margin-right: 1rem;'>
+                        <span style='font-size: 1rem;'>📋</span>
+                    </div>
+                    <h4 style='margin: 0; color: #0c4a6e; font-weight: 700;'>Login Credentials</h4>
+                </div>
+                <div style='background: rgba(14, 165, 233, 0.05); padding: 1rem; border-radius: 8px; margin: 0.5rem 0;'>
+                    <p style='margin: 0; color: #0c4a6e;'><strong style='color: #0369a1;'>Username:</strong> admin</p>
+                </div>
+                <div style='background: rgba(14, 165, 233, 0.05); padding: 1rem; border-radius: 8px; margin: 0.5rem 0;'>
+                    <p style='margin: 0; color: #0c4a6e;'><strong style='color: #0369a1;'>Password:</strong> admin@123</p>
+                </div>
             </div>
             """, unsafe_allow_html=True)
             
