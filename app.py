@@ -1356,7 +1356,10 @@ def show_data_upload():
                         with col_b:
                             st.markdown(create_metric_card("Columns", len(data.columns)), unsafe_allow_html=True)
                         with col_c:
-                            st.markdown(create_metric_card("Size", f"{data.memory_usage(deep=True).sum() / 1024**2:.1f} MB"), unsafe_allow_html=True)
+                            # Get actual file size from uploaded file
+                            file_size_bytes = uploaded_file.size if hasattr(uploaded_file, 'size') else len(uploaded_file.getvalue())
+                            file_size_mb = file_size_bytes / (1024**2)
+                            st.markdown(create_metric_card("Size", f"{file_size_mb:.2f} MB"), unsafe_allow_html=True)
                         with col_d:
                             st.markdown(create_metric_card("File Type", uploaded_file.name.split('.')[-1].upper()), unsafe_allow_html=True)
                         
@@ -1427,9 +1430,29 @@ def show_data_upload():
                 if st.button("🔧 Apply Auto-Fixes", use_container_width=True):
                     with st.spinner("Applying auto-fixes..."):
                         try:
+                            # Get quality score before fixes
+                            original_quality = quality_report['overall_quality']
+                            
+                            # Apply fixes
                             fixed_data = components['data_handler'].repair_data(st.session_state.data)
                             st.session_state.data = fixed_data
-                            st.success("Auto-fixes applied successfully! Data quality has been improved.")
+                            
+                            # Get quality score after fixes
+                            new_quality_report = components['data_handler'].assess_data_quality(fixed_data)
+                            new_quality = new_quality_report['overall_quality']
+                            
+                            # Show improvement
+                            improvement = new_quality - original_quality
+                            if improvement > 0:
+                                st.success(f"✅ Auto-fixes applied successfully! Quality improved by {improvement:.1f}% (from {original_quality:.1f}% to {new_quality:.1f}%)")
+                            else:
+                                st.success("✅ Auto-fixes applied successfully! Data has been standardized.")
+                            
+                            # Show what was fixed
+                            fixed_issues = set(quality_report['issues']) - set(new_quality_report['issues'])
+                            if fixed_issues:
+                                st.info(f"Fixed {len(fixed_issues)} issue(s): " + ", ".join(list(fixed_issues)[:3]))
+                            
                             st.rerun()
                         except Exception as e:
                             st.error(f"Error applying auto-fixes: {str(e)}")

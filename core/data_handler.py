@@ -451,9 +451,9 @@ class DataHandler:
                 if unique_values < len(repaired_data) * 0.1:  # <10% unique values (likely categorical)
                     repaired_data[col] = repaired_data[col].str.title()
         
-        # Repair 4: Handle date columns
+        # Repair 4: Handle date columns (especially date_of_birth)
         for col in repaired_data.columns:
-            if repaired_data[col].dtype == 'object':
+            if repaired_data[col].dtype == 'object' and ('date' in col.lower() or 'birth' in col.lower()):
                 # Try to parse as dates
                 try:
                     date_series = pd.to_datetime(repaired_data[col], errors='coerce', infer_datetime_format=True)
